@@ -7,6 +7,7 @@ import NavigationBar from "./components/header/NavigationBar";
 import FootBar from "./components/footer/FootBar";
 
 function App() {
+
   return (
     <div className="App">
       <Provider store={store}>{/* 리덕스 툴킷을 사용하기 위해 선언 */}

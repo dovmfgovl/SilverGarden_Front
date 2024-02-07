@@ -25,7 +25,7 @@ const NavigationBar = () => {
             <Nav.Link href="/admin" className='mx-2'>관리자페이지</Nav.Link>
           </Nav>
           <Nav className="mx-3">
-            <Nav.Link href="#deets">마이페이지</Nav.Link>
+            <Nav.Link href="/mypage">마이페이지</Nav.Link>
             <Nav.Link href="#deets">로그아웃</Nav.Link>
           </Nav>
         </Navbar.Collapse>
