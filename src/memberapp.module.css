@@ -1,0 +1,22 @@
+.memberappWrap{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.memberappHeaderWrap{
+  background-color: azure;
+}
+
+.memberappContentWrap{
+  display: flex;
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(246, 209, 196);
+}
+
+.memberappFooterWrap{
+  background-color: blanchedalmond;
+}

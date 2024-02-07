@@ -1,0 +1,35 @@
+.homeWrap{
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "profileWrap homeInnerContentWrap"
+  "sidebarWrap homeInnerContentWrap"
+  ;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 1.5fr 3fr;
+
+}
+
+.profileWrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items:center;
+  background-color: rgb(129, 175, 216);
+  grid-area: profileWrap;
+}
+.profileWrap img{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.sidebarWrap{
+  background-color: rgb(255, 255, 255);
+  grid-area: sidebarWrap;
+}
+
+.homeInnerContentWrap{
+  grid-area: homeInnerContentWrap;
+}

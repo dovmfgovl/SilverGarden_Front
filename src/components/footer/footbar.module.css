@@ -1,0 +1,9 @@
+#footerWrap {
+  display:flex;
+
+  .footer{
+    color: white;
+    justify-content: center;
+    width : 100%;
+  }
+}
