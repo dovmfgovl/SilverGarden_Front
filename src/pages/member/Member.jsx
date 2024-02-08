@@ -4,6 +4,7 @@ import styles from './member.module.css';
 import SidebarCommon from '../../components/sidebar/SidebarCommon'
 import MemberInfo from './MemberInfo';
 import MemberInfo2 from './counsel/MemberInfo2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Member = () => {
   const list = [//이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
@@ -19,7 +20,7 @@ const Member = () => {
 
 ];
 
-const [menu,setMenu]=useState();
+const [menu,setMenu]=useState('이용자기본정보');
 
 const handleMenu=(menuTitle)=>{
   setMenu(menuTitle);
@@ -28,6 +29,7 @@ console.log(menu);
 
   return (
     <div className={styles.MemberContainerLayout}>
+      <div className={styles.memberTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> 이용자관리 </div>
       <div className={styles.sidebarLayout}><SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon></div>
       <div className={styles.innerContentLayout}>
           {/* 서브라우터 구현 */}
@@ -39,6 +41,7 @@ console.log(menu);
             }
           {/* 서브라우터 구현 */}
         </div>
+       
     </div>
   )
 }

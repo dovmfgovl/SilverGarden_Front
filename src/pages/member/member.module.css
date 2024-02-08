@@ -2,8 +2,10 @@
     height: 100%;
     display:grid;
     grid-template-areas:
+    "sidebarLayout memberTitlebar"
     "sidebarLayout innerContentLayout";
     grid-template-columns: 0.5fr 5fr;
+    grid-template-rows: 0.5fr 5fr;
 }
 
 .sidebarLayout{
@@ -16,6 +18,13 @@
     background-color: white;
 }
 
+.memberTitlebar{
+    grid-area: memberTitlebar;
+    background-color: white;
+    font-size: 2.0rem;
+    padding: 10px;
+}
+
 .InnerMemberLayout{
     height: 100%;
     display:grid;
@@ -24,7 +33,7 @@
     "leftMemberLayout rightMemberLayout2"
     ;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
 }
 
 .leftMemberLayout{
