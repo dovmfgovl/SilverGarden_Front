@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+.child{
+  margin : auto;
+  margin-top:180px;
+}
+.input {
+  width : 200px;
+
+}
+.header {
+  font-size: 50px;
+}
+.button{
+  margin : 0 auto;
+  font-size: small;
+  height: 35px;
+  width : 80px;
+}
+
+.error{
+  color : red;
+  font-size: 12px;
+}
