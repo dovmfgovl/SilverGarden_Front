@@ -51,9 +51,7 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
       <FontAwesomeIcon icon={faPaperclip} />첨부파일:
         {fileList.map(file =>
         <div key={file.N_FILE_NO} onClick={handleFileDownload}>
-          <div>
-           {file.N_FILENAME}<button>삭제</button>
-          </div>
+           {file.N_FILENAME}
         </div>
         )}
       </div>
