@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './notice.module.css'
 import NoticeDetailHeader from './NoticeDetailHeader'
-import { getNoticeDetail } from '../../services/api/noticeApi'
+import { getNoticeDetail, noticeFileDownload } from '../../services/api/noticeApi'
 import { Button } from 'react-bootstrap'
-import { faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons'
+import {faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const NoticeDetail = ({noticeNo , handlePage}) => {
+const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
 
   const [noticeDetail, setNoticeDetail] = useState({});
-  const [fileList, setFileList] = useState([]);
 
   const getDetail = async () => {//해당 문서와 첨부파일 정보를 가져오는 함수 선언
     const response =  await getNoticeDetail(noticeNo);
@@ -19,14 +18,20 @@ const NoticeDetail = ({noticeNo , handlePage}) => {
     
     let tempList = [];//임시배열생성
     detailList.forEach(file => {//DB에서 받아온 파일명을 임시배열에 담아줌
-      tempList =[...tempList,file.N_FILENAME];
+      tempList =[...tempList,{N_FILENAME: file.N_FILENAME, N_FILE_NO: file.N_FILE_NO}];
     })
-      setFileList(tempList);//파일명 배열을 state에 저장
+      handleFileList(tempList);
+      //setFileList(tempList);//파일명 배열을 state에 저장
   }
 
   useEffect(()=>{
     getDetail();
   },[])
+
+  const handleFileDownload = (e) =>{
+      const response = noticeFileDownload(e.target.innerText);
+      console.log(response);
+  }
 
   return (
     <>
@@ -38,18 +43,19 @@ const NoticeDetail = ({noticeNo , handlePage}) => {
         handlePage("전체공지")
       }}>목록</Button>{' '}
       </div>
-      <div className={styles.noticeDetailHeader}><NoticeDetailHeader noticeDetail={noticeDetail} fileList={fileList}/></div>
+      <div className={styles.noticeDetailHeader}><NoticeDetailHeader noticeDetail={noticeDetail} fileList={fileList} handlePage={handlePage}/></div>
       <div className={styles.noticeDatailContent}>
-        {noticeDetail.N_TITLE}
+        {noticeDetail.N_CONTENT}
       </div>
       <div className={styles.noticeDetailAttachment}>
       <FontAwesomeIcon icon={faPaperclip} />첨부파일:
         {fileList.map(file =>
-        <>
-          <div>{file}</div>
-        </>
-        )
-        }
+        <div key={file.N_FILE_NO} onClick={handleFileDownload}>
+          <div>
+           {file.N_FILENAME}<button>삭제</button>
+          </div>
+        </div>
+        )}
       </div>
     </div>
     </>

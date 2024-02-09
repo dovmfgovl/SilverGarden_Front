@@ -20,9 +20,9 @@ const NoticeTable = ({noticeList, handlePage}) => {
         <tr key={notice.N_NO} onClick={()=>handlePage("공지상세", notice.N_NO)}>
           <td>{notice.N_NO}</td>
           <td>{notice.N_TITLE}</td>
-          <td>{"익명"}</td>
+          <td>{notice.E_NAME}</td>
           <td>{notice.REG_DATE}</td>
-          <td>{"첨부"}</td>
+          <td>{notice.N_ATT}</td>
           <td>{notice.N_HIT}</td>
         </tr>
       ))}

@@ -24,10 +24,16 @@ const NoticeFileUpload = ({handleFile, fileList}) => {
               console.log(list);
               handleFile([...list, selectedFile])
             }
-          }}>+</button>
+          }}>추가</button>
       </div>
       {fileList && fileList.map((file, index)=>(
-        <div key={index}>{index+1+"."+file.name}</div>
+        <div key={index}>
+          <button onClick={(e)=>{
+            console.log(e.target);
+          }
+          }>-</button>
+          {index+1+"."+file.name}
+        </div>
       ))}
     </div>
     </>

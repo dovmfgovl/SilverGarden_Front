@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import styles from './notice.module.css'
 import { Button, Form, InputGroup } from 'react-bootstrap'
 import NoticeFileUpload from './NoticeFileUpload'
-import axios from 'axios'
 import { noticeInsert } from '../../services/api/noticeApi'
 
 const NoticeWrite = ({handlePage}) => {
@@ -12,8 +11,7 @@ const NoticeWrite = ({handlePage}) => {
     setFileList([...list])
   }
 
-   const usernameRef = useRef(null);//input값을 참조할 ref 선언
-   const titleRef = useRef(null);
+   const titleRef = useRef(null);//input값을 참조할 ref 선언
    const contentRef = useRef(null);
 
 
@@ -21,23 +19,35 @@ const NoticeWrite = ({handlePage}) => {
     const title = titleRef.current.value;
     const content = contentRef.current.value;
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('n_title', title)
-    formDataToSend.append('n_content', content)
-    formDataToSend.append('emp_id', "s1604010")
-
-    for(let i = 0; i < fileList.length; i++){
-      formDataToSend.append('files', fileList[i]);
+    if("" !== title && "" !== content){
+      const formDataToSend = new FormData();
+      formDataToSend.append('n_title', title)
+      formDataToSend.append('n_content', content)
+      formDataToSend.append('e_no', "202402_00000008")
+  
+      for(let i = 0; i < fileList.length; i++){
+        formDataToSend.append('files', fileList[i]);
+      }
+      await noticeInsert(formDataToSend);
+        alert("공지등록 성공")
+        handlePage("전체공지")
+    }else{
+      alert("제목과 내용을 작성해주세요")
     }
-    await noticeInsert(formDataToSend);
-      alert("공지등록 성공")
-      handlePage("전체공지")
   }
   
 
   return (
   <div className={styles.noticeWriteLayout}>
       <div className={styles.noticeWriteHeader}>
+      <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1" >작성자</InputGroup.Text>
+            <Form.Control
+              placeholder="작성자"
+              readOnly
+              value="관리자"
+            />
+          </InputGroup>   
           <InputGroup className="mb-3">
             <InputGroup.Text id="basic-addon1">제목</InputGroup.Text>
             <Form.Control
@@ -49,9 +59,6 @@ const NoticeWrite = ({handlePage}) => {
             작성완료
           </Button>
       </div>
-      <div className={styles.noticeWriteAttachment}>
-        <NoticeFileUpload handleFile={handleFile} fileList={fileList}/>
-      </div>
       <div className={styles.noticeWriteContent}>
         <InputGroup>
           <InputGroup.Text>내용</InputGroup.Text>
@@ -59,6 +66,9 @@ const NoticeWrite = ({handlePage}) => {
           as="textarea" 
           ref={contentRef} />
         </InputGroup>
+      </div>
+      <div className={styles.noticeWriteAttachment}>
+        <NoticeFileUpload handleFile={handleFile} fileList={fileList}/>
       </div>
   </div>
   )
