@@ -1,0 +1,27 @@
+.empListWrap {
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "empSidebarWrap empTitleBar"
+  "empSidebarWrap innerContentWrap"
+  /* "empSidebarWrap innerContentWrap"
+  "empSidebarWrap innerContentWrap" */
+  ;
+  grid-template-columns: 1fr 6fr;
+/*   grid-template-rows: 70px 1fr 1fr;*/  
+  background-color: darkblue;
+}
+
+.empSidebarWrap{
+  grid-area: empSidebarWrap;
+  background-color: antiquewhite;
+  display: flex;
+}
+
+.empTitleBar{
+  grid-area: empTitleBar;
+  background-color: aqua;
+  font-size: 2.0rem;
+  padding: 10px;
+}
+

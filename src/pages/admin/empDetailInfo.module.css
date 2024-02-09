@@ -1,0 +1,75 @@
+.empInfoWrap {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr;
+  grid-template-areas: 
+  "empPicture empInfo1 empInfo2"
+  "empPicture empInfo3 empInfo4"
+  "empPicture empInfo5 empInfo6"
+  "empPicture empInfo7 empInfo8"
+  "empPicture empInfo9 empInfo9"
+  "empPicture empInfo10 empInfo11"
+  "empPicture empInfo12 empInfo13"
+  "empPicture empInfo14 empInfo15"
+  "empPicture empInfo16 empInfo17"
+  ;
+}
+
+.empPicture{
+  grid-area: empPicture;
+  background-color: aliceblue;
+
+}
+.empInfo1{
+  grid-area: empInfo1;
+
+}
+.empInfo2{
+  grid-area: empInfo2;
+}
+.empInfo3{
+  grid-area: empInfo3;
+}
+.empInfo4{
+  grid-area: empInfo4;
+}
+.empInfo5{
+  grid-area: empInfo5;
+}
+.empInfo6{
+  grid-area: empInfo6;
+}
+.empInfo7{
+  grid-area: empInfo7;
+}
+.empInfo8{
+  grid-area: empInfo8;
+}
+.empInfo9{
+  grid-area: empInfo9;
+}
+.empInfo10{
+  grid-area: empInfo10;
+}
+.empInf11{
+  grid-area: empInfo11;
+}
+.empInfo12{
+  grid-area: empInfo12;
+}
+.empInfo13{
+  grid-area: empInfo13;
+}
+.empInfo14{
+  grid-area: empInfo14;
+}
+.empInfo15{
+  grid-area: empInfo15;
+}
+.empInfo16{
+  grid-area: empInfo16;
+}
+.empInfo17{
+  grid-area: empInfo17;
+}
+

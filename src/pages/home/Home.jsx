@@ -1,5 +1,4 @@
 import {faPenNib,} from '@fortawesome/free-solid-svg-icons';
-import React from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
