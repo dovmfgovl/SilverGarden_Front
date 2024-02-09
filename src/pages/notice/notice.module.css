@@ -1,0 +1,193 @@
+.noticeContainerLayout{
+  height:100%;
+  display:grid;
+  grid-template-areas: 
+  "sidebarLayout  noticeTitleBar noticeTitleBar"
+  "sidebarLayout  innerContentLayout innerContentLayout"
+  "sidebarLayout  innerContentLayout innerContentLayout"
+  "sidebarLayout innerContentLayout innerContentLayout"
+  ;
+  grid-template-columns: 0.5fr 2fr 2fr;
+  grid-template-rows: 70px 1fr 1fr 1fr;
+}
+
+.profileLayout{
+  background-color: rgb(89, 93, 97);
+  grid-area: profileLayout
+}
+
+.sidebarLayout{
+  background-color: rgb(255, 255, 255);
+  grid-area: sidebarLayout
+}
+
+.noticeTitleBar{
+  background-color: rgb(255, 255, 255);
+  grid-area:noticeTitleBar;
+  font-size: 2.0rem;
+  padding:10px;
+}
+
+.innerContentLayout{
+  background-color: rgb(71, 102, 133);
+  grid-area: innerContentLayout;
+}
+
+.noticeListLayout{
+  height:100%;
+  display: grid;
+  grid-template-areas: 
+  "noticeHeader noticeHeader"
+  "noticeContent noticeContent"
+  "noticePagenation noticePagenation"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 8fr 1fr;
+}
+
+.noticeHeader{
+  grid-area: noticeHeader;
+  background-color: rgb(227, 227, 227);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  padding:9px 50px 0 50px;
+  margin:10px;
+}
+.noticeContent{
+  background-color: rgb(227, 227, 227);
+  grid-area: noticeContent;
+  margin:10px;
+  padding:10px;
+}
+.noticePagenation{
+  grid-area: noticePagenation;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
+/* noticedetail css */
+
+.noticeDetailLayout{
+  height: 100%;
+  background-color: rgb(159, 198, 237);
+  display:grid;
+  grid-template-areas:
+  "noticeDetailBtn"
+  "noticeDetailHeader"
+  "noticeDatailContent"
+  "noticeDetailAttachment"
+  ;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 1fr 4fr 0.5fr;
+  margin: 20px;
+  padding:20px;
+}
+.noticeDetailBtn{
+  grid: noticeDetailBtn;
+}
+
+.noticeDetailHeader{
+  display: flex;
+  flex-direction:column;
+  align-items: start;
+  grid-area: noticeDetailHeader;
+  background-color: rgb(231, 231, 231);
+  margin:0 20px 0 20px;
+  padding: 0 10px
+}
+
+.noticeDetailTitle{
+  font-size: 2.0rem;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.noticeDetailOthers{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+.noticeDetailOthers div:nth-child(1){
+  width: 100px;
+}
+.noticeDetailOthers div:nth-child(2){
+  width: 150px;
+}
+.noticeDetailOthers div:nth-child(1){
+  width: 100px;
+}
+
+.noticeDetailAttachment{
+  grid-area: noticeDetailAttachment;
+  background-color: rgb(255, 255, 255);
+  margin:0 20px 20px 20px;
+  padding: 10px;
+  align-items: center;
+}
+.noticeDetailAttachment div{
+  cursor: pointer;
+  margin: 0 20px;
+}
+.noticeDatailContent{
+  grid-area: noticeDatailContent;
+  background-color: rgb(255, 255, 255);
+  margin:20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.noticeDatailContent div{
+  font-size: 1.2rem;
+}
+/* noticeWrite css */
+
+.noticeWriteLayout{
+  height: 100%;
+  background-color: rgb(81, 134, 188);
+  display:grid;
+  grid-template-areas:
+  "noticeWriteHeader"
+  "noticeWriteContent"
+  "noticeWriteAttachment";
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 3fr 0.5fr;
+  margin: 20px;
+  padding:20px;
+}
+
+.noticeWriteHeader{
+  grid-area: noticeWriteHeader;
+  background-color: rgb(207, 207, 207);
+  padding:10px 50px 10px 10px;
+  margin:0 20px;
+}
+
+.noticeWriteAttachment{
+  grid-area: noticeWriteAttachment;
+  background-color: rgb(255, 255, 255);
+  flex-direction: row;
+  padding: 10px;
+  margin:10px 20px;
+}
+
+.noticeFileUploadBar{
+  display: flex;
+  flex-direction: column;
+}
+ .noticeFileUploadBar div{
+  margin: 5px;
+ }
+
+.noticeWriteContent{
+  grid-area: noticeWriteContent;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  margin:20px;
+  overflow-y: auto;
+}
