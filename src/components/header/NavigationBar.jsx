@@ -1,4 +1,4 @@
-import {faPersonShelter } from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faPersonShelter } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
@@ -25,6 +25,7 @@ const NavigationBar = () => {
             <Nav.Link href="/admin" className='mx-2'>관리자페이지</Nav.Link>
           </Nav>
           <Nav className="mx-3">
+            <Nav.Link href="/message"><FontAwesomeIcon style={{margin:'0px'}} className='ms-2' icon={faPaperPlane} /></Nav.Link>
             <Nav.Link href="/mypage">마이페이지</Nav.Link>
             <Nav.Link href="#deets">로그아웃</Nav.Link>
           </Nav>
