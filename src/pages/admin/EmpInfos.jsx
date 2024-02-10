@@ -4,6 +4,8 @@ import EmpListAll from './EmpListAll'
 import EmpDetail from './EmpDetail'
 import { empListDB } from '../../services/api/empInfoApi'
 import EmpEdu from './EmpEdu'
+import EmpExp from './EmpExp'
+import EmpCerti from './EmpCerti'
 
 const EmpInfos = () => {
   const [empList, setEmpList] = useState([]);
@@ -16,14 +18,14 @@ const EmpInfos = () => {
       const data = response.data;
       console.log(data);
       setEmpList(data);
-    } catch (error) {
+    } catch (error) { 
       console.error(error);
     }
   }
 
   const oneRow = async (emp) => {
     if (emp) {
-      const detail = empList.find(item => item.E_CODE === emp.E_CODE);
+      const detail = empList.find(item => item.E_NO === emp.E_NO);
       setEmpDetail(detail)
     } else {
       setEmpDetail(null)
@@ -56,6 +58,16 @@ const EmpInfos = () => {
       </div>
       <div className={styles.empBaseInfoWrap}>
         <EmpEdu 
+          empDetail={empDetail}
+          oneRow={oneRow}
+          getEmpList={getEmpList}
+        />
+        <EmpExp 
+          empDetail={empDetail}
+          oneRow={oneRow}
+          getEmpList={getEmpList}
+        />
+        <EmpCerti
           empDetail={empDetail}
           oneRow={oneRow}
           getEmpList={getEmpList}

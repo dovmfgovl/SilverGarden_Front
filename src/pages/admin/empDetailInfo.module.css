@@ -1,4 +1,6 @@
 .empInfoWrap {
+  background-color: white;
+  border: 1px solid lightgray;
   height: 100%;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr;
@@ -16,60 +18,68 @@
 }
 
 .empPicture{
+  border: 1px solid lightgray;
   grid-area: empPicture;
   background-color: aliceblue;
 
 }
 .empInfo1{
+  border: 1px solid lightgray;
   grid-area: empInfo1;
-
 }
 .empInfo2{
+  border: 1px solid lightgray;
   grid-area: empInfo2;
 }
 .empInfo3{
+  border: 1px solid lightgray;
   grid-area: empInfo3;
 }
 .empInfo4{
+  border: 1px solid lightgray;
   grid-area: empInfo4;
 }
 .empInfo5{
+  border: 1px solid lightgray;
   grid-area: empInfo5;
 }
 .empInfo6{
+  border: 1px solid lightgray;
   grid-area: empInfo6;
 }
 .empInfo7{
+  border: 1px solid lightgray;
   grid-area: empInfo7;
 }
 .empInfo8{
+  border: 1px solid lightgray;
   grid-area: empInfo8;
 }
 .empInfo9{
+  border: 1px solid lightgray;
   grid-area: empInfo9;
 }
 .empInfo10{
+  border: 1px solid lightgray;
   grid-area: empInfo10;
 }
-.empInf11{
+.empInfo11{
+  border: 1px solid lightgray;
   grid-area: empInfo11;
 }
 .empInfo12{
+  border: 1px solid lightgray;
   grid-area: empInfo12;
 }
 .empInfo13{
+  border: 1px solid lightgray;
   grid-area: empInfo13;
 }
 .empInfo14{
+  border: 1px solid lightgray;
   grid-area: empInfo14;
 }
 .empInfo15{
+  border: 1px solid lightgray;
   grid-area: empInfo15;
 }
-.empInfo16{
-  grid-area: empInfo16;
-}
-.empInfo17{
-  grid-area: empInfo17;
-}
-

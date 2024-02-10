@@ -52,7 +52,7 @@ const EmpListAll = ({ empList, oneRow }) => {
                     <select id="gubun" className="form-select" aria-label="분류">
                         <option defaultValue>분류</option>
                         <option value="E_NAME">사원명</option>
-                        <option value="E_CURRENT">현황</option>
+                        <option value="E_STATUS">현황</option>
                         <option value="E_RANK">직급</option>
                     </select>
                 </div>
@@ -86,8 +86,9 @@ const EmpListAll = ({ empList, oneRow }) => {
                     <thead>
                     <tr>
                         <th>사원번호</th>
-                        <th>사원명</th>
                         <th>현황</th>
+                        <th>사원명</th>
+                        <th>부서</th>
                         <th>직급</th>
                         <th>전화번호</th>
                     </tr>
