@@ -1,76 +1,51 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './empInfo.module.css'
 import EmpListAll from './EmpListAll'
 import EmpDetail from './EmpDetail'
-import { empListDB } from '../../services/api/empInfoApi'
 import EmpEdu from './EmpEdu'
 import EmpExp from './EmpExp'
 import EmpCerti from './EmpCerti'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEmpList, setDetail } from '../../redux/empInfosSlice' // 액션 및 셀럭터 import
 
 const EmpInfos = () => {
-  const [empList, setEmpList] = useState([]);
-  const [empDetail, setEmpDetail] = useState([]);
-
-  // 전체 직원 목록 조회
-  const getEmpList = async () => {
-    try {
-      const response = await empListDB();
-      const data = response.data;
-      console.log(data);
-      setEmpList(data);
-    } catch (error) { 
-      console.error(error);
-    }
-  }
-
-  const oneRow = async (emp) => {
-    if (emp) {
-      const detail = empList.find(item => item.E_NO === emp.E_NO);
-      setEmpDetail(detail)
-    } else {
-      setEmpDetail(null)
-    }
-  }
+  const dispatch = useDispatch();
+  const empList = useSelector(state => state.empInfos.value); // 변경된 상태명을 가져옴
+  const empDetail = useSelector(state => state.empInfos.selectedEmployee); // 변경된 상태명을 가져옴
 
   useEffect(() => {
-    getEmpList()
-  }, [])
+    dispatch(getEmpList());
+  }, [dispatch]);
 
-  useEffect(() => {}, [empDetail])
+  const handleUpdate = (updatedDetail) => {
+    // 수정 버튼 클릭 시 호출되는 함수
+    // 수정된 상세정보를 스토어에 업데이트
+    // updatedDetail을 사용하여 서버로 업데이트 요청을 보내고, 성공 시 dispatch(setDetail(updateDetail))를 호출
+    // -> 스토어 상태 업데이트되고 자동으로 UI도 업데이트 된다.
+    // > 서버로 업데이트 요청 보내는 부분은 생략.
+    // dispatch(setDetail(updatedDetail));
+  }
 
   return (
     <>
     <div className={styles.innerEmpInfoWrap}>
       <div className={styles.empListContentWrap}>
-        <EmpListAll 
-          empList={empList}
-          getEmpList={getEmpList}
-          oneRow={oneRow}
-          setEmpDetail={setEmpDetail}
-        />
+        <EmpListAll />
       </div>
       <div className={styles.empDetailWrap}>
         <EmpDetail 
-          empDetail={empDetail}
-          oneRow={oneRow}
-          getEmpList={getEmpList}
+          handleUpdate={handleUpdate}
         />
       </div>
       <div className={styles.empBaseInfoWrap}>
         <EmpEdu 
           empDetail={empDetail}
-          oneRow={oneRow}
-          getEmpList={getEmpList}
         />
         <EmpExp 
           empDetail={empDetail}
-          oneRow={oneRow}
-          getEmpList={getEmpList}
         />
         <EmpCerti
           empDetail={empDetail}
-          oneRow={oneRow}
-          getEmpList={getEmpList}
         />
       </div> 
     </div>
