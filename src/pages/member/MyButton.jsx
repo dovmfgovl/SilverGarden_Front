@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import MemberInsert from './MemberInsert';
 import MemberDelete from './MemberDelete';
+import MemberUpdate from './MemberUpdate';
 
 const MyButton = () => {
   const [button, setButton] = useState('');
@@ -24,6 +25,7 @@ const MyButton = () => {
       <Buttons handleButton={handleButton} />
         <>
           {button === "추가" && <MemberInsert />}
+          {button === "수정" && <MemberUpdate />}
           {button === "삭제" && <MemberDelete show={showDeleteModal} handleClose={handleCloseDeleteModal} />}
         </>
     </div>

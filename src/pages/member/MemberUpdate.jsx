@@ -5,7 +5,7 @@ import DaumPostcode from 'react-daum-postcode';
 import 'react-datepicker/dist/react-datepicker.css';
 import { memberInsert } from '../../services/api/memberApi';
 
-const MemberInsert = () => {
+const MemberUpdate = () => {
   const [formData, setFormData] = useState({
     client_name: '',
     client_birth: '',
@@ -75,7 +75,7 @@ const MemberInsert = () => {
   return (
     <>
       <Row>
-        <Col><h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자정보입력</h2></Col>
+        <Col><h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자정보수정</h2></Col>
         <Col>
           <Stack direction="horizontal" gap={2}>
             <Button variant="success" className="p-2 ms-auto" onClick={handleSubmit}>저장</Button>
@@ -146,4 +146,4 @@ const MemberInsert = () => {
   )
 }
 
-export default MemberInsert;
+export default MemberUpdate;
