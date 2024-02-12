@@ -22,8 +22,7 @@ const EmpInfos = () => {
     // 수정된 상세정보를 스토어에 업데이트
     // updatedDetail을 사용하여 서버로 업데이트 요청을 보내고, 성공 시 dispatch(setDetail(updateDetail))를 호출
     // -> 스토어 상태 업데이트되고 자동으로 UI도 업데이트 된다.
-    // > 서버로 업데이트 요청 보내는 부분은 생략.
-    // dispatch(setDetail(updatedDetail));
+    dispatch(setDetail(updatedDetail)); // 선택된 직원을 store에 저장
   }
 
   return (
@@ -34,7 +33,7 @@ const EmpInfos = () => {
       </div>
       <div className={styles.empDetailWrap}>
         <EmpDetail 
-          handleUpdate={handleUpdate}
+         /*  handleUpdate={handleUpdate} */
         />
       </div>
       <div className={styles.empBaseInfoWrap}>

@@ -1,10 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
+import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 
-const EmpDetail = ({ handleUpdate }) => {
+const EmpDetail = ({ /* handleUpdate */ }) => {
+  const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const [Editing, setEditing] = useState(false);
+  const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
+
+  useEffect(() => {
+    setUpdatedEmployee(selectedEmployee);
+  }, [selectedEmployee]);
+
   const inputFields = [
     { label: '사원명', name: 'E_NAME', type: 'text' },
     { label: '성별', name: 'E_GENDER', type: 'text' },
@@ -23,14 +32,42 @@ const EmpDetail = ({ handleUpdate }) => {
     { label: '직급', name: 'E_RANK', type: 'text' },
   ];
 
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedEmployee(prevState => ({
+      ...prevState, [name]: value
+    }));
+  };
+
+  // EmpDetail 컴포넌트에서 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져오도록 수정
+  const handleSaveChanges = () => {
+    dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
+    .then(() => {
+      dispatch(setDetail(updatedEmployee)); // Redux 스토어에서 선택된 직원 정보 업데이트
+      setEditing(false); // 수정 모드 해제
+
+      // 수정된 직원 정보를 Redux 스토어에서 가져와 전체 직원 목록을 업데이트
+      dispatch(getEmpList()); // 전체 직원 목록 다시 가져오기
+    })
+    .catch(error => {
+      console.error('Error saving employee details: ', error);
+    });
+  }
+
   const renderInputField = ({ label, name, type }, index) => (
     <div className={styles.empInfoItem} key={name}>
       <div className={styles.label}>{label}</div>
       <input
         type={type}
         style={{ border: '1px solid lightgray', background: 'transparent', margin: '5px', paddingLeft: '50px' }}
-        value={selectedEmployee[name] || ''}
-        readOnly
+        value={updatedEmployee[name] || ''}
+        onChange={handleInputChange} // 입력값 변경 시 updatedEmployee 상태 업데이트
+        readOnly={!Editing} // 수정 모드일 때만 readOnly 해제
+        name={name} // input 요소의 name 속성 추가
       />
       {index !== inputFields.length - 1 && <div className={styles.divider} />}
     </div>
@@ -40,9 +77,12 @@ const EmpDetail = ({ handleUpdate }) => {
     <div style={{ padding: '20px', borderLeft: '1px solid' }}>
       <h5>직원 상세 정보</h5>
       <div className="col-2">
-        <Button variant="warning" onClick={() => handleUpdate(selectedEmployee)}>
+        {/* <Button variant="warning" onClick={() => handleUpdate(selectedEmployee)}>
           수정
-        </Button>      
+        </Button>    */}   
+        <Button variant="warning" onClick={Editing ? handleSaveChanges : handleEdit}>
+          {Editing ? '저장' : '수정'}
+        </Button>
       </div>
       <div className={styles.empInfoWrap}>
         <div className={styles.empPicture}>
