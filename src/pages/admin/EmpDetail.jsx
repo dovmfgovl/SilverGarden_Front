@@ -4,14 +4,16 @@ import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 
-const EmpDetail = ({ /* handleUpdate */ }) => {
+const EmpDetail = () => {
   const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
-  const [Editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
+  const [originalEmployee, setOriginalEmployee] = useState(selectedEmployee);
 
   useEffect(() => {
     setUpdatedEmployee(selectedEmployee);
+    setOriginalEmployee(selectedEmployee);
   }, [selectedEmployee]);
 
   const inputFields = [
@@ -43,7 +45,12 @@ const EmpDetail = ({ /* handleUpdate */ }) => {
     }));
   };
 
-  // EmpDetail 컴포넌트에서 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져오도록 수정
+  const handleCancel = () => {
+    setEditing(false);
+    setUpdatedEmployee(originalEmployee); // 수정 취소 시 원래 정보로 되돌림
+  };
+
+  // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져오도록 수정
   const handleSaveChanges = () => {
     dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
     .then(() => {
@@ -66,7 +73,7 @@ const EmpDetail = ({ /* handleUpdate */ }) => {
         style={{ border: '1px solid lightgray', background: 'transparent', margin: '5px', paddingLeft: '50px' }}
         value={updatedEmployee[name] || ''}
         onChange={handleInputChange} // 입력값 변경 시 updatedEmployee 상태 업데이트
-        readOnly={!Editing} // 수정 모드일 때만 readOnly 해제
+        readOnly={!editing} // 수정 모드일 때만 readOnly 해제
         name={name} // input 요소의 name 속성 추가
       />
       {index !== inputFields.length - 1 && <div className={styles.divider} />}
@@ -77,11 +84,10 @@ const EmpDetail = ({ /* handleUpdate */ }) => {
     <div style={{ padding: '20px', borderLeft: '1px solid' }}>
       <h5>직원 상세 정보</h5>
       <div className="col-2">
-        {/* <Button variant="warning" onClick={() => handleUpdate(selectedEmployee)}>
-          수정
-        </Button>    */}   
-        <Button variant="warning" onClick={Editing ? handleSaveChanges : handleEdit}>
-          {Editing ? '저장' : '수정'}
+        {/* 수정 모드일 때만 저장 버튼 표시 */}
+        {editing && <Button variant="warning" onClick={handleSaveChanges}>저장</Button>}
+        <Button variant="warning" onClick={editing ? handleCancel : handleEdit}>
+          {editing ? '취소' : '수정'}
         </Button>
       </div>
       <div className={styles.empInfoWrap}>
