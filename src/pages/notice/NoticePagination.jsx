@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap';
 
-const NoticePagenation = ({currentPage, totalPosts, postPerPage, handleSetCurentPage}) => {
+const NoticePagination = ({currentPage, totalPosts, postPerPage, handleSetCurentPage}) => {
   const pageNumbers = [];
   // 총 페이지 수 계산
   const totalPages = Math.ceil(totalPosts / postPerPage);
@@ -40,4 +40,4 @@ const NoticePagenation = ({currentPage, totalPosts, postPerPage, handleSetCurent
   )
 }
 
-export default NoticePagenation
+export default NoticePagination

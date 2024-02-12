@@ -62,7 +62,7 @@
   margin:10px;
   padding:10px;
 }
-.noticePagenation{
+.noticePagination{
   grid-area: noticePagenation;
   background-color: rgb(255, 255, 255);
   display: flex;

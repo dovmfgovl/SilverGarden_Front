@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './notice.module.css';
 import NoticeSearchBar from './NoticeSearchBar';
-import NoticePagenation from './NoticePagenation';
 import NoticeTable from './NoticeTable';
+import NoticePagination from './NoticePagination';
 
 const NoticeList = ({noticeList, handlePage, getList}) => {
   const[currentPage, setCurrentPage] = useState(1);
@@ -24,8 +24,8 @@ const NoticeList = ({noticeList, handlePage, getList}) => {
     <div className={styles.noticeListLayout}>
       <div className={styles.noticeHeader}><NoticeSearchBar getList={getList}></NoticeSearchBar></div>
       <div className={styles.noticeContent}><NoticeTable noticeList={selectedlist} handlePage={handlePage}></NoticeTable></div>
-      <div className={styles.noticePagenation}>
-        <NoticePagenation currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></NoticePagenation>
+      <div className={styles.noticePagination}>
+        <NoticePagination currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></NoticePagination>
       </div>
     </div>
     </>
