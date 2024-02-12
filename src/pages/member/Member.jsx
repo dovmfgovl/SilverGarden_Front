@@ -1,10 +1,11 @@
 import { faFilePen, faUsersRectangle, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './member.module.css';
 import SidebarCommon from '../../components/sidebar/SidebarCommon'
 import MemberInfo from './MemberInfo';
 import MemberInfo2 from './counsel/MemberInfo2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getMemberList } from '../../services/api/memberApi'
 
 const Member = () => {
   const list = [//이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
@@ -20,12 +21,24 @@ const Member = () => {
 
 ];
 
-const [menu,setMenu]=useState('이용자기본정보');
+const [memberPage,setmemberPage]=useState('이용자기본정보');
+const [memberList,setMemberList]=useState([]);
+const [memberId,setMemberId]=useState({});
+
+
+const Member =async (params)=>{
+  const response = await getMemberList(params)
+  console.log(response.data);
+  setMemberList(response.data);
+}
+
+useEffect(()=>{
+  Member();
+},[])
 
 const handleMenu=(menuTitle)=>{
-  setMenu(menuTitle);
+  setmemberPage(menuTitle);
 }
-console.log(menu);
 
   return (
     <div className={styles.MemberContainerLayout}>
@@ -33,10 +46,10 @@ console.log(menu);
       <div className={styles.sidebarLayout}><SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon></div>
       <div className={styles.innerContentLayout}>
           {/* 서브라우터 구현 */}
-            {menu&&
+            {memberPage&&
             <>
-          {menu ==="이용자기본정보" &&<MemberInfo/>}
-          {menu ==="이용자상담관리" &&<MemberInfo2/>} 
+          {memberPage ==="이용자기본정보" &&<MemberInfo getmemberList={Member}/>}
+          {memberPage ==="이용자상담관리" &&<MemberInfo2 getmemberList={Member}/>} 
             </>
             }
           {/* 서브라우터 구현 */}

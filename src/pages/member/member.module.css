@@ -15,7 +15,7 @@
 
 .innerContentLayout{
     grid-area: innerContentLayout;
-    background-color: white;
+    background-color: rgb(70, 154, 243);
 }
 
 .memberTitlebar{
@@ -38,6 +38,7 @@
 
 .leftMemberLayout{
     grid-area: leftMemberLayout;
+    background-color: white;
     flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
    
 }

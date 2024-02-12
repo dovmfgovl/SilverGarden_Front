@@ -1,35 +1,23 @@
 import {React, useEffect, useState} from 'react'
 import styles from './member.module.css';
-
-
-// import { userListDB } from '../../services/api/CardApi';
-
 import { Button, Table } from 'react-bootstrap';
 import MemberSearchbar from './MemberSearchbar';
 import MemberRow from './MemberRow';
 import MemberDetail from './MemberDetail';
 
 
-const MemberInfo = () => {
-  const [userList, setUserList] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null); // 선택된 사용자 정보 저장
+const MemberInfo = ({Member}) => {
+  const [selectedMember, setSelectedMember] = useState(null); // 선택된 사용자 정보 저장
 
-//   const getUserList=async()=>{
-//     const res= await userListDB();
-//     const data= res.data;
-//     console.log(data);
-//     setUserList(data);
-//   }
+  const handleRowClick = (userNum) => {
+    const selected = Member.find((Member) => Member.CLIENT_ID === userNum);
+    setSelectedMember(selected);
+    console.log(selectedMember);
+  };
 
-//   useEffect(()=>{
-//     getUserList();
-//   },[]);
 
-//   const handleRowClick = (userNum) => {
-//     const selected = userList.find((userList) => userList.U_NUM === userNum);
-//     setSelectedUser(selected);
-//     console.log(selectedUser);
-//   };
+
+  
   return (
     <>
     <div className={styles.InnerMemberLayout}>
@@ -44,7 +32,6 @@ const MemberInfo = () => {
           <tr>
             <th className='text-center'>#</th>
             <th className='text-center'>이름</th>
-            <th className='text-center'>현황</th>
             <th className='text-center'>생년월일</th>
             <th className='text-center'>나이</th>
             <th className='text-center'>담당자</th>
@@ -52,9 +39,9 @@ const MemberInfo = () => {
         </thead>
         {/* 목록 내용 */}
         <tbody>
-        {userList &&
-              userList.map((userList, key) => (
-                <MemberRow key={key} userList={userList}  />
+        {Member &&
+             Member.map((member, memberId) => (
+                <MemberRow key={memberId} member={member}  />
               ))}
         </tbody>
       </Table>
@@ -67,7 +54,7 @@ const MemberInfo = () => {
   </div>
           </div>
         <div className={styles.rightMemberLayout1}>
-         <MemberDetail user={selectedUser} /> 
+         <MemberDetail member={selectedMember} /> 
           </div>
     </div>
     </>
