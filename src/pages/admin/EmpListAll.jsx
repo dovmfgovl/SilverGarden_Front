@@ -42,10 +42,6 @@ const EmpListAll = () => {
         dispatch(setShowAll());
     };
 
-    const newEmpInsert = () => {
-        console.log("newEmpInsert");
-    };
-
     const handleUpdate = (selectedEmployee) => {
         dispatch(setDetail(selectedEmployee)); // 선택된 직원을 store에 저장
     };
@@ -59,7 +55,7 @@ const EmpListAll = () => {
                 </div>
 
                 <div className={styles.row}>
-                    <div className="col-3">
+                    <div className="col-2">
                         <select id="gubun" className="form-select" aria-label="분류">
                             <option defaultValue>분류</option>
                             <option value="E_NAME">사원명</option>
@@ -67,7 +63,7 @@ const EmpListAll = () => {
                             <option value="E_RANK">직급</option>
                         </select>
                     </div>
-                    <div className="col-6">
+                    <div className="col-7">
                         <input
                             type="text"
                             id="keyword"
@@ -85,7 +81,7 @@ const EmpListAll = () => {
                             검색
                         </Button>
                     </div>
-                    <div className="col-1">
+                    <div className="col-2">
                         <Button variant="secondary" onClick={() => handleShowAll()}>
                             전체조회
                         </Button>
@@ -113,10 +109,10 @@ const EmpListAll = () => {
 
                     <hr />
                     <span className={`${styles.empListFooter} row`}>
-                        <span className="col-3">
+                        <span className="col-2">
                             <ExcelForm empList={empList}/>
                         </span>
-                        <span className="col-2">
+                        <span className="col-3">
                             <Form>
                                 <Form.Check
                                     type="switch"
@@ -128,9 +124,6 @@ const EmpListAll = () => {
                             </Form>
                         </span>                    
                         <span className="col-7">
-                            <Button variant="warning" id="btn_newEmpInsert" onClick={newEmpInsert}>
-                                신규등록
-                            </Button>
                             <EmpCreateModal/>
                         </span>
                     </span>

@@ -4,11 +4,8 @@ import { setDetail } from '../../redux/empInfosSlice';
 
 const EmpRow = ({ emp }) => {
     const dispatch = useDispatch();
-    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     const handleRowClick = () => {
-        // 선택한 직원의 정보를 상태로 저장
-        setSelectedEmployee(emp);
         // Redux 스토어에 선택한 직원의 정보를 설정
         dispatch(setDetail(emp));
     };

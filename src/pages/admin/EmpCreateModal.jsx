@@ -145,9 +145,9 @@ const EmpCreateModal = () => {
                   {...register("e_birth", {
                     required: "* 생년월일을 입력해주세요.",
                   })}
-                  type="date"
+                  type="text"
                   autoFocus
-                  maxLength={6}
+                  maxLength={10}
                   thousandSeparator=","
                   allowNegative={false}
                 />
@@ -162,7 +162,7 @@ const EmpCreateModal = () => {
                   })}
                   type="text"
                   autoFocus
-                  maxLength={11}
+                  maxLength={13}
                   thousandSeparator=","
                   allowNegative={false}
                 />

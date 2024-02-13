@@ -11,17 +11,17 @@
 
 .empListContentWrap{
   grid-area: empListContentWrap;
-  background-color: blueviolet;
+  background-color: white;
 }
 
 .empDetailWrap{
   grid-area: empDetailWrap;
-  background-color: cadetblue;
+  background-color: white;
 }
 
 .empBaseInfoWrap{
   grid-area: empBaseInfoWrap;
-  background-color: darkkhaki;
+  background-color: white;
 }
 
 .listGroup {
