@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 
-const EmpDetail = () => {
+const EmpDetail = (/* handleUpdate */) => {
   const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
   const [editing, setEditing] = useState(false);

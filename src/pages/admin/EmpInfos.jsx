@@ -33,7 +33,7 @@ const EmpInfos = () => {
       </div>
       <div className={styles.empDetailWrap}>
         <EmpDetail 
-         /*  handleUpdate={handleUpdate} */
+          handleUpdate={handleUpdate}
         />
       </div>
       <div className={styles.empBaseInfoWrap}>
