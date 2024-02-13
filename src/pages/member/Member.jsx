@@ -49,7 +49,7 @@ const handleMenu=(menuTitle)=>{
             {memberPage&&
             <>
           {memberPage ==="이용자기본정보" &&<MemberInfo memberList={memberList} getMemberList={Member} />}
-          {memberPage ==="이용자상담관리" &&<MemberInfo2 />} 
+          {memberPage ==="이용자상담관리" &&<MemberInfo2 memberList={memberList} getMemberList={Member}/>} 
             </>
             }
           {/* 서브라우터 구현 */}

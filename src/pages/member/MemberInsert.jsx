@@ -56,10 +56,6 @@ const MemberInsert = () => {
     setPw(value);
   }, []);
 
-
-
-
-
   const completeHandler = (data) => {
     console.log(data);
     setRoadAddress(data.address);

@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useCallback, useState } from 'react';
 import { Button, Col, Form, Image, Modal, Row, Stack, Table } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import DaumPostcode from 'react-daum-postcode';
@@ -9,25 +9,23 @@ import { useNavigate} from 'react-router-dom';
 const MemberUpdate = ({selectedMember}) => {
   const [memberDetail,setMemberDetail]=useState(
     {
+      CLIENT_ID:selectedMember.CLIENT_ID,
       CLIENT_NAME:selectedMember.CLIENT_NAME,
       CLIENT_BIRTH:selectedMember.CLIENT_BIRTH,
       CLIENT_GENDER:selectedMember.CLIENT_GENDER,
       CLIENT_TEL:selectedMember.CLIENT_TEL,
       CLIENT_MANAGER:selectedMember.CLIENT_MANAGER,
       CLIENT_ADDRESS:selectedMember.CLIENT_ADDRESS,
+      MOD_ID:selectedMember.MOD_ID
     });
-
-
-
 
   const navigate = useNavigate();
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
+  const [birth,setBirth]=useState('')
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  
   
   // 나중에 트러블슈팅: 다른 회원의 정보를 수정하려고 할 때 새로 고치고 다시 내기  
   
@@ -41,12 +39,20 @@ const MemberUpdate = ({selectedMember}) => {
     setDetailAddress(e.target.value);
     console.log(detailAddress);
   };
+
+  const handleBirth = useCallback((value) => {
+    console.log(value);
+    setBirth(value) 
+    },[]);
   
   const handleSubmit = async () => {
     const fullAddress = `${roadAddress} ${detailAddress}`;
-    
+    const updatedMemberDetail = {
+      ...memberDetail,
+      CLIENT_ADDRESS: fullAddress
+    };
     try {
-      const res = await memberUpdate(memberDetail);
+      const res = await memberUpdate(updatedMemberDetail);
       console.log(res.data);
       alert("회원 정보가 성공적으로 저장되었습니다.");
       navigate("/member");
@@ -80,7 +86,7 @@ const MemberUpdate = ({selectedMember}) => {
               <th><strong>생년월일:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
                 <DatePicker  id="client_birth" dateFormat="yyyy-MM-dd"
-                 value={memberDetail.CLIENT_BIRTH}  onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_BIRTH:e.target.value}) }}/>
+                 value={birth} onChange={handleBirth} selected={birth}/>
               </td>
             </tr>
             <tr>

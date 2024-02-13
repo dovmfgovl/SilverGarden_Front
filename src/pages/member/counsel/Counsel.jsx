@@ -4,29 +4,7 @@ import CounselRow from './CounselRow';
 
 
 const Counsel = (props) => {
-    //const [UserConsult,setUserConsult]=useState([]);
 
-   // const userNum=props.userNum;
-   // console.log(userNum);
-
-    // useEffect(()=>{
-    //   ConsultCall(props);
-    // },[props])
-
-    // const ConsultCall = async(props) =>{
-    
-    //     const res = await userDetailDB(props);
-    //     console.log(res);
-    //     const jsonDoc = res.data
-    //     console.log(jsonDoc);
-    //     const consultsArray=jsonDoc[1].consults
-    //     setUserConsult(consultsArray);
-    //     console.log(UserConsult);
-    //   }
-
-    //   const filteredConsults = UserConsult.filter((consult) => consult.TB_UNUM === userNum);
-
- 
 
   return (
     <>
