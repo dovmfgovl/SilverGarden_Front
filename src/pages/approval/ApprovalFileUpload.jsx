@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import styles from './notice.module.css'
+import styles from './approval.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
+import { faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
-const NoticeFileUpload = ({handleFile, fileList}) => {
+const ApprovalFileUpload = ({fileList, handleFile}) => {
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -42,4 +42,4 @@ const NoticeFileUpload = ({handleFile, fileList}) => {
   )
 }
 
-export default NoticeFileUpload
+export default ApprovalFileUpload

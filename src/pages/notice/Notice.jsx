@@ -53,12 +53,6 @@ const handleFileList = (list) =>{//파일리스트를 변경하는 함수 선언
   setFileList(list)
 }
 
-
-///////////////pagenation 관련 ////////////////
-const [totalPage, setTotalPage] = useState(1);
-const [currentPage, setCurrentPage] = useState(1);
-
-
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>
