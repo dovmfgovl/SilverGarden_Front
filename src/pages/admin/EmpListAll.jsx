@@ -6,6 +6,7 @@ import styles from "./empInfo.module.css";
 import ExcelForm from './ExcelForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, setDetail, setSearchKeywords, setShowAll, toggleIncludeResigned } from '../../redux/empInfosSlice';
+import EmpCreateModal from './EmpCreateModal';
 
 const EmpListAll = () => {
     const [searchKeyword, setSearchKeyword] = useState('');
@@ -130,6 +131,7 @@ const EmpListAll = () => {
                             <Button variant="warning" id="btn_newEmpInsert" onClick={newEmpInsert}>
                                 신규등록
                             </Button>
+                            <EmpCreateModal/>
                         </span>
                     </span>
                 </div>

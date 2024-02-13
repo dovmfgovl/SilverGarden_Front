@@ -145,7 +145,7 @@ const EmpCreateModal = () => {
                   {...register("e_birth", {
                     required: "* 생년월일을 입력해주세요.",
                   })}
-                  type="text"
+                  type="date"
                   autoFocus
                   maxLength={6}
                   thousandSeparator=","
