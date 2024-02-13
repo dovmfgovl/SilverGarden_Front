@@ -1,0 +1,45 @@
+.body{
+  height: 100%;
+    width: 100%;
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "empno birth"
+    "name pnumber"
+    "dept email"
+    "password role";
+  }
+  
+  .empno{
+    grid-area: empno;
+
+  }
+  
+  .birth{
+    grid-area: birth;
+  }
+
+  .name{
+grid-area: name;
+  }
+  .pnumber{
+    grid-area: pnumber;
+  }
+  .dept{
+    grid-area:dept;
+  }
+  .email{
+    grid-area:email;
+  }
+  .password{
+    grid-area:password;
+  }
+  .role{
+    grid-area: role;
+  }
+  .input{
+    width: 50px;
+    font-size: 15px;
+  }
+  
