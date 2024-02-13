@@ -65,7 +65,7 @@ export const MemberDetailPage = ({selectedMember}) => {
               </tbody>
               </Table>
       </Stack>
-      <Counsel/>
+      <Counsel selectedMember={selectedMember}/>
     </>
   )
 }

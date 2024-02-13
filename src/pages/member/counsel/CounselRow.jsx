@@ -3,7 +3,7 @@ import CounselDetail from './CounselDetail';
 import { Table } from 'react-bootstrap';
 
 
-const CounselRow = () => {
+const CounselRow = ({selectedMember,counselList}) => {
   
   return (
     <>
@@ -19,13 +19,15 @@ const CounselRow = () => {
           </thead>
           {/* 목록 내용 */}
           <tbody>
-            <tr className='' style={{ cursor: 'pointer' }} >
-              <td className='text-center'><h6 className="pe-auto"></h6></td>
-              <td className='text-center'> <h6 className="pe-auto"></h6></td>
-              <td className='text-center'> <h6 className="pe-auto"></h6></td>
-              <td className='text-center'> <h6 className="pe-auto"></h6></td>
+            {counselList.map((counsel,index)=>(
+            <tr key={counsel.COUNSEL_NO}className='' style={{ cursor: 'pointer' }} >
+              <td className='text-center'><h6 className="pe-auto">{counsel.COUNSEL_DATE}</h6></td>
+              <td className='text-center'> <h6 className="pe-auto">{counsel.COUNSEL_TIME}</h6></td>
+              <td className='text-center'> <h6 className="pe-auto">{counsel.COUNSEL_HOW}</h6></td>
+              <td className='text-center'> <h6 className="pe-auto"></h6>{counsel.CLIENT_ID}</td>
               <CounselDetail  />
             </tr>
+            ))}
           </tbody>
     </Table>
     </>
