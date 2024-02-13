@@ -33,35 +33,3 @@
 .homeInnerContentWrap{
   grid-area: homeInnerContentWrap;
 }
-
-.empListWrap{
-  height: 100%;
-  display: grid;
-  grid-template-areas: 
-  "empSidebarWrap empTitleBar empTitleBar"
-  "empSidebarWrap empListContentWrap empDetailWrap"
-  "empSidebarWrap empListContentWrap empBaseInfoWrap"
-  ;
-  grid-template-columns: 1fr 3fr 3fr;
-  grid-template-rows: 70px 1fr 1fr;
-  background-color: azure;
-}
-
-.empSidebarWrap{
-  grid-area: empSidebarWrap;
-}
-.empTitleBar{
-  grid-area:empTitleBar;
-  background-color: rgb(101, 90, 90);
-}
-.empListContentWrap{
-  grid-area:empListContentWrap
-}
-.empDetailWrap{
-  grid-area:empDetailWrap;
-  background-color: chocolate;
-}
-.empBaseInfoWrap{
-  grid-area:empBaseInfoWrap;
-  background-color: tomato;
-}
