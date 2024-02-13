@@ -44,7 +44,7 @@ export const memberDelete = (client_id) => {
       const response = axios({
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "member/memberDelete",
-        params: {'client_id': client_id},
+        params: {'CLIENT_ID': client_id},
       });
       resolve(response);
     } catch (error) {

@@ -1,8 +1,18 @@
 import React from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import { memberDelete } from '../../services/api/memberApi';
 
-const MemberDelete = ({ show, handleClose }) => {
-  
+const MemberDelete = ({ show, handleClose,selectedMember }) => {
+
+  const handleDelete= async()=>{
+    const client={
+      CLIENT_ID:selectedMember.CLIENT_ID
+    }
+    const res = await memberDelete(client.CLIENT_ID)
+    console.log(res.data);
+    alert("삭제되었습니다");
+    handleClose()
+  }
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -21,10 +31,7 @@ const MemberDelete = ({ show, handleClose }) => {
         <Button variant="secondary" onClick={handleClose}>
           취소
         </Button>
-        <Button variant="primary" onClick={() => {
-          // 삭제 처리 로직 추가
-          handleClose(); // 모달 닫기
-        }}>
+        <Button variant="primary" onClick={handleDelete}>
           삭제
         </Button>
       </Modal.Footer>
