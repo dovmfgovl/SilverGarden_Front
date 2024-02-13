@@ -1,14 +1,255 @@
+/* approval start */
 .approvalWrap{
   height: 100%;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-areas: 
+  "approvalSidebarWrap approvalTitleBar"
+  "approvalSidebarWrap approvalContentWrap"
+  ;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 70px 3fr;
 }
 
 .approvalSidebarWrap{
+  grid-area: approvalSidebarWrap;
   background-color: rgb(255, 255, 255);
 }
 
+.approvalTitleBar{
+  grid-area: approvalTitleBar;
+  background-color: rgb(255, 255, 255);
+  font-size: 2.0rem;
+  padding:10px;
+}
+
 .approvalContentWrap{
-  background-color: rgb(139, 139, 198);
-  flex-grow: 1;
+  grid-area: approvalContentWrap;
+  background-color: rgb(227, 227, 227);
+}
+/* approval end */
+
+
+/* waitList start */
+
+.approvalListWrap{
+  height:100%;
+  display: grid;
+  grid-template-areas: 
+  "approvalListHeader approvalListHeader"
+  "approvalListContent approvalListContent"
+  "approvalListPagination approvalListPagination"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 8fr 1fr;
+}
+
+.approvalListHeader{
+  grid-area: approvalListHeader;
+  background-color: rgb(255, 255, 255);
+  min-width: 790px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  padding:10px 10px;
+  margin:10px;
+}
+
+.approvalListHeader div:nth-child(1){
+  align-self: flex-end;
+}
+
+.approvalListContent{
+  background-color: rgb(255, 255, 255);
+  grid-area: approvalListContent;
+  margin:10px;
+  padding:10px;
+}
+
+.approvalListPagination{
+  grid-area: approvalListPagination;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
+/* waitList end */
+
+/* approvalWrite start */
+.approvalWriteWrap{
+  height: 100%;
+  max-width: 950px;
+  min-width: 950px;
+  margin: auto;
+  display: grid;
+  grid-template-areas: 
+  "approvalWriteBtnGroup approvalWriteBtnGroup"
+  "approvalWriteHeader approvalWriteLine"
+  "approvalWriteTable approvalWriteTable"
+  "approvalWriteContent approvalWriteContent"
+  "approvalWriteFileUpload approvalWriteFileUpload"
+  ;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 60px 190px 200px 600px 1fr;
+  border: 1px solid rgb(231, 229, 229);
+}
+
+/* .approvalWriteWrap div{
+  border: 1px solid red;
+} */
+
+.approvalWriteBtnGroup{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+  grid-area: approvalWriteBtnGroup;
+}
+
+.approvalWriteBtnGroup :nth-child(1){
+  margin-left: 5px;
+  margin-right: auto;
+  flex-basis: content;
+}
+
+
+.approvalWriteHeader{
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: approvalWriteHeader;
+  font-size: 2.2rem;
+}
+
+.approvalWriteLine{
+  grid-area: approvalWriteLine;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+}
+
+.approvalWriteTable{
+  height: 100%;
+  grid-area: approvalWriteTable;
+  display: flex;
+  flex-direction: column;
+}
+
+.approvalWriteContent{
+  background-color: rgb(255, 255, 255);
+  grid-area: approvalWriteContent;
+  overflow-y: scroll;
+}
+
+.approvalWriteFileUpload{
+  min-height: 100px;
+  grid-area: approvalWriteFileUpload;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+}
+
+/* approvalWrite end */
+
+/* approvalWriteLine */
+.approvalLineWrap{
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "approvalTableHeader approvalTable"
+  "agreeTableHeader agreeTable"
+  ;
+  grid-template-columns:  1fr 6fr;
+  grid-template-rows: 1fr 1fr;
+}
+.approvalTableHeader{
+  border-right: 1px solid rgb(231, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: approvalTableHeader;
+}
+.agreeTableHeader{
+  border-right: 1px solid rgb(231, 229, 229);
+  border-top: 1px solid rgb(231, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: agreeTableHeader;
+}
+.approvalTable{
+  border-bottom: 1px solid rgb(231, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: approvalTable;
+  padding: 0 10px;
+  text-align: center;
+}
+.agreeTable{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: agreeTable;
+  padding: 0 10px;
+  text-align: center;
+}
+/* lineSelectModal */
+
+.lineSelectorWrap{
+  height: 70vh;
+  display: grid;
+  grid-template-areas: 
+  "deptView selectBar selectedApprovalLine"
+  "deptView selectBar selectedAgreeLine";
+  grid-template-columns:  3fr 0.7fr 3fr;
+  grid-template-rows:  1fr 1fr;
+}
+
+.deptView{
+  grid-area: deptView;
+}
+
+.selectBar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid rgb(231, 229, 229);
+  border-left: 1px solid rgb(231, 229, 229);
+  grid-area: selectBar;
+}
+.selectedApprovalLine{
+  border-bottom: 1px solid rgb(231, 229, 229);
+  grid-area: selectedApprovalLine;
+}
+.selectedApprovalLine div:nth-child(1){
+  background-color: rgb(228, 228, 228);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.selectedAgreeLine{
+  grid-area: selectedAgreeLine;
+}
+
+.selectedAgreeLine div:nth-child(1){
+  background-color: rgb(228, 228, 228);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.deptView{
+  background-color: rgb(237, 237, 237);
+  height: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }

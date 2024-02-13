@@ -1,10 +1,12 @@
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 
 const NoticeTable = ({noticeList, handlePage}) => {
   return (
-    <Table bordered hover>
+    <Table bordered hover style={{textAlign: "center"}}>
     <thead>
       <tr>
         <th>#</th>
@@ -22,7 +24,7 @@ const NoticeTable = ({noticeList, handlePage}) => {
           <td>{notice.N_TITLE}</td>
           <td>{notice.E_NAME}</td>
           <td>{notice.REG_DATE}</td>
-          <td>{notice.N_ATT}</td>
+          <td>{notice.N_ATT > 0 ? <FontAwesomeIcon icon={faPaperclip} /> : ""}</td>
           <td>{notice.N_HIT}</td>
         </tr>
       ))}
