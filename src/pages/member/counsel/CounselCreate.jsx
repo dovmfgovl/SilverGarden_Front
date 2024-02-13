@@ -2,7 +2,7 @@ import React, { useState }from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 import CounselUpdate from './CounselUpdate';
 
-const CounselDetail = () => {
+const CounselCreate = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -11,31 +11,33 @@ const CounselDetail = () => {
   return (
     <>
       <Button gap={2} variant="primary" onClick={handleShow}>
-        상세보기
+        상담일지 작성 
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>상담 상세</Modal.Title>
+          <Modal.Title>상담일지 작성</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Table  >
                 <tbody>
                   <tr>
                     <th><strong>날짜</strong></th>
-                     <td className='px-2'>2023-02-03</td>
+                     <td className='px-2'></td>
                     <th><strong>상담방법</strong></th>
-                     <td  style={{width: '23%'}}>전화통화</td>
+                     <td  style={{width: '23%'}}></td>
                   </tr>
                   <tr>
                     <th><strong>상담시간</strong></th>
-                     <td  className='px-2'> 13:00</td>
+                     <td  className='px-2'> </td>
                      <th><strong>상담자</strong></th>
-                     <td  style={{width: '23%'}}> 이성계</td>
+                     <td  style={{width: '23%'}}> </td>
                   </tr>
                   <tr>
-                    <th style={{width: '23%'}}><strong>내용</strong></th>
-                     <td  className='px-2' style={{overflow:'auto'}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi necessitatibus fuga asperiores cum? Placeat excepturi nisi magni odio cum aspernatur iste quidem repudiandae assumenda molestiae laboriosam aperiam, officia similique quas!</td>
+                    <th style={{width: '23%'}}><strong></strong></th>
+                     <td  className='px-2' style={{overflow:'auto'}}>
+
+                     </td>
                   </tr>
               </tbody>
               </Table>
@@ -55,4 +57,4 @@ const CounselDetail = () => {
   
 }
 
-export default CounselDetail
+export default CounselCreate
