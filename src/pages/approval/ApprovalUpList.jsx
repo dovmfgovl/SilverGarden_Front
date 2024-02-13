@@ -5,13 +5,10 @@ import ApprovalTable from './ApprovalTable';
 import ApprovalListHeader from './ApprovalListHeader';
 import { getAllApprovalList } from '../../services/api/approvalApi';
 
-const ApprovalUpList = ({handleMenu}) => {
+const ApprovalUpList = ({handleMenu, empData}) => {
     const[appList, setAppList] = useState([]);
-
-    const E_NO = "202402_00000008"
-
     const getList = async () =>{
-      const response = await getAllApprovalList({e_no: E_NO})
+      const response = await getAllApprovalList({e_no: empData.e_no})
       console.log(response.data);
       setAppList(response.data);
     }

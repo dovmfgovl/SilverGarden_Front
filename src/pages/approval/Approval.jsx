@@ -1,4 +1,4 @@
-import { faCheck,faCircleUp,faFile,faNewspaper, faPen, faVolumeHigh,} from '@fortawesome/free-solid-svg-icons';
+import { faCheck,faCircleUp,faFile,faNewspaper, faPen} from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react'
 import styles from './approval.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
@@ -10,6 +10,7 @@ import ApprovalDocWrite from './ApprovalDocWrite';
 import ApprovalTempList from './ApprovalTempList';
 import ApprovalUpList from './ApprovalUpList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux'
 
 const Approval = () => {
   const list = [//이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
@@ -36,10 +37,14 @@ const Approval = () => {
   },
 ];
 const [approvalPage, setPage] = useState("결재대기함");//기본페이지 결재대기함
+const empData = useSelector(state => state.empInfoSlice)
 
 const handleMenu = (menuTitle) =>{//사이드바 메뉴를 조작하는 함수
   setPage(menuTitle)
 }
+
+
+
   return (
     <div className={styles.approvalWrap}>
       <div className={styles.approvalSidebarWrap}><SidebarCommon list={list} handleMenu ={handleMenu}/></div>
@@ -54,7 +59,7 @@ const handleMenu = (menuTitle) =>{//사이드바 메뉴를 조작하는 함수
         {approvalPage === "결재완료문서함" && <ApprovalCompleteList handleMenu={handleMenu}/>}
         {approvalPage === "결재문서작성" && <ApprovalDocWrite handleMenu={handleMenu}/>}
         {approvalPage === "임시보관함" && <ApprovalTempList handleMenu={handleMenu}/>}
-        {approvalPage === "결재요청함" && <ApprovalUpList handleMenu={handleMenu}/>}
+        {approvalPage === "결재요청함" && <ApprovalUpList handleMenu={handleMenu} empData={empData}/>}
       </div>
     </div>
   )

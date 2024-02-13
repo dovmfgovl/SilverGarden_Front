@@ -29,14 +29,14 @@ const ApprovalTable = ({appList}) => {
       {appList && appList.map((doc)=>(
         <tr>
           <td><Form.Check aria-label="option 1"/></td>
-          <td>{doc.D_NO}</td>
-          <td>{doc.D_TITLE}</td>
-          <td>{doc.D_CONTENT}</td>
-          <td>{doc.E_NAME}</td>
-          <td>{doc.DEPT_NAME}</td>
-          <td>{doc.REG_DATE}</td>
-          <td>{doc.REG_DATE}</td>
-          <td>{doc.D_STATUS}</td>
+          <td>{doc.d_no}</td>
+          <td>{doc.d_title}</td>
+          <td>{doc.d_content}</td>
+          <td>{doc.e_name}</td>
+          <td>{doc.dept_name}</td>
+          <td>{doc.reg_date}</td>
+          <td>{doc.reg_date}</td>
+          <td>{doc.d_status}</td>
         </tr>
       ))}
     </tbody>

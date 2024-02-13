@@ -4,12 +4,9 @@ import { noticeImageUpload } from "../../services/api/noticeApi";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 
-const QuillEditor = ({ value, handleContent, quillRef, files, isReadOnly }) => {
+const QuillEditor = ({ value, handleContent, quillRef, handleImages, isReadOnly, memoTemp }) => {
 
     const imageHandler = useCallback(() => {
-        if(files.length > 2){
-            return "이미지는 3장까지 업로드 가능합니다.";
-        }
         const formData = new FormData(); // 이미지를 url로 바꾸기위해 서버로 전달할 폼데이터 만들기
         
         const input = document.createElement("input"); // input 태그를 동적으로 생성하기
@@ -21,29 +18,33 @@ const QuillEditor = ({ value, handleContent, quillRef, files, isReadOnly }) => {
         // 파일 선택창에서 이미지를 선택하면 실행될 콜백 함수 등록
         input.onchange = async () => {
             const file = input.files[0];
-            const fileName = file.name;
-            const fileExtension = fileName.slice(fileName.lastIndexOf(".") + 1).toUpperCase();
-            
-            if(!["JPG", "PNG", "JPEG"].includes(fileExtension)) {
-                console.log("jpg png jpeg형식만 지원합니다.");
-            } else {
-                // 파일 확장자가 JPG, PNG, JPEG 중 하나일 때의 로직 처리
+            console.log(file);
+            const fileType = file.name.split(".");
+            console.log(fileType);
+            if (
+              !fileType[fileType.length - 1].toUpperCase().match("JPG") &&
+              !fileType[fileType.length - 1].toUpperCase().match("PNG") &&
+              !fileType[fileType.length - 1].toUpperCase().match("JPEG")
+            ) {
+              console.log("jpg png jpeg형식만 지원합니다.");
             }
-            
             formData.append("image", file); // 위에서 만든 폼데이터에 이미지 추가
             for (let pair of formData.entries()) {
-                console.log(pair[0], pair[1]); 
+              console.log(pair[0], pair[1]);
             }
             // 폼데이터를 서버에 넘겨 multer로 이미지 URL 받아오기
-
             const res = await noticeImageUpload(formData);
+            console.log(res.data); //avartar21.png
             //RepleBoardFileInsert.jsx에 첨부사진 목록 추가하기
-            files.push(res.data)
+            memoTemp.push(res.data);
+            handleImages(JSON.parse(JSON.stringify(memoTemp)).join(','))
             if (!res.data) {
-                console.log("이미지 업로드에 실패하였습니다.");
+              console.log("이미지 업로드에 실패하였습니다.");
             }
-
             const url = process.env.REACT_APP_SPRING_IP+`notice/fileDownload?filename=${res.data}`;
+            console.log(url);
+            const encodedURL = encodeURI(url);
+            console.log(encodedURL);
             const quill = quillRef.current.getEditor();
             /* ReactQuill 노드에 대한 Ref가 있어야 메서드들을 호출할 수 있으므로
             useRef()로 ReactQuill에 ref를 걸어주자.
@@ -63,13 +64,12 @@ const QuillEditor = ({ value, handleContent, quillRef, files, isReadOnly }) => {
             
             quill.clipboard.dangerouslyPasteHTML(
                 range,
-                `<img src=${url} style="width: 100%; height: auto;" alt="image" />`);
-                
+                `<img src=${encodedURL} style="width: 100%; height: auto;" alt="image" />`);
                 //handleFiles(res.data, `${Math.floor(file.size/(1024*1024)*10)/10}MB`);
             }   //주어진 인덱스에 HTML로 작성된 내용물을 에디터에 삽입한다.
             //console.log(files);
             
-        }, [quillRef, files]);
+        }, [quillRef, memoTemp, handleImages]);
 
     const modules = useMemo(
         () => ({
@@ -92,10 +92,6 @@ const QuillEditor = ({ value, handleContent, quillRef, files, isReadOnly }) => {
         },
      }
     ), [imageHandler])
-    
-    useEffect(()=>{
-        console.log('QuillEditor useEffect');
-    },[])
     
     const formats = [
         //'font',

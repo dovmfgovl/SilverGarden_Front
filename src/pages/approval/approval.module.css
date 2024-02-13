@@ -167,23 +167,22 @@
   grid-template-rows: 1fr 1fr;
 }
 .approvalTableHeader{
-  border: 1px solid rgb(231, 229, 229);
-  background-color: rgb(234, 234, 234);
+  border-right: 1px solid rgb(231, 229, 229);
   display: flex;
   justify-content: center;
   align-items: center;
   grid-area: approvalTableHeader;
 }
 .agreeTableHeader{
-  border: 1px solid rgb(231, 229, 229);
-  background-color: rgb(234, 234, 234);
+  border-right: 1px solid rgb(231, 229, 229);
+  border-top: 1px solid rgb(231, 229, 229);
   display: flex;
   justify-content: center;
   align-items: center;
   grid-area: agreeTableHeader;
 }
 .approvalTable{
-  border: 1px solid rgb(231, 229, 229);
+  border-bottom: 1px solid rgb(231, 229, 229);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,7 +191,6 @@
   text-align: center;
 }
 .agreeTable{
-  border: 1px solid rgb(231, 229, 229);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,26 +204,52 @@
   height: 70vh;
   display: grid;
   grid-template-areas: 
-  "lineTree selectBar selectedApprovalLine"
-  "lineTree selectBar selectedAgreeLine";
+  "deptView selectBar selectedApprovalLine"
+  "deptView selectBar selectedAgreeLine";
   grid-template-columns:  3fr 0.7fr 3fr;
   grid-template-rows:  1fr 1fr;
 }
 
-.lineTree{
-  border: 1px solid black;
-  grid-area: lineTree;
+.deptView{
+  grid-area: deptView;
 }
 
 .selectBar{
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid rgb(231, 229, 229);
+  border-left: 1px solid rgb(231, 229, 229);
   grid-area: selectBar;
 }
 .selectedApprovalLine{
-  border: 1px solid black;
+  border-bottom: 1px solid rgb(231, 229, 229);
   grid-area: selectedApprovalLine;
 }
+.selectedApprovalLine div:nth-child(1){
+  background-color: rgb(228, 228, 228);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .selectedAgreeLine{
-  border: 1px solid black;
   grid-area: selectedAgreeLine;
+}
+
+.selectedAgreeLine div:nth-child(1){
+  background-color: rgb(228, 228, 228);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.deptView{
+  background-color: rgb(237, 237, 237);
+  height: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
