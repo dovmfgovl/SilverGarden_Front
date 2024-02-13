@@ -4,7 +4,7 @@ import MemberInsert from './MemberInsert';
 import MemberDelete from './MemberDelete';
 import MemberUpdate from './MemberUpdate';
 
-const MyButton = () => {
+const MyButton = ({selectedMember}) => {
   const [button, setButton] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false); // 모달 상태 추가
   
@@ -25,8 +25,8 @@ const MyButton = () => {
       <Buttons handleButton={handleButton} />
         <>
           {button === "추가" && <MemberInsert />}
-          {button === "수정" && <MemberUpdate />}
-          {button === "삭제" && <MemberDelete show={showDeleteModal} handleClose={handleCloseDeleteModal} />}
+          {button === "수정" && <MemberUpdate selectedMember={selectedMember}/>}
+          {button === "삭제" && <MemberDelete show={showDeleteModal} handleClose={handleCloseDeleteModal} selectedMember={selectedMember}/>}
         </>
     </div>
   );

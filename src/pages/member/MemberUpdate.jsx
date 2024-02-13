@@ -1,77 +1,61 @@
-import React, { useCallback, useState } from 'react';
-import { Button, Col, Form, Image, InputGroup, Modal, Row, Stack, Table } from 'react-bootstrap';
+import React, {useState } from 'react';
+import { Button, Col, Form, Image, Modal, Row, Stack, Table } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import DaumPostcode from 'react-daum-postcode';
 import 'react-datepicker/dist/react-datepicker.css';
-import { memberInsert } from '../../services/api/memberApi';
+import { memberUpdate } from '../../services/api/memberApi';
+import { useNavigate} from 'react-router-dom';
 
-const MemberUpdate = () => {
-  const [formData, setFormData] = useState({
-    client_name: '',
-    client_birth: '',
-    client_gender: '',
-    client_tel: '',
-    client_address: '',
-    client_manager: '',
-    client_photo: '',
-    client_pageid: '',
-    client_pw: '',
-    e_no: '',
-  });
+const MemberUpdate = ({selectedMember}) => {
+  const [memberDetail,setMemberDetail]=useState(
+    {
+      CLIENT_NAME:selectedMember.CLIENT_NAME,
+      CLIENT_BIRTH:selectedMember.CLIENT_BIRTH,
+      CLIENT_GENDER:selectedMember.CLIENT_GENDER,
+      CLIENT_TEL:selectedMember.CLIENT_TEL,
+      CLIENT_MANAGER:selectedMember.CLIENT_MANAGER,
+      CLIENT_ADDRESS:selectedMember.CLIENT_ADDRESS,
+    });
 
+
+
+
+  const navigate = useNavigate();
   const [roadAddress, setRoadAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");    // 추가
+  const [detailAddress, setDetailAddress] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const changeDate = useCallback((value) => {
-    setFormData(prevState => ({
-      ...prevState,
-      client_birth: value
-    }));
-  }, []);
-
+  
+  
+  
+  // 나중에 트러블슈팅: 다른 회원의 정보를 수정하려고 할 때 새로 고치고 다시 내기  
+  
   const completeHandler = (data) => {
+    console.log(data);
     setRoadAddress(data.address);
     setShow(false);
   };
   
   const changeHandler = (e) => {
     setDetailAddress(e.target.value);
+    console.log(detailAddress);
   };
-
+  
   const handleSubmit = async () => {
-    const fullAddress = `${roadAddress} ${detailAddress}`; // 도로명주소와 상세주소를 합침
-    const birthDate = new Date(formData.client_birth).toISOString().split("T")[0];
-  
-    const formDataToSend = {
-      ...formData,
-      address: fullAddress,
-      client_birth: birthDate,
-    };
+    const fullAddress = `${roadAddress} ${detailAddress}`;
+    
     try {
-      const response = await memberInsert(formDataToSend);
-      const responseData = JSON.parse(response.data); // 응답 데이터 추출
+      const res = await memberUpdate(memberDetail);
+      console.log(res.data);
       alert("회원 정보가 성공적으로 저장되었습니다.");
-      // 저장 후 필요한 리다이렉트나 화면 전환 등의 작업을 수행할 수 있습니다.
-  
+      navigate("/member");
+
     } catch (error) {
       console.error("회원 정보 저장 실패:", error);
       alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
   };
-  console.log(typeof formData.client_name); // string
-  console.log(typeof formData.client_birth); // string
-  console.log(typeof formData.client_gender); // string
-  console.log(typeof formData.client_tel); // string
-  console.log(typeof formData.client_address); // string
-  console.log(typeof formData.client_manager); // string
-  console.log(typeof formData.client_photo); // string
-  console.log(typeof formData.client_pageid); // string
-  console.log(typeof formData.client_pw); // string
-  console.log(typeof formData.e_no); // string
-
   return (
     <>
       <Row>
@@ -84,46 +68,47 @@ const MemberUpdate = () => {
         </Col>
       </Row>
       <Stack direction="horizontal" gap={3}>
-        <Image width={210}
-          height={180}
-          alt="171x180" src="logo192.png" rounded
-          className='p-2 ms-auto' />
+        <Image width={210} height={180} alt="171x180" src="logo192.png" rounded className='p-2 ms-auto' />
         <Table className='shadow w-100 ms-auto'>
           <tbody>
             <tr>
               <th><strong>이름:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
-                <Form.Control value={formData.client_name} onChange={e => setFormData({ ...formData, client_name: e.target.value })} />
+                <Form.Control  id='client_name' 
+                value={memberDetail.CLIENT_NAME}  onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_NAME:e.target.value}) }}/>
               </td>
               <th><strong>생년월일:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
-                <DatePicker id="tb_date" placeholderText='ex)1923-02-03 입력'
-                  dateFormat="yyyy-MM-dd" onChange={changeDate} selected={formData.client_birth && new Date(formData.client_birth)} />
+                <DatePicker  id="client_birth" dateFormat="yyyy-MM-dd"
+                 value={memberDetail.CLIENT_BIRTH}  onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_BIRTH:e.target.value}) }}/>
               </td>
             </tr>
             <tr>
               <th><strong>성별:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
-                <Form.Select aria-label="Default select example" value={formData.client_gender} onChange={e => setFormData({ ...formData, client_gender: e.target.value })}>
-                  <option>성별 선택</option>
-                  <option value="남">남</option>
+                <Form.Select aria-label="Default select example" 
+                value={memberDetail.CLIENT_GENDER} onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_GENDER:e.target.value}) }}>
+                  <option >분류선택</option> 
+                  <option value="남">남</option> 
                   <option value="여">여</option>
                 </Form.Select>
               </td>
               <th><strong>전화번호:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
-                <Form.Control value={formData.client_tel} onChange={e => setFormData({ ...formData, client_tel: e.target.value })} placeholder='010-0000-0000' />
-              </td>
+                <Form.Control id="client_tel" 
+                 value={memberDetail.CLIENT_TEL}  onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_TEL:e.target.value}) }}/>
+                 </td>
             </tr>
             <tr>
               <th><strong>담당자:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
-                <Form.Control value={formData.client_manager} onChange={e => setFormData({ ...formData, client_manager: e.target.value })} placeholder='ex)복지사' />
+                <Form.Control id="client_manger"
+                 value={memberDetail.CLIENT_MANAGER} onChange={(e) => {setMemberDetail({...memberDetail,CLIENT_MANAGER:e.target.value}) }}/>
               </td>
               <th><strong>주소:</strong></th>
               <td style={{ width: '20%' }} className='px-2'>
                 <Stack direction=''>
-                  <input value={roadAddress} readOnly placeholder="도로명 주소" />
+                  <input id="client_address" value={roadAddress} readOnly placeholder="도로명 주소" />
                   <br />
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -133,7 +118,7 @@ const MemberUpdate = () => {
                       <DaumPostcode onComplete={completeHandler} height="400px" />
                     </Modal.Body>
                   </Modal>
-                  <input type="text" onChange={changeHandler} value={detailAddress} placeholder="상세주소" />
+                  <input id="client_sideadress" type="text" onChange={changeHandler} value={detailAddress} placeholder="상세주소" />
                   <br />
                   <button onClick={handleShow}>주소검색</button>
                 </Stack>
@@ -147,3 +132,4 @@ const MemberUpdate = () => {
 }
 
 export default MemberUpdate;
+
