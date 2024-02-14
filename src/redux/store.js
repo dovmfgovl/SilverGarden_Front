@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import empInfosSlice from './empInfosSlice';
 import userInfoSlice from './userInfoSlice';
+
+import programSlice from "./programSlice"
+import empInfosSlice from "./empInfosSlice";
 
 const store = configureStore({
   reducer:{
-    empInfos: empInfosSlice,
-    userInfoSlice:userInfoSlice.reducer
+    programSlice:programSlice.reducer,
+    userInfoSlice:userInfoSlice.reducer,
+    empInfos:empInfosSlice
   }
 });
 
