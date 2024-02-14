@@ -22,6 +22,7 @@ export const getNoticeDetail = (n_no) => {
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "notice/noticeDetail",
         params: {'n_no': n_no},
+
       });
       resolve(response);
     } catch (error) {
@@ -29,7 +30,6 @@ export const getNoticeDetail = (n_no) => {
     }
   });
 };
-
 
 export const noticeInsert = (data) => {
   return new Promise((resolve, reject) => {
