@@ -7,7 +7,7 @@ import ApprovalWriteLine from './ApprovalWriteLine'
 import ApprovalFileUpload from './ApprovalFileUpload'
 import ApprovalLineModal from './ApprovalLineModal'
 
-const ApprovalDocWrite = () => {
+const ApprovalDocWrite = ({empData}) => {
   const[docType, setDocType] = useState("품의서");//문서 종류를 관리할 state
   const [modalShow, setModalShow] = useState(false);//모달의 상태를 관리할 state
   const [lineData, setLineData] = useState({
@@ -74,7 +74,7 @@ const ApprovalDocWrite = () => {
         <div>{docType}</div>
       </div>
       <div className={styles.approvalWriteLine}><ApprovalWriteLine/></div>
-      <div className={styles.approvalWriteTable}><ApprovalWriteTable/></div>
+      <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData}/></div>
       <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={quillContent} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
       <div className={styles.approvalWriteFileUpload}>
         <ApprovalFileUpload handleFile={handleFile} fileList={fileList} />

@@ -5,7 +5,7 @@ import { Nav, Navbar } from 'react-bootstrap'
 import Roboto from '../../assets/fonts/Roboto'
 import styles from './navigation.module.css'
 
-const NavigationBar = () => {
+const NavigationBar = ({isLogin}) => {
   return (
     <>
     <Roboto></Roboto>
@@ -16,7 +16,7 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" className='mx-2'>Home</Nav.Link>
+            <Nav.Link href="/home" className='mx-2'>Home</Nav.Link>
             <Nav.Link href="/approval" className='mx-2'>결재</Nav.Link>
             <Nav.Link href="/empList" className='mx-2'>직원조회</Nav.Link>
             <Nav.Link href="/member" className='mx-2'>이용자관리</Nav.Link>

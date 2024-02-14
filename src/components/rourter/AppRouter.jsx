@@ -12,7 +12,7 @@ import Mypage from '../../pages/mypage/Mypage'
 const AppRouter = () => {
   return (
   <Routes>
-    <Route path="/" exact={true} element={<Home/>}></Route>
+    <Route path="/home" exact={true} element={<Home/>}></Route>
     <Route path="/approval" exact={true} element={<Approval/>}></Route>
     <Route path="/emplist" exact={true} element={<Emplist/>}></Route>
     <Route path="/member" exact={true} element={<Member/>}></Route>
