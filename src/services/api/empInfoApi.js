@@ -10,6 +10,8 @@ export const empListDB = (emp) => {
                 params: emp,
             });
             resolve(response);
+            console.log(response);
+
         } catch (error) {
             reject(error); 
         }
@@ -30,6 +32,24 @@ export const empDetailDB = (emp) => {
         }
     });
 };
+
+export const empUpdateDB = (emp) => {
+    console.log(emp);
+    return new Promise((resolve, reject) => {
+        try {
+        const response = axios({
+            method: "put", //@RequestBody
+            url: process.env.REACT_APP_SPRING_IP + "emp/empUpdate",
+            data: emp, //post방식으로 전송시 반드시 data속성으로 파라미터 줄 것
+        });
+        console.log(response);
+        resolve(response);
+        } catch (error) {
+        reject(error);
+        }
+    });
+};
+
 export const excelDownDB = (emp) => {
     return new Promise((resolve, reject) => {
         try {
@@ -42,6 +62,23 @@ export const excelDownDB = (emp) => {
             resolve(response);
         } catch (error) {
             reject(error);
+        }
+    });
+};
+
+export const empEduUpdateDB = (emp) => {
+    console.log(emp);
+    return new Promise((resolve, reject) => {
+        try {
+        const response = axios({
+            method: "put", //@RequestBody
+            url: process.env.REACT_APP_SPRING_IP + "emp/empEduUpdate",
+            data: emp, //post방식으로 전송시 반드시 data속성으로 파라미터 줄 것
+        });
+        console.log(response);
+        resolve(response);
+        } catch (error) {
+        reject(error);
         }
     });
 };
