@@ -23,18 +23,17 @@ const Member = () => {
 
 const [memberPage,setmemberPage]=useState('이용자기본정보');
 const [memberList,setMemberList]=useState([]);
-const [memberId,setMemberId]=useState({});
 
 
-const Member =async (params)=>{
+const getMember =async (params)=>{
   const response = await getMemberList(params)
   console.log(response.data);
   setMemberList(response.data);
 }
 
 useEffect(()=>{
-  Member();
-},[])
+  getMember();
+},[memberPage])
 
 const handleMenu=(menuTitle)=>{
   setmemberPage(menuTitle);
@@ -48,8 +47,8 @@ const handleMenu=(menuTitle)=>{
           {/* 서브라우터 구현 */}
             {memberPage&&
             <>
-          {memberPage ==="이용자기본정보" &&<MemberInfo memberList={memberList} getMemberList={Member} />}
-          {memberPage ==="이용자상담관리" &&<MemberInfo2 memberList={memberList} getMemberList={Member}/>} 
+          {memberPage ==="이용자기본정보" &&<MemberInfo memberList={memberList} getMember={getMember} />}
+          {memberPage ==="이용자상담관리" &&<MemberInfo2 memberList={memberList} getMember={getMember}/>} 
             </>
             }
           {/* 서브라우터 구현 */}

@@ -105,13 +105,13 @@ export const counselInsert = (params) => {
   });
 };
 
-export const counselDelete = (counsel_no) => {
+export const counselDelete = (COUNSEL_NO) => {
   return new Promise((resolve, reject) => {
     try {
       const response = axios({
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "member/counselDelete",
-        params: {'COUNSEL_NO': counsel_no},
+        params: {'COUNSEL_NO': COUNSEL_NO},
       });
       resolve(response);
     } catch (error) {

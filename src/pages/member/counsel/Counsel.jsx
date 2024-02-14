@@ -20,7 +20,7 @@ const Counsel = ({selectedMember}) => {
   return (
     <>
     <div>
-      <CounselRow   selectedMember={selectedMember} counselList={counselList}/>
+      <CounselRow  selectedMember={selectedMember} counselList={counselList}/>
       <CounselCreate selectedMember={selectedMember} />
     </div>
     </>
