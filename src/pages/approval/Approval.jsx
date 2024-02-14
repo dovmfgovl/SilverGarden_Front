@@ -6,7 +6,7 @@ import ApprovalWaitList from './ApprovalWaitList';
 import ApprovalProgList from './ApprovalProgList';
 import ApprovalDenyList from './ApprovalDenyList';
 import ApprovalCompleteList from './ApprovalCompleteList';
-import ApprovalDocWrite from './ApprovalDocWrite';
+import ApprovalDocWrite from './approvalwrite/ApprovalDocWrite';
 import ApprovalTempList from './ApprovalTempList';
 import ApprovalUpList from './ApprovalUpList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,7 +37,7 @@ const Approval = () => {
   },
 ];
 const [approvalPage, setPage] = useState("결재대기함");//기본페이지 결재대기함
-const empData = useSelector(state => state.empInfoSlice)
+const empData = useSelector(state => state.userInfoSlice)
 
 const handleMenu = (menuTitle) =>{//사이드바 메뉴를 조작하는 함수
   setPage(menuTitle)
@@ -57,7 +57,7 @@ const handleMenu = (menuTitle) =>{//사이드바 메뉴를 조작하는 함수
         {approvalPage === "결재진행함" && <ApprovalProgList handleMenu={handleMenu}/>}
         {approvalPage === "반려문서함" && <ApprovalDenyList handleMenu={handleMenu}/>}
         {approvalPage === "결재완료문서함" && <ApprovalCompleteList handleMenu={handleMenu}/>}
-        {approvalPage === "결재문서작성" && <ApprovalDocWrite handleMenu={handleMenu}/>}
+        {approvalPage === "결재문서작성" && <ApprovalDocWrite handleMenu={handleMenu} empData={empData}/>}
         {approvalPage === "임시보관함" && <ApprovalTempList handleMenu={handleMenu}/>}
         {approvalPage === "결재요청함" && <ApprovalUpList handleMenu={handleMenu} empData={empData}/>}
       </div>

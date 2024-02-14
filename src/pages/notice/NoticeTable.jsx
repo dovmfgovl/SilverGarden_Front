@@ -2,19 +2,18 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Table } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
 
 const NoticeTable = ({noticeList, handlePage}) => {
   return (
-    <Table bordered hover style={{textAlign: "center"}}>
+    <Table bordered hover style={{textAlign: "center", margin:0}}>
     <thead>
       <tr>
-        <th>#</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>등록일</th>
-        <th>첨부</th>
-        <th>조회수</th>
+        <th style={{width: "7%"}}>#</th>
+        <th style={{width: "40%"}}>제목</th>
+        <th style={{width: "10%"}}>작성자</th>
+        <th style={{width: "18%"}}>등록일</th>
+        <th style={{width: "auto"}}>첨부</th>
+        <th style={{width: "auto"}}>조회수</th>
       </tr>
     </thead>
     <tbody>

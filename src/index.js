@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
-import EntryPoint from './EntryPoint';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginTest from './LoginTest';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <EntryPoint></EntryPoint>
+    <Routes>
+{/*       <Route path='/' element={<LoginTest/>}></Route> */}
+      <Route path='/*' element={<App></App>}></Route>
+    </Routes>
   </BrowserRouter>
 );

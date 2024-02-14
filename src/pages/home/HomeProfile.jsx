@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 
 const HomeProfile = () => {
-  const empData = useSelector(state => state.empInfoSlice)
+  const empData = useSelector(state => state.userInfoSlice)
 
   console.log(empData);
   return (

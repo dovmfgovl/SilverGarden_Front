@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import styles from './approval.module.css'
-import LineSelectBar from './LineSelectBar'
-import SelectedAgreementLine from './SelectedAgreementLine'
-import SelectedApprovalLine from './SelectedApprovalLine'
+import LineSelectBar from './approvalwrite/LineSelectBar'
+import SelectedAgreementLine from './approvalwrite/SelectedAgreementLine'
+import SelectedApprovalLine from './approvalwrite/SelectedApprovalLine'
 import { getDeptData } from '../../services/api/approvalApi'
-import DeptView from './DeptView'
+import DeptView from './approvalwrite/DeptView'
 
 const ApprovalLineModal = (props) => {
   const[deptData, setDeptData] = useState([]);
@@ -53,8 +53,8 @@ const ApprovalLineModal = (props) => {
       </div>
     </Modal.Body>
     <Modal.Footer>
-      <Button >완료</Button>
-      <Button onClick={props.onHide}>닫기</Button>
+      <Button onClick={() => props.onHide("완료")}>완료</Button>
+      <Button onClick={() => props.onHide("닫기")}>닫기</Button>
     </Modal.Footer>
   </Modal>
   )
