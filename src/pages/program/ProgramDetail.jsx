@@ -28,6 +28,10 @@ const buttonStyles = {
 const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset }) => {
     const dispatch = useDispatch();
     const pNO = useSelector((state) => state.programSlice.value);
+    const periodOptions = ['매주', '격주', '매월', '격월', '하루']; // 주기 옵션들
+    const categoryOptions = ['신체', '교양', '문화', '교육', '여가']; // 분류 옵션들
+    const daysOptions = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 분류 옵션들
+
     const handleDelete = async () => {
         console.log(pNO);
         console.log('삭제 버튼이 클릭되었습니다.!');
@@ -111,11 +115,25 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                 <tr>
                     <th style={{ width: '25%' }}>분류</th>
                     <td style={{ width: '25%' }}>
-                        <FormControl type="text" value={pNO.PG_CATEGORY} name="PG_CATEGORY" onChange={handleInputChange} />
+                        <select name="PG_CATEGORY" value={pNO.PG_CATEGORY} onChange={handleInputChange}>
+                        <option value="null">선택</option>
+                        {categoryOptions.map((category, index) => (
+                            <option key={index} value={category}>
+                            {category}
+                            </option>
+                        ))}
+                        </select>
                     </td>
                     <th style={{ width: '25%' }}>주기</th>
-                    <td style={{ width: '25%' }}>
-                        <FormControl type="text" value={pNO.PG_REPEAT_TYPE} name="PG_REPEAT_TYPE" onChange={handleInputChange} />
+                    <td >
+                        <select name="PG_REPEAT_TYPE" value={pNO.PG_REPEAT_TYPE} onChange={handleInputChange}>
+                        <option value="null">선택</option>
+                        {periodOptions.map((period, index) => (
+                            <option key={index} value={period}>
+                            {period}
+                            </option>
+                        ))}
+                        </select>
                     </td>
                 </tr>
                 <tr>
@@ -124,8 +142,15 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                         <FormControl type="text" value={pNO.PG_TEACHER} name="PG_TEACHER" onChange={handleInputChange} />
                     </td>
                     <th style={{ width: '30%' }}>요일</th>
-                    <td style={{ width: '30%' }}>
-                        <FormControl type="text" value={pNO.PG_DAYSOFWEEK} name="PG_DAYSOFWEEK" onChange={handleInputChange} />
+                    <td >
+                        <select name="PG_DAYSOFWEEK" value={pNO.PG_DAYSOFWEEK} onChange={handleInputChange}>
+                        <option value="null">선택</option>
+                        {daysOptions.map((period, index) => (
+                            <option key={index} value={period}>
+                            {period}
+                            </option>
+                        ))}
+                        </select>
                     </td>
                 </tr>
                 <tr>

@@ -1,10 +1,11 @@
 // ProgramFulCalendar.js
 import React, { useState, useEffect, useRef } from 'react';
-import { CommonCalendar, getWeekdayNumber, getBackgroundColor } from '../../components/calendar/CommonCalendar';
+import { getWeekdayNumber, getBackgroundColor } from '../../components/calendar/CommonCalendar';
 import { scheduleListDB, updateEventDB } from '../../services/api/programApi';
 import styles from './pgcalendar.module.css'
+import { CommonCalendar2 } from '../../components/calendar/CommonCalendar copy';
 
-const ProgramFullCalendar = () => {
+const ProgramFullCalendarCopy = () => {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -140,16 +141,9 @@ const ProgramFullCalendar = () => {
 
     return (
         <div className={styles['pg-calendar-main']}>
-            <CommonCalendar
-                events={events} // 프로그램 리스트를 CommonCalendar로 전달
-                handleEventClick={handleEventClick}
-                handleEventDrop={handleEventDrop}
-                handleDayClick={handleDayClick}
-                getBackgroundColor={(pgCategory) => getBackgroundColor(pgCategory)}
-                selectedEvent={selectedEvent}
-                closeModal={closeModal}
+            <CommonCalendar2
             />
         </div>
     );
 };
-export default ProgramFullCalendar;
+export default ProgramFullCalendarCopy;

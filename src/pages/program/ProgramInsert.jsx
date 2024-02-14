@@ -41,6 +41,7 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
 
     const periodOptions = ['매주', '격주', '매월', '격월', '하루']; // 주기 옵션들
     const categoryOptions = ['신체', '교양', '문화', '교육', '여가']; // 분류 옵션들
+    const daysOptions = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 분류 옵션들
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -103,8 +104,15 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
                         <input type="text" name="PG_TEACHER" value={newData.PG_TEACHER} onChange={handleInputChange} />
                     </td>
                     <th>요일</th>
-                    <td>
-                        <input type="text" name="PG_DAYSOFWEEK" value={newData.PG_DAYSOFWEEK} onChange={handleInputChange} />
+                    <td >
+                        <select name="PG_DAYSOFWEEK" value={newData.PG_DAYSOFWEEK} onChange={handleInputChange}>
+                        <option value="null">선택</option>
+                        {daysOptions.map((period, index) => (
+                            <option key={index} value={period}>
+                            {period}
+                            </option>
+                        ))}
+                        </select>
                     </td>
                 </tr>
                 <tr>

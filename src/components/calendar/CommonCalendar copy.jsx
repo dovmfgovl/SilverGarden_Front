@@ -5,7 +5,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import rrulePlugin from '@fullcalendar/rrule';
-import Modal from 'react-modal';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -31,15 +30,11 @@ const getBackgroundColor = (category) => {
 };
 
 //사용하는 캘린더에서 가져온 값을 공통처리
-const CommonCalendar = ({ events, handleEventDrop, onEventClick, getBackgroundColor, closeModal }) => {
+const CommonCalendar2 = ({ events, handleEventDrop, onEventClick, getBackgroundColor, closeModal }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
 
-  //모달
-  useEffect(() => {
-    Modal.setAppElement('#app');
-  }, []);
 
   //주말 표시, 미표시
   const handleWeekendsToggle = () => {
@@ -100,7 +95,10 @@ const CommonCalendar = ({ events, handleEventDrop, onEventClick, getBackgroundCo
       },
     });
   };
-  
+  const handleDeleteEvent = () => {
+    // 모달을 닫습니다.
+    setSelectedEvent(null);
+  };
   return (
     <div>
       <FullCalendar
@@ -136,13 +134,14 @@ const CommonCalendar = ({ events, handleEventDrop, onEventClick, getBackgroundCo
       </button>
       {selectedEvent && (
         <CalendarModal
-        isOpen={!!selectedEvent}
-        selectedEvent={selectedEvent}
-        closeModal={closeCalendarModal}
-        />  
+          show={true}
+          onHide={() => setSelectedEvent(null)}
+          event={selectedEvent}
+          onDelete={handleDeleteEvent}
+        />
       )}
     </div>
   );
 };
 
-export { CommonCalendar, getWeekdayNumber, getBackgroundColor };
+export { CommonCalendar2, getWeekdayNumber, getBackgroundColor };

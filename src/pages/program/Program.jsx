@@ -8,6 +8,7 @@ import ProgramDashboard from '../programdashboard/ProgramDashboard';
 import ProgramInfo from './ProgramInfo';
 import { setDetail } from '../../redux/programSlice';
 import ProgramCalendarHome from '../programcalendar/ProgramCalendarHome';
+import ProgramCalendarHome2 from '../programcalendar/ProgramCalendarHome2';
 
 
 const Program = () => {
@@ -21,6 +22,7 @@ const Program = () => {
             { label: '현황', icon: faChartPie},//서브목록이름, 아이콘명, 클릭시넘어갈 url
             { label: '프로그램 정보', icon: faBook},
             { label: '일정', icon: faCalendar},
+            // { label: '일정2', icon: faCalendar},
         ],
     },{
     label: '프로그램 기록',
@@ -36,7 +38,7 @@ const Program = () => {
     const handleMenu = (menuTitle) =>{
         setPage(menuTitle);
     }
-    const [page, setPage] = useState("일정");//기본 페이지
+    const [page, setPage] = useState("현황");//기본 페이지
     const [programList, setProgramList] = useState([]);
     const [programDetail, setProgramDetail] = useState(null);
     //전체조회해 온 값을 저장해두고, 나중에 디테일g 조회할 때 사용해보자
@@ -91,6 +93,10 @@ const Program = () => {
                     />}
                 {page === "일정" && 
                     <ProgramCalendarHome 
+                        programList={programList}   
+                    />}
+                {page === "일정" && 
+                    <ProgramCalendarHome2 
                         programList={programList}   
                     />}
             </div>
