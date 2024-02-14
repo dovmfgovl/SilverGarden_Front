@@ -37,8 +37,7 @@ const [adminPage, setPage] = useState("인적사항관리"); // 초기에 진입
       </div>
       <div className={styles.innerContentWrap}>
         {adminPage === "인적사항관리" && <EmpInfos handleMenu={handleMenu} />} {/* 조건부 렌더링 - Home.jsx 참고 */}
-      </div>
-      
+      </div>  
     </div>
 
 

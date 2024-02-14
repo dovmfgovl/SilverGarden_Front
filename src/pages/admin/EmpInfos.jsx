@@ -24,7 +24,7 @@ const EmpInfos = () => {
     // -> 스토어 상태 업데이트되고 자동으로 UI도 업데이트 된다.
     dispatch(setDetail(updatedDetail)); // 선택된 직원을 store에 저장
   }
-
+  
   return (
     <>
     <div className={styles.innerEmpInfoWrap}>
