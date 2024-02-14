@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './notice.module.css'
 import { Button, Form, InputGroup } from 'react-bootstrap'
 import NoticeFileUpload from './NoticeFileUpload'
 import { noticeInsert } from '../../services/api/noticeApi'
+import QuillEditor from '../../components/Quill/QuillEditor'
 
 const NoticeWrite = ({handlePage}) => {
   const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
@@ -12,17 +13,15 @@ const NoticeWrite = ({handlePage}) => {
   }
 
    const titleRef = useRef(null);//input값을 참조할 ref 선언
-   const contentRef = useRef(null);
 
 
   const handleSubmit = async () =>{//서브밋이 요청되었을 때 일하는 함수
     const title = titleRef.current.value;
-    const content = contentRef.current.value;
 
-    if("" !== title && "" !== content){
+    if("" !== title && "" !== quillContent){
       const formDataToSend = new FormData();
       formDataToSend.append('n_title', title)
-      formDataToSend.append('n_content', content)
+      formDataToSend.append('n_content', quillContent)
       formDataToSend.append('e_no', "202402_00000008")
   
       for(let i = 0; i < fileList.length; i++){
@@ -35,7 +34,24 @@ const NoticeWrite = ({handlePage}) => {
       alert("제목과 내용을 작성해주세요")
     }
   }
-  
+
+  //////////////////quill/////////////////////////////////
+  const  quillRef = useRef()
+  const [quillContent, setQuillContent] = useState('');//공지내용이 담김
+  const [images, setImages] = useState([])
+  let temp = [];//함수가 새로 생성(재렌더링)되더라도 처음에 대입된 이미지를 계속 기억해야함
+  const memoTemp = useMemo(() => {
+    return temp;
+  },[])
+
+  const handleImages = useCallback((value)=>{
+    setImages([...images, value]);
+  },[]);
+
+  const handleContent = useCallback((value) => {
+    console.log(value)
+    setQuillContent(value)
+  },[])
 
   return (
   <div className={styles.noticeWriteLayout}>
@@ -60,12 +76,7 @@ const NoticeWrite = ({handlePage}) => {
           </Button>
       </div>
       <div className={styles.noticeWriteContent}>
-        <InputGroup>
-          <InputGroup.Text>내용</InputGroup.Text>
-          <Form.Control 
-          as="textarea" 
-          ref={contentRef} />
-        </InputGroup>
+        <QuillEditor memoTemp={memoTemp} isReadOnly={false} value={quillContent} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages} />
       </div>
       <div className={styles.noticeWriteAttachment}>
         <NoticeFileUpload handleFile={handleFile} fileList={fileList}/>

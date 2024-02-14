@@ -3,8 +3,9 @@ import styles from './notice.module.css'
 import NoticeDetailHeader from './NoticeDetailHeader'
 import { getNoticeDetail, noticeFileDownload } from '../../services/api/noticeApi'
 import { Button } from 'react-bootstrap'
-import {faPaperclip } from '@fortawesome/free-solid-svg-icons'
+import {faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import QuillEditor from '../../components/Quill/QuillEditor'
 
 const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
 
@@ -14,22 +15,25 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
     const response =  await getNoticeDetail(noticeNo);
     const detailList = response.data;
     console.log(detailList);
-    setNoticeDetail({...detailList[0]});//받아온 값을 noticeDetail에 저장
+    setNoticeDetail({...detailList[0]});//받아온 값중 공지글에 대한 정보만 detail에 담음
     
     let tempList = [];//임시배열생성
     detailList.forEach(file => {//DB에서 받아온 파일명을 임시배열에 담아줌
-      tempList =[...tempList,{N_FILENAME: file.N_FILENAME, N_FILE_NO: file.N_FILE_NO}];
+      if(file.N_FILENAME){//첨부파일이 있는 경우만 
+        tempList =[...tempList,{N_FILENAME: file.N_FILENAME, N_FILE_NO: file.N_FILE_NO}];
+      }
     })
       handleFileList(tempList);
       //setFileList(tempList);//파일명 배열을 state에 저장
-  }
+    }
+    console.log(fileList);
 
   useEffect(()=>{
     getDetail();
   },[])
 
-  const handleFileDownload = (e) =>{
-      const response = noticeFileDownload(e.target.innerText);
+  const handleFileDownload = (filename) =>{
+      const response = noticeFileDownload(filename);
       console.log(response);
   }
 
@@ -45,17 +49,19 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
       </div>
       <div className={styles.noticeDetailHeader}><NoticeDetailHeader noticeDetail={noticeDetail} fileList={fileList} handlePage={handlePage}/></div>
       <div className={styles.noticeDatailContent}>
-        {noticeDetail.N_CONTENT}
+        <QuillEditor isReadOnly={true} value={noticeDetail.N_CONTENT}/>
+        {/* {noticeDetail.N_CONTENT} */}
       </div>
       <div className={styles.noticeDetailAttachment}>
-      <FontAwesomeIcon icon={faPaperclip} />첨부파일:
-        {fileList.map(file =>
-        <div key={file.N_FILE_NO} onClick={handleFileDownload}>
-          <div>
-           {file.N_FILENAME}<button>삭제</button>
-          </div>
+      <FontAwesomeIcon icon={faPaperclip} />첨부파일
+      {fileList && fileList.length > 0 && fileList.map(file =>
+        <div key={file.N_FILE_NO}>
+          {file.N_FILENAME}
+          <button onClick={()=>handleFileDownload(file.N_FILENAME)}>
+            <FontAwesomeIcon icon={faDownload} />
+          </button>
         </div>
-        )}
+      )}
       </div>
     </div>
     </>
