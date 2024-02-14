@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const empInfoSlice = createSlice({
-  name:"empInfoSlice",
+const userInfoSlice = createSlice({
+  name:"userInfoSlice",
   initialState:{
     e_no: "202402_00000008",
     e_name: "이슬기",
@@ -20,4 +20,4 @@ const empInfoSlice = createSlice({
   }
 })
 
-export default empInfoSlice;
+export default userInfoSlice;

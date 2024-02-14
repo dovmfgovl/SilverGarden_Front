@@ -37,7 +37,7 @@ const Approval = () => {
   },
 ];
 const [approvalPage, setPage] = useState("결재대기함");//기본페이지 결재대기함
-const empData = useSelector(state => state.empInfoSlice)
+const empData = useSelector(state => state.userInfoSlice)
 
 const handleMenu = (menuTitle) =>{//사이드바 메뉴를 조작하는 함수
   setPage(menuTitle)
