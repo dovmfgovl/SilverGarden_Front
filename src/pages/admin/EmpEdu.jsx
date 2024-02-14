@@ -2,41 +2,41 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import EmpEduRow from './EmpEduRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
+import { getEmpList, saveEmpEdu, setDetail } from '../../redux/empInfosSlice';
 import { Button } from 'react-bootstrap';
 
 const EmpEdu = () => {
   const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
   const [editing, setEditing] = useState(false);
-  const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
-  const [originalEmployee, setOriginalEmployee] = useState(selectedEmployee);
+  const [updatedEdu, setUpdatedEdu] = useState(selectedEmployee);
+  const [originalEdu, setOriginalEdu] = useState(selectedEmployee);
 
   useEffect(() => {
-    setUpdatedEmployee(selectedEmployee);
-    setOriginalEmployee(selectedEmployee);
+    setUpdatedEdu(selectedEmployee);
+    setOriginalEdu(selectedEmployee);
   }, [selectedEmployee]);
 
   const handleEdit = () => {
     setEditing(true);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedEmployee(prevState => ({
+  const handleInputChange = (name, value) => {
+    console.log(`name: ${name}, value: ${value}`);
+    setUpdatedEdu(prevState => ({
       ...prevState, [name]: value
     }));
-  };
+  };  
 
   const handleCancel = () => {
     setEditing(false);
-    setUpdatedEmployee(originalEmployee);
+    setUpdatedEdu(originalEdu);
   };
 
   const handleSaveChanges = () => {
-    dispatch(saveEmpDetails(updatedEmployee))
+    dispatch(saveEmpEdu(updatedEdu))
     .then(() => {
-      dispatch(setDetail(updatedEmployee));
+      dispatch(setDetail(updatedEdu));
       setEditing(false);
       dispatch(getEmpList());
     })
@@ -46,13 +46,13 @@ const EmpEdu = () => {
   }
 
   const educations = [
-    { label: '고등학교', period: selectedEmployee.HIGH_SCHOOL_PERIOD, name: selectedEmployee.HIGH_SCHOOL_NAME, major: selectedEmployee.HIGH_SCHOOL_MAJOR, status: selectedEmployee.HIGH_SCHOOL_STATUS },
-    { label: '대학교', period: selectedEmployee.UNIVERSITY_PERIOD, name: selectedEmployee.UNIVERSITY_NAME, major: selectedEmployee.UNIVERSITY_MAJOR, status: selectedEmployee.UNIVERSITY_STATUS },
-    { label: '대학원', period: selectedEmployee.GRADUATE_SCHOOL_PERIOD, name: selectedEmployee.GRADUATE_SCHOOL_NAME, major: selectedEmployee.GRADUATE_SCHOOL_MAJOR, status: selectedEmployee.GRADUATE_SCHOOL_STATUS }
+    { label: 'HIGH_SCHOOL', period: selectedEmployee.HIGH_SCHOOL_PERIOD, name: selectedEmployee.HIGH_SCHOOL_NAME, major: selectedEmployee.HIGH_SCHOOL_MAJOR, status: selectedEmployee.HIGH_SCHOOL_STATUS },
+    { label: 'UNIVERSITY', period: selectedEmployee.UNIVERSITY_PERIOD, name: selectedEmployee.UNIVERSITY_NAME, major: selectedEmployee.UNIVERSITY_MAJOR, status: selectedEmployee.UNIVERSITY_STATUS },
+    { label: 'GRADUATE_SCHOOL', period: selectedEmployee.GRADUATE_SCHOOL_PERIOD, name: selectedEmployee.GRADUATE_SCHOOL_NAME, major: selectedEmployee.GRADUATE_SCHOOL_MAJOR, status: selectedEmployee.GRADUATE_SCHOOL_STATUS }
   ];
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid' }}>
+    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
       <h5>직원 기초 정보</h5>
       <h5>학력</h5>
       <div className="col-2">

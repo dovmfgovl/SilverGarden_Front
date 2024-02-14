@@ -9,7 +9,7 @@ const EmpCerti = ({ empDetail }) => {
   const certi_acquire = empDetail? empDetail.CERTI_ACQUIRE : '';
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid' }}>
+    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
       <h5>자격증</h5>
       <Table striped bordered hover>
       <thead>

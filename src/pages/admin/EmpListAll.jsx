@@ -48,7 +48,7 @@ const EmpListAll = () => {
 
     return (
         <>
-            <div className={styles.container} style={{ padding: '20px', borderLeft: '1px solid' }}>
+            <div className={styles.container} style={{ padding: '20px', borderLeft: 'none' }}>
                 <div className={styles.pageHeader}>
                     <h5>직원목록</h5>
                     <hr />
@@ -82,7 +82,7 @@ const EmpListAll = () => {
                         </Button>
                     </div>
                     <div className="col-2">
-                        <Button variant="secondary" onClick={() => handleShowAll()}>
+                        <Button variant="outline-secondary" onClick={() => handleShowAll()}>
                             전체조회
                         </Button>
                     </div>

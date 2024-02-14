@@ -70,7 +70,7 @@ const EmpCreateModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-primary" onClick={handleShow}>
         신규등록
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -145,7 +145,7 @@ const EmpCreateModal = () => {
                   {...register("e_birth", {
                     required: "* 생년월일을 입력해주세요.",
                   })}
-                  type="text"
+                  type="date"
                   autoFocus
                   maxLength={10}
                   thousandSeparator=","

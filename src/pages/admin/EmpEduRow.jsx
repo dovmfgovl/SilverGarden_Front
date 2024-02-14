@@ -2,11 +2,8 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
   const { period, name, major, status, label } = edu;
 
   const handleChange = (e) => {
-    const { name, value } = e; // e에서 바로 name과 value 추출
-    if (name && value) {
-      handleInputChange({ name: `${label}_${name}`, value });
-    }
-  };  
+    handleInputChange(e.target.name, e.target.value);
+  };
 
   return (
     <tr>
@@ -16,7 +13,7 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
           value={period || ''}
           onChange={handleChange}
           readOnly={!editing}
-          name="period"
+          name={`${label}_PERIOD`}
         />
       </td>
       <td>
@@ -25,7 +22,7 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
           value={name || ''}
           onChange={handleChange}
           readOnly={!editing}
-          name="name"
+          name={`${label}_NAME`}
         />
       </td>
       <td>
@@ -34,7 +31,7 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
           value={major || ''}
           onChange={handleChange}
           readOnly={!editing}
-          name="major"
+          name={`${label}_MAJOR`}
         />
       </td>
       <td>
@@ -43,7 +40,7 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
           value={status || ''}
           onChange={handleChange}
           readOnly={!editing}
-          name="status"
+          name={`${label}_STATUS`}
         />
       </td>
     </tr>

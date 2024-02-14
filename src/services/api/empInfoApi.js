@@ -10,6 +10,7 @@ export const empListDB = (emp) => {
                 params: emp,
             });
             resolve(response);
+            console.log(response);
         } catch (error) {
             reject(error); 
         }
@@ -62,7 +63,7 @@ export const excelDownDB = (emp) => {
     });
 };
 
-export const emEdupUpdateDB = (emp) => {
+export const empEduUpdateDB = (emp) => {
     console.log(emp);
     return new Promise((resolve, reject) => {
         try {
