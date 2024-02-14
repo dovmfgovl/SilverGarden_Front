@@ -2,6 +2,15 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 
 const SelectedApprovalLine = ({lineData, handleLineData}) => {
+
+  const handleDelete = (e_no) =>{
+    if(lineData.approvalLine.length !==0){
+      const updatedData = [...lineData.approvalLine.filter((element) => element.e_no !== e_no)]
+      
+      handleLineData({...lineData, approvalLine: updatedData});
+    }
+  }
+
   return (
     <>
     <div>결재</div>
@@ -22,7 +31,7 @@ const SelectedApprovalLine = ({lineData, handleLineData}) => {
         <td>{approval.ap_category}</td>
         <td>{approval.e_name}</td>
         <td>{approval.e_rank}</td>
-        <td><button type="button" className="btn btn-danger">삭제</button></td>
+        <td><button type="button" className="btn btn-danger" onClick={() => handleDelete(approval.e_no)}>삭제</button></td>
       </tr>
       )}
     </tbody>
