@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
+import { AdminPage } from "../../services/auth/UserApi";
 
 const Admin = () => {
-  return (
-    <div>Admin</div>
-  )
-}
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    AdminPage()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-export default Admin
+  return <div>Admin</div>;
+};
+
+export default Admin;

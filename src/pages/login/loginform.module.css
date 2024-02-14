@@ -5,18 +5,25 @@
   margin : auto;
   margin-top:180px;
 }
+.inputbox{
+  margin-left : 10%;
+}
 .input {
   width : 200px;
-
 }
 .header {
   font-size: 50px;
 }
+
 .button{
-  margin : 0 auto;
-  font-size: small;
-  height: 35px;
+  margin-left : 25%;
+  font-size: medium;
+  height: 20px;
   width : 80px;
+  background-color: rgb(161, 209, 145);
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 .error{

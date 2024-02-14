@@ -1,7 +1,5 @@
 import axios from "axios";
 
-let ACCESS_TOKEN = localStorage.getItem("token")
-
 export const AuthApi = axios.create({
   baseURL : process.env.REACT_APP_SPRING_IP,
   headers : {
@@ -9,8 +7,8 @@ export const AuthApi = axios.create({
   }
 })
 
-export const SigninTokenAPI = async({email, password}) => {
-  const data = {email, password};
+export const SigninTokenAPI = async({e_no, e_password}) => {
+  const data = {e_no, e_password};
   const response = await AuthApi.post(`/api/v1/auth/signin`, data);
 console.log(response.data)
   return response.data;

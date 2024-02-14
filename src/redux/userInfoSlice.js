@@ -9,7 +9,7 @@ const userInfoSlice = createSlice({
     dept_name: "간호부",
     e_rank: "대리"
   },
-  reducer:{
+  reducers:{
     setEmpInfo:(state, action) =>{
       state.e_no = action.payload.e_no;
       state.e_name = action.payload.e_name;

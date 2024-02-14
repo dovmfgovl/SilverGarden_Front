@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { UserAPage } from "../../services/auth/UserApi";
 
 const Emplist = () => {
-  return (
-    <div>Emplist</div>
-  )
-}
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    UserAPage()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  return <div>Emplist</div>;
+};
 
-export default Emplist
+export default Emplist;
