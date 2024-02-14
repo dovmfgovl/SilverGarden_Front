@@ -6,7 +6,7 @@ import ApprovalWaitList from './ApprovalWaitList';
 import ApprovalProgList from './ApprovalProgList';
 import ApprovalDenyList from './ApprovalDenyList';
 import ApprovalCompleteList from './ApprovalCompleteList';
-import ApprovalDocWrite from './ApprovalDocWrite';
+import ApprovalDocWrite from './approvalwrite/ApprovalDocWrite';
 import ApprovalTempList from './ApprovalTempList';
 import ApprovalUpList from './ApprovalUpList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

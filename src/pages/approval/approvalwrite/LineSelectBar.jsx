@@ -11,6 +11,10 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
           return;
         }
       }
+      if(lineData.approvalLine.length ===3){
+        alert("결재라인은 최대 3명까지입니다.")
+        return;
+      }
       const approvalLineList = [...lineData.approvalLine, {e_no:empData.e_no, e_name:empData.e_name, ap_category:"결재", e_rank:empData.e_rank}]
       const updatedLineData = {...lineData, approvalLine: approvalLineList};
       console.log(updatedLineData);
@@ -22,6 +26,10 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
           alert("이미 동일한 이름이 있습니다.")
           return;
         }
+      }
+      if(lineData.agreement.length ===3){
+        alert("합의대상은 최대 3명까지입니다.")
+        return;
       }
       const agreementList = [...lineData.agreement, {e_no:empData.e_no, e_name:empData.e_name, ap_category:"합의", e_rank:empData.e_rank}]
       const updatedAgreementData = {...lineData, agreement: agreementList};

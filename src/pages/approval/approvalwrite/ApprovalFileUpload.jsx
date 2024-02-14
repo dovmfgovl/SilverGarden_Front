@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './approval.module.css'
+import styles from './approvalWrite.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
