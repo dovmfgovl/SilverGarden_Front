@@ -21,9 +21,9 @@ const MemberDetail = ({ selectedMember }) => {
           <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
         </Col>
         <Col>
-          <Stack direction="horizontal" gap={2}>
+          {/* <Stack direction="horizontal" gap={2}>
             <MyButton className="p-2 ms-auto" onClick={handleInsertButtonClick}  selectedMember={selectedMember}/>
-          </Stack>
+          </Stack> */}
         </Col>
         {selectedMember ? (
           <MemberDetailPage selectedMember={selectedMember} />
@@ -38,6 +38,9 @@ const MemberDetail = ({ selectedMember }) => {
 export const MemberDetailPage = ({selectedMember}) => {
   return (
     <>
+      <Stack direction="horizontal" gap={2}>
+            <MyButton className="p-2 ms-auto"  selectedMember={selectedMember}/>
+          </Stack>
           <Stack direction="horizontal" gap={3}>
       <Image width={210}
         height={180}

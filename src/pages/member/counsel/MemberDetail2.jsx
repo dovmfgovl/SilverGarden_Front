@@ -8,7 +8,7 @@ const MemberDetail2 = ({selectedMember}) => {
     <div className="container">
       <div className="user-detail">
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상담정보</h2>
         </Col>
         <Col>
           <Stack direction="horizontal" gap={2}>
