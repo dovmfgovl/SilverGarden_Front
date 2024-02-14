@@ -1,0 +1,23 @@
+.pg-calendar {
+  display: flex;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.pg-calendar-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #9bc6d6;
+}
+
+
+.pg-calendar-main {
+  flex-grow: 1;
+  padding: 3em;
+  font-size: 15px;
+}
+
+.fc { /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
