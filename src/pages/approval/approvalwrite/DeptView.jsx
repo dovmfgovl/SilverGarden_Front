@@ -2,7 +2,7 @@ import { faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import styles from './approval.module.css'
+import styles from './approvalWrite.module.css'
 
 const EmpBlock = styled.li`
   list-style-type: none;
