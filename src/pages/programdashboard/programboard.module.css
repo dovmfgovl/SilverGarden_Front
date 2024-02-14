@@ -1,0 +1,29 @@
+.chartWrap{
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
+    border: 1px solid rgb(216, 216, 216);
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    min-width: 100px;
+    align-items: center;
+}
+
+.chartName{
+    text-align: left;
+}
+
+/* 가로 페이지(축소정도에 따라 zoom 조절) */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 20mm;
+    }
+    body {
+        zoom: 0.7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+}

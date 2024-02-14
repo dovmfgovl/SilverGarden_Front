@@ -1,23 +1,17 @@
-import {
-  faCheck,
-  faCircleUp,
-  faFile,
-  faNewspaper,
-  faPen,
-} from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
-import styles from "./approval.module.css";
-import SidebarCommon from "../../components/sidebar/SidebarCommon";
-import ApprovalWaitList from "./ApprovalWaitList";
-import ApprovalProgList from "./ApprovalProgList";
-import ApprovalDenyList from "./ApprovalDenyList";
-import ApprovalCompleteList from "./ApprovalCompleteList";
-import ApprovalDocWrite from "./ApprovalDocWrite";
-import ApprovalTempList from "./ApprovalTempList";
-import ApprovalUpList from "./ApprovalUpList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
 import { UserAPage } from "../../services/auth/UserApi";
+import { faCheck,faCircleUp,faFile,faNewspaper, faPen} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react'
+import styles from './approval.module.css'
+import SidebarCommon from '../../components/sidebar/SidebarCommon';
+import ApprovalWaitList from './ApprovalWaitList';
+import ApprovalProgList from './ApprovalProgList';
+import ApprovalDenyList from './ApprovalDenyList';
+import ApprovalCompleteList from './ApprovalCompleteList';
+import ApprovalDocWrite from './approvalwrite/ApprovalDocWrite';
+import ApprovalTempList from './ApprovalTempList';
+import ApprovalUpList from './ApprovalUpList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux'
 
 const Approval = () => {
   const accessToken = localStorage.getItem("accessToken");
