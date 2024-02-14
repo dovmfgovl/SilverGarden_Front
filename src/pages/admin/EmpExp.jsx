@@ -10,7 +10,7 @@ const EmpExp = ({ empDetail }) => {
   const exp_period = empDetail? empDetail.EXP_PERIOD : '';
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid' }}>
+    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
       <h5>경력</h5>
       <Table striped bordered hover>
       <thead>

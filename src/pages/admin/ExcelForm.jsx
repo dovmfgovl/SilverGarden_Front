@@ -12,6 +12,10 @@ const ExcelForm = ({empList}) => {
       const excelData = res.data;
       console.log(excelData); */
 
+      if (empList.length === 0) {
+        throw new Error('직원 목록이 비어 있습니다.');
+      }
+
       // Excel 파일 생성 및 다운로드
       const wb = XLSX.utils.book_new();
       const headerStyle = {
@@ -28,23 +32,25 @@ const ExcelForm = ({empList}) => {
       };
 
       // 열의 폭을 정의
-      const colWidths = [80, 120, 80, 80, 130];
+      const colWidths = [120 ,80, 120, 80, 80, 130];
 
       // cols 속성을 사용하여 각 열의 폭을 조절
       const cols = colWidths.map(width => ({ wpx: width }));
 
       const headerRow = [
         { v: '사원번호', t: 's', s: headerStyle },
-        { v: '사원명', t: 's', s: headerStyle },
         { v: '현황', t: 's', s: headerStyle },
+        { v: '사원명', t: 's', s: headerStyle },
+        { v: '부서', t: 's', s: headerStyle },
         { v: '직급', t: 's', s: headerStyle },
         { v: '전화번호', t: 's', s: headerStyle },
       ];
 
       const dataRows = empList.map(emp => [
-        { v: emp.E_CODE, t: 's', s: dataStyle },  // 사원번호
+        { v: emp.E_NO, t: 's', s: dataStyle },  // 사원번호
+        { v: emp.E_STATUS, t: 's', s: dataStyle },  // 현황
         { v: emp.E_NAME, t: 's', s: dataStyle },  // 사원명
-        { v: emp.E_CURRENT, t: 's', s: dataStyle },  // 현황
+        { v: emp.DEPT_NAME, t: 's', s: dataStyle },  // 사원명
         { v: emp.E_RANK, t: 's', s: dataStyle },  // 직급
         { v: emp.E_PHONE, t: 's', s: dataStyle },  // 전화번호
       ]);
@@ -66,6 +72,7 @@ const ExcelForm = ({empList}) => {
       console.log('Excel 파일 생성 및 다운로드 완료');
     } catch (error) {
       console.error('Error occurred while downloading Excel', error);
+      alert('Excel 파일 다운로드 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
