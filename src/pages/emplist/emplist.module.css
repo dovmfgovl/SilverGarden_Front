@@ -7,7 +7,7 @@
     ;
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 0.1fr 1fr;
-    background-color: white;
+    background-color: rgb(211, 211, 211);
   }
   
   .empListSidebarWrap{
@@ -18,14 +18,14 @@
   
   .empListTitleBar{
     grid-area: empTitleBar;
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(51, 184, 255);
     font-size: 2.0rem;
     padding: 10px;
   }
 
   .innerContentWrap{
     grid-area: innerContentWrap;
-    background-color: white;
+    background-color: rgb(168, 211, 255);
     font-size: 2.0rem;
     padding: 10px;
   }
@@ -33,14 +33,20 @@
   .searchbar{
     position: absolute;
     bottom: 2px;
-    left: 55rem;
+    right: 100%
   }
   .refreshButton{
     position: absolute;
     bottom: 2px;
-    left: 69rem;
+    left: 30%;
+  }
+  .result{
+    bottom: 2px;
+    right: 4%;
   }
 
   .container {
     position: relative;
+    left: 92%;
+    
   }
