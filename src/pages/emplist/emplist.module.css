@@ -1,0 +1,46 @@
+.empListsWrap {
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    "empSidebarWrap empTitleBar"
+    "empSidebarWrap innerContentWrap"
+    ;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 0.1fr 1fr;
+    background-color: white;
+  }
+  
+  .empListSidebarWrap{
+    grid-area: empSidebarWrap;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+  }
+  
+  .empListTitleBar{
+    grid-area: empTitleBar;
+    background-color: rgb(201, 201, 201);
+    font-size: 2.0rem;
+    padding: 10px;
+  }
+
+  .innerContentWrap{
+    grid-area: innerContentWrap;
+    background-color: white;
+    font-size: 2.0rem;
+    padding: 10px;
+  }
+  
+  .searchbar{
+    position: absolute;
+    bottom: 2px;
+    left: 55rem;
+  }
+  .refreshButton{
+    position: absolute;
+    bottom: 2px;
+    left: 69rem;
+  }
+
+  .container {
+    position: relative;
+  }
