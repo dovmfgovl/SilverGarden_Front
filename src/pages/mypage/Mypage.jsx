@@ -1,8 +1,19 @@
 import React from 'react'
+import styles from './mypage.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUsersRectangle } from '@fortawesome/free-solid-svg-icons'
+import MypageMainCon from './MypageMainCon'
 
 const Mypage = () => {
   return (
-    <div>Mypage</div>
+    <>
+     <div className={styles.MypageContainerLayout}>
+     <div className={styles.mypageTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> 마이페이지 </div>
+    <div className={styles.innerContentLayout}>
+    <MypageMainCon/>
+    </div>
+     </div>
+    </>
     // 서브라우팅은 필요없이 구상만
       //admin emplist에 있는 대상을 쭉 나열한다(이걸 드랍다운으로 처리) 
         // 이후 jwt가 완성되는대로 이 자리에 대체한다.
