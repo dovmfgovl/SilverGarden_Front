@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { scheduleListDB } from '../../services/api/programApi';
-import styles from './pgcalendar.module.css';
-import { CommonCalendar } from '../../components/calendar/CommonCalendar';
+import React, { useEffect, useState } from 'react';
+import { getCalendarEventsDB } from '../../services/api/calendarApi';
+import DemoApp from './DemoApp';
 
-const ProgramFullCalendar = () => {
+const Calendar = () => {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -12,7 +11,7 @@ const ProgramFullCalendar = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await scheduleListDB();  // 예시 함수, 실제 데이터를 가져오는 함수로 교체
+            const response = await getCalendarEventsDB();  // 예시 함수, 실제 데이터를 가져오는 함수로 교체
             console.log(response);
             const scheduleData = response.data;  // 적절한 데이터로 교체
             console.log(scheduleData);
@@ -32,10 +31,10 @@ const ProgramFullCalendar = () => {
         }
     }; 
     return (
-        <div className={styles['pg-calendar-main']}>
-            <CommonCalendar events={events}/>
-        </div>
+        <DemoApp
+            events={events}
+        />
     );
 };
 
-export default ProgramFullCalendar;
+export default Calendar;

@@ -9,119 +9,121 @@ import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'; 
-import CalendarModal from './CalendarModal'
-
-// 한글로된 요일을 숫자로 전환하여 캘린더에 표시하는 함수
-const getWeekdayNumber = (weekdayString) => {
-  const weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-  const index = weekdays.indexOf(weekdayString);
-  return index !== -1 ? index + 1 : 0;
-};
-
-// 카테고리에 따라 배경색을 반환하는 함수
-const getBackgroundColor = (category) => {
-  const actualCategory = category || '기본값';
-  const predefinedColors = ['#1abc9c', '#3498db', '#e74c3c', '#f0932b', '#6ab04c', '#3c40c6', '#e056fd', '#ff7979', '#82589F', '#6D214F'];
-  const hash = actualCategory.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
-  const colorIndex = hash % predefinedColors.length;
-  return predefinedColors[colorIndex];
-};
+import { formatScheduleToEvent, getBackgroundColor } from './CalendarUtils';
+import CalendarModalDetail from './CalendarModal';
+import CalendarModalInsert from './CalendarModalInsert';
 
 //사용하는 캘린더에서 가져온 값을 공통처리
-const CommonCalendar = ({ events}) => {
+const CommonCalendar = ({ events }) => {
+  // console.log(events); 
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
-  const [currentEvents, setCurrentEvents] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState(events);
-
+  const [modalShow, setModalShow] = useState('True');
+  const [insertModalShow, setInsertModalShow] = useState(false);
+  const [newEvent, setNewEvent] = useState(null);  // 새로운 일정을 저장할 상태 추가
+  
   useEffect(() => {
-    setCalendarEvents(events);
-    // 특정 요일에 대한 테스트 코드
-    const weekdayNumber = getWeekdayNumber("월요일"); 
-    console.log("월요일의 숫자:", weekdayNumber);    // 월요일의 숫자: 1
+    // 컴포넌트가 렌더링될 때 formattedEvents 실행
+    setCalendarEvents(formattedEvents(events));
   }, [events]);
+  
+  const formattedEvents = (events) => {
+    const formatted = events.map(eventData => formatScheduleToEvent(eventData));
+    console.log('Formatted Events:', formatted);
+    return formatted;
+  }
 
+  //주말 표시, 미표시
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   };
-
-  const createEventId = () => String(Math.random()).slice(2, 11);
-
-  const handleDayClick = (selectInfo) => {
-    let title = prompt('새로운 일정 제목을 입력해주세요.');
-    let calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect();
-
-    if (title) {
-      const formattedStart = selectInfo.startStr.substring(0, 10);
-      const formattedEnd = selectInfo.endStr ? selectInfo.endStr.substring(0, 10) : null;
   
-      const newEvent = {
-        id: createEventId(),
-        title,
-        start: formattedStart,
-        end: formattedEnd,
-        allDay: selectInfo.allDay,
-      };
-      calendarApi.addEvent(newEvent);
-      setCurrentEvents([...currentEvents, newEvent]);
-    }
-  };
-
-  const handleEventClick = (info) => {
-    setSelectedEvent(info.event);
-  };
-
   const handleDeleteEvent = () => {
-    // 여기에서 DB 또는 상태 업데이트 등을 통해 이벤트를 삭제합니다.
-    // 예제에서는 단순히 이벤트만 제거하도록 작성되었습니다.
-    const updatedEvents = events.filter(event => event.id !== selectedEvent.id);
+    const updatedEvents = calendarEvents.filter(event => event.id !== selectedEvent.id);
     setCalendarEvents(updatedEvents);
-    // 모달을 닫습니다.
     setSelectedEvent(null);
+    setModalShow(false); // 모달을 닫습니다.
   };
+
+  const handleInsertEvent = (newEvent) => {
+    // 여기서 새 일정을 추가하는 로직을 구현합니다.
+    // newEvent를 calendarEvents에 추가하거나 API를 호출하여 서버에 저장할 수 있습니다.
+    // 예시: setCalendarEvents([...calendarEvents, newEvent]);
+    setCalendarEvents([...calendarEvents, newEvent]);
+
+    // 모달 닫기
+    setInsertModalShow(false);
+  
+    console.log('새 일정 추가:', newEvent);
+  };
+
   return (
     <div>
+      <div className="form-check form-switch">
+        <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            checked={weekendsVisible}
+            onChange={handleWeekendsToggle}
+        />
+        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+            {weekendsVisible ? '주말 표시' : '주말 미표시'}
+        </label>
+      </div>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, rrulePlugin, listPlugin, bootstrap5Plugin]}
-        themeSystem="bootstrap5"
+        themeSystem="bootstrap4"
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
         }}
         initialView="dayGridMonth"
-        navLinks={true}
         editable={true}
         dayMaxEvents={true}
         events={events}
         nowIndicator={true}
+        select={(info) => {
+          // 빈 영역을 클릭하여 새로운 일정을 추가할 때의 동작
+          setInsertModalShow(true);
+          setNewEvent({
+            start: info.startStr,
+            end: info.endStr,
+          });
+        }}
         selectable={true}
         selectMirror={true}
         weekends={weekendsVisible} 
         locale={'ko'}
         schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
-        eventClick={(info) => handleEventClick(info)}
+        eventClick={(info) => setSelectedEvent(formatScheduleToEvent(info.event))}
         eventContent={(eventInfo) => {
           return {
             html: `<div style="background-color: ${getBackgroundColor(eventInfo.event.extendedProps.pgCategory)}; color: white;">${eventInfo.event.title}</div>`,
           };
         }}
-        select={(selectInfo) => handleDayClick(selectInfo)}
-      />
-      <button onClick={handleWeekendsToggle}>
-        {weekendsVisible ? '주말 표시' : '주말 미표시'}
-      </button>
+      /> 
       {selectedEvent && (
-        <CalendarModal
-          show={true}
-          onHide={() => setSelectedEvent(null)}
-          event={selectedEvent}
+        <CalendarModalDetail
+          modalShow={modalShow === 'True'}  // 'True' 문자열이면 true, 아니면 false로 설정
+          onHide={() => setModalShow(false)}
+          selectedEvent={selectedEvent}
+          events={calendarEvents}
           onDelete={handleDeleteEvent}
+          setCalendarEvents={setCalendarEvents}
+          setSelectedEvent={setSelectedEvent}
         />
       )}
+        <CalendarModalInsert
+          modalShow={insertModalShow}
+          onHide={() => setInsertModalShow(false)}
+          onInsert={handleInsertEvent}
+          defaultDate={selectedEvent ? selectedEvent.start : null}
+          />
     </div>
   );
 };
-export { CommonCalendar, getWeekdayNumber };
+export { CommonCalendar};
