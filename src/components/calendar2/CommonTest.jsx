@@ -15,27 +15,27 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
+    // 일정 조회 로직
+    const fetchEvents = async () => {
+        console.log('fetchEvents'); 
+        try {
+            const eventsData = await TestLogic.listDB(urls.listURL);
+            const formattedEvents = eventsData.map(event => ({
+                title: event[columnNames.title],
+                start: event[columnNames.start],
+                end: event[columnNames.end],
+                no: event[columnNames.no],
+                // 추가 필드들도 필요에 따라 변환
+            }));
+            setEvents(formattedEvents);
+        } catch (error) {
+            // 에러 처리
+        }
+    };
+    //최초 한 번 이벤트 조회해서 띄우기
     useEffect(() => {
-        // 일정 조회 로직
-        const fetchEvents = async () => {
-            console.log('fetchEvents'); 
-            try {
-                const eventsData = await TestLogic.listDB(urls.listURL);
-                const formattedEvents = eventsData.map(event => ({
-                    title: event[columnNames.title],
-                    start: event[columnNames.start],
-                    end: event[columnNames.end],
-                    no: event[columnNames.no],
-                    // 추가 필드들도 필요에 따라 변환
-                }));
-                setEvents(formattedEvents);
-            } catch (error) {
-                // 에러 처리
-            }
-        };
-        //최초 한 번 이벤트 조회해서 띄우기
         fetchEvents();
-    }, [urls.listURL, columnNames]);
+    }, []);
 
     //모달 핸들링
     const handleModalAction = (action, event) => {
@@ -75,6 +75,7 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
             onEventUpdate(transformedData);
             setIsModalOpen(false);
             setModalAction(null);
+            fetchEvents();
         } catch (error) {
             // 에러 처리
         }

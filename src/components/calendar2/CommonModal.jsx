@@ -15,13 +15,16 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
         end: event ? event.end : '',
         no: event && event.extendedProps ? event.extendedProps.no : undefined,
     });
+
+    //변경된 경우에만 업데이트가 발생하며, 변경이 없으면 이전 상태를 그대로 유지
     useEffect(() => {
-        setFormData({
+        setFormData((prevFormData) => ({
+            ...prevFormData,
             title: event ? event.title : '',
-            start: event ? event.start : '',
-            end: event ? event.end : '',
+            start: event && event.start !== prevFormData.start ? formatDateForInput(event.start) : prevFormData.start,
+            end: event && event.end !== prevFormData.end ? formatDateForInput(event.end) : prevFormData.end,
             no: event && event.extendedProps ? event.extendedProps.no : undefined,
-        });
+        }));
     }, [event]);
 
     const handleChange = (e) => {
