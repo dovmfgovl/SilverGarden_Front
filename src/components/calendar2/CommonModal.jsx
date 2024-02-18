@@ -8,23 +8,31 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
         const isoString = date.toISOString();
         return isoString.slice(0, isoString.length - 8); // 끝의 'Z'를 제외한 부분을 반환
     };
-    //개별 컴포넌트 값으로 통일시켜주기
     const [formData, setFormData] = useState({
-        title: event ? event.title : '',
-        start: event ? event.start : '',// "start": "2024-02-01T23:52:00+09:00",
-        end: event ? event.end : '',
-        no: event && event.extendedProps ? event.extendedProps.no : undefined,
+        title: '',
+        start: '',
+        end: '',
+        no: undefined,
     });
 
-    //변경된 경우에만 업데이트가 발생하며, 변경이 없으면 이전 상태를 그대로 유지
     useEffect(() => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            title: event ? event.title : '',
-            start: event && event.start !== prevFormData.start ? formatDateForInput(event.start) : prevFormData.start,
-            end: event && event.end !== prevFormData.end ? formatDateForInput(event.end) : prevFormData.end,
-            no: event && event.extendedProps ? event.extendedProps.no : undefined,
-        }));
+        if (event) {
+            // 이벤트 클릭 시
+            setFormData({
+                title: event.title,
+                start: formatDateForInput(event.start),
+                end: formatDateForInput(event.end),
+                no: event.extendedProps.no,
+            });
+        } else {
+            // 날짜 클릭 시
+            setFormData({
+                title: '',
+                start: '',
+                end: '',
+                no: undefined,
+            });
+        }
     }, [event]);
 
     const handleChange = (e) => {
@@ -36,17 +44,17 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
 
     const handleSave = () => {
         onSave(formData);
-        onClose(); // 저장 후에 모달을 닫도록 추가
+        onClose();
     };
 
     const handleUpdate = () => {
         onUpdate(formData);
-        onClose(); // 저장 후에 모달을 닫도록 추가
+        onClose();
     };
 
     const handleDelete = () => {
         onDelete();
-        onClose(); // 저장 후에 모달을 닫도록 추가
+        onClose();
     };
 
     return (
@@ -71,7 +79,7 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
                         <Form.Control
                             type="datetime-local"
                             name="start"
-                            value={formatDateForInput(formData.start)}
+                            value={formData.start}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -80,7 +88,7 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
                         <Form.Control
                             type="datetime-local"
                             name="end"
-                            value={formatDateForInput(formData.end)}
+                            value={formData.end}
                             onChange={handleChange}
                         />
                     </Form.Group>

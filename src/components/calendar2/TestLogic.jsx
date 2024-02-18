@@ -19,6 +19,8 @@ class TestLogic {
     };
     
     static addDB = (url, event) => {
+        console.log('addDB');//addDB
+        console.log(event); //{PS_NAME: 'ㅁㄴㅇ', PS_START: '2024-02-05T00:24', PS_END: '2024-02-07T00:24'}
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await axios({
@@ -37,7 +39,7 @@ class TestLogic {
     
     static updateDB = (url, event) => {
         console.log('updateDB'); //updateDB 나옴
-        console.log(event); //{PS_NAME: '일정 수정 성공123123', PS_START: Thu Feb 01 2024 02:52:00 GMT+0900 (한국 표준시), PS_END: Thu Feb 01 2024 23:52:00 GMT+0900 (한국 표준시), PS_NO2: 1}
+        console.log(event); //{PS_NAME: '일정 수정 성공123', PS_START: '2024-02-12T00:37', PS_END: '2024-02-14T09:37', PS_NO2: 1}
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await axios({
@@ -45,9 +47,6 @@ class TestLogic {
                     url: process.env.REACT_APP_SPRING_IP + url,
                     data: event,
                 });
-                console.log(url); //calendar/update
-                console.log(event); //안나옴
-                console.log(response);
                 resolve(response.data);
             } catch (error) {
                 console.error('Error updating calendar event:', error);

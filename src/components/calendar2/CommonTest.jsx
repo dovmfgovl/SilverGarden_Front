@@ -45,17 +45,25 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
         setModalAction(action);
         setSelectedEvent(event);
         setIsModalOpen(true);
-    };
+    }; 
     
     //저장 모달
     const handleEventAdd = async (formData) => {
-        console.log(formData); 
+        console.log(formData); //{title: 'aaa', start: '2024-02-01T22:50', end: '2024-02-02T22:50', no: undefined}
         try {
-            await TestLogic.addDB(formData, urls.addURL);
-                onEventAdd(formData);
-                setIsModalOpen(false);
-                setModalAction(null);
-            } catch (error) {
+            const transformedData = {
+                [columnNames.title]: formData.title,
+                [columnNames.start]: formData.start,
+                [columnNames.end]: formData.end,
+                // 추가 필드들도 필요에 따라 변환
+            };
+            console.log(transformedData);//{PS_NAME: 'aaaaa', PS_START: '2024-02-01T22:51', PS_END: '2024-02-02T22:51'}
+            await TestLogic.addDB(urls.addURL, transformedData);
+            onEventAdd(transformedData);
+            setIsModalOpen(false);
+            setModalAction(null);
+            fetchEvents();
+        } catch (error) {
             // 에러 처리
         }
     };
@@ -113,14 +121,17 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
         },
         locale:'ko',
         editable: true,
+        // 날짜를 클릭한 경우, 새로운 이벤트를 생성하는 모달 열기 로직 추가
+        dateClick: (info) => {
+            handleModalAction('create', null);
+        },
+        // 이벤트를 클릭한 경우
         eventClick: (info) => {
-            // 이벤트를 클릭한 경우
-            if (info.event) {
-                handleModalAction('update', info.event);
-            } else {
-                // 날짜를 클릭한 경우, 새로운 이벤트를 생성하는 모달 열기 로직 추가
-                handleModalAction('create', null);
-            }
+            handleModalAction('update', info.event);
+        },
+        // 이벤트를 드래그해서 이동한 경우
+        eventDrop: (info) => {
+            handleModalAction('update', info.event);
         },
     };
     
