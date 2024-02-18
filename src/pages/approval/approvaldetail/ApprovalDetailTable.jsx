@@ -1,14 +1,7 @@
 import React from 'react'
-import { Form, InputGroup} from 'react-bootstrap'
+import { Form, InputGroup } from 'react-bootstrap'
 
-const ApprovalWriteTable = ({empData, titleRef}) => {
-
-    const now = new Date();
-    // ISO 문자열로 변환 (예: "2024-02-13T15:03:04.000Z")
-    const isoString = now.toISOString();
-    // ISO 문자열을 Oracle 날짜 형식으로 변환 (UTC 기준)
-    const dateString = isoString.replace('T', ' ').substring(0, 19);
-
+const ApprovalDetailTable = ({docDetail}) => {
   return (
     <>
       <InputGroup style={{height: "30%"}}>
@@ -17,7 +10,7 @@ const ApprovalWriteTable = ({empData, titleRef}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
-          value={empData.e_name}
+          value={docDetail.e_name}
           readOnly
         />
         <InputGroup.Text style={{borderRadius: 0, width:"140px", justifyContent:"center"}} id="inputGroup-sizing-lg">직급</InputGroup.Text>
@@ -25,7 +18,7 @@ const ApprovalWriteTable = ({empData, titleRef}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
-          value={empData.e_rank}
+          value={docDetail.e_rank}
           readOnly
         />
     </InputGroup >
@@ -35,7 +28,7 @@ const ApprovalWriteTable = ({empData, titleRef}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
-          value={dateString}
+          value={docDetail.reg_date}
           readOnly
         />
         <InputGroup.Text style={{borderRadius: 0, width:"140px", justifyContent:"center"}} id="inputGroup-sizing-lg">부서</InputGroup.Text>
@@ -43,7 +36,7 @@ const ApprovalWriteTable = ({empData, titleRef}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
-          value={empData.dept_name}
+          value={docDetail.dept_name}
           readOnly
         />
     </InputGroup>
@@ -53,11 +46,12 @@ const ApprovalWriteTable = ({empData, titleRef}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
-          ref={titleRef}
+          value={docDetail.d_title}
+          readOnly
         />
     </InputGroup>
     </>
   )
 }
 
-export default ApprovalWriteTable
+export default ApprovalDetailTable
