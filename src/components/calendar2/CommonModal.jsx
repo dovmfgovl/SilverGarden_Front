@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => {
+    //구조분해 할당해서 사용하기
+    // const { title, start, end, no } = formData;
     // 날짜 형식을 변환하는 함수
     const formatDateForInput = (dateString) => {
         const date = new Date(dateString);
@@ -14,10 +16,9 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
         end: '',
         no: undefined,
     });
-
     useEffect(() => {
         if (event) {
-            // 이벤트 클릭 시
+            // 이벤트 클릭 시 -> update, delete
             setFormData({
                 title: event.title,
                 start: formatDateForInput(event.start),
@@ -25,7 +26,7 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
                 no: event.extendedProps.no,
             });
         } else {
-            // 날짜 클릭 시
+            // 날짜 클릭 시 -> create
             setFormData({
                 title: '',
                 start: '',
@@ -53,7 +54,9 @@ const CustomModal = ({ action, event, onSave, onUpdate, onDelete, onClose }) => 
     };
 
     const handleDelete = () => {
-        onDelete();
+        // 삭제 로직 수행
+        onDelete(formData);
+        console.log(formData);
         onClose();
     };
 

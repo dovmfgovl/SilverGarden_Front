@@ -14,7 +14,12 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
-
+    //기본 초기화 세트
+    const updateModalState = () => {
+        setIsModalOpen(false);
+        setModalAction(null);
+        fetchEvents();
+    };
     // 일정 조회 로직
     const fetchEvents = async () => {
         console.log('fetchEvents'); 
@@ -60,9 +65,7 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
             console.log(transformedData);//{PS_NAME: 'aaaaa', PS_START: '2024-02-01T22:51', PS_END: '2024-02-02T22:51'}
             await TestLogic.addDB(urls.addURL, transformedData);
             onEventAdd(transformedData);
-            setIsModalOpen(false);
-            setModalAction(null);
-            fetchEvents();
+            updateModalState();
         } catch (error) {
             // 에러 처리
         }
@@ -81,22 +84,28 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
             console.log(transformedData);
             await TestLogic.updateDB(urls.updateURL,transformedData);
             onEventUpdate(transformedData);
-            setIsModalOpen(false);
-            setModalAction(null);
-            fetchEvents();
+            updateModalState();
         } catch (error) {
             // 에러 처리
         }
     };
 
     //삭제액션 모달 
-    const handleEventDelete = async () => {
+    const handleEventDelete = async (formData) => {
         console.log('handleModalDelete');
         try {
-            await TestLogic.deleteDB(selectedEvent, urls.deleteURL);
-                onEventDelete(selectedEvent);
-                setIsModalOpen(false);
-                setModalAction(null);
+            // 컬럼명을 변환하여 서버로 데이터 전송
+            const transformedData = {
+                [columnNames.title]: formData.title,
+                [columnNames.start]: formData.start,
+                [columnNames.end]: formData.end,
+                [columnNames.no]: formData.no,
+                // 추가 필드들도 필요에 따라 변환
+            };
+            console.log(transformedData);//{PS_NAME: '진짜??', PS_START: '2024-01-31T16:03', PS_END: '2024-01-31T18:03', PS_NO2: 7}
+            await TestLogic.deleteDB(urls.deleteURL,transformedData);
+                onEventDelete(transformedData);
+                updateModalState();
         } catch (error) {
             // 에러 처리
         }
@@ -104,8 +113,7 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
 
     //모달 닫기  
     const handleEventClose = () => {
-        setIsModalOpen(false);
-        setModalAction(null);
+        updateModalState();
     };
 
     // FullCalendar 옵션 설정

@@ -56,6 +56,8 @@ class TestLogic {
     };
     
     static deleteDB = (url, event) => {
+        console.log(url);//calendar/delete
+        console.log(event);//{PS_NAME: '진짜??', PS_START: '2024-01-31T16:03', PS_END: '2024-01-31T18:03', PS_NO2: 7}
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await axios({
