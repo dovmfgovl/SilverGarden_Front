@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import EmpExpRow from './EmpExpRow';
+import styles from './empDetailInfo.module.css';
 
 const EmpExp = ({ empDetail }) => {
   const exp_name = empDetail? empDetail.EXP_NAME : '';
@@ -10,9 +11,9 @@ const EmpExp = ({ empDetail }) => {
   const exp_period = empDetail? empDetail.EXP_PERIOD : '';
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
+    <div className={styles.empBaseInfo} >
       <h5>경력</h5>
-      <Table striped bordered hover>
+      <Table striped bordered hover className={styles.empBaseTable} >
       <thead>
         <tr>
           <th>회사명</th>

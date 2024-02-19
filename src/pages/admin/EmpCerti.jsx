@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import EmpCertiRow from './EmpCertiRow';
+import styles from './empDetailInfo.module.css';
 
 const EmpCerti = ({ empDetail }) => {
   const certi_cate = empDetail? empDetail.CERTI_CATE : '';
@@ -9,9 +10,9 @@ const EmpCerti = ({ empDetail }) => {
   const certi_acquire = empDetail? empDetail.CERTI_ACQUIRE : '';
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
+    <div className={styles.empBaseInfo}>
       <h5>자격증</h5>
-      <Table striped bordered hover>
+      <Table striped bordered hover className={styles.empBaseTable} >
       <thead>
         <tr>
           <th>자격종류</th>

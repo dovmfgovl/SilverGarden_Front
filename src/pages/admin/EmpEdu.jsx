@@ -4,6 +4,8 @@ import EmpEduRow from './EmpEduRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, saveEmpEdu, setDetail } from '../../redux/empInfosSlice';
 import { Button } from 'react-bootstrap';
+import styles from './empDetailInfo.module.css';
+import { Col, Row } from 'antd';
 
 const EmpEdu = () => {
   const dispatch = useDispatch();
@@ -52,16 +54,28 @@ const EmpEdu = () => {
   ];
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
+    <div className={styles.empBaseInfo} >
       <h5>직원 기초 정보</h5>
-      <h5>학력</h5>
-      <div className="col-2">
-        {editing && <Button variant="warning" onClick={handleSaveChanges}>저장</Button>}
-        <Button variant="warning" onClick={editing ? handleCancel : handleEdit}>
-          {editing ? '취소' : '수정'}
-        </Button>
-      </div>
-      <Table striped bordered hover>
+      <Row style={{marginBottom:"10px"}}>
+        <Col md = {19}>          
+          <h5>학력</h5>          
+        </Col>
+        <Col md ={5}>          
+          <div className="col-9">
+            <Row>
+              <Col md={16}>
+                {editing && <Button style = {{width : "80px"}} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>}
+              </Col>
+              <Col md={8}>
+                <Button style = {{width : "80px"}} variant="outline-success" onClick={editing ? handleCancel : handleEdit}>
+                  {editing ? '취소' : '수정'}
+                </Button>
+              </Col>
+            </Row>
+          </div>          
+        </Col>
+      </Row>
+      <Table striped bordered hover className={styles.empBaseTable}>
         <thead>
           <tr>
             <th>기간</th>
