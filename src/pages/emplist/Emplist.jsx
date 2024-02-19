@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './emplist.module.css'
 import React, { useEffect, useState } from 'react'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
-import { faComment, faCrosshairs, faFile, faSolarPanel } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faCrosshairs, faFile, faHouseMedical,faPeopleArrows,faPeopleGroup,faPersonChalkboard,faPersonCircleCheck,faSolarPanel } from '@fortawesome/free-solid-svg-icons';
 import EmpListAll from './EmpListAll';
 import {  getEmpList } from '../../services/api/empListApi';
 import { Space } from 'antd';
@@ -35,11 +35,11 @@ const Emplist = () => {
     icon: faSolarPanel,//fontAwsome 아이콘 명
     isOpen:true, // 시작 시 열려있도록 함
     subMenuItems: [//서브목록 정보
-      { label: '전체', icon: faCrosshairs},//서브목록이름, 아이콘명, 클릭시넘어갈 url
-      { label: '간호팀', icon: faCrosshairs},
-      { label: '사회복지팀', icon: faComment},
-      { label: '교육팀', icon: faComment},
-      { label: '운영관리팀', icon: faComment},
+      { label: '전체', icon: faPeopleGroup},//서브목록이름, 아이콘명, 클릭시넘어갈 url
+      { label: '간호팀', icon: faHouseMedical},
+      { label: '사회복지팀', icon: faPeopleArrows},
+      { label: '교육팀', icon: faPersonChalkboard},
+      { label: '운영관리팀', icon: faPersonCircleCheck},
     ],
   },
 ];
