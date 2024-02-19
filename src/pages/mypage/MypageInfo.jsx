@@ -1,62 +1,66 @@
-import React from 'react'
-import { Image, Stack, Table } from 'react-bootstrap'
+import { Col, Descriptions } from 'antd';
+import { Image, Stack} from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const MypageInfo = () => {
+   const dispatch = useDispatch();
+   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
+
+
+   // select who에서 선택한 직원을 selectedEmployee로 설정하고 사용합니다.
+   const empDetail = useSelector(state => state.empInfos.selectedEmployee) || {};
+
+   const items = [
+    {
+      key: '1',
+      label: '이름',
+      children: empDetail.E_NAME,
+    },
+    {
+      key: '2',
+      label: '사원번호',
+      children: empDetail.E_NO,
+    },
+    {
+      key: '3',
+      label: '연락처',
+      children: empDetail.E_PHONE,
+    },
+    {
+      key: '4',
+      label: '이메일',
+      children: empDetail.E_EMAIL,
+    },
+    {
+      key: '5',
+      label: '부서',
+      children: empDetail.DEPT_NAME,
+    },
+    {
+      key: '6',
+      label: '담당직종',
+      children: empDetail.E_OCCUP,
+      
+    },
+
+  ];
+
   return (
     <>
-    <Stack direction="horizontal" gap={3}>
-<Image width={210} height={180}
-  alt="171x180" src="logo192.png" rounded 
-  className='p-2 ms-auto'/>
-        <Table className='shadow  w-100 ms-auto' >
-          <tbody>
-            <tr>
-              <th><strong>이름:</strong></th>
-              <td style={{width: '20%'}} className='px-2'></td>
-              <th><strong>성별:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-            </tr>
-            <tr>
-              <th><strong>생년월일:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-              <th><strong>사원번호:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-            </tr>
-            <tr>
-              <th><strong>입사일:</strong></th>
-               <td style={{width: '35%'}} className='px-2'></td>
-              <th><strong>퇴사일:</strong></th>
-               <td style={{width: '20%'}} className='px-2'></td>
-            </tr>
-            <tr>
-            <th><strong>연락처:</strong></th>
-               <td style={{width: '1%'}} className='px-2'> </td>
-              <th><strong>이메일:</strong></th>
-               <td style={{width: '20%'}} className='px-2'></td>
-            </tr>
-            <tr>
-               <th><strong>주소:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-               <th><strong>부서:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-            </tr>
-            <tr>
-               <th><strong>권한:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-               <th><strong>현황:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-            </tr>
-            <tr>
-               <th><strong>담당직종:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-               <th><strong>직급:</strong></th>
-               <td style={{width: '20%'}} className='px-2'> </td>
-            </tr>
-        </tbody>
-        </Table>
-</Stack>
-</>
+    <Stack direction="horizontal" gap={0}>
+      <Col span={5}>
+      <Image width={210} height={180} alt="171x180" src="logo192.png" rounded className='p-2 ms-auto'/>
+      </Col>
+      <Col span={16}>
+      <Descriptions title="User Info" bordered items={items} />
+      </Col>
+      <Col span={2}></Col>
+    </Stack>
+    </>
   )
 }
 
 export default MypageInfo
+
+ 

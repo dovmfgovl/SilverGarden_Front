@@ -1,43 +1,30 @@
 import React from 'react'
 import {  Table } from 'antd';
-const { Column } = Table;
-const data = [
-  {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
 
 const MypageExp = () => {
+  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+    const dispatch = useDispatch();
+  
+  const { Column } = Table;
+  const data = [
+    {
+      exp_name: selectedEmployee.EXP_NAME,
+      exp_dept: selectedEmployee.EXP_DEPT,
+      exp_rank: selectedEmployee.EXP_RANK,
+      exp_duty: selectedEmployee.EXP_DUTY,
+      exp_period:selectedEmployee.EXP_PERIOD
+    },
+  ];
   return (
     <>
     <h1>경력</h1>
     <Table dataSource={data} pagination={false}>
-        <Column title="회사명" dataIndex="firstName" key="firstName" />
-        <Column title="부서" dataIndex="age" key="age" />
-        <Column title="직급" dataIndex="address" key="address" />
-        <Column title="담당업무" dataIndex="address" key="address" />
-        <Column title="재직기간" dataIndex="address" key="address" />
+        <Column title="회사명" dataIndex="exp_name" key="firstName" />
+        <Column title="부서" dataIndex="exp_dept" key="age" />
+        <Column title="직급" dataIndex="exp_rank" key="address" />
+        <Column title="담당업무" dataIndex="exp_duty" key="address" />
+        <Column title="재직기간" dataIndex="exp_period" key="address" />
   </Table>
     </>
   )
