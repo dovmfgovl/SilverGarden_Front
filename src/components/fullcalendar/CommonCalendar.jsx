@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import TestLogic from './TestLogic';
+import TestLogic from './CommonCalendarLogic';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import CustomModal from './CommonModal';
+import CustomModal from './CommonCalendarModal';
 
 const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames }) => {
+    const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [events, setEvents] = useState([]);
     console.log(urls);//{listURL: 'calendar/list', addURL: 'calendar/add', updateURL: 'calendar/update', deleteURL: 'calendar/delete'}
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
+
     //기본 초기화 세트
     const updateModalState = () => {
         setIsModalOpen(false);
         setModalAction(null);
         fetchEvents();
     };
+
+      //주말 표시, 미표시
+    const handleWeekendsToggle = () => {
+        setWeekendsVisible(!weekendsVisible);
+    };
+
     // 일정 조회 로직
     const fetchEvents = async () => {
         console.log('fetchEvents'); 
@@ -30,6 +38,9 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 start: event[columnNames.start],
                 end: event[columnNames.end],
                 no: event[columnNames.no],
+                color: event[columnNames.color],
+                content: event[columnNames.content],
+                category: event[columnNames.category],
                 // 추가 필드들도 필요에 따라 변환
             }));
             setEvents(formattedEvents);
@@ -54,15 +65,17 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
     
     //저장 모달
     const handleEventAdd = async (formData) => {
-        console.log(formData); //{title: 'aaa', start: '2024-02-01T22:50', end: '2024-02-02T22:50', no: undefined}
+        console.log(formData); 
         try {
             const transformedData = {
                 [columnNames.title]: formData.title,
                 [columnNames.start]: formData.start,
                 [columnNames.end]: formData.end,
+                [columnNames.category]: formData.category,
+                [columnNames.content]: formData.content,
                 // 추가 필드들도 필요에 따라 변환
             };
-            console.log(transformedData);//{PS_NAME: 'aaaaa', PS_START: '2024-02-01T22:51', PS_END: '2024-02-02T22:51'}
+            console.log(transformedData);
             await TestLogic.addDB(urls.addURL, transformedData);
             onEventAdd(transformedData);
             updateModalState();
@@ -79,6 +92,8 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 [columnNames.start]: formData.start,
                 [columnNames.end]: formData.end,
                 [columnNames.no]: formData.no,
+                [columnNames.category]: formData.category,
+                [columnNames.content]: formData.content,
                 // 추가 필드들도 필요에 따라 변환
             };
             console.log(transformedData);
@@ -122,33 +137,49 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
         selectMirror: true,
         initialView: 'dayGridMonth',
         events: events,
+        locale:'ko',
+        timezone: 'local',
+        editable: true,
+        weekends: weekendsVisible, // 주말 표시 여부 설정
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
         },
-        locale:'ko',
-        editable: true,
+        color:'{color}', //카테고리별 색상
+        eventTextColor: 'black', 
         // 날짜를 클릭한 경우, 새로운 이벤트를 생성하는 모달 열기 로직 추가
         dateClick: (info) => {
-            handleModalAction('create', null);
+            handleModalAction('생성', null);
         },
         // 이벤트를 클릭한 경우
         eventClick: (info) => {
-            handleModalAction('update', info.event);
+            handleModalAction('수정', info.event);
         },
         // 이벤트를 드래그해서 이동한 경우
         eventDrop: (info) => {
-            handleModalAction('update', info.event);
+            handleModalAction('수정', info.event);
         },
     };
     
     return (
         <>
+            <div className="form-check form-switch">
+            <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                checked={weekendsVisible}
+                onChange={handleWeekendsToggle}
+            />
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                {weekendsVisible ? '주말 표시' : '주말 미표시'}
+            </label>
+            </div>
             <FullCalendar 
                 plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin]}
                 {...calendarOptions}
-                
             />
             {isModalOpen && (
                 <CustomModal

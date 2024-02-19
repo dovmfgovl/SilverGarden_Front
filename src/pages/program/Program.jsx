@@ -8,7 +8,8 @@ import ProgramDashboard from '../programdashboard/ProgramDashboard';
 import ProgramInfo from './ProgramInfo';
 import { setDetail } from '../../redux/programSlice';
 import ProgramCalendarHome from '../programcalendar/ProgramCalendarHome';
-import TestCalendar from '../../components/calendar2/TestCalendar';
+import TestCalendar from '../../components/fullcalendar/TestCalendar';
+import TestCalendar2 from '../../components/fullcalendar/TestCalendar2';
 
 
 const Program = () => {

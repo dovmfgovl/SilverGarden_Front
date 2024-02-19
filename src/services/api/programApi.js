@@ -64,9 +64,9 @@ export const ProgramUpdateDB = (params) => {
     console.log(params); 
     return new Promise((resolve, reject) => {
         axios({
-            method: "get",
+            method: "put",
             url: process.env.REACT_APP_SPRING_IP + "program/pgUpdate",
-            params: params, 
+            data: params, 
         })
         .then(response => {
             console.log(response);
