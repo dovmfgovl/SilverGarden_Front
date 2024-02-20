@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { atListDB } from '../../services/api/attendanceApi';
 import AtStart from './AtStart';
+import AtEnd from './AtEnd';
 
 const Attendance = () => {
   const [atList, setAtList] = useState([]);
@@ -24,10 +25,10 @@ const Attendance = () => {
   return (
     <>
       <div>
-        {/* {atList && atList.map(item => (
-          <AtStart key={item.e_no} e_no={item.e_no} /> // e_no를 AtStart 컴포넌트에 전달
-        ))} */}
         <AtStart />
+      </div>
+      <div>
+        <AtEnd />
       </div>
     </>
   )

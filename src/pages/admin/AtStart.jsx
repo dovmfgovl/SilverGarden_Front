@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import userInfoSlice from '../../redux/userInfoSlice';
+import { useSelector } from 'react-redux'
 import { atInsertDB } from '../../services/api/attendanceApi';
 
 const AtStart = () => {
-  const dispatch = useDispatch();
   const E_NO = useSelector(state => state.userInfoSlice.e_no); // Redux store에서 e_no 가져오기
   console.log(E_NO);
 
@@ -13,17 +11,6 @@ const AtStart = () => {
   const [date, setDate] = useState([today.getFullYear(), `0${today.getMonth() + 1}`.slice(-2), `0${today.getDate()}`.slice(-2)].join("-"));
   const [start, setStart] = useState([today.getFullYear(), `0${today.getMonth() + 1}`.slice(-2), `0${today.getDate()}`.slice(-2)].join("-") 
                                       + ` ${`0${today.getHours()}`.slice(-2)}:${`0${today.getMinutes()}`.slice(-2)}:${`0${today.getSeconds()}`.slice(-2)}`);
-
-  /* const getAtList = useSelector(state => state.userInfoSlice); */
-
- /*  const [newData, setData] = useState({
-    AT_DATE: '',
-    E_NO: '',
-    AT_START: '',
-    AT_STATUS: '',
-    REG_DATE: '',
-    REG_ID: ''
-  }) */
 
   const handleInsert = async () => {
     console.log("출근버튼 클릭");
