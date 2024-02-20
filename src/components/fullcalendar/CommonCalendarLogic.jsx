@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-class TestLogic {
+class CommonCalendarLogic {
     static listDB = (url) => {
-        console.log(url); 
+        // console.log(url); 
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await axios({
                     method: 'get',
                     url: process.env.REACT_APP_SPRING_IP + url,
                 });
-                console.log(response);
+                // console.log(response);
                 resolve(response.data);
             } catch (error) {
                 console.error('Error fetching calendar events:', error);
@@ -75,4 +75,4 @@ class TestLogic {
     };
 }
 
-export default TestLogic;
+export default CommonCalendarLogic;

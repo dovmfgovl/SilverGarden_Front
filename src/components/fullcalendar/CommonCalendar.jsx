@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import TestLogic from './CommonCalendarLogic';
+import CommonCalendarLogic from './CommonCalendarLogic';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import CustomModal from './CommonCalendarModal';
+import CommonCalendarModal from './CommonCalendarModal';
+import styles from './calendar.module.css';
+import moment from 'moment-timezone';
 
-const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames }) => {
+const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames }) => {
+    // console.log(urls);//컨트롤러 Url 확인 가능
     const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [events, setEvents] = useState([]);
-    console.log(urls);//{listURL: 'calendar/list', addURL: 'calendar/add', updateURL: 'calendar/update', deleteURL: 'calendar/delete'}
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
+    const [categories, setCategories] = useState([]);
 
     //기본 초기화 세트
     const updateModalState = () => {
@@ -30,9 +34,9 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
 
     // 일정 조회 로직
     const fetchEvents = async () => {
-        console.log('fetchEvents'); 
+        // console.log('fetchEvents'); 
         try {
-            const eventsData = await TestLogic.listDB(urls.listURL);
+            const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
             const formattedEvents = eventsData.map(event => ({
                 title: event[columnNames.title],
                 start: event[columnNames.start],
@@ -44,6 +48,11 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 // 추가 필드들도 필요에 따라 변환
             }));
             setEvents(formattedEvents);
+            // console.log(formattedEvents);
+            // 카테고리 값 추출 및 상태로 관리
+            const uniqueCategories = Array.from(new Set(formattedEvents.map(event => event.category)));
+            setCategories(uniqueCategories);
+            // console.log(uniqueCategories);
         } catch (error) {
             // 에러 처리
         }
@@ -56,8 +65,8 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
     //모달 핸들링
     const handleModalAction = (action, event) => {
         console.log('Opening modal');  
-        console.log(action);  
-        console.log(event);  
+        // console.log(action);  
+        // console.log(event);  
         setModalAction(action);
         setSelectedEvent(event);
         setIsModalOpen(true);
@@ -76,7 +85,7 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 // 추가 필드들도 필요에 따라 변환
             };
             console.log(transformedData);
-            await TestLogic.addDB(urls.addURL, transformedData);
+            await CommonCalendarLogic.addDB(urls.addURL, transformedData);
             onEventAdd(transformedData);
             updateModalState();
         } catch (error) {
@@ -97,14 +106,13 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 // 추가 필드들도 필요에 따라 변환
             };
             console.log(transformedData);
-            await TestLogic.updateDB(urls.updateURL,transformedData);
+            await CommonCalendarLogic.updateDB(urls.updateURL,transformedData);
             onEventUpdate(transformedData);
             updateModalState();
         } catch (error) {
             // 에러 처리
         }
     };
-
     //삭제액션 모달 
     const handleEventDelete = async (formData) => {
         console.log('handleModalDelete');
@@ -118,23 +126,23 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                 // 추가 필드들도 필요에 따라 변환
             };
             console.log(transformedData);//{PS_NAME: '진짜??', PS_START: '2024-01-31T16:03', PS_END: '2024-01-31T18:03', PS_NO2: 7}
-            await TestLogic.deleteDB(urls.deleteURL,transformedData);
+            await CommonCalendarLogic.deleteDB(urls.deleteURL,transformedData);
                 onEventDelete(transformedData);
                 updateModalState();
         } catch (error) {
             // 에러 처리
         }
     };
-
     //모달 닫기  
     const handleEventClose = () => {
         updateModalState();
     };
-
     // FullCalendar 옵션 설정
     const calendarOptions = {
+        height: '80vh',
         selectable: true,
         selectMirror: true,
+        selectInfo: true,
         initialView: 'dayGridMonth',
         events: events,
         locale:'ko',
@@ -148,20 +156,31 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
         },
         color:'{color}', //카테고리별 색상
         eventTextColor: 'black', 
-        // 날짜를 클릭한 경우, 새로운 이벤트를 생성하는 모달 열기 로직 추가
-        dateClick: (info) => {
-            handleModalAction('생성', null);
-        },
         // 이벤트를 클릭한 경우
         eventClick: (info) => {
-            handleModalAction('수정', info.event);
+            handleModalAction('수정', info.event, categories);
         },
         // 이벤트를 드래그해서 이동한 경우
         eventDrop: (info) => {
-            handleModalAction('수정', info.event);
+            handleModalAction('수정', info.event, categories);
+        },
+        // 날짜가 선택되는경우(하루, 영역)
+        selectAllow: () => {
+            return true;
+        },
+        select: (selectInfo) => {
+            const isSingleDay = selectInfo.startStr === selectInfo.endStr;
+            let endDate = isSingleDay ? selectInfo.startStr : selectInfo.endStr;
+        
+            // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
+            if (!isSingleDay) {
+                const endMoment = moment(endDate).subtract(1, 'days');
+                endDate = endMoment.toISOString();
+            }
+            handleModalAction('생성', { start: selectInfo.startStr, end: endDate }, categories);
+            return true; // 
         },
     };
-    
     return (
         <>
             <div className="form-check form-switch">
@@ -180,9 +199,10 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
             <FullCalendar 
                 plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin]}
                 {...calendarOptions}
+                className={styles.customCalendar}
             />
             {isModalOpen && (
-                <CustomModal
+                <CommonCalendarModal
                     show={isModalOpen}
                     action={modalAction}
                     event={selectedEvent}
@@ -190,10 +210,11 @@ const CommonTest = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnName
                     onUpdate={handleEventUpdate}
                     onDelete={handleEventDelete}
                     onClose={handleEventClose}
+                    categories={categories} 
                 />
             )}
         </>
     );
 };
 
-export default CommonTest;
+export default CommonCalendar;

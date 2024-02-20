@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import CommonTest from './CommonCalendar';
+import React from 'react';
+import CommonCalendar from './CommonCalendar';
 
 const TestCalendar = () => {
-    //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
-    const [categories, setCategories] = useState([]);
-
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -39,8 +36,8 @@ const TestCalendar = () => {
 
     return (
         <div>
-            <h2>Individual Calendar</h2>
-            <CommonTest
+            <h2>공통캘린더 사용(예시)</h2>
+            <CommonCalendar
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
