@@ -18,7 +18,7 @@
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
-  grid-area: sidebarLayout
+  grid-area: sidebarLayout;
 }
 
 .noticeTitleBar{

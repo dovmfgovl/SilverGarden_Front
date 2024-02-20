@@ -6,7 +6,6 @@ import userInfoSlice from '../../redux/userInfoSlice'
 const HomeProfile = () => {
   const empData = useSelector(state => state.userInfoSlice)
 
-  console.log(empData);
   return (
     <>
     <div>

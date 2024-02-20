@@ -1,0 +1,83 @@
+.messageWrap{
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "profileWrap messageTitleBar"
+  "profileWrap messageContentWrap"
+  "messageSidebarWrap messageContentWrap"
+  ;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 70px 260px 3fr;
+}
+
+.messageSidebarWrap{
+  grid-area: messageSidebarWrap;
+  background-color: rgb(255, 255, 255);
+}
+.profileWrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items:center;
+  background-color: rgb(129, 175, 216);
+  grid-area: profileWrap;
+}
+.profileWrap img{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.messageTitleBar{
+  grid-area: messageTitleBar;
+  background-color: rgb(255, 255, 255);
+  font-size: 2.0rem;
+  padding:10px;
+}
+
+.messageContentWrap{
+  grid-area: messageContentWrap;
+  background-color: rgb(227, 227, 227);
+}
+
+.messageListWrap{
+  height:100%;
+  display: grid;
+  grid-template-areas: 
+  "messageListHeader messageListHeader"
+  "messageListContent messageListContent"
+  "messageListPagination messageListPagination"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 6fr 1fr;
+}
+
+.messageListHeader{
+  grid-area: messageListHeader;
+  background-color: rgb(255, 255, 255);
+  min-width: 790px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  padding:10px 10px;
+  margin:10px;
+}
+
+.messageListContent{
+  background-color: rgb(255, 255, 255);
+  grid-area: messageListContent;
+  margin:10px;
+  padding:10px;
+}
+
+.messageListPagination{
+  grid-area: messageListPagination;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
