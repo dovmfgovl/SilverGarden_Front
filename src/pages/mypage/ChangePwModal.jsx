@@ -1,54 +1,53 @@
-import { Form, Input,Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 
+// 비밀번호 변경 모달 컴포넌트
 const ChangePwModal = ({ show, handleClose }) => {
+  // useForm을 사용하여 폼 상태 관리
   const { register, handleSubmit, formState: { errors } } = useForm();
-  
-  
   const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
   const [originalEmployee, setOriginalEmployee] = useState(selectedEmployee);
   const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
   
-
+  // 변경된 내용 저장 및 Redux 업데이트
   const handleSaveChanges = () => {
-    dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
-    .then(() => {
-      dispatch(setDetail(updatedEmployee)); // Redux 스토어에서 선택된 직원 정보 업데이트
-      // 수정된 직원 정보를 Redux 스토어에서 가져와 전체 직원 목록을 업데이트
-      dispatch(getEmpList()); // 전체 직원 목록 다시 가져오기
-      handleClose();
-    })
-    .catch(error => {
-      console.error('Error saving password details: ', error);
-    });
+    dispatch(saveEmpDetails(updatedEmployee))
+      .then(() => {
+        dispatch(setDetail(updatedEmployee));
+        dispatch(getEmpList());
+        handleClose();
+      })
+      .catch(error => {
+        console.error('Error saving password details: ', error);
+      });
   }
   
+  // 선택된 직원이 변경되면 실행되는 useEffect
   useEffect(() => {
     if (!selectedEmployee) {
       setOriginalEmployee(selectedEmployee); 
     }
-   }, [selectedEmployee]);
+  }, [selectedEmployee]);
 
-
+  // 선택된 직원의 비밀번호 가져오기
   const empDetail = useSelector(state => state.empInfos.selectedEmployee) || {};
-
-  const selectedUserPw =empDetail.E_PASSWORD;
-
+  const selectedUserPw = empDetail.E_PASSWORD;
 
   // 입력 필드 변경 핸들러
   const handleInputChange = (e) => {
-    const {value}= e.target
+    const { value } = e.target
     setUpdatedEmployee(empDetail => ({
-      ...empDetail, E_PASSWORD : value //insert here register된 password2를 집어 넣기 
+      ...empDetail,
+      E_PASSWORD: value
     }));
-    console.log(updatedEmployee.E_PASSWORD);
   };
 
+  // 폼 제출 핸들러
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -66,10 +65,7 @@ const ChangePwModal = ({ show, handleClose }) => {
           }}
           layout="vertical"
           onSubmit={handleSubmit(onSubmit)}
-
         >
-          {/* <Alert message=" 새 비밀번호를 입력하시고 비밀번호 확인에 해당 비밀번호를 입력해주세요." type="info" showIcon /> */}
-
           <Form.Item
             label="기존 비밀번호"
             name="originalPassword"
@@ -100,13 +96,10 @@ const ChangePwModal = ({ show, handleClose }) => {
                 required: true,
                 message: '비밀번호를 확인해주세요',
               },
-              
             ]}
           >
             <Input.Password {...register("password")} />
           </Form.Item>
-
-          {/* Field */}
           <Form.Item
             label="비밀번호 확인"
             name="password2"
@@ -128,19 +121,17 @@ const ChangePwModal = ({ show, handleClose }) => {
           >
             <Input.Password {...register("password2")} onChange={handleInputChange} />
           </Form.Item>
-
-          {/* Error messages */}
+          {/* 에러 메시지 출력 */}
           {errors.originalPassword && <p>{errors.originalPassword.message}</p>}
           {errors.password && <p>{errors.password.message}</p>}
           {errors.password2 && <p>{errors.password2.message}</p>}
-
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button  onClick={handleClose}>
+        <Button onClick={handleClose}>
           취소
         </Button>
-        <Button type="primary" onClick={handleSaveChanges} >저장</Button>
+        <Button type="primary" onClick={handleSaveChanges}>저장</Button>
       </Modal.Footer>
     </Modal>
   );
