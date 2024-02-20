@@ -11,9 +11,9 @@ const ApprovalWriteLine = ({lineData}) => {
         <Table className='mb-0 mt-0' striped bordered size="sm">
         <thead>
           <tr style={{height:'30px'}}>
-            <th style={{width:"33%"}}>{lineData.approvalLine[0] ? lineData.approvalLine[0].e_name+" "+lineData.approvalLine[0].e_rank : ""}</th>
-            <th style={{width:"33%"}}>{lineData.approvalLine[1] ? lineData.approvalLine[1].e_name+" "+lineData.approvalLine[1].e_rank : ""}</th>
-            <th style={{width:"33%"}}>{lineData.approvalLine[2] ? lineData.approvalLine[2].e_name+" "+lineData.approvalLine[2].e_rank : ""}</th>
+            <th style={{width:"33%"}}>{lineData.approvalLine[0] ? lineData.approvalLine[0].ap_name+" "+lineData.approvalLine[0].ap_rank : ""}</th>
+            <th style={{width:"33%"}}>{lineData.approvalLine[1] ? lineData.approvalLine[1].ap_name+" "+lineData.approvalLine[1].ap_rank : ""}</th>
+            <th style={{width:"33%"}}>{lineData.approvalLine[2] ? lineData.approvalLine[2].ap_name+" "+lineData.approvalLine[2].ap_rank : ""}</th>
           </tr>
         </thead>
         <tbody>
@@ -29,9 +29,9 @@ const ApprovalWriteLine = ({lineData}) => {
         <Table className='mb-0 mt-0' striped bordered size="sm">
           <thead>
             <tr style={{height:'30px'}}>
-              <th style={{width:"33%"}}>{lineData.agreement[0] ? lineData.agreement[0].e_name+" "+lineData.agreement[0].e_rank : ""}</th>
-              <th style={{width:"33%"}}>{lineData.agreement[1] ? lineData.agreement[1].e_name+" "+lineData.agreement[1].e_rank : ""}</th>
-              <th style={{width:"33%"}}>{lineData.agreement[2] ? lineData.agreement[2].e_name+" "+lineData.agreement[2].e_rank : ""}</th>
+              <th style={{width:"33%"}}>{lineData.agreement[0] ? lineData.agreement[0].ap_name+" "+lineData.agreement[0].ap_rank : ""}</th>
+              <th style={{width:"33%"}}>{lineData.agreement[1] ? lineData.agreement[1].ap_name+" "+lineData.agreement[1].ap_rank : ""}</th>
+              <th style={{width:"33%"}}>{lineData.agreement[2] ? lineData.agreement[2].ap_name+" "+lineData.agreement[2].ap_rank : ""}</th>
             </tr>
           </thead>
           <tbody>

@@ -1,33 +1,49 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
-import styles from './approvalWrite.module.css'
-import ApprovalWriteTable from './ApprovalWriteTable'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import styles from '../approvalwrite/approvalWrite.module.css'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
+import ApprovalDetailLine from '../approvaldetail/ApprovalDetailLine'
+import ApprovalDetailTable from '../approvaldetail/ApprovalDetailTable'
 import QuillEditor from '../../../components/Quill/QuillEditor'
-import ApprovalWriteLine from './ApprovalWriteLine'
-import ApprovalFileUpload from './ApprovalFileUpload'
-import ApprovalLineModal from './ApprovalLineModal'
-import { approvalInsert } from '../../../services/api/approvalApi'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { approvalInsert, getApprovalDetail } from '../../../services/api/approvalApi'
+import { noticeFileDownload } from '../../../services/api/noticeApi'
+import { faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons'
+import ApprovalLineModal from '../approvalwrite/ApprovalLineModal'
+import ApprovalWriteTable from '../approvalwrite/ApprovalWriteTable'
+import ApprovalFileUpload from '../approvalwrite/ApprovalFileUpload'
 
-const ApprovalDocWrite = ({empData, handleMenu}) => {
+const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
   const[docType, setDocType] = useState("품의서");//문서 종류를 관리할 state
+  const [docDetail, setDocDetail] = useState([]);
   const [lineData, setLineData] = useState({
     approvalLine: [],
     agreement: []
   });//결재라인 정보를 담을 state
-  //approvalLine : [{e_no:empData.e_no, e_name:empData.e_name, ap_category:"결재", e_rank:empData.e_rank}...]
-  //agreement : [{e_no:empData.e_no, e_name:empData.e_name, ap_category:"힙의", e_rank:empData.e_rank}...]
-
-  console.log(lineData);
   const handleLineData = (data) =>{
     setLineData(data)
   }
 
-  ///////파일 업로드를 위해 선언한 state와 함수
-  const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
+  const getApprovalDoc = async() => {
+    const response = await getApprovalDetail({d_no: docNo})
+    setDocDetail(response.data[0])
+    setQuillContent(response.data[0].d_content)
+    const approval = response.data[0].line.filter((element)=> element.ap_category === '결재')
+    const agreement = response.data[0].line.filter((element)=> element.ap_category === '합의')
+    const files = response.data[0].file
+    setLineData({...lineData, approvalLine: approval, agreement: agreement})
+    setFileList(files);
+    setDocType(response.data[0].d_category)
+  }
 
+  const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
   const handleFile = (list) =>{//파일리스트를 업데이트할 함수선언
     setFileList([...list])
   }
+
+  useEffect(()=>{
+    getApprovalDoc();
+  },[])
+
     //////////////////quill 관련 state /////////////////////////////////
     const  quillRef = useRef()
     const [quillContent, setQuillContent] = useState('');//공지내용이 담김
@@ -56,7 +72,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
         const formDataToSend = new FormData();
         formDataToSend.append('d_title', title)
         formDataToSend.append('d_content', quillContent)
-        formDataToSend.append('e_no', empData.e_no)
+        formDataToSend.append('e_no', docDetail.e_no)
         formDataToSend.append('d_category', docType)
         formDataToSend.append('d_status', d_status)
 
@@ -108,11 +124,12 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
         });
       }
     }
+    ///////modal end/////////////////////////////////////////////////
 
   return (
     <div className={styles.approvalWriteWrap}>
       <div className={styles.approvalWriteBtnGroup}>
-        <InputGroup size='sm'>
+      <InputGroup size='sm'>
           <DropdownButton
             variant="secondary"
             title="문서선택"
@@ -124,16 +141,16 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
           </DropdownButton>
           <Form.Control value={docType} aria-label="Text input with dropdown button"/>
         </InputGroup>
+        <Button className="mx-2" variant="secondary" onClick={()=>handleMenu("결재대기함")}>목록</Button>
         <Button className="mx-2" variant="secondary" onClick={() => setModalShow(true)}>결재선관리</Button>
-        <Button className="mx-2" variant="secondary" onClick={(e) => {handleSubmit(e)}}>상신</Button>
-        <Button className="mx-2" variant="secondary" onClick={(e) => {handleSubmit(e)}}>임시저장</Button>
-        <Button className="mx-2" variant="danger" onClick={()=>handleMenu("결재대기함")}>종료</Button>
+        <Button className="mx-2" variant="danger" onClick={()=>handleMenu("결재문서상세", docNo)}>수정취소</Button>
+        <Button className="mx-2" variant="primary" onClick={(e) => {handleSubmit(e)}}>상신</Button>
         <ApprovalLineModal show={modalShow} lineData={lineData} handleLineData={handleLineData} onHide={onHide}/>
       </div>
       <div className={styles.approvalWriteHeader}>
         <div>{docType}</div>
       </div>
-      <div className={styles.approvalWriteLine}><ApprovalWriteLine lineData={lineData}/></div>
+      <div className={styles.approvalWriteLine}><ApprovalDetailLine lineData={lineData} /></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
       <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={quillContent} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
       <div className={styles.approvalWriteFileUpload}>
@@ -143,4 +160,4 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
   )
 }
 
-export default ApprovalDocWrite
+export default ApprovalDocUpdate

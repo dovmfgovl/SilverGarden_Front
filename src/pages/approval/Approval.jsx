@@ -12,6 +12,7 @@ import ApprovalUpList from './ApprovalUpList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux'
 import ApprovalDocDetail from './approvaldetail/ApprovalDocDetail';
+import ApprovalDocUpdate from './approvalupdate/ApprovalDocUpdate';
 
 const Approval = () => {
   const list = [//이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
@@ -69,8 +70,9 @@ const handleMenu = (menuTitle, d_no) =>{//사이드바 메뉴를 조작하는 �
         {approvalPage === "결재완료문서함" && <ApprovalCompleteList handleMenu={handleMenu} empData={empData}/>}
         {approvalPage === "결재문서작성" && <ApprovalDocWrite handleMenu={handleMenu} empData={empData}/>}
         {approvalPage === "임시보관함" && <ApprovalTempList handleMenu={handleMenu} empData={empData}/>}
-        {approvalPage === "결재요청함" && <ApprovalUpList handleMenu={handleMenu} empData={empData}/>}
+        {approvalPage === "결재요청함" && <ApprovalUpList handleMenu={handleMenu} empData={empData} />}
         {approvalPage === "결재문서상세" && <ApprovalDocDetail handleMenu={handleMenu} empData={empData} docNo={docNo}/>}
+        {approvalPage === "결재문서수정" && <ApprovalDocUpdate handleMenu={handleMenu} empData={empData} docNo={docNo}/>}
       </div>
     </div>
   )

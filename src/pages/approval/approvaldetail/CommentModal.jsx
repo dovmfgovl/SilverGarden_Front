@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import { passOrDeny } from '../../../services/api/approvalApi';
+import { useNavigate } from 'react-router-dom';
 
-const CommentModal = ({show, onHide, docNo, lineData, empData}) => {
+const CommentModal = ({show, onHide, docNo, lineData, empData, handleMenu}) => {
   const [passDeny, setPassDeny] = useState(true);
   const commentRef = useRef(); 
+  const navigation = useNavigate();
 
   const handleSubmit = async () =>{
     const ap_comment = commentRef.current.value;
@@ -29,6 +31,7 @@ const CommentModal = ({show, onHide, docNo, lineData, empData}) => {
       if(response.data === "ok"){
         alert("결재가 완료되었습니다.")
         onHide()
+        handleMenu("결재대기함")
         
       }
     }else if(apData.length === 0){

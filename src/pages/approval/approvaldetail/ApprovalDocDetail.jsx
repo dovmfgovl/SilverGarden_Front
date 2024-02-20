@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { getApprovalDetail } from '../../../services/api/approvalApi';
+import { approvalDelete, getApprovalDetail } from '../../../services/api/approvalApi';
 import { Button} from 'react-bootstrap';
 import styles from './approvalDetail.module.css'
 import QuillEditor from '../../../components/Quill/QuillEditor';
@@ -8,7 +8,6 @@ import ApprovalDetailTable from './ApprovalDetailTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { noticeFileDownload } from '../../../services/api/noticeApi';
-import { useSelector } from 'react-redux';
 import CommentModal from './CommentModal';
 
 const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
@@ -42,6 +41,13 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
     getApprovalDoc();
   },[])
 
+  const handleDelete = async ()=>{
+    const response = await approvalDelete({d_no: docNo})
+    if(response.data === "ok"){
+      alert("성공적으로 삭제되었습니다.")
+      handleMenu("결재대기함")
+    }
+  }
   //////////////////quill 관련 state /////////////////////////////////
   const  quillRef = useRef()
   const [quillContent, setQuillContent] = useState('');//공지내용이 담김
@@ -71,18 +77,21 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
   return (
     <div className={styles.approvalDetailWrap}>
       <div className={styles.approvalDetailBtnGroup}>
-        <Button className="mx-2" variant="secondary">목록</Button>
-        {docDetail.e_no === empData.e_no &&  /*현재 상세문서가 내가 작성한 문서일 때*/
-          <>
-            <Button className="mx-2" variant="primary">문서수정</Button>
-            <Button className="mx-2" variant="secondary">문서회수</Button>
-          </>
-       }
+        <Button className="mx-2" variant="secondary" onClick={()=>handleMenu("결재대기함", docNo)}>목록</Button>
+        {docDetail.e_no === empData.e_no && docDetail.d_status === '상신' &&  /*현재 상세문서가 내가 작성한 문서일 때*/
+            <Button className="mx-2" variant="primary">문서회수</Button>
+        }
+        {docDetail.e_no === empData.e_no && docDetail.d_status === '임시저장' &&  /*현재 상세문서가 내가 작성한 문서일 때*/
+            <>
+              <Button className="mx-2" variant="primary" onClick={()=>handleMenu("결재문서수정")}>문서수정</Button>
+              <Button className="mx-2" variant="danger" onClick={handleDelete}>임시문서삭제</Button>
+            </>
+        }
        {lineData.approvalLine && lineData.approvalLine.map(/* 내가 결재자인 경우 */
-        (approval)=> approval.ap_name === empData.e_name && <Button className="mx-2" variant="primary">결재</Button>)}
+        (approval)=> approval.ap_id === empData.e_no && approval.ap_result === '대기중' && <Button className="mx-2" variant="primary" onClick={()=>setModalShow(true)}>결재</Button>)}
        {lineData.agreement && lineData.agreement.map(/* 내가 합의자인 경우 */
-        (agreement)=> agreement.ap_name === empData.e_name && <Button className="mx-2" variant="primary" onClick={()=>setModalShow(true)}>합의</Button>)}
-        <CommentModal show={modalShow} onHide={onHide} docNo={docNo} lineData={lineData} empData={empData}/>
+        (agreement)=> agreement.ap_id === empData.e_no && agreement.ap_result === '대기중' && <Button className="mx-2" variant="primary" onClick={()=>setModalShow(true)}>합의</Button>)}
+        <CommentModal show={modalShow} onHide={onHide} docNo={docNo} lineData={lineData} empData={empData} handleMenu={handleMenu}/>
       </div>
       <div className={styles.approvalDetailHeader}>
         <div>품의서</div>

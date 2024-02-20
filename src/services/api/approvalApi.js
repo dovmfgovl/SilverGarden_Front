@@ -65,12 +65,89 @@ export const approvalInsert = (data) => {
   });
 };
 
+export const approvalDelete = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "delete",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalDelete",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+
+
 export const approvalWaitList = (params) => {
   return new Promise((resolve, reject) => {
     try {
       const response = axios({
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "approval/approvalWaitList",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const approvalProgressList = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalProgressList",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const approvalDenyList = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalDenyList",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const approvalCompleteList = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalCompleteList",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const approvalTempList = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalTempList",
         params: params,
       });
       resolve(response);
@@ -90,6 +167,21 @@ export const passOrDeny = (data) => {
           'Content-Type': 'application/json'
         },
         data: data,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const getApprovalDocCount = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "approval/getApprovalDocCount",
+        params: params,
       });
       resolve(response);
     } catch (error) {

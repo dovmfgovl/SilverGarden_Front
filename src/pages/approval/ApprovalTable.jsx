@@ -15,11 +15,11 @@ const ApprovalTable = ({appList, handleMenu}) => {
       <tr>
         <th style={{ width: '60px'}}><Form.Check aria-label="option 1"/></th>
         <th style={{ width: '60px'}}>번호</th>
-        <th>문서종류</th>
+        <th style={{ width: '150px'}}>문서종류</th>
         <th>문서제목</th>
-        <th>기안자</th>
-        <th>기안부서</th>
-        <th>기안일</th>
+        <th style={{ width: '150px'}}>기안자</th>
+        <th style={{ width: '150px'}}>기안부서</th>
+        <th style={{ width: '150px'}}>기안일</th>
         <th style={{ width: '90px'}}>결재상태</th>
       </tr>
     </thead>
