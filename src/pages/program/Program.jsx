@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 import ProgramDashboard from '../programdashboard/ProgramDashboard';
 import ProgramInfo from './ProgramInfo';
 import { setDetail } from '../../redux/programSlice';
-import ProgramCalendarHome from '../programcalendar/ProgramCalendarHome';
-import ProgramCalendarHome2 from '../programcalendar/ProgramCalendarHome2';
+import ProgramCalendar from '../programcalendar/ProgramCalendar';
+import TestCalendar from '../../components/fullcalendar/TestCalendar';
 
 
 const Program = () => {
@@ -22,7 +22,7 @@ const Program = () => {
             { label: '현황', icon: faChartPie},//서브목록이름, 아이콘명, 클릭시넘어갈 url
             { label: '프로그램 정보', icon: faBook},
             { label: '일정', icon: faCalendar},
-            // { label: '일정2', icon: faCalendar},
+            { label: '일정테스트(공통)', icon: faCalendar},
         ],
     },{
     label: '프로그램 기록',
@@ -38,37 +38,27 @@ const Program = () => {
     const handleMenu = (menuTitle) =>{
         setPage(menuTitle);
     }
-    const [page, setPage] = useState("현황");//기본 페이지
+    const [page, setPage] = useState("일정테스트(공통)");//기본 페이지
     const [programList, setProgramList] = useState([]);
     const [programDetail, setProgramDetail] = useState(null);
-    //전체조회해 온 값을 저장해두고, 나중에 디테일g 조회할 때 사용해보자
-    //저장은 SetProgramList를 통해 상태에 저장!! 만약 에러 발생하면 에러 출력
     const dispatch = useDispatch();
     const getProgramList = async () => { 
         const response = await programListDB();
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         setProgramList(data);
     };
-    //기존에는 DbLogic에서 한번 더 해당 로우의 번호에 따라서 값을 조회해 왔다면
-    //전체 프로그램목록이라는 상태값을 갖고 있으니, 거기서 사용해보자
-    //해당 로우의 번호와 일치하는 번호의 항목을 찾아와서 setProgramDetail을 통해 상태에 저장
     const onRowClick = async (program) => {
         if (program) {
             dispatch(setDetail(program));
             console.log(program);
             const detail = programList.find(item => item.PG_NO === program.PG_NO);
             setProgramDetail(detail);
+            console.log(programDetail);
         } else {
-            // 프로그램이 `null`일 때의 처리를 추가
-            // 예: 전체 조회 버튼 클릭 시에는 programDetail을 초기화
             setProgramDetail(null);
         };
     }
-
-    useEffect(() => {
-        console.log(programDetail); // 최신 programDetail 값 확인
-    }, [programDetail]);
 
     useEffect(() => {
         getProgramList();
@@ -92,13 +82,9 @@ const Program = () => {
                         setProgramDetail={setProgramDetail}
                     />}
                 {page === "일정" && 
-                    <ProgramCalendarHome 
-                        programList={programList}   
-                    />}
-                {page === "일정" && 
-                    <ProgramCalendarHome2 
-                        programList={programList}   
-                    />}
+                    <ProgramCalendar />}
+                {page === "일정테스트(공통)" && 
+                    <TestCalendar />}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect } from   'react'
+import React from   'react'
 import styles from './programhome.module.css'
 import ProgramList from './ProgramList'
 import RightContent from './RightContent';
