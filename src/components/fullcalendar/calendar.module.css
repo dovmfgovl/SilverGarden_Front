@@ -1,0 +1,7 @@
+.customCalendar {
+  font-size: 30px;
+  width: 80%;
+  height: 100px; /* 원하는 높이로 조절 */
+  margin: 10px; /* 원하는 마진 값으로 조절 */
+  /* 다른 원하는 스타일 속성들 추가 */
+}
