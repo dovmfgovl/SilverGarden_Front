@@ -81,7 +81,7 @@ export const SelectWho = () => {
 
   
   const empOptions = empList.map(emp => ({
-    key: emp.E_ID,
+    key: emp.E_NO,
     value: emp.E_NAME,
     label: emp.E_NAME,
   }));

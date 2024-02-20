@@ -1,149 +1,94 @@
-// CommonCalendar.js
 import React, { useEffect, useState } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import rrulePlugin from '@fullcalendar/rrule';
-import listPlugin from '@fullcalendar/list';
-import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-icons/font/bootstrap-icons.css'; 
-import confirm from 'antd/es/modal/confirm';
-import CalendarModal from '/Users/a/silverGarden/front/src/components/calendar/CalendarModal.jsx'
+import { Col, Row,  Statistic, Table } from 'antd';
+import { callMypage } from '../../services/api/mypageApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 
+const MypageSubcon2 = () => {
+
+  const [mypageDate, setMypageDate] = useState([]);
+  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const dispatch = useDispatch();
 
 
-// 한글로된 요일을 숫자로 전환하여 캘린더에 표시하는 함수
-const getWeekdayNumber = (weekdayString) => {
-  const weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-  return weekdays.indexOf(weekdayString) - 1;
-};
+  const callMy = async () => {
+    const response = await callMypage();
+    console.log(response.data);
+    setMypageDate(response.data);
+  }
 
-// 카테고리에 따라 배경색을 반환하는 함수
-const getBackgroundColor = (category) => {
-  const actualCategory = category || '기본값';
-  const predefinedColors = ['#1abc9c', '#3498db', '#e74c3c', '#f0932b', '#6ab04c', '#3c40c6', '#e056fd', '#ff7979', '#82589F', '#6D214F'];
-  const hash = actualCategory.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
-  const colorIndex = hash % predefinedColors.length;
-  return predefinedColors[colorIndex];
-};
+  useEffect(() => {
+    callMy();
+  }, [])
 
-//사용하는 캘린더에서 가져온 값을 공통처리
-const MypageSubcon2 = ({ events, handleEventDrop, onEventClick, getBackgroundColor, closeModal }) => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [weekendsVisible, setWeekendsVisible] = useState(true);
-  const [currentEvents, setCurrentEvents] = useState([]);
+  const whoDate = mypageDate.find(my => my.E_NO === selectedEmployee.E_NO);
+ // redux에서 정해진 직원의 번호와 근태표의 직원번호가 일치하는지 찾으라
+
+ //만일 whoDate가 충족하는 경우라면 해당 근태표의 값을 출력 
+  const data = whoDate ? [{
+    at_Date: whoDate.AT_DATE,
+    startTime: whoDate.AT_START,
+    EndTime: whoDate.AT_END,
+    status: whoDate.AT_STATUS,
+  }] : [];
 
 
-  //주말 표시, 미표시
-  const handleWeekendsToggle = () => {
-    setWeekendsVisible(!weekendsVisible);
-  };
-  //모달 열기
-  const openModal = (event) => {
-    setSelectedEvent(event);
-  };
-  //모달 닫기
-  const closeCalendarModal = () => {
-    setSelectedEvent(null);
-  };
-  //이벤트 생성하기
-  const createEventId = () => {
-    return String(Math.random()).slice(2, 11);
-  };
-  //날짜 클릭 시
-  const handleDayClick = (selectInfo) => {
-    let title = prompt('새로운 일정 제목을 입력해주세요.');
-    let calendarApi = selectInfo.view.calendar;
+  const columns = [
+    {
+      title: '일자',
+      dataIndex: 'at_Date',
+      key: 'at_Date',
+      align: 'center',
+      format: 'YYYY-MM-DD',
+    },
+    {
+      title: '출근시각',
+      dataIndex: 'startTime',
+      key: 'startTime',
+      align: 'center',
+    },
+    {
+      title: '퇴근시각',
+      dataIndex: 'EndTime',
+      key: 'EndTime',
+      align: 'center',
+    },
+    {
+      title: '상태',
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+    },
+  ];
 
-    calendarApi.unselect();
-
-    if (title) {
-      const newEvent = {
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      };
-      calendarApi.addEvent(newEvent);
-      setCurrentEvents([...currentEvents, newEvent]);
-    }
-  };
-  //이벤트 클릭시 모달창(삭제/확인버튼)
-  const handleEventClick = (clickInfo) => {
-    const event = clickInfo.event;
-  
-    const modalContent = (
-      <div>
-        <h2>{event.title}</h2>
-        {event.start && <p>시작 시간: {event.start.toLocaleString()}</p>}
-        {event.end && <p>종료 시간: {event.end.toLocaleString()}</p>}
-        <p>내용: {event.extendedProps.content}</p>
-      </div>
-    );
-      
-    confirm({
-      title: "일정 확인",
-      content: modalContent,
-      onOk() {
-        closeCalendarModal();
-      },
-      onCancel() {
-        closeCalendarModal();
-      },
-    });
-  };
-  const handleDeleteEvent = () => {
-    // 모달을 닫습니다.
-    setSelectedEvent(null);
-  };
   return (
-    <div>
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, rrulePlugin, listPlugin, bootstrap5Plugin]}
-        themeSystem="bootstrap5"
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-        }}
-        initialView="dayGridMonth"
-        navLinks={true}
-        editable={true}
-        dayMaxEvents={true}
-        events={events}
-        nowIndicator={true}
-        selectable={true}
-        selectMirror={true}
-        weekends={weekendsVisible} 
-        handleWindowResize={true}
-        locale={'ko'}
-        schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
-        eventClick={(info) => handleEventClick(info)}
-        eventDrop={handleEventDrop}
-        eventContent={(eventInfo) => {
-          return {
-            html: `<div style="background-color: ${getBackgroundColor(eventInfo.event.extendedProps.pgCategory)}; color: white;">${eventInfo.event.title}</div>`,
-          };
-        }}
-        select={(selectInfo) => handleDayClick(selectInfo)}
-      />
-      <button onClick={handleWeekendsToggle}>
-        {weekendsVisible ? '주말 표시' : '주말 미표시'}
-      </button>
-      {selectedEvent && (
-        <CalendarModal
-          show={true}
-          onHide={() => setSelectedEvent(null)}
-          event={selectedEvent}
-          onDelete={handleDeleteEvent}
-        />
-      )}
-    </div>
-  );
-};
+    <>
+      <Row gutter={17}>
+        <Col span={6}>
+          <Statistic title="이번달 출근일자" value={22} valueStyle={{color: '#3f8600', }} />
+        </Col> 
+        <Col span={6}>
+          <Statistic title="결근일자" value={0} />
+        </Col> 
+        <Col span={6}>
+          <Statistic title="조퇴 사용횟수" value={3} />
+        </Col> 
+        <Col span={6}>
+          <Statistic title="휴가 사용횟수" value={12} />
+        </Col> 
+      </Row>
 
-export { MypageSubcon2, getWeekdayNumber, getBackgroundColor };
+      <Table
+        columns={columns}
+        dataSource={data}
+        size="small"
+        bordered 
+        pagination={{position:['bottomCenter']}}
+      />
+
+    </>
+  );
+}
+
+
+export default MypageSubcon2;

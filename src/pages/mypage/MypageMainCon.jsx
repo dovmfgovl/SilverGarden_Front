@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import MypageSubcon1 from './MypageSubcon1';
 import { Tab, Tabs } from 'react-bootstrap';
 import MypageInfo from './MypageInfo';
-import { MypageSubcon2 } from './MypageSubcon2';
+import MypageSubcon2 from './MypageSubcon2';
+
 
 const MypageMainCon = () => {
   const [key, setKey] = useState('기초정보'); //태그에 대한 초기에 보여줄 화면
