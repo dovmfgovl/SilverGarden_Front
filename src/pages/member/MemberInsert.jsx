@@ -117,7 +117,7 @@ const MemberInsert = () => {
   
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
+      <Button variant="outline-primary" onClick={handleShow} >
         신규등록
       </Button>
       <Modal size='lg' show={show} onHide={handleClose}>
@@ -136,31 +136,32 @@ const MemberInsert = () => {
           <Stack direction="horizontal" gap={3}>
             <Descriptions bordered>
               <Descriptions.Item label="이름"> 
-                <Form.Control id='client_name' value={name} onChange={e => {handleName(e.target.value)}} />
+                <Form.Control id='client_name'  value={name} onChange={e => {handleName(e.target.value)}} />
               </Descriptions.Item>
               <Descriptions.Item label="생년월일" span={2} > 
                 <Input
+                  
                   type='date'
                   placeholder=''
                   onChange={e => {handleBirth(e.target.value)}}
                 />
               </Descriptions.Item>
               <Descriptions.Item label="성별">
-                <Form.Select aria-label="Default select example"  id="client_gender" value={gender} onChange={e => {handleGender(e.target.value)}}>
+                <Form.Select aria-label="Default select example"   value={gender} onChange={e => {handleGender(e.target.value)}}>
                   <option>분류선택</option> 
                   <option value="남">남</option> 
                   <option value="여">여</option>
                 </Form.Select>
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}> 
-                <Form.Select aria-label="Default select example"   value={manager} onChange={e => {handleManager(e.target.value)}}>
+                <Form.Select aria-label="Default select example"    value={manager} onChange={e => {handleManager(e.target.value)}}>
                   {empList.map(emp=>(
                     <option value={emp.E_NAME}>{emp.E_NAME}</option> 
                   ))}
                 </Form.Select>
               </Descriptions.Item>
               <Descriptions.Item label="전화번호">
-                <Form.Control id="client_tel" value={tel} onChange={e => {handleTel(e.target.value)}} placeholder='010-0000-0000' />
+                <Form.Control id="client_tel"  value={tel} onChange={e => {handleTel(e.target.value)}} placeholder='010-0000-0000' />
               </Descriptions.Item>
               <Descriptions.Item label="나이" span={2}> 
                 <Input
@@ -169,9 +170,10 @@ const MemberInsert = () => {
                   disabled // 나이는 입력하지 않고 자동 계산되므로 disabled 처리
                 />
               </Descriptions.Item>
-              <Descriptions.Item label="주소" span={3}>
+              <Descriptions.Item  label="주소" span={3}>
                 <Input.Group compact>
-                  <Input
+                  <Input 
+                    
                     style={{ width: '70%' }}
                     value={roadAddress}
                     readOnly
@@ -187,6 +189,7 @@ const MemberInsert = () => {
                   </Modal>
                 </Input.Group>
                 <Input
+                  
                   placeholder="상세주소"
                   value={detailAddress}
                   onChange={changeHandler}

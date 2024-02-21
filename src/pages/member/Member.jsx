@@ -1,4 +1,4 @@
-import { faFilePen, faUsersRectangle, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faFilePen, faUsersRectangle, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import styles from './member.module.css';
 import SidebarCommon from '../../components/sidebar/SidebarCommon'
@@ -16,6 +16,7 @@ const Member = () => {
     subMenuItems: [//서브목록 정보
     { label: '이용자기본정보', icon: faUsersRectangle},//서브목록이름, 아이콘명, 클릭시넘어갈 url
     { label: '이용자상담관리', icon: faFilePen},
+    { label: '이용자송영관리', icon: faCar}
   ],
   },
 

@@ -43,8 +43,8 @@ const MemberInfo = () => {
                   </tbody>
             </Table>
           </div>
-          <Button variant="warning" onClick={() => dispatch(getMemList())}>전체조회</Button>
-          <MemberInsert />
+          <Button variant="outline-warning" onClick={() => dispatch(getMemList())}>전체조회</Button>
+          <MemberInsert/>
         </div>
         <div className={styles.rightMemberLayout1}>
           <MemberDetail  />
