@@ -55,7 +55,6 @@ const EmpEdu = () => {
 
   return (
     <div className={styles.empBaseInfo} >
-      <h5>직원 기초 정보</h5>
       <Row style={{marginBottom:"10px"}}>
         <Col md = {19}>          
           <h5>학력</h5>          
