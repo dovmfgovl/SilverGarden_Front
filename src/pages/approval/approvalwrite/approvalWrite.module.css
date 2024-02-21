@@ -64,7 +64,12 @@
 .approvalWriteContent{
   background-color: rgb(255, 255, 255);
   grid-area: approvalWriteContent;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.approvalWriteContent tbody td input{
+ border: none;
+ text-align: center;
 }
 
 .approvalWriteFileUpload{

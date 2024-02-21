@@ -13,14 +13,16 @@
 .messageSidebarWrap{
   grid-area: messageSidebarWrap;
   background-color: rgb(255, 255, 255);
+  border-right: 1px solid lightgray;
 }
 .profileWrap{
   display: flex;
   flex-direction: column;
   justify-content: baseline;
   align-items:center;
-  background-color: rgb(129, 175, 216);
+  background-color: rgb(255, 255, 255);
   grid-area: profileWrap;
+  border-right: 1px solid lightgray;
 }
 .profileWrap img{
   height: 200px;
@@ -50,27 +52,61 @@
   "messageListPagination messageListPagination"
   ;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 6fr 1fr;
+  grid-template-rows: 3fr 6fr 50px;
 }
 
 .messageListHeader{
+  display: grid;
   grid-area: messageListHeader;
   background-color: rgb(255, 255, 255);
   min-width: 790px;
+  padding:10px 10px;
+  margin:10px;
+  grid-template-columns: 2fr 8fr;
+  grid-template-rows: 1.5fr 1fr;
+}
+.datepickerTitle{
+  background-color: rgb(244, 244, 244);
+  display: flex;
+  justify-content: center;
   align-items: center;
+  border-top: 1px solid rgb(214, 214, 214);
+  font-size: 1.2rem;
+}
+.datepicker{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-self: auto;
-  padding:10px 10px;
-  margin:10px;
+  align-items: start;
+  padding: 0 10px;
+  border-top: 1px solid rgb(214, 214, 214);
 }
+.datepicker > *{
+  padding: 5px;
+}
+
+.searchTitle{
+  background-color: rgb(244, 244, 244);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgb(214, 214, 214);
+  font-size: 1.2rem;
+}
+.searchBar{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 10px;
+  border-top: 1px solid rgb(214, 214, 214);
+} 
 
 .messageListContent{
   background-color: rgb(255, 255, 255);
   grid-area: messageListContent;
   margin:10px;
   padding:10px;
+  
 }
 
 .messageListPagination{
@@ -81,3 +117,34 @@
   align-items: center;
   margin:0 10px 10px 10px;
 }
+/* message write start */
+.writeWrap{
+  height:100%;
+  display: grid;
+  grid-template-areas: 
+  "writeBtnGroup writeBtnGroup"
+  "writeHeader writeHeader"
+  "writeContent writeContent"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 3fr 6fr;
+  margin: 0 15%;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+.writeBtnGroup{
+ grid-area: writeBtnGroup;
+ padding: 10px 30px;
+}
+.writeHeader{
+  grid-area: writeHeader;
+  padding: 10px 30px;
+}
+.writeContent{
+  grid-area: writeContent;
+  margin: 0 30px 10px;
+}
+
+
+
+/* message write end */

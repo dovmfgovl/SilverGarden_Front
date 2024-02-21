@@ -7,6 +7,8 @@ import ApprovalWriteLine from './ApprovalWriteLine'
 import ApprovalFileUpload from './ApprovalFileUpload'
 import ApprovalLineModal from './ApprovalLineModal'
 import { approvalInsert } from '../../../services/api/approvalApi'
+import VacationRequestForm from './VacationRequestForm'
+import ExpenseReportForm from './ExpenseReportForm'
 
 const ApprovalDocWrite = ({empData, handleMenu}) => {
   const[docType, setDocType] = useState("품의서");//문서 종류를 관리할 state
@@ -30,7 +32,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
   }
     //////////////////quill 관련 state /////////////////////////////////
     const  quillRef = useRef()
-    const [quillContent, setQuillContent] = useState('');//공지내용이 담김
+    const [content, setContent] = useState('');//품의서내용이 담김
     const [images, setImages] = useState([])
     let temp = [];//함수가 새로 생성(재렌더링)되더라도 처음에 대입된 이미지를 계속 기억해야함
     const memoTemp = useMemo(() => {
@@ -43,19 +45,20 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
   
     const handleContent = useCallback((value) => {
       console.log(value)
-      setQuillContent(value)
+      setContent(value)
     },[])
     /////////////////////////////////quill end////////////////////////
     const titleRef = useRef()
+    
     const handleSubmit = async (e) =>{//서브밋이 요청되었을 때 일하는 함수
       const title = titleRef.current.value;
       const d_status = e.target.innerText;
       console.log(d_status);
   
-      if("" !== title && "" !== quillContent){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
+      if("" !== title && "" !== content){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
         const formDataToSend = new FormData();
         formDataToSend.append('d_title', title)
-        formDataToSend.append('d_content', quillContent)
+        formDataToSend.append('d_content', content)
         formDataToSend.append('e_no', empData.e_no)
         formDataToSend.append('d_category', docType)
         formDataToSend.append('d_status', d_status)
@@ -118,9 +121,19 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
             title="문서선택"
             id="input-group-dropdown-1"
           >
-            <Dropdown.Item onClick={(e)=>{setDocType(e.target.innerText)}}>품의서</Dropdown.Item>
-            <Dropdown.Item onClick={(e)=>{setDocType(e.target.innerText)}}>지출결의서</Dropdown.Item>
-            <Dropdown.Item onClick={(e)=>{setDocType(e.target.innerText)}}>휴가신청서</Dropdown.Item>
+            <Dropdown.Item onClick={(e)=>{
+              setDocType(e.target.innerText)
+              setContent("")
+            }
+              }>품의서</Dropdown.Item>
+            <Dropdown.Item onClick={(e)=>{
+              setDocType(e.target.innerText)
+              setContent("")
+            }}>지출결의서</Dropdown.Item>
+            <Dropdown.Item onClick={(e)=>{
+              setDocType(e.target.innerText)
+              setContent("")
+              }}>휴가신청서</Dropdown.Item>
           </DropdownButton>
           <Form.Control value={docType} aria-label="Text input with dropdown button"/>
         </InputGroup>
@@ -135,9 +148,13 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
       </div>
       <div className={styles.approvalWriteLine}><ApprovalWriteLine lineData={lineData}/></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
-      <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={quillContent} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
+      <div className={styles.approvalWriteContent}>
+        {docType === '품의서' && <QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
+        {docType === '휴가신청서' && <VacationRequestForm handleContent={handleContent}/>}
+        {docType === '지출결의서' && <ExpenseReportForm handleContent={handleContent}/>}
+      </div>
       <div className={styles.approvalWriteFileUpload}>
-        <ApprovalFileUpload handleFile={handleFile} fileList={fileList} />
+        {docType === "품의서" && <ApprovalFileUpload handleFile={handleFile} fileList={fileList} />}
       </div>
     </div>
   )

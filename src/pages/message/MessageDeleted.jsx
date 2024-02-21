@@ -3,6 +3,7 @@ import PaginationCommon from '../../components/pagination/PaginationCommon';
 import styles from './message.module.css'
 import { messageDeletedList } from '../../services/api/messageApi';
 import MessageListHeader from './MessageListHeader';
+import MessageListTable from './MessageListTable';
 
 const MessageDeleted = ({empData, handleMenu}) => {
   const[deletedList, setReceiveList] = useState([]);
@@ -33,7 +34,7 @@ const MessageDeleted = ({empData, handleMenu}) => {
   return (
     <div className={styles.messageListWrap}>
       <div className={styles.messageListHeader}><MessageListHeader/></div>
-      <div className={styles.messageListContent}>컨텐츠</div>
+      <div className={styles.messageListContent}><MessageListTable/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
       </div>

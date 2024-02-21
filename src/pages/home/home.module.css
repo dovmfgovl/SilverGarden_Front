@@ -15,8 +15,9 @@
   flex-direction: column;
   justify-content: baseline;
   align-items:center;
-  background-color: rgb(129, 175, 216);
+  background-color: rgb(243, 243, 243);
   grid-area: profileWrap;
+  border-right: 1px solid lightgray;
 }
 .profileWrap img{
   height: 200px;
@@ -28,6 +29,8 @@
 .sidebarWrap{
   background-color: rgb(255, 255, 255);
   grid-area: sidebarWrap;
+  border-right: 1px solid lightgray;
+  
 }
 
 .homeInnerContentWrap{

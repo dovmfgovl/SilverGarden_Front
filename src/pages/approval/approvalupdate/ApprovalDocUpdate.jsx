@@ -26,7 +26,7 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
   const getApprovalDoc = async() => {
     const response = await getApprovalDetail({d_no: docNo})
     setDocDetail(response.data[0])
-    setQuillContent(response.data[0].d_content)
+    setContent(response.data[0].d_content)
     const approval = response.data[0].line.filter((element)=> element.ap_category === '결재')
     const agreement = response.data[0].line.filter((element)=> element.ap_category === '합의')
     const files = response.data[0].file
@@ -46,7 +46,7 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
 
     //////////////////quill 관련 state /////////////////////////////////
     const  quillRef = useRef()
-    const [quillContent, setQuillContent] = useState('');//공지내용이 담김
+    const [content, setContent] = useState('');//공지내용이 담김
     const [images, setImages] = useState([])
     let temp = [];//함수가 새로 생성(재렌더링)되더라도 처음에 대입된 이미지를 계속 기억해야함
     const memoTemp = useMemo(() => {
@@ -59,7 +59,7 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
   
     const handleContent = useCallback((value) => {
       console.log(value)
-      setQuillContent(value)
+      setContent(value)
     },[])
     /////////////////////////////////quill end////////////////////////
     const titleRef = useRef()
@@ -68,10 +68,10 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
       const d_status = e.target.innerText;
       console.log(d_status);
   
-      if("" !== title && "" !== quillContent){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
+      if("" !== title && "" !== content){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
         const formDataToSend = new FormData();
         formDataToSend.append('d_title', title)
-        formDataToSend.append('d_content', quillContent)
+        formDataToSend.append('d_content', content)
         formDataToSend.append('e_no', docDetail.e_no)
         formDataToSend.append('d_category', docType)
         formDataToSend.append('d_status', d_status)
@@ -152,7 +152,7 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
       </div>
       <div className={styles.approvalWriteLine}><ApprovalDetailLine lineData={lineData} /></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
-      <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={quillContent} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
+      <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
       <div className={styles.approvalWriteFileUpload}>
         <ApprovalFileUpload handleFile={handleFile} fileList={fileList} />
       </div>

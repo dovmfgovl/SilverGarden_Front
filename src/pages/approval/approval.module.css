@@ -13,6 +13,7 @@
 .approvalSidebarWrap{
   grid-area: approvalSidebarWrap;
   background-color: rgb(255, 255, 255);
+  border-right: 1px solid lightgray;
 }
 
 .approvalTitleBar{
@@ -40,7 +41,7 @@
   "approvalListPagination approvalListPagination"
   ;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 8fr 1fr;
+  grid-template-rows: 3fr 8fr 50px;
 }
 
 .approvalListHeader{

@@ -45,7 +45,7 @@ const handleMenu = (menuTitle, d_no) =>{//사이드바 메뉴를 조작하는 �
 
   return (
     <div className={styles.messageWrap}>
-    <div className={styles.profileWrap}><MessageProfile/></div>
+    <div className={styles.profileWrap}><MessageProfile handleMenu={handleMenu}/></div>
     <div className={styles.messageSidebarWrap}><SidebarCommon list={list} handleMenu ={handleMenu}/></div>
     <div className={styles.messageTitleBar}>
     <FontAwesomeIcon icon={faPaperPlane} />

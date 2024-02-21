@@ -3,6 +3,7 @@ import styles from './message.module.css'
 import { messageReceiveList } from '../../services/api/messageApi';
 import PaginationCommon from '../../components/pagination/PaginationCommon';
 import MessageListHeader from './MessageListHeader';
+import MessageListTable from './MessageListTable';
 
 const MessageReceive = ({empData, handleMenu}) => {
   const[receiveList, setReceiveList] = useState([]);
@@ -33,7 +34,7 @@ const MessageReceive = ({empData, handleMenu}) => {
   return (
     <div className={styles.messageListWrap}>
       <div className={styles.messageListHeader}><MessageListHeader/></div>
-      <div className={styles.messageListContent}>컨텐츠</div>
+      <div className={styles.messageListContent}><MessageListTable/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
       </div>

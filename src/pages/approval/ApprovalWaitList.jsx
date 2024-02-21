@@ -7,6 +7,7 @@ import { approvalWaitList } from '../../services/api/approvalApi';
 
 const ApprovalWaitList = ({handleMenu, empData}) => {
   const[waitList, setWaitList] = useState([]);
+  
   const getList = async () =>{
     const response = await approvalWaitList({e_no: empData.e_no})
     console.log(response.data);

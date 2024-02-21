@@ -63,11 +63,12 @@ const CommentModal = ({show, onHide, docNo, lineData, empData, handleMenu}) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
-            결재완료
-          </Button>
+          {passDeny === true ? 
+          <Button variant="primary" onClick={handleSubmit}>승인</Button>
+          :<Button variant="danger" onClick={handleSubmit}>반려</Button>
+          }
           <Button variant="secondary" onClick={onHide}>
-            Close
+            닫기
           </Button>
         </Modal.Footer>
       </Modal>
