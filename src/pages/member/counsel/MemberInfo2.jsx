@@ -1,71 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import styles from '../member.module.css';
-import { Button, Table, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
+import { Button, Table} from 'react-bootstrap';
 import MemberRow from '../MemberRow';
 import { useDispatch, useSelector } from 'react-redux';
 import MemberDetail2 from './MemberDetail2';
-import { getMemList, setSearchKeywords, setShowAll } from '../../../redux/memberSlice';
+import { getMemList} from '../../../redux/memberSlice';
+import MemberSearchbar from '../MemberSearchbar';
 
 
 const MemberInfo2 = () => {
-  const [gubun, setGubun] = useState("");
-  const [keyword, setKeyword] = useState("");
-  const [title, setTitle] = useState("전체");
+
   const dispatch = useDispatch();
   const memberList = useSelector(state => state.memberSlice.value)
   const memberDetail = useSelector(state => state.memberSlice.selectedMember)
+  const searchedMemberList = useSelector(state => state.memberSlice.searchedMemberList);
 
   useEffect(()=>{
     dispatch(getMemList())
   },[dispatch])
 
-  const handleChange = (e) => {
-    const text = e.target.innerText;
-    const id = e.target.id;
-    if (text === "전체") {
-      dispatch(setShowAll());
-    } else {
-      const params = { gubun: id, keyword: keyword };
-      dispatch(setSearchKeywords(keyword));
-    }
-    setGubun(id);
-    setTitle(text);
-  };
-
-  const handleSearch = () => {
-    if (keyword !== "" && gubun !== "") {
-      const params = { gubun: gubun, keyword: keyword };
-      dispatch(setSearchKeywords(keyword));
-      setKeyword('');
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      handleSearch();
-      setKeyword('');
-    }
-  };
 
   return (
     <>
       <div className={styles.InnerMemberLayout}>
         <div className={styles.leftMemberLayout}>
           <h2>▶︎&nbsp;이용자목록</h2>
-          <InputGroup className="mb-3">
-            <InputGroup.Text>이용자 검색</InputGroup.Text>
-            <DropdownButton
-              variant='outline-primary'
-              title={title}
-              id="input-group-dropdown-1"
-            >
-              <Dropdown.Item onClick={handleChange} >전체</Dropdown.Item>
-              <Dropdown.Item id="client_name" onClick={handleChange} value="client_name">이름</Dropdown.Item>
-              <Dropdown.Item id="client_manager" onClick={handleChange} value="client_manager">담당자</Dropdown.Item>
-            </DropdownButton>
-            <Form.Control aria-label="Text input with dropdown button" value={keyword} onChange={(e) => setKeyword(e.target.value)} onKeyDown={handleKeyDown} />
-            <Button variant="info" onClick={handleSearch}> 검색</Button>
-          </InputGroup>
+          <MemberSearchbar getMemList={getMemList}/>
           {/* 이용자목록  */}
           <div className="col border border-white border-2" style={{ background: 'hsl(193, 6%, 88%)' }}>
             <Table striped bordered hover>

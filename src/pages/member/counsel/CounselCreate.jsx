@@ -1,6 +1,8 @@
-import React, { useCallback, useState }from 'react';
+import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
 import { counselInsert } from '../../../services/api/memberApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmpList } from '../../../redux/empInfosSlice';
 
 const CounselCreate = ({selectedMember}) => {
     const [show, setShow] = useState(false);
@@ -46,6 +48,13 @@ const CounselCreate = ({selectedMember}) => {
       setContent(value);
       console.log(content);
     },[]);
+
+
+  const empList = useSelector(state => state.empInfos.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEmpList());
+}, [dispatch]);
 
     const handleSubmit = async () => {
      const counsel= {
@@ -113,11 +122,11 @@ const CounselCreate = ({selectedMember}) => {
         <Col>상담자
         <Card style={{ width: '13rem' }}>
           <Col>
-            <Form.Control id='counsel_manager' 
-            value={manager}
-            onChange={e => {{handleManager(e.target.value)}}}
-            >
-            </Form.Control>
+            <Form.Select aria-label="Default select example"   value={manager} onChange={e => {handleManager(e.target.value)}}>
+                      {empList.map(emp=>(
+                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
+                      ))}
+                    </Form.Select>
           </Col>
        </Card></Col>
         <Col>내용

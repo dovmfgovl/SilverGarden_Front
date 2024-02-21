@@ -18,6 +18,7 @@ const MemberDelete = () => {
     console.log(res.data);
     alert("삭제되었습니다");
     handleClose()
+    window.location.reload(); 
   }
   return (
     <>

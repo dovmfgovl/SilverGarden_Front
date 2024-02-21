@@ -1,7 +1,8 @@
 import React from 'react'
-import {Col, Image, Row, Stack, Table } from 'react-bootstrap'
+import {Col, Image,  Stack} from 'react-bootstrap'
 import Counsel from './Counsel'
 import { useDispatch, useSelector } from 'react-redux';
+import { Descriptions } from 'antd';
 
 const MemberDetail2 = () => {
   const dispatch = useDispatch();
@@ -27,44 +28,18 @@ const MemberDetail2 = () => {
 export const MemberDetailPage = ({selectedMember}) => {
   return (
     <>
-          <Stack direction="horizontal" gap={3}>
-      <Image width={210}
-        height={180}
-        alt="171x180" src="logo192.png" rounded 
-        className='p-2 ms-auto'/>
-              <Table className='shadow  w-100 ms-auto' >
-                <tbody>
-                  <tr>
-                    <th><strong>이름:</strong></th>
-                    <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_NAME : ''}</td>
-                    <th><strong>이용자번호:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_ID : ''}</td>
-                  </tr>
-                  <tr>
-                    <th><strong>생년월일:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_BIRTH : ''}</td>
-                    <th><strong>나이:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> </td>
-                  </tr>
-                  <tr>
-                    <th><strong>등록일:</strong></th>
-                     <td style={{width: '35%'}} className='px-2'>{selectedMember ? selectedMember.REG_DATE : ''}</td>
-                    <th><strong>성별:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_GENDER : ''}</td>
-                  </tr>
-                  <tr>
-                  <th><strong>담당자:</strong></th>
-                     <td style={{width: '1%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_MANAGER : ''}</td>
-                    <th><strong>전화번호:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_TEL : ''}</td>
-                  </tr>
-                  <tr>
-                     <th><strong>주소:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_ADDRESS : ''}</td>
-                  </tr>
-              </tbody>
-              </Table>
-      </Stack>
+   <Descriptions bordered >
+            <Descriptions.Item label="이름">{selectedMember.CLIENT_NAME}</Descriptions.Item>
+            <Descriptions.Item label="이용자번호" span={2}>{selectedMember.CLIENT_ID}</Descriptions.Item>
+            <Descriptions.Item label="생년월일">{selectedMember.CLIENT_BIRTH}</Descriptions.Item>
+            <Descriptions.Item label="등록일" span={2}>{selectedMember.REG_DATE}</Descriptions.Item>
+            <Descriptions.Item label="성별">{selectedMember.CLIENT_GENDER}</Descriptions.Item>
+            <Descriptions.Item label="담당자"span={2}>{selectedMember.CLIENT_MANAGER}</Descriptions.Item>
+            <Descriptions.Item label="전화번호">{selectedMember.CLIENT_TEL}</Descriptions.Item>
+            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}세</Descriptions.Item>
+            <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
+          </Descriptions>
+     
       <Counsel selectedMember={selectedMember}/>
     </>
   )

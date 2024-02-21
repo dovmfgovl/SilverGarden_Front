@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 
-const MemberSearchbar2 = ({getMember}) => {
+
+const MemberSearchbar = ({getMemList}) => {
     const [gubun, setGubun]=useState("");
     const [keyword, setKeyword] = useState("");
     const [title, setTitle] = useState("전체");
@@ -10,22 +11,22 @@ const MemberSearchbar2 = ({getMember}) => {
       const text = e.target.innerText;
       const id = e.target.id;
       if (text === "전체") {
-        getMember();
+        getMemList();
       } else {
         const params = { gubun: id, keyword: keyword };
-        getMember(params);
+        getMemList(params);
         setKeyword('');
       }
       setGubun(id);
       setTitle(text);
     };
-      const handleSearch = () =>{
-        if(keyword !== "" && gubun !== ""){
-          const params = {gubun: gubun, keyword: keyword};
-          getMember(params);
-          setKeyword('');
-        }
-      }      
+    const handleSearch = () => {
+      if (keyword !== "" && gubun !== "") {
+        const params = { gubun: gubun, keyword: keyword };
+        getMemList(params);
+        setKeyword('');
+      }
+    };
    const handleKeyDown = (e) =>{
     if(e.keyCode === 13){
       handleSearch();
@@ -55,4 +56,4 @@ const MemberSearchbar2 = ({getMember}) => {
   )
 }
 
-export default MemberSearchbar2
+export default MemberSearchbar

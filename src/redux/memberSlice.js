@@ -3,9 +3,9 @@ import { getMemberList, memberUpdate } from "../services/api/memberApi";
 
 export const getMemList = createAsyncThunk(
   'member/getMemList',
-  async () => {
+  async (params) => {
     try {
-      const response = await getMemberList();
+      const response = await getMemberList(params);
       return response.data;
     } catch (error) {
       console.error('Error fetching member list: ', error);
@@ -31,24 +31,12 @@ const memberSlice = createSlice({
   name: "memberSlice",
   initialState: { 
     value: [],
-    searchKeyword: '',
     selectedMember: null,
-    searchResult: [] // 새로운 상태 추가: 검색 결과를 저장
   },
   reducers: {
     setDetail: (state, action) => {
       state.selectedMember = action.payload;
     },
-    setSearchKeywords: (state, action) => {
-      state.searchKeyword = action.payload;
-    },
-    setShowAll: (state) => {
-      state.searchKeyword = '';
-      state.searchResult = []; // 모두 보기를 클릭하면 검색 결과 초기화
-    },
-    updateSearchResult: (state, action) => {
-      state.searchResult = action.payload;
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -63,5 +51,5 @@ const memberSlice = createSlice({
   }
 });
 
-export const { setDetail, setSearchKeywords, setShowAll, updateSearchResult } = memberSlice.actions;
+export const { setDetail } = memberSlice.actions;
 export default memberSlice.reducer;

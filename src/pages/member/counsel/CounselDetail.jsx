@@ -17,13 +17,14 @@ const CounselDetail = ({counsel}) => {
         console.log(res.data);
         alert("삭제되었습니다");
         handleClose();
+        window.location.reload(); 
       }
 
     }
   
   return (
     <>
-      <Button gap={2} variant="primary" onClick={handleShow}>
+      <Button gap={2}  variant="primary" onClick={handleShow}>
         상세보기
       </Button>
 
