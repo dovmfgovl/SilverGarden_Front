@@ -123,7 +123,7 @@ const MemberDetail = () => {
                     </Select>
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}> 
-              <Form.Select aria-label="Default select example"  id="client_"  onChange={e => {handleChange('CLIENT_MANAGER',e.target.value)}}>
+              <Form.Select aria-label="Default select example"  onChange={e => {handleChange('CLIENT_MANAGER',e.target.value)}}>
                       {empList.map(emp=>(
                         <option value={emp.E_NAME}>{emp.E_NAME}</option> 
                       ))}

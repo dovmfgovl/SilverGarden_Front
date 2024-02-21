@@ -30,7 +30,7 @@ const handleMenu=(menuTitle)=>{
 
   return (
     <div className={styles.MemberContainerLayout}>
-      <div className={styles.memberTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> 이용자관리 </div>
+      <div className={styles.memberTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> 이용자관리 ‣{memberPage} </div>
       <div className={styles.sidebarLayout}><SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon></div>
       <div className={styles.innerContentLayout}>
           {/* 서브라우터 구현 */}

@@ -16,11 +16,9 @@ const MemberDetail2 = () => {
           <Stack direction="horizontal" gap={2}>
           </Stack>
         </Col>
-        {selectedMember ? (
+
           <MemberDetailPage selectedMember={selectedMember} />
-        ) : (
-          <p>선택된 회원이 없습니다.</p>
-        )}
+
       </div>
     </div>
   );

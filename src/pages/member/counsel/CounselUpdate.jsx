@@ -1,9 +1,5 @@
 import React, { useCallback, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
 import { counselUpdate } from '../../../services/api/memberApi';
 const CounselUpdate = ({counsel}) => {
   const [counselDetail,setCounselDetail]=useState(
@@ -47,7 +43,7 @@ console.table(counselDetail);
         const res = await counselUpdate(updatedCounsel);
         console.log(res.data);
         alert("회원 정보가 성공적으로 저장되었습니다.");
-        handleClose()
+        window.location.reload(); 
   
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
@@ -68,7 +64,7 @@ console.table(counselDetail);
         <Row xs={1} md={2}>
         <Col>날짜
           <Col>
-        <DatePicker  placeholderText={counselDetail.COUNSEL_DATE} dateFormat="yyyy-MM-dd" onChange={handleDate}  
+        <input type='date'  placeholderText={counselDetail.COUNSEL_DATE} dateFormat="yyyy-MM-dd" onChange={handleDate}  
         value={date} selected={date}/>
           </Col>
 
@@ -90,7 +86,7 @@ console.table(counselDetail);
        </Col>
         <Col>상담시간
         <Card style={{ width: '13rem' }}>
-        <TimePicker  value={time} disableClock={true} locale='ko'
+        <input type='time'  value={time} disableClock={true} locale='ko'
           onChange={handleTime}/>
           <h6>수정전 : {counselDetail.COUNSEL_TIME}</h6>
         </Card>
