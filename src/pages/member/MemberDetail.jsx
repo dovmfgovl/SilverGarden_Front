@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Col, Image, Stack, Button, Modal } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Col, Image, Stack, Button, Modal, Form } from 'react-bootstrap';
 import { DatePicker, Descriptions, Input, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
-import SelectManager from './SelectManager';
+import MemberDelete from './MemberDelete';
+import { getEmpList } from '../../redux/empInfosSlice';
 
 const MemberDetail = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,18 @@ const MemberDetail = () => {
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [updatedMember, setUpdatedMember] = useState(selectedMember);
+  const [originalMember, setOriginalMember] = useState(selectedMember);
   const [selectedManager, setSelectedManager] = useState(selectedMember.CLIENT_MANAGER);
+
+  const empList = useSelector(state => state.empInfos.value);
+  useEffect(() => {
+    dispatch(getEmpList());
+}, [dispatch]);
+
+  useEffect(()=>{
+    setUpdatedMember(selectedMember)
+    setOriginalMember(selectedMember)
+  },[selectedMember])
 
 
   const handleEdit = () => {
@@ -27,7 +39,7 @@ const MemberDetail = () => {
     setEditing(false);
     setRoadAddress('');
     setDetailAddress('');
-    setUpdatedMember(selectedMember);
+    setUpdatedMember(originalMember);
   };
 
 
@@ -42,6 +54,7 @@ const MemberDetail = () => {
       .then(() => {
         dispatch(setDetail(updatedMember));
         setEditing(false);
+        window.location.reload(); 
       })
       .catch(error => {
         console.error('Error saving member details: ', error);
@@ -77,7 +90,10 @@ const MemberDetail = () => {
               <Button variant="outline-danger" onClick={handleCancel}>취소</Button>
             </>
           ) : (
+            <> 
             <Button variant="outline-success" onClick={handleEdit}>수정</Button>
+            <MemberDelete />
+            </>
           )}
         </Stack>
         {editing ? (
@@ -107,10 +123,11 @@ const MemberDetail = () => {
                     </Select>
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}> 
-              <SelectManager
-                  value={selectedManager}
-                  onChange={value => setSelectedManager(value)}
-                                />
+              <Form.Select aria-label="Default select example"  id="client_"  onChange={e => {handleChange('CLIENT_MANAGER',e.target.value)}}>
+                      {empList.map(emp=>(
+                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
+                      ))}
+                    </Form.Select>
               </Descriptions.Item>
               <Descriptions.Item label="전화번호">
               <Input

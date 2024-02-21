@@ -1,20 +1,31 @@
-import React, { useCallback, useState } from 'react';
-import { Button, Col, Image, Modal, Row, Stack } from 'react-bootstrap';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button, Col, Form, Modal, Row, Stack } from 'react-bootstrap';
 import DaumPostcode from 'react-daum-postcode';
 import { memberInsert } from '../../services/api/memberApi';
 import { useNavigate} from 'react-router-dom';
-import { DatePicker, Form, Input,List,Select } from 'antd';
+import {  Descriptions, Input, } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmpList } from '../../redux/empInfosSlice';
 
 const MemberInsert = () => {
+  
   const [name,setName]=useState('')
   const [birth,setBirth]=useState('')
   const [gender,setGender]=useState('')
   const [tel,setTel]=useState('')
   const [age,setAge]=useState(0)
-  const [manager,setManager]=useState('')
+  const [manager, setManager] = useState('');
   const [photo,setPhoto]=useState('')
   const [pageid,setPageId]=useState('')
   const [pw,setPw]=useState('')
+
+
+  const empList = useSelector(state => state.empInfos.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEmpList());
+}, [dispatch]);
+
 
   const navigate = useNavigate();
   const [roadAddress, setRoadAddress] = useState("");
@@ -22,7 +33,9 @@ const MemberInsert = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [subShow,setSubShow]=useState(false);
+  const handleSubShow=()=> setSubShow(true)
+  const handleSubClose=()=> setSubShow(false)
   const handleName = useCallback((value) => {
     console.log(value);
     setName(value);
@@ -36,14 +49,16 @@ const MemberInsert = () => {
     console.log(value);
     setGender(value);
   }, []);
-  const handleTel = useCallback((value) => {
-    console.log(value);
-    setTel(value);
-  }, []);
   const handleManager = useCallback((value) => {
     console.log(value);
     setManager(value);
   }, []);
+  const handleTel = useCallback((value) => {
+    console.log(value);
+    setTel(value);
+  }, []);
+
+
   const handlePhoto = useCallback((value) => {
     console.log(value);
     setPhoto(value);
@@ -60,7 +75,7 @@ const MemberInsert = () => {
   const completeHandler = (data) => {
     console.log(data);
     setRoadAddress(data.address);
-    setShow(false);
+    setSubShow(false)
   };
   
   const changeHandler = (e) => {
@@ -87,7 +102,8 @@ const MemberInsert = () => {
       const responseData = JSON.parse(res.data);
       console.log(responseData);
       alert("회원 정보가 성공적으로 저장되었습니다.");
-      navigate("/member");
+      window.location.reload(); // 화면 리로드
+     
 
     } catch (error) {
       console.error("회원 정보 저장 실패:", error);
@@ -96,9 +112,15 @@ const MemberInsert = () => {
   };
   return (
 <>
-
+<Button variant="outline-primary" onClick={handleShow}>
+    신규등록
+  </Button>
+  <Modal size='lg' show={show} onHide={handleClose}>
+  <Modal.Header closeButton>
+        <Modal.Title>이용자등록</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
       <Row>
-        <Col><h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자정보입력</h2></Col>
         <Col>
           <Stack direction="horizontal" gap={2}>
             <Button variant="success" className="p-2 ms-auto" onClick={handleSubmit}>저장</Button>
@@ -107,74 +129,67 @@ const MemberInsert = () => {
         </Col>
       </Row>
       <Stack direction="horizontal" gap={3}>
-        <Image width={210} height={180} alt="171x180" src="logo192.png" rounded className='p-2 ms-auto' />
-<Row>
-  <List bordered>
-    
-        <Form  >
-          <List.Item>
-          <Form.Item label="이름"  name={name} rules={[{ required: true, message: 'Please input!' }]}>
-                <Input id='client_name' value={name} onChange={e => {handleName(e.target.value)}} />
-          </Form.Item>
-          </List.Item>
-          <List.Item>
-                  <Form.Item label="성별" rules={[{ required: true, message: 'Please input!' }]}>
-                    <Select style={{width:'300%'}}>
-                      <Select.Option value="남">남</Select.Option>
-                      <Select.Option value="여">여</Select.Option>
-                    </Select>
-             </Form.Item>
-          </List.Item>
-          <List.Item>
-          <Form.Item label="담당자" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-                <Input />
-            </Form.Item>
-          </List.Item>
-            </Form>
-  </List>
-</Row>
-<List bordered>
-<Form  >
-  <List.Item>
-            <Form.Item label="생년월일" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-                <DatePicker id="client_birth"  dateFormat="yyyy-MM-dd" value={birth} onChange={handleBirth} selected={birth} />
-            </Form.Item>
-  </List.Item>
-  <List.Item>
-            <Form.Item label="전화번호" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-                <Input />
-            </Form.Item>
-  </List.Item>
-  <List.Item>
-            <Form.Item label="나이">
-                <Input />
-            </Form.Item>
+        <Descriptions bordered>
+              <Descriptions.Item label="이름"> 
+              <Form.Control id='client_name' value={name} onChange={e => {handleName(e.target.value)}} />
+            </Descriptions.Item>
+            <Descriptions.Item label="생년월일" span={2} > 
+              <Input
+                      type='date'
+                      placeholder=''
+                      onChange={e => {handleBirth(e.target.value)}}
+            />
+              </Descriptions.Item>
+              <Descriptions.Item label="성별">
+                  <Form.Select aria-label="Default select example"  id="client_gender" value={gender} onChange={e => {handleGender(e.target.value)}}>
+                      <option >분류선택</option> 
+                      <option value="남">남</option> 
+                      <option value="여">여</option>
+                    </Form.Select>
+              </Descriptions.Item>
+              <Descriptions.Item label="담당자" span={2}> 
+              <Form.Select aria-label="Default select example"  id="client_" value={manager} onChange={e => {handleManager(e.target.value)}}>
+                      {empList.map(emp=>(
+                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
+                      ))}
+                    </Form.Select>
+              </Descriptions.Item>
+              <Descriptions.Item label="전화번호">
+              <Form.Control id="client_tel" value={tel} onChange={e => {handleTel(e.target.value)}} placeholder='010-0000-0000' />
+              </Descriptions.Item>
+              <Descriptions.Item label="나이" span={2}> 
+                <Input
+              placeholder="나이"
+            /> </Descriptions.Item>
+            <Descriptions.Item label="주소" span={3}>
+                <Input.Group compact>
+                  <Input
+                    style={{ width: '70%' }}
+                    value={roadAddress}
+                    readOnly
+                  />
+                  <Button onClick={() => setSubShow(true)}>주소검색</Button>
+                  <Modal show={subShow} onHide={handleSubClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>주소검색</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <DaumPostcode onComplete={completeHandler} height="400px" />
+                    </Modal.Body>
+                  </Modal>
+                </Input.Group>
+                <Input
+                  placeholder="상세주소"
+                  value={detailAddress}
+                  onChange={changeHandler}
+                />
+              </Descriptions.Item>
+            </Descriptions>
 
-  </List.Item>
-        </Form>
-</List>
       </Stack>
-        <Row>
-          <List>
-            <List.Item>
-                  <Form className='w-75 ms-auto' layout='vertical' >
-                  <Form.Item label='주소' name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-                            <Input id="client_address" value={roadAddress} readOnly placeholder="도로명 주소" />
-                            <Input id="client_sideadress" type="text" onChange={changeHandler} value={detailAddress} placeholder="상세주소" />
-                            <Button onClick={handleShow}>주소검색</Button>
-                                      <Modal show={show} onHide={handleClose}>
-                                        <Modal.Header closeButton>
-                                          <Modal.Title>주소검색</Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                          <DaumPostcode onComplete={completeHandler} height="400px" />
-                                        </Modal.Body>
-                                      </Modal>
-                      </Form.Item>
-                  </Form>
-            </List.Item>
-          </List>
-        </Row>
+     
+      </Modal.Body>
+</Modal>
 </>
 
   )

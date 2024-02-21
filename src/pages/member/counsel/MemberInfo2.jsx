@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import styles from './member.module.css';
+import styles from '../member.module.css';
 import { Button, Table, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
-import MemberRow from './MemberRow';
-import MemberDetail from './MemberDetail';
+import MemberRow from '../MemberRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMemList, setSearchKeywords, setShowAll } from '../../redux/memberSlice';
-import MemberInsert from './MemberInsert';
+import MemberDetail2 from './MemberDetail2';
+import { getMemList, setSearchKeywords, setShowAll } from '../../../redux/memberSlice';
 
-const MemberInfo = () => {
+
+const MemberInfo2 = () => {
   const [gubun, setGubun] = useState("");
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("전체");
@@ -84,14 +84,13 @@ const MemberInfo = () => {
             </Table>
           </div>
           <Button variant="warning" onClick={() => dispatch(getMemList())}>전체조회</Button>
-          <MemberInsert />
         </div>
         <div className={styles.rightMemberLayout1}>
-          <MemberDetail  />
+          <MemberDetail2  />
         </div>
       </div>
     </>
   );
 };
 
-export default MemberInfo;
+export default MemberInfo2;

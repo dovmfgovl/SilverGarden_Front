@@ -4,6 +4,7 @@ import styles from './member.module.css';
 import SidebarCommon from '../../components/sidebar/SidebarCommon'
 import MemberInfo from './MemberInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MemberInfo2 from './counsel/MemberInfo2';
 
 
 const Member = () => {
@@ -36,7 +37,7 @@ const handleMenu=(menuTitle)=>{
             {memberPage&&
             <>
           {memberPage ==="이용자기본정보" &&<MemberInfo  />}
-          {memberPage ==="이용자상담관리" }
+          {memberPage ==="이용자상담관리" &&<MemberInfo2 />}
  
             </>
             }
