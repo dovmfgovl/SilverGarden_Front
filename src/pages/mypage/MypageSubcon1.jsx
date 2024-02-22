@@ -7,7 +7,6 @@ const MypageSubcon1 = () => {
     <>
       <MypageEdu />
       <MypageExp />
-      <MypageCerti />
     </>
   )
 }
