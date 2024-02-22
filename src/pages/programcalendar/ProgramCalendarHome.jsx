@@ -20,7 +20,7 @@ const ProgramCalendarHome = () => {
     const [sharedEvent, setSharedEvent] = useState([]);
 
     const handleEvents = (events) =>{
-        console.log("받아옴:"+events);
+        // console.log("받아옴:"+events);
         setSharedEvent(events)
     }
     

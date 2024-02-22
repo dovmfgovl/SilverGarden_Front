@@ -11,24 +11,20 @@ import moment from 'moment-timezone';
 import '../../components/fullcalendar/FullCalendarContainer.css';
 
 const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames,sharedEvent}) => {
-    console.log("sharedEvent"+sharedEvent);//컨트롤러 Url 확인 가능
     const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
-    const [categories, setCategories] = useState([]);
-
+    const categories=['신체', '교양', '문화', '교육', '여가'];
     //기본 초기화 세트
     const updateModalState = () => {
         setIsModalOpen(false);
         setModalAction(null);
-        // fetchEvents();
     };
 
     //모달 핸들링
     const handleModalAction = (action, event) => {
-        console.log('Opening modal');  
         setModalAction(action);
         setSelectedEvent(event);
         setIsModalOpen(true);
@@ -103,7 +99,7 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
     const calendarOptions = {
         height: 600, //캘린더 높이
         slotMinTime: '08:00', //최소시간
-        slotMaxTime: '20:00', //최대시간
+        slotMaxTime: '24:00', //최대시간
         expandRows: true, //드래그로 확장
         navLinks: true, //버튼 링크 사용
         selectable: true,
@@ -122,7 +118,11 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
                 dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
             }
         },
-
+        eventTimeFormat: { 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            hour12: false 
+        },
         titleFormat:{
             month: 'long',
             day: 'numeric'

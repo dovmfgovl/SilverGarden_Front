@@ -17,18 +17,19 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
     });
     const handleInsert = async () => {
         console.log('등록 버튼이 클릭되었습니다.');
-        try {
-            const endHHMM = newData.PG_END.slice(11, 16);
-            const startHHMM = newData.PG_START.slice(11, 16);
-            if (newData.PG_START&&endHHMM === startHHMM) {
-                window.alert('종료일시는 시작일시와 다르게 설정해주세요.');
-                return;
-            }
-            // 내용이 아무것도 입력되지 않았을 때
-            if (!newData.PG_NAME.trim()) {
-                window.alert('프로그램 내용을 입력해주세요.');
-                return;
-            }
+        const endHHMM = newData.PG_END.slice(11, 16);
+        const startHHMM = newData.PG_START.slice(11, 16);
+        if (newData.PG_START&&endHHMM === startHHMM) {
+            window.alert('종료일시는 시작일시와 다르게 설정해주세요.');
+            return;
+        }
+        // 내용이 아무것도 입력되지 않았을 때
+        if (!newData.PG_NAME.trim()||!newData.PG_REPEAT_TYPE.trim()||!newData.PG_CATEGORY.trim()||!newData.PG_CONTENT.trim()) {
+            window.alert('프로그램 내용을 입력해주세요.');
+            return;
+        }
+        const confirmInsert = window.confirm("등록하시겠습니까?");
+        if(confirmInsert){
             const response = await programInsertDB(newData);
             console.log(response);
             // 등록 성공 시 상태 초기화
@@ -44,8 +45,6 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
             });
             getProgramList(); // 초기화 진행
             handleReset(); // 등록화면 이동
-        } catch (error) {
-            console.error('API 호출 에러:', error);
         }
     };
 

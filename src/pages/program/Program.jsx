@@ -62,7 +62,6 @@ const Program = () => {
 
     useEffect(() => {
         getProgramList();
-        console.log(programList);//{PG_NO: 163, PG_TEACHER: '124', PG_CONTENT: '343333', PG_CATEGORY: '신체', COLOR: '#E0FFFF', …}
     }, []);
 
     return (
