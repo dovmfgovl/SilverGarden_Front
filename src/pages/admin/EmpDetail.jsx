@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
@@ -7,15 +7,22 @@ import { Col, Row } from 'antd';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
-  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee);
+  const memoSelectedEmployee = useMemo(() => selectedEmployee || {}, [selectedEmployee]);
   const [editing, setEditing] = useState(false);
-  const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
-  const [originalEmployee, setOriginalEmployee] = useState(selectedEmployee);
+  const [updatedEmployee, setUpdatedEmployee] = useState(memoSelectedEmployee);
+  const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee);
 
   useEffect(() => {
-    setUpdatedEmployee(selectedEmployee);
-    setOriginalEmployee(selectedEmployee);
-  }, [selectedEmployee]);
+    setUpdatedEmployee(prevEmployee => {
+      // memoSelectedEmployee와 비교하여 변경된 경우에만 업데이트
+      if (prevEmployee !== memoSelectedEmployee) {
+        return memoSelectedEmployee;
+      }
+      return prevEmployee;
+    });
+    setOriginalEmployee(memoSelectedEmployee);
+  }, [memoSelectedEmployee]);
 
   const inputFields = [
     { label: '사원명', name: 'E_NAME', type: 'text' },
