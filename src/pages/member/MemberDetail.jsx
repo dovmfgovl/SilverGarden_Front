@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Stack, Button, Modal, Form } from 'react-bootstrap';
-import { Descriptions, Input, Select } from 'antd';
+import { Descriptions, Input, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
@@ -12,13 +12,11 @@ const MemberDetail = () => {
   const selectedMember = useSelector(state => state.memberSlice.selectedMember) || {};
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [editing, setEditing] = useState(false);
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [updatedMember, setUpdatedMember] = useState(selectedMember);
   const [originalMember, setOriginalMember] = useState(selectedMember);
-  const [selectedManager, setSelectedManager] = useState(selectedMember.CLIENT_MANAGER);
 
   const empList = useSelector(state => state.empInfos.value);
   useEffect(() => {
@@ -26,8 +24,8 @@ const MemberDetail = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setUpdatedMember(selectedMember)
-    setOriginalMember(selectedMember)
+      setUpdatedMember(selectedMember)
+      setOriginalMember(selectedMember)
   }, [selectedMember])
 
   const handleEdit = () => {
@@ -127,9 +125,9 @@ const MemberDetail = () => {
               <Descriptions.Item label="생년월일" span={2} >
                 <Input
                   type='date'
-                  placeholder={updatedMember.CLIENT_BIRTH}
                   onChange={e => handleChange('CLIENT_BIRTH', e.target.value)}
                 />
+                <text>{updatedMember.CLIENT_BIRTH}</text>
               </Descriptions.Item>
               <Descriptions.Item label="성별">
                 <Select
@@ -142,7 +140,8 @@ const MemberDetail = () => {
                 </Select>
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}>
-                <Form.Select aria-label="Default select example" onChange={e => { handleChange('CLIENT_MANAGER', e.target.value) }}>
+                <Form.Select  onChange={e => { handleChange('CLIENT_MANAGER', e.target.value) }}>
+                  <option >{updatedMember.CLIENT_MANAGER}</option>
                   {empList.map(emp => (
                     <option value={emp.E_NAME}>{emp.E_NAME}</option>
                   ))}
@@ -162,14 +161,15 @@ const MemberDetail = () => {
                   disabled
                 /> </Descriptions.Item>
               <Descriptions.Item label="주소" span={3}>
-                <Input.Group compact>
+                <Space size={'large'}>
                   <Input
-                    style={{ width: '70%' }}
+                    style={{ maxWidth: '150%' }}
                     placeholder={updatedMember.CLIENT_ADDRESS}
                     value={roadAddress}
                     readOnly
                   />
-                  <Button onClick={() => setShow(true)}>주소검색</Button>
+                  <Button  onClick={() => setShow(true)}>주소검색</Button>
+                </Space>
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>주소검색</Modal.Title>
@@ -178,7 +178,6 @@ const MemberDetail = () => {
                       <DaumPostcode onComplete={completeHandler} height="400px" />
                     </Modal.Body>
                   </Modal>
-                </Input.Group>
                 <Input
                   placeholder="상세주소"
                   value={detailAddress}

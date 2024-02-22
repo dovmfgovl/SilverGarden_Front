@@ -16,8 +16,6 @@ const MemberInsert = () => {
   const [age,setAge]=useState(0);
   const [manager, setManager] = useState('');
   const [photo,setPhoto]=useState('');
-  const [pageid,setPageId]=useState('');
-  const [pw,setPw]=useState('');
 
   const empList = useSelector(state => state.empInfos.value);
   const dispatch = useDispatch();
@@ -71,14 +69,8 @@ const MemberInsert = () => {
   const handlePhoto = useCallback((value) => {
     setPhoto(value);
   }, []);
-  
-  const handlePageId = useCallback((value) => {
-    setPageId(value);
-  }, []);
-  
-  const handlePw = useCallback((value) => {
-    setPw(value);
-  }, []);
+
+
 
   const completeHandler = (data) => {
     setRoadAddress(data.address);

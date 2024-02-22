@@ -6,7 +6,6 @@ import { getEmpList } from '../../../redux/empInfosSlice';
 
 const CounselCreate = ({selectedMember}) => {
     const [show, setShow] = useState(false);
-
     const handleClose = () => {
       setDate('')
       setHow('')
@@ -83,10 +82,13 @@ const CounselCreate = ({selectedMember}) => {
   
   return (
     <>
-      <Button gap={2} variant="outline-primary" onClick={handleShow}>
-        상담일지 작성 
-      </Button>
-
+   {Object.keys(selectedMember).length > 0 ? (
+        <Button gap={2} variant="outline-primary" onClick={handleShow}>
+          상담일지 작성
+        </Button>
+      ) : (
+        <Button disabled>상담일지 작성</Button>
+      )}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>상담일지 작성</Modal.Title>

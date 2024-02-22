@@ -37,8 +37,7 @@ export const MemberDetailPage = ({selectedMember}) => {
             <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
             <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
           </Descriptions>
-     
-      <Counsel selectedMember={selectedMember}/>
+       <Counsel selectedMember={selectedMember}/>
     </>
   )
 }

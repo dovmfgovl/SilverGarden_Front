@@ -1,4 +1,4 @@
-import { faCar, faFilePen, faUsersRectangle, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
+import { faBus, faCar, faFilePen, faRoad, faUsersRectangle, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import styles from './member.module.css';
 import SidebarCommon from '../../components/sidebar/SidebarCommon'
@@ -16,9 +16,18 @@ const Member = () => {
     subMenuItems: [//서브목록 정보
     { label: '이용자기본정보', icon: faUsersRectangle},//서브목록이름, 아이콘명, 클릭시넘어갈 url
     { label: '이용자상담관리', icon: faFilePen},
-    { label: '이용자송영관리', icon: faCar}
   ],
   },
+  {
+    label: '이용자송영관리',
+    isOpen: true,
+    icon:faBus,
+    subMenuItems:[
+      {label: '차량관리', icon: faCar},
+      {label: '차량서비스관리', icon: faRoad}
+    ]
+
+  }
 
 ];
 
@@ -31,7 +40,7 @@ const handleMenu=(menuTitle)=>{
 
   return (
     <div className={styles.MemberContainerLayout}>
-      <div className={styles.memberTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> 이용자관리 ‣{memberPage} </div>
+      <div className={styles.memberTitlebar}><FontAwesomeIcon icon={faUsersRectangle}/> {memberPage} </div>
       <div className={styles.sidebarLayout}><SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon></div>
       <div className={styles.innerContentLayout}>
           {/* 서브라우터 구현 */}
@@ -39,7 +48,8 @@ const handleMenu=(menuTitle)=>{
             <>
           {memberPage ==="이용자기본정보" &&<MemberInfo  />}
           {memberPage ==="이용자상담관리" &&<MemberInfo2 />}
- 
+          {memberPage ==="차량관리" }
+          {memberPage ==="차량서비스관리" }
             </>
             }
           {/* 서브라우터 구현 */}
