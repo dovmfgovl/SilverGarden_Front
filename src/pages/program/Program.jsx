@@ -10,12 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { programListDB } from "../../services/api/programApi";
 import { useDispatch } from "react-redux";
-import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import ProgramInfo from "./ProgramInfo";
 import { setDetail } from "../../redux/programSlice";
-import { UserBPage } from "../../services/auth/UserApi";
-import ProgramCalendar from "../programcalendar/ProgramCalendar";
 import TestCalendar from "../../components/fullcalendar/TestCalendar";
+import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
+import ProgramDashboard from "../programdashboard/ProgramDashboard";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -42,6 +41,7 @@ const Program = () => {
         { label: "일정테스트(공통)", icon: faCalendar },
       ],
     },
+
     {
       label: "프로그램 기록",
       icon: faFile,
@@ -53,7 +53,7 @@ const Program = () => {
   const handleMenu = (menuTitle) => {
     setPage(menuTitle);
   };
-  const [page, setPage] = useState("일정테스트(공통)"); //기본 페이지
+  const [page, setPage] = useState("일정"); //기본 페이지
   const [programList, setProgramList] = useState([]);
   const [programDetail, setProgramDetail] = useState(null);
   const dispatch = useDispatch();
@@ -74,37 +74,38 @@ const Program = () => {
       setProgramDetail(null);
     }
   };
-
-  useEffect(() => {
-    getProgramList();
-  }, []);
-
-  return (
-    <div className={styles.programWrap}>
-      <div className={styles.programSidebarWrap}>
-        <SidebarCommon list={list} handleMenu={handleMenu} />
-      </div>
-      <div className={styles.programTitleBar}> {page}</div>
-      <div className={styles.innerContentLayout}>
-        {page === "현황" && (
-          <ProgramDashboard
-            programList={programList}
-            getProgramList={getProgramList}
-          />
-        )}
-        {page === "프로그램 정보" && (
-          <ProgramInfo
-            programList={programList}
-            getProgramList={getProgramList}
-            onRowClick={onRowClick}
-            setProgramDetail={setProgramDetail}
-          />
-        )}
-        {page === "일정" && <ProgramCalendar />}
-        {page === "일정테스트(공통)" && <TestCalendar />}
-      </div>
-    </div>
-  );
 };
+
+useEffect(() => {
+  getProgramList();
+  console.log(programList); //{PG_NO: 163, PG_TEACHER: '124', PG_CONTENT: '343333', PG_CATEGORY: '신체', COLOR: '#E0FFFF', …}
+}, []);
+
+return (
+  <div className={styles.programWrap}>
+    <div className={styles.programSidebarWrap}>
+      <SidebarCommon list={list} handleMenu={handleMenu} />
+    </div>
+    <div className={styles.programTitleBar}> {page}</div>
+    <div className={styles.innerContentLayout}>
+      {page === "현황" && (
+        <ProgramDashboard
+          programList={programList}
+          getProgramList={getProgramList}
+        />
+      )}
+      {page === "프로그램 정보" && (
+        <ProgramInfo
+          programList={programList}
+          getProgramList={getProgramList}
+          onRowClick={onRowClick}
+          setProgramDetail={setProgramDetail}
+        />
+      )}
+      {page === "일정" && <ProgramCalendarHome programList={programList} />}
+      {page === "일정테스트(공통)" && <TestCalendar />}
+    </div>
+  </div>
+);
 
 export default Program;

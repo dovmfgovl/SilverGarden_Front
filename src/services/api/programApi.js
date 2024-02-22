@@ -34,7 +34,7 @@ export const ProgramDeleteDB = async (program) => {
         console.log(program) //42(눌린 pg_no값)
         // 수정 시작
         const response = await axios({
-            method: "get",
+            method: "delete",
             url: process.env.REACT_APP_SPRING_IP + "program/pgDelete",
             params: program
         });

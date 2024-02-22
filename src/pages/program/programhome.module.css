@@ -1,8 +1,3 @@
-body, html {
-    height: 100%;
-    margin: 0;
-}
-
 input, option, select{
     width: 100%;
 }
@@ -14,7 +9,7 @@ textarea{
 
 
 .programWrap{
-    height: 100%;
+    height: 90vh;
     display: grid;
     grid-template-areas: 
     "programSidebarWrap programTitleBar"
@@ -42,6 +37,8 @@ textarea{
     grid-area: innerContentLayout;
     background-color: rgb(255, 255, 255);
     padding: 10px;
+    height: 100%;
+    width: 100%;
 }
 
 .programInfoWrap{
@@ -81,10 +78,26 @@ textarea{
     text-align: left;
 }
 
-
+/* 세로 페이지 출력시(화면 절반에 적당) */
 @media print {
     @page {
         size: A4 portrait;
         margin: 20mm;
     }
+    body {
+        zoom: 0.7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+}
+
+.programPagination{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 10px 10px 10px;
 }
