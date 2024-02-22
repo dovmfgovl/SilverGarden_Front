@@ -2,9 +2,9 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 
 const SelectedAgreementLine = ({lineData, handleLineData}) => {
-  const handleDelete = (e_no) =>{
+  const handleDelete = (ap_id) =>{
     if(lineData.agreement.length !==0){
-      const updatedData = [...lineData.agreement.filter((element) => element.e_no !== e_no)]
+      const updatedData = [...lineData.agreement.filter((element) => element.ap_id !== ap_id)]
       
       handleLineData({...lineData, agreement: updatedData});
     }
@@ -25,12 +25,12 @@ const SelectedAgreementLine = ({lineData, handleLineData}) => {
     </thead>
     <tbody>
       {lineData.agreement && lineData.agreement.map((agreement, index)=>
-      <tr key={agreement.e_no}>
+      <tr key={agreement.ap_id}>
         <td>{index+1}</td>
         <td>{agreement.ap_category}</td>
-        <td>{agreement.e_name}</td>
-        <td>{agreement.e_rank}</td>
-        <td><button type="button" className="btn btn-danger" onClick={() => handleDelete(agreement.e_no)}>삭제</button></td>
+        <td>{agreement.ap_name}</td>
+        <td>{agreement.ap_rank}</td>
+        <td><button type="button" className="btn btn-danger" onClick={() => handleDelete(agreement.ap_id)}>삭제</button></td>
       </tr>
       )}
     </tbody>

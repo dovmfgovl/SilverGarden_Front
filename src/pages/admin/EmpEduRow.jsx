@@ -10,8 +10,8 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
       <td>
         <input
           type="text"
-          value={period || ''}
-          onChange={handleChange}
+          defaultValue={period || ''}
+          onChange={(e) => handleChange(e, `${label}_PERIOD`)}
           readOnly={!editing}
           name={`${label}_PERIOD`}
         />
@@ -19,8 +19,8 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
       <td>
         <input
           type="text"
-          value={name || ''}
-          onChange={handleChange}
+          defaultValue={name || ''}
+          onChange={(e) => handleChange(e, `${label}_NAME`)}
           readOnly={!editing}
           name={`${label}_NAME`}
         />
@@ -28,8 +28,8 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
       <td>
         <input
           type="text"
-          value={major || ''}
-          onChange={handleChange}
+          defaultValue={major || ''}
+          onChange={(e) => handleChange(e, `${label}_MAJOR`)}
           readOnly={!editing}
           name={`${label}_MAJOR`}
         />
@@ -37,8 +37,8 @@ const EmpEduRow = ({ edu, editing, handleInputChange }) => {
       <td>
         <input
           type="text"
-          value={status || ''}
-          onChange={handleChange}
+          defaultValue={status || ''}
+          onChange={(e) => handleChange(e, `${label}_STATUS`)}
           readOnly={!editing}
           name={`${label}_STATUS`}
         />

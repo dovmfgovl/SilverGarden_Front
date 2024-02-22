@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, InputGroup} from 'react-bootstrap'
 
-const ApprovalWriteTable = ({empData}) => {
+const ApprovalWriteTable = ({empData, titleRef}) => {
 
     const now = new Date();
     // ISO 문자열로 변환 (예: "2024-02-13T15:03:04.000Z")
@@ -53,6 +53,7 @@ const ApprovalWriteTable = ({empData}) => {
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
           style={{borderRadius: 0}}
+          ref={titleRef}
         />
     </InputGroup>
     </>

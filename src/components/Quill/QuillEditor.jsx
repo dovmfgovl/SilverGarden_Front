@@ -42,7 +42,6 @@ const QuillEditor = ({ value, handleContent, quillRef, handleImages, isReadOnly,
               console.log("이미지 업로드에 실패하였습니다.");
             }
             const url = process.env.REACT_APP_SPRING_IP+`notice/fileDownload?filename=${res.data}`;
-            console.log(url);
             const encodedURL = encodeURI(url);
             console.log(encodedURL);
             const quill = quillRef.current.getEditor();

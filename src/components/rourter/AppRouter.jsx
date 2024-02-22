@@ -8,6 +8,7 @@ import Member from '../../pages/member/Member'
 import Admin from '../../pages/admin/Admin'
 import Program from '../../pages/program/Program'
 import Mypage from '../../pages/mypage/Mypage'
+import Message from '../../pages/message/Message'
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
     <Route path="/notice" exact={true} element={<Notice/>}></Route>
     <Route path="/admin" exact={true} element={<Admin/>}></Route>
     <Route path="/mypage" exact={true} element={<Mypage/>}></Route>
+    <Route path="/message" exact={true} element={<Message/>}></Route>
   </Routes>
   )
 }

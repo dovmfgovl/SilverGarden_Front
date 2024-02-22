@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./home.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import HomeProfile from "./HomeProfile";
+import { useDispatch } from "react-redux";
 import { UserAPage } from "../../services/auth/UserApi";
 import Loading from "../login/Loading";
 

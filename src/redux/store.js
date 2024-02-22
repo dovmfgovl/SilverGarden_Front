@@ -2,11 +2,13 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userInfoSlice from './userInfoSlice';
 import programSlice from "./programSlice"
 import empInfosSlice from "./empInfosSlice";
+import memberReducer from "./memberSlice";
+import deptDetail from "./deptSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
 
 
-const persistConfig ={
+const persistConfig ={//persist redux를 사용하고자 할 때 필요한 설정
   key: "root",
   version: 1,
   storage,
@@ -23,9 +25,14 @@ const rootReducer = combineReducers({
   empInfos:empInfosSlice
 });
 
-
 const store = configureStore({
-  reducer:rootReducer,
-})
+  reducer:{
+    programSlice:programSlice.reducer,
+    userInfoSlice:userInfoSlice.reducer,
+    empInfos:empInfosSlice,
+    memberSlice: memberReducer,
+    deptDetail:deptDetail.reducer,
+  }
+});
 
 export default store;

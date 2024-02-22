@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './notice.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
 const NoticeFileUpload = ({handleFile, fileList}) => {
-
   const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (e) =>{
     const file = e.target.files[0];
@@ -21,13 +21,17 @@ const NoticeFileUpload = ({handleFile, fileList}) => {
     <>
     <div className={styles.noticeFileUploadBar}>
       <div>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} 
+          ref={fileInputRef} style={{width: '300px'}}/>
         <button onClick={(e)=> {
           e.preventDefault();
             if(selectedFile){
               const list = fileList.filter(element => element.name !== selectedFile.name)
               console.log(list);
               handleFile([...list, selectedFile])
+              if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+              }
             }
           }}><FontAwesomeIcon icon={faSquarePlus} /></button>
       </div>
