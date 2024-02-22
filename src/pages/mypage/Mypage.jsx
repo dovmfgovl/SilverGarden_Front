@@ -103,7 +103,7 @@ export const SelectWho = () => {
   }, [dispatch]);
 
 
-  const SelectedUser = empList.find(emp=>emp.E_NAME===userData.e_name)
+  const SelectedUser = empList.find(emp=>emp.E_NO===userData.e_no)
   
   // 직원 선택 이벤트 핸들러
   // const onChange = (value) => {
