@@ -4,6 +4,7 @@ import styles from "./home.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import HomeProfile from "./HomeProfile";
 import { UserAPage } from "../../services/auth/UserApi";
+import Loading from "../login/Loading";
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -26,15 +27,21 @@ const Home = () => {
   ];
 
   return (
-    <div className={styles.homeWrap}>
-      <div className={styles.profileWrap}>
-        <HomeProfile />
-      </div>
-      <div className={styles.sidebarWrap}>
-        <SidebarCommon list={sidebarList} />
-      </div>
-      <div className={styles.homeInnerContentWrap}>Home 화면</div>
-    </div>
+    <>
+      {accessToken ? (
+        <div className={styles.homeWrap}>
+          <div className={styles.profileWrap}>
+            <HomeProfile />
+          </div>
+          <div className={styles.sidebarWrap}>
+            <SidebarCommon list={sidebarList} />
+          </div>
+          <div className={styles.homeInnerContentWrap}>Home 화면</div>
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 };
 

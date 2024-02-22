@@ -22,9 +22,9 @@ export const AdminPage = async() => {
     console.log(JSON.stringify(response.data));
   })
   .catch((error) => {
-   
+    console.log(error)
     const status = error.response ? error.response.status : null;
-
+    console.log(status)
     if (status === 401) {
       // 토큰이 만료된 경우 처리
       // 로그아웃 등의 작업 수행
@@ -65,7 +65,9 @@ export const UserAPage = async() => {
     console.log(JSON.stringify(response.data));
   })
   .catch((error) => {
+    console.log(error)
     const status = error.response ? error.response.status : null;
+    console.log(status)
 
     if (status === 401) {
       // 토큰이 만료된 경우 처리
@@ -108,8 +110,9 @@ export const UserBPage = async() => {
     console.log(JSON.stringify(response.data));
   })
   .catch((error) => {
+    console.log(error)
     const status = error.response ? error.response.status : null;
-
+    console.log(status)
     if (status === 401) {
       // 토큰이 만료된 경우 처리
       // 로그아웃 등의 작업 수행
