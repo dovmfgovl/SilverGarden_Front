@@ -26,37 +26,37 @@ const buttonStyles = {
 };
 
 const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset }) => {
-    const dispatch = useDispatch();
-    const pNO = useSelector((state) => state.programSlice.value);
     const periodOptions = ['매주', '격주', '매월', '격월', '하루']; // 주기 옵션들
     const categoryOptions = ['신체', '교양', '문화', '교육', '여가']; // 분류 옵션들
     const daysOptions = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 분류 옵션들
-
+    const dispatch = useDispatch();
+    const pNO = useSelector((state) => state.programSlice.value);
+    //삭제하기
     const handleDelete = async () => {
         console.log(pNO);
         console.log('삭제 버튼이 클릭되었습니다.!');
         try {
-            // 서버에서 삭제 요청을 보냅니다.
             const res = await ProgramDeleteDB(pNO);
             console.log(res);
-            // 초기화 후의 로직을 수행합니다.
             getProgramList(); // 초기화 진행
             handleReset(); // 등록화면 이동
         } catch (error) {
             console.error('삭제 에러:', error);
         }
     };
-
+    //입력값 변경
     const handleInputChange = (e, name) => {
         const { value } = e.target;
+        console.log(`Updating ${name} to: ${value}`); //여기선 드롭다운 변경된 게 로그에 뜨지만 화면에 적용 안됨
         dispatch(setDetail({
         ...pNO,
         [name]: value,
         }));
     };
-
+    //전송
     const onSubmit = async () => {
         console.log('수정 버튼이 클릭되었습니다.');
+        //입력된 데이터값
         const data = {
             PG_NO: pNO.PG_NO,
             PG_NAME: pNO.PG_NAME,
@@ -68,6 +68,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
             PG_CONTENT: pNO.PG_CONTENT,
             PG_REPEAT_TYPE: pNO.PG_REPEAT_TYPE
         };
+        //수정하기
         const res = await ProgramUpdateDB(data);
         console.log(res);
         console.log(data);
@@ -79,7 +80,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
     return (
         <div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '3px' }}>
-            <button className="btn btn-outline-danger" style={buttonStyles} onClick={handleDelete}>
+            <button style={{fontWeight:'bolder', fontSize:'1px'}} variant="outline-danger" onClick={handleDelete}>
             삭제
             </button>
             <button className="btn btn-outline-secondary" style={buttonStyles} onClick={handleOutput}>
@@ -108,29 +109,29 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                 <tr>
                     <th style={{ width: '25%' }}>프로그램명</th>
                     <td style={{ width: '25%' }} colSpan="3" >
-                        <FormControl type="text" value={pNO.PG_NAME} name="PG_NAME" onChange={handleInputChange} />
+                        <FormControl type="text" value={pNO.PG_NAME|| ''} name="PG_NAME" onChange={handleInputChange} />
                     </td>
                 </tr>
 
                 <tr>
                     <th style={{ width: '25%' }}>분류</th>
                     <td style={{ width: '25%' }}>
-                        <select name="PG_CATEGORY" value={pNO.PG_CATEGORY} onChange={handleInputChange}>
-                        <option value="null">선택</option>
+                        <select name="PG_CATEGORY" value={pNO.PG_CATEGORY || ''}  onChange={(e) => handleInputChange(e, 'PG_CATEGORY')}>
+                        <option value="" >선택</option>
                         {categoryOptions.map((category, index) => (
                             <option key={index} value={category}>
-                            {category}
+                                {category}
                             </option>
                         ))}
                         </select>
                     </td>
                     <th style={{ width: '25%' }}>주기</th>
                     <td >
-                        <select name="PG_REPEAT_TYPE" value={pNO.PG_REPEAT_TYPE} onChange={handleInputChange}>
-                        <option value="null">선택</option>
+                        <select name="PG_REPEAT_TYPE" value={pNO.PG_REPEAT_TYPE || ''} onChange={(e) => handleInputChange(e, 'PG_REPEAT_TYPE')}>
+                        <option value="">선택</option>
                         {periodOptions.map((period, index) => (
                             <option key={index} value={period}>
-                            {period}
+                                {period}
                             </option>
                         ))}
                         </select>
@@ -139,15 +140,15 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                 <tr>
                     <th style={{ width: '30%' }}>강사</th>
                     <td style={{ width: '30%' }}>
-                        <FormControl type="text" value={pNO.PG_TEACHER} name="PG_TEACHER" onChange={handleInputChange} />
+                        <FormControl type="text" value={pNO.PG_TEACHER|| ''} name="PG_TEACHER" onChange={handleInputChange} />
                     </td>
                     <th style={{ width: '30%' }}>요일</th>
                     <td >
-                        <select name="PG_DAYSOFWEEK" value={pNO.PG_DAYSOFWEEK} onChange={handleInputChange}>
-                        <option value="null">선택</option>
+                        <select name="PG_DAYSOFWEEK" value={pNO.PG_DAYSOFWEEK || ''} onChange={(e) => handleInputChange(e, 'PG_DAYSOFWEEK')}>
+                        <option value="">선택</option>
                         {daysOptions.map((period, index) => (
                             <option key={index} value={period}>
-                            {period}
+                                {period}
                             </option>
                         ))}
                         </select>
@@ -179,7 +180,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                 <tr>
                     <td colSpan="6">
                         <FormControl
-                        value={pNO.PG_CONTENT}
+                        value={pNO.PG_CONTENT|| ''}
                         name="PG_CONTENT"
                         textarea
                         onChange={handleInputChange}

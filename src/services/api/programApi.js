@@ -3,7 +3,7 @@ import axios from "axios";
 export const programListDB = (program) => {
     return new Promise((resolve,reject)=>{
     try {
-        console.log(program);
+        // console.log(program);
         const response = axios({
             method: "get",
             url: process.env.REACT_APP_SPRING_IP + "program/pgList",
@@ -18,7 +18,7 @@ export const programListDB = (program) => {
 
 export const programDetailDB = async (program) => {
     try {
-        console.log(program)
+        // console.log(program)
         const response = await axios({
             method: "get",
             url: process.env.REACT_APP_SPRING_IP + "program/pgDetail",
@@ -45,7 +45,7 @@ export const ProgramDeleteDB = async (program) => {
 };
 
 export const programInsertDB = (program) => {
-    console.log(program); //
+    // console.log(program); //
     return new Promise((resolve, reject) => {
         try {
             const response = axios({
@@ -61,12 +61,12 @@ export const programInsertDB = (program) => {
 };
 
 export const ProgramUpdateDB = (params) => {
-    console.log(params); 
+    // console.log(params); 
     return new Promise((resolve, reject) => {
         axios({
-            method: "get",
+            method: "put",
             url: process.env.REACT_APP_SPRING_IP + "program/pgUpdate",
-            params: params, 
+            data: params, 
         })
         .then(response => {
             console.log(response);
@@ -87,7 +87,7 @@ export const scheduleListDB = () => {
                 url: process.env.REACT_APP_SPRING_IP + 'program/scheduleList',
                 // 필요한 경우 params 추가
             });
-            console.log(response);
+            // console.log(response);
             resolve(response);
         } catch (error) {
             reject(error);
@@ -103,7 +103,7 @@ export const updateEventDB = () => {
                 url: process.env.REACT_APP_SPRING_IP + 'program/scheduleUpdate',
                 // 필요한 경우 params 추가
             });
-            console.log(response);
+            // console.log(response);
             resolve(response);
         } catch (error) {
             reject(error);
