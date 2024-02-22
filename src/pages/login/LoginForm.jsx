@@ -1,14 +1,15 @@
 import { Col, Radio, Row } from "antd";
 import Input from "antd/es/input/Input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import style from "./loginform.module.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SigninTokenAPI } from "../../services/auth/AutApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
 import styled from "styled-components";
+import Home from "../home/Home";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const LoginForm = () => {
         localStorage.clear();
         localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("refreshToken", response.refreshToken);
+        console.log(response);
         dispatch(
           userInfoSlice.actions.setEmpInfo({
             e_no: response.e_no,
@@ -38,7 +40,9 @@ const LoginForm = () => {
             e_rank: response.e_rank,
           })
         );
-        navigate("/home");
+        setTimeout(() => {
+          navigate("home");
+        }, 2000);
       })
       .catch((error) => {
         alert("아이디 혹은 비밀번호를 올바르게 입력해주세요.");

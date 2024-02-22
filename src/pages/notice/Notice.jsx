@@ -51,9 +51,9 @@ const Notice = () => {
 
   const getList = async (params) => {
     //DB에서 리스트를 불러오는 함수
-    //const response = await getNoticeList(params);
-    //console.log(response.data);
-    //setNoticeList(response.data);
+    const response = await getNoticeList(params);
+    console.log(response.data);
+    setNoticeList(response.data);
   };
 
   useEffect(() => {
