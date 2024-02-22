@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import CommonCalendarLogic from './CommonCalendarLogic';
+import React, { useState } from 'react';
+import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import CommonCalendarModal from './CommonCalendarModal';
+import CommonCalendarModal from '../../components/fullcalendar/CommonCalendarModal';
 import moment from 'moment-timezone';
-import './FullCalendarContainer.css';
+import '../../components/fullcalendar/FullCalendarContainer.css';
 
-const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames,handleEvents}) => {
-    // console.log(urls);//컨트롤러 Url 확인 가능
+const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames,sharedEvent}) => {
+    console.log("sharedEvent"+sharedEvent);//컨트롤러 Url 확인 가능
     const [weekendsVisible, setWeekendsVisible] = useState(true);
-    const [events, setEvents] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -24,37 +23,8 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
     const updateModalState = () => {
         setIsModalOpen(false);
         setModalAction(null);
-        fetchEvents();
+        // fetchEvents();
     };
-
-    // 일정 조회 로직
-    const fetchEvents = async () => {
-        try {
-            const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
-            const formattedEvents = eventsData.map(event => ({
-                title: event[columnNames.title],
-                start: event[columnNames.start],
-                end: event[columnNames.end],
-                no: event[columnNames.no],
-                color: event[columnNames.color],
-                content: event[columnNames.content],
-                category: event[columnNames.category],
-                // 추가 필드들도 필요에 따라 변환
-            }));
-            setEvents(formattedEvents);
-            // 카테고리 값 추출 및 상태로 관리
-            const uniqueCategories = Array.from(new Set(formattedEvents.map(event => event.category)));
-            setCategories(uniqueCategories);
-        } catch (error) {
-            // 에러 처리
-        }
-        handleEvents(events)
-    };
-    //최초 한 번 이벤트 조회해서 띄우기
-    useEffect(() => {
-        fetchEvents();
-        handleEvents(events)
-    }, []);
 
     //모달 핸들링
     const handleModalAction = (action, event) => {
@@ -117,6 +87,7 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
                 [columnNames.no]: formData.no,
                 // 추가 필드들도 필요에 따라 변환
             };
+            console.log(transformedData);//{PS_NAME: '진짜??', PS_START: '2024-01-31T16:03', PS_END: '2024-01-31T18:03', PS_NO2: 7}
             await CommonCalendarLogic.deleteDB(urls.deleteURL,transformedData);
                 onEventDelete(transformedData);
                 updateModalState();
@@ -130,13 +101,17 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
     };
     // FullCalendar 옵션 설정
     const calendarOptions = {
-        height: 600,
+        height: 600, //캘린더 높이
+        slotMinTime: '08:00', //최소시간
+        slotMaxTime: '20:00', //최대시간
+        expandRows: true, //드래그로 확장
+        navLinks: true, //버튼 링크 사용
         selectable: true,
         selectMirror: true,
         selectInfo: true,
-        initialView: 'dayGridMonth',
+        nowIndicator: true,
+        initialView: 'timeGridDay',
         locale:'ko',
-        expandRows: true, //드래그로 확장
         timezone: 'local',
         editable: true,
         dayMaxEvents: true,
@@ -147,18 +122,15 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
                 dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
             }
         },
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,listWeek',
+
+        titleFormat:{
+            month: 'long',
+            day: 'numeric'
         },
-        events: events,
+        events: sharedEvent,
         textColor: 'black',
         color:'{color}', //카테고리별 색상
         eventTextColor: 'black', 
-        nowIndicator:false,
-        eventOverlap: false,
-        eventMargin:'1',
         // 이벤트를 클릭한 경우
         eventClick: (info) => {
             handleModalAction('수정', info.event, categories);
@@ -186,7 +158,7 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
     };
     return (
         <>
-            <div className="customCalendar">
+            <div className="customCalendarList">
                 <FullCalendar 
                     plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin]}
                     {...calendarOptions}
@@ -208,4 +180,4 @@ const CommonCalendar = ({ onEventAdd, onEventUpdate, onEventDelete, urls, column
     );
 };
 
-export default CommonCalendar;
+export default CommonCalendarList;
