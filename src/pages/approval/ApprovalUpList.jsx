@@ -5,7 +5,7 @@ import ApprovalTable from './ApprovalTable';
 import ApprovalListHeader from './ApprovalListHeader';
 import { getAllApprovalList } from '../../services/api/approvalApi';
 
-const ApprovalUpList = ({handleMenu, empData}) => {
+const ApprovalUpList = ({handleMenu, empData, approvalPage}) => {
     const[appList, setAppList] = useState([]);
     const getList = async () =>{
       const response = await getAllApprovalList({e_no: empData.e_no})
@@ -35,8 +35,8 @@ const ApprovalUpList = ({handleMenu, empData}) => {
 
   return (
   <div className={styles.approvalListWrap}>
-    <div className={styles.approvalListHeader}><ApprovalListHeader handleMenu={handleMenu}/></div>
-    <div className={styles.approvalListContent}><ApprovalTable appList={selectedlist}/></div>
+    <div className={styles.approvalListHeader}><ApprovalListHeader handleMenu={handleMenu} empData={empData}/></div>
+    <div className={styles.approvalListContent}><ApprovalTable appList={selectedlist} handleMenu={handleMenu} approvalPage={approvalPage}/></div>
     <div className={styles.approvalListPagination}>
       <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
     </div>
