@@ -71,40 +71,44 @@ export const SelectWho = () => {
   const empList = useSelector(state => state.empInfos.value);
   const empDetail = useSelector(state => state.empInfos.selectedEmployee) || {};
   const dispatch = useDispatch();
+  const userData =useSelector(state => state.userInfoSlice);
 
   // 직원 리스트 가져오기
   useEffect(() => {
     dispatch(getEmpList());
   }, [dispatch]);
 
+
+  const SelectedUser = empList.find(emp=>emp.E_NAME===userData.e_name)
+  
   // 직원 선택 이벤트 핸들러
-  const onChange = (value) => {
-    dispatch(setDetail(value));
-    // 선택한 직원의 상세 정보 설정
-    const selectedEmp = empList.find(emp => emp.E_NAME === value);
-    dispatch(setDetail(selectedEmp));
-  };
-
+  // const onChange = (value) => {
+  //   dispatch(setDetail(value));
+  //   // 선택한 직원의 상세 정보 설정
+  //   const selectedEmp = empList.find(emp => emp.E_NAME === value);
+  //   dispatch(setDetail(selectedEmp));
+  // };
+  dispatch(setDetail(SelectedUser))
   // 직원 옵션 리스트 생성 및 정렬
-  const empOptions = empList.map(emp => ({
-    key: emp.E_NO,
-    value: emp.E_NAME,
-    label: emp.E_NAME,
-  }));
+  // const empOptions = empList.map(emp => ({
+  //   key: emp.E_NO,
+  //   value: emp.E_NAME,
+  //   label: emp.E_NAME,
+  // }));
 
-  const sortOptions = (options) =>
-    options.sort((a, b) => a.label.localeCompare(b.label));
-  const sortedOptions = sortOptions(empOptions);
+  // const sortOptions = (options) =>
+  //   options.sort((a, b) => a.label.localeCompare(b.label));
+  // const sortedOptions = sortOptions(empOptions);
 
-  return (
-    <Select 
-      showSearch
-      placeholder="직원 선택"
-      optionFilterProp="children"
-      onChange={onChange}
-      options={sortedOptions}
-    />
-  );
+  // return (
+  //   <Select 
+  //     showSearch
+  //     placeholder="직원 선택"
+  //     optionFilterProp="children"
+  //     onChange={onChange}
+  //     options={sortedOptions}
+  //   />
+  // );
 };
 
 
