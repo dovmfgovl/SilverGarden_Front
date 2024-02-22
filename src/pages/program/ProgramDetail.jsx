@@ -26,9 +26,8 @@ const buttonStyles = {
 };
 
 const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset }) => {
-    const periodOptions = ['매주', '격주', '매월', '격월', '하루']; // 주기 옵션들
+    const periodOptions = ['하루','매주', '격주']; // 주기 옵션들
     const categoryOptions = ['신체', '교양', '문화', '교육', '여가']; // 분류 옵션들
-    const daysOptions = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 분류 옵션들
     const dispatch = useDispatch();
     const pNO = useSelector((state) => state.programSlice.value);
     //삭제하기
@@ -47,11 +46,23 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
     //입력값 변경
     const handleInputChange = (e, name) => {
         const { value } = e.target;
-        console.log(`Updating ${name} to: ${value}`); //여기선 드롭다운 변경된 게 로그에 뜨지만 화면에 적용 안됨
-        dispatch(setDetail({
-        ...pNO,
-        [name]: value,
-        }));
+        console.log(`Updating ${name} to: ${value}`);
+        if (name === 'PG_START') {
+            const startDate = new Date(value);
+            const daysOfWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+            const dayOfWeek = daysOfWeek[startDate.getDay()];
+    
+            dispatch(setDetail({
+                ...pNO,
+                PG_DAYSOFWEEK: dayOfWeek,
+                [name]: value,
+            }));
+        } else {
+            dispatch(setDetail({
+                ...pNO,
+                [name]: value,
+            }));
+        }
     };
     //전송
     const onSubmit = async () => {
@@ -80,7 +91,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
     return (
         <div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '3px' }}>
-            <button style={{fontWeight:'bolder', fontSize:'1px'}} variant="outline-danger" onClick={handleDelete}>
+            <button className="btn btn-outline-danger" style={buttonStyles} onClick={handleDelete}>
             삭제
             </button>
             <button className="btn btn-outline-secondary" style={buttonStyles} onClick={handleOutput}>
@@ -127,7 +138,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                     </td>
                     <th style={{ width: '25%' }}>주기</th>
                     <td >
-                        <select name="PG_REPEAT_TYPE" value={pNO.PG_REPEAT_TYPE || ''} onChange={(e) => handleInputChange(e, 'PG_REPEAT_TYPE')}>
+                        <select name="PG_REPEAT_TYPE" value={pNO.PG_REPEAT_TYPE || null} onChange={(e) => handleInputChange(e, 'PG_REPEAT_TYPE')}>
                         <option value="">선택</option>
                         {periodOptions.map((period, index) => (
                             <option key={index} value={period}>
@@ -143,19 +154,20 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                         <FormControl type="text" value={pNO.PG_TEACHER|| ''} name="PG_TEACHER" onChange={handleInputChange} />
                     </td>
                     <th style={{ width: '30%' }}>요일</th>
-                    <td >
-                        <select name="PG_DAYSOFWEEK" value={pNO.PG_DAYSOFWEEK || ''} onChange={(e) => handleInputChange(e, 'PG_DAYSOFWEEK')}>
-                        <option value="">선택</option>
-                        {daysOptions.map((period, index) => (
-                            <option key={index} value={period}>
-                                {period}
-                            </option>
-                        ))}
-                        </select>
+                    <td>
+                        {pNO.PG_START && (
+                            <input
+                                type="text"
+                                name="PG_DAYSOFWEEK"
+                                value={pNO.PG_DAYSOFWEEK}
+                                onChange={handleInputChange}
+                                disabled={true} // 자동으로 계산된 값이므로 비활성화
+                            />
+                        )}
                     </td>
                 </tr>
                 <tr>
-                    <th style={{ width: '30%' }}>시작일</th>
+                    <th style={{ width: '30%' }}>시작일시</th>
                     <td style={{ width: '30%' }}>
                         <FormControl
                         type="datetime-local"
@@ -164,7 +176,7 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
                         onChange={(e) => handleInputChange(e, 'PG_START')}
                         />
                     </td>
-                    <th style={{ width: '30%' }}>종료일</th>
+                    <th style={{ width: '30%' }}>종료일시</th>
                     <td style={{ width: '30%' }}>
                         <FormControl
                         type="datetime-local"

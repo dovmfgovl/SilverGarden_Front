@@ -6,7 +6,7 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
   const handleClick = () =>{
     if(appMethod === "결재" && empData.e_no !== ""){//Object.keys(array).length => 객체는 길이를 구할 수 없으나 이 방법으로 구할 수 있음
       for (const element of lineData.approvalLine) {
-        if(element.e_no === empData.e_no){
+        if(element.ap_id === empData.e_no){
           alert("이미 동일한 이름이 있습니다.")
           return;
         }
@@ -15,14 +15,14 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
         alert("결재라인은 최대 3명까지입니다.")
         return;
       }
-      const approvalLineList = [...lineData.approvalLine, {e_no:empData.e_no, e_name:empData.e_name, ap_category:"결재", e_rank:empData.e_rank}]
+      const approvalLineList = [...lineData.approvalLine, {ap_id:empData.e_no, ap_name:empData.e_name, ap_category:"결재", ap_rank:empData.e_rank}]
       const updatedLineData = {...lineData, approvalLine: approvalLineList};
       console.log(updatedLineData);
       handleLineData(updatedLineData)
     }
     else if(appMethod === "합의" && empData.e_no !== ""){
       for (const element of lineData.agreement) {
-        if(element.e_no === empData.e_no){
+        if(element.ap_id === empData.e_no){
           alert("이미 동일한 이름이 있습니다.")
           return;
         }
@@ -31,7 +31,7 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
         alert("합의대상은 최대 3명까지입니다.")
         return;
       }
-      const agreementList = [...lineData.agreement, {e_no:empData.e_no, e_name:empData.e_name, ap_category:"합의", e_rank:empData.e_rank}]
+      const agreementList = [...lineData.agreement, {ap_id:empData.e_no, ap_name:empData.e_name, ap_category:"합의", ap_rank:empData.e_rank}]
       const updatedAgreementData = {...lineData, agreement: agreementList};
       handleLineData(updatedAgreementData);
     }

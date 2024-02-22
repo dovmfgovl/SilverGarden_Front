@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './approvalWrite.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
 const ApprovalFileUpload = ({fileList, handleFile}) => {
-
+  const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) =>{
@@ -19,15 +19,18 @@ const ApprovalFileUpload = ({fileList, handleFile}) => {
 
   return (
     <>
-    <div className={styles.noticeFileUploadBar}>
+    <div className={styles.approvalFileUploadBar}>
       <div>
-        <input type="file" onChange={handleFileChange} />
+        <input ref={fileInputRef} type="file" onChange={handleFileChange} style={{width: '300px'}}/>
         <button onClick={(e)=> {
           e.preventDefault();
             if(selectedFile){
               const list = fileList.filter(element => element.name !== selectedFile.name)
               console.log(list);
               handleFile([...list, selectedFile])
+              if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+              }
             }
           }}><FontAwesomeIcon icon={faSquarePlus} /></button>
       </div>

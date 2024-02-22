@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import moment from 'moment-timezone';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 
 const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
     // 날짜 형식을 변환하는 함수
@@ -17,6 +19,7 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
         category: '',
         content:''
     });
+    
     //event가 바뀔때 실행->이벤트클릭, 날짜클릭 나눠서 초기값 재세팅
     useEffect(() => {
         if (event) {
@@ -24,7 +27,7 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
             setFormData({
                 title: event.title || '',
                 start: formatDateForInput(event.start) || '',
-                end: formatDateForInput(event.end) || '',
+                end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
                 content: event.extendedProps?.content || '',
@@ -81,36 +84,39 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
     };
 
     return (
-        <Modal show={true} onHide={onClose}>
-            <Modal.Header closeButton style={{backgroundColor:'#E6E6FA'}}>
-                <Modal.Title style={{fontWeight:'bolder'}}>{action === '생성' ? '일정 추가' : '일정 수정'}</Modal.Title>
+        <div>
+        <Modal show={true} onHide={onClose} className="modalForm" style={{height:'auto', alignItems:'center', fontSize:'0.5rem'}}>
+            <Modal.Header closeButton style={{backgroundColor:'#6e95f796'}}>
+                <Modal.Title style={{fontWeight:'bolder', fontSize:'1rem', height:'auto'}}><FontAwesomeIcon icon={faCalendarDays} />  {action === '생성' ? '새로운 일정 추가' : '기존 일정 수정'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group controlId="formTitle">
-                        <Form.Label style={{fontSize:'20px', margin:'15px', fontWeight:'bolder'}}>일정 이름</Form.Label>
+                    <Form.Group controlId="formTitle" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>일정제목</Form.Label>
                         <Form.Control
+                            style={{fontSize:'0.8rem'}}
                             type="text"
-                            placeholder="일정 이름을 입력하세요"
+                            placeholder="일정제목을 입력하세요"
                             name="title"
                             value={formData.title}
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="formContent">
-                        <Form.Label style={{fontSize:'20px', margin:'15px', fontWeight:'bolder'}}>내용</Form.Label>
+                    <Form.Group controlId="formContent" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>내용</Form.Label>
                         <Form.Control
+                            style={{fontSize:'0.8rem', height: '50px' }}
                             as="textarea"
                             rows={1}
-                            style={{ height: '80px' }}  // 원하는 높이로 조절
                             name="content"
                             value={formData.content}
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="formCategory">
-                        <Form.Label style={{fontSize:'20px', margin:'15px', fontWeight:'bolder'}}>카테고리</Form.Label>
+                    <Form.Group controlId="formCategory" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>카테고리</Form.Label>
                         <Form.Control
+                            style={{fontSize:'0.8rem'}}
                             as="select"
                             name="category"
                             value={formData.category}
@@ -124,18 +130,20 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
                             ))}
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formStart">
-                        <Form.Label style={{fontSize:'20px', margin:'15px', fontWeight:'bolder'}}>시작 일시</Form.Label>
+                    <Form.Group controlId="formStart" style={{marginTop:'10px'}}>
+                    <Form.Label style={{ fontSize: '1rem', fontWeight: 'bolder', marginRight: '10px' }}>시작 일시</Form.Label>
                         <Form.Control
+                            style={{fontSize:'0.8rem'}}
                             type="datetime-local"
                             name="start"
                             value={formData.start}
                             onChange={handleChange}
                             />
                     </Form.Group>
-                    <Form.Group controlId="formEnd">
-                        <Form.Label style={{fontSize:'20px', margin:'15px', fontWeight:'bolder'}}>종료 일시</Form.Label>
+                    <Form.Group controlId="formEnd" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>종료 일시</Form.Label>
                         <Form.Control
+                            style={{fontSize:'0.8rem'}}
                             type="datetime-local"
                             name="end"
                             value={formData.end}
@@ -145,20 +153,21 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
                     <br/>
                 </Form>
             </Modal.Body>
-            <Modal.Footer style={{backgroundColor:'#E6E6FA'}}>
-                <Button style={{fontWeight:'bolder'}} variant="outline-secondary" onClick={onClose}>
+            <Modal.Footer>
+                <Button style={{fontWeight:'bolder', fontSize:'0.8rem'}} variant="outline-secondary" onClick={onClose}>
                     취소
                 </Button>
-                <Button style={{fontWeight:'bolder'}} variant="outline-primary"  onClick={action === '생성' ? handleSave : handleUpdate}>
+                <Button style={{fontWeight:'bolder', fontSize:'0.8rem'}} variant="outline-primary"  onClick={action === '생성' ? handleSave : handleUpdate}>
                     {action === '생성' ? '저장' : '수정'}
                 </Button>
                 {action === '수정' && (
-                    <Button style={{fontWeight:'bolder'}} variant="outline-danger" onClick={handleDelete}>
+                    <Button style={{fontWeight:'bolder', fontSize:'0.8rem'}} variant="outline-danger" onClick={handleDelete}>
                         삭제
                     </Button>
                 )}
             </Modal.Footer>
         </Modal>
+        </div>
     );
 };
 
