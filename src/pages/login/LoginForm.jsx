@@ -58,7 +58,7 @@ const LoginForm = () => {
           <h3 className={style.header}>SliverGarden</h3>
         </div>
         <div className={style.inputbox}>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)} className={style.loginForm}>
             <Row>ID</Row>
             <Row>
               <Form.Control
