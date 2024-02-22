@@ -53,7 +53,7 @@ const MypageInfo = () => {
       <Image width={210} height={180} alt="171x180" src="logo192.png" rounded className='p-2 ms-auto'/>
       </Col>
       <Col span={16}>
-      <Descriptions title="User Info" bordered items={items} />
+      <Descriptions title="내 정보" bordered items={items} />
       </Col>
       <Col span={2}></Col>
     </Stack>
