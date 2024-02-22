@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { atListDB } from '../../services/api/attendanceApi';
-import AtStart from './AtStart';
-import AtEnd from './AtEnd';
+import AtCalendar from './AtCalendar';
 
 const Attendance = () => {
   const [atList, setAtList] = useState([]);
@@ -25,10 +24,7 @@ const Attendance = () => {
   return (
     <>
       <div>
-        <AtStart />
-      </div>
-      <div>
-        <AtEnd />
+        <AtCalendar />
       </div>
     </>
   )
