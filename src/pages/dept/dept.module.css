@@ -1,0 +1,84 @@
+/*dept 영역 지정*/
+.innerDeptWrap {
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "deptListWrap deptDetailWrap"
+  "deptListWrap deptSideInfoWrap"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.deptListWrap{
+  grid-area: deptListWrap;
+}
+
+.deptDetailWrap{
+  grid-area: deptDetailWrap;
+}
+
+.deptSideInfoWrap{
+  grid-area: deptSideInfoWrap;
+}
+/*deptlist/deptdetail/deptupdate*/
+/* 페이지 전체를 꽉 채우도록 설정 */
+.container {
+  width: 100%;
+  height: 100vh; /* 100% 높이로 설정 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 페이지 헤더 스타일 조정 */
+.pageHeader {
+  text-align: left;
+}
+/*deptlist*/
+/* 검색 및 버튼 컨테이너 스타일 조정 */
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  column-gap: 7px;
+}
+
+/* 테이블 푸터 스타일 조정 */
+.deptListFooter {
+  text-align: right;
+  margin-top: 10px;
+}
+
+/* 테이블 스타일 조정 */
+.deptList {
+  flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+  padding: 15px;
+}
+
+.detailContainer{
+  padding: 20px;
+}
+
+/*sideinfo*/
+.job{
+  padding: 10px;
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "jobtable jobbtn"
+  ;
+  grid-template-columns: 1fr 1fr;
+}
+.jobtable{
+  grid-area: jobtable;
+}
+.jobbtn{
+  grid-area: jobbtn;
+  margin: 20px;
+}
+.btn{
+  width: 100px;
+  height: 40px;
+  margin-bottom: 10px;
+}
