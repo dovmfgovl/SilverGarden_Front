@@ -1,5 +1,5 @@
 .innerEmpInfoWrap {
-  height: 100%;
+  height: 90%;
   display: grid;
   grid-template-areas: 
   "empListContentWrap empDetailWrap"

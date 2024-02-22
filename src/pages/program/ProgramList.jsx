@@ -5,8 +5,21 @@ import { useDispatch } from 'react-redux';
 import { setDetail } from '../../redux/programSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
+import ProgramPagination from './ProgramPagination';
 
 const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
+    const[currentPage, setCurrentPage] = useState(1)
+    const postPerPage = 10;
+    const totalPosts = programList.length
+    console.log(totalPosts);
+    // 시작 인덱스와 끝 인덱스 계산
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const selectedlist = [...programList.slice(indexOfFirstPost, indexOfLastPost)]
+    const handleSetCurentPage = (pageNo) => {
+        setCurrentPage(pageNo)
+    }
+
     const dispatch = useDispatch();
     const [searchedPrograms, setSearchedPrograms] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState(''); // 추가: 검색어 상태
@@ -119,7 +132,8 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
                     {searchedPrograms.length > 0
                         ? searchedPrograms.map((program, index) => (
                             <tr key={program.PG_NO} onClick={() => onRowClick(program)}>
-                                <td>{index + 1}</td>
+                                {/* <td>{index + 1}</td> */}
+                                <td>{(currentPage - 1) * postPerPage + index + 1}</td>
                                 <td>{program.PG_NAME}</td>
                                 <td>{program.PG_CATEGORY}</td>
                                 <td>{program.PG_TEACHER}</td>
@@ -132,9 +146,10 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
                         //목록이 존재하고, 그 길이가 1 이상이야? 전체조회 리스트 표시하기
                         //index 넣어서 pg_no(개발자가 보고 사용하는 번호)가 아니라 연번 식으로 붙여서 표현
                         : programList && programList.length > 0
-                            ? programList.map((program, index) => (
+                            ? selectedlist.map((program, index) => (
                             <tr key={program.PG_NO} onClick={() => onRowClick(program)}>
-                                <td>{index + 1}</td>
+                                {/* <td>{index + 1}</td> */}
+                                <td>{(currentPage - 1) * postPerPage + index + 1}</td>
                                 <td>{program.PG_NAME}</td>
                                 <td>{program.PG_CATEGORY}</td>
                                 <td>{program.PG_TEACHER}</td>
@@ -149,6 +164,9 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
                     }
                     </tbody>
                 </table>
+                <div className={styles.programPagination}>
+                    <ProgramPagination currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></ProgramPagination>
+                </div>
             </div>
         </div>
     );
