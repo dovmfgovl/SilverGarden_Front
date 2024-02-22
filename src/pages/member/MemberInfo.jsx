@@ -3,6 +3,7 @@ import styles from './member.module.css';
 import { Button, Table, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
 import MemberRow from './MemberRow';
 import MemberDetail from './MemberDetail';
+import MemberInsert from './MemberInsert'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMemList, setSearchKeywords, setShowAll } from '../../redux/memberSlice';
 
@@ -43,7 +44,7 @@ const MemberInfo = () => {
                             value={searchKeyword}
                             onChange={(e) => setSearchKeyword(e.target.value)}
                         />  
-                            <Button variant="outline-warning" onClick={handleShowAll}>초기화</Button>
+                            <Button variant="outline-primary" onClick={handleShowAll}>전체조회</Button>
                     </InputGroup>
                     <div className="col border border-white border-2" style={{ background: 'hsl(193, 6%, 88%)' }}>
                         <Table striped bordered hover>
@@ -61,6 +62,7 @@ const MemberInfo = () => {
                             </tbody>
                         </Table>
                     </div>
+                    <MemberInsert />
                 </div>
                 <div className={styles.rightMemberLayout1}>
                     <MemberDetail />

@@ -133,7 +133,6 @@ const MemberInsert = () => {
               </Stack>
             </Col>
           </Row>
-          <Stack direction="horizontal" gap={3}>
             <Descriptions bordered>
               <Descriptions.Item label="이름"> 
                 <Form.Control id='client_name'  value={name} onChange={e => {handleName(e.target.value)}} />
@@ -196,7 +195,7 @@ const MemberInsert = () => {
                 />
               </Descriptions.Item>
             </Descriptions>
-          </Stack>
+    
         </Modal.Body>
       </Modal>
     </>

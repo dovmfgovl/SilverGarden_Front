@@ -38,13 +38,13 @@
 
 .leftMemberLayout{
     grid-area: leftMemberLayout;
-    background-color: rgb(255, 245, 245);
+    background-color: rgb(255, 255, 255);
     flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
    
 }
 .rightMemberLayout1{
     grid-area: rightMemberLayout1;
-    background-color: rgb(255, 245, 245);
+    background-color: rgb(255, 255, 255);
      flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
     
 }

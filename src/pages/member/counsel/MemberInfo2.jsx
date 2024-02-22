@@ -45,7 +45,7 @@ const MemberInfo = () => {
                           value={searchKeyword}
                           onChange={(e) => setSearchKeyword(e.target.value)}
                       />  
-                          <Button variant="outline-warning" onClick={handleShowAll}>초기화</Button>
+                          <Button variant="outline-primary" onClick={handleShowAll}>전체조회</Button>
           </InputGroup>
           {/* 이용자목록  */}
           <div className="col border border-white border-2" style={{ background: 'hsl(193, 6%, 88%)' }}>

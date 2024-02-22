@@ -83,7 +83,7 @@ const CounselCreate = ({selectedMember}) => {
   
   return (
     <>
-      <Button gap={2} variant="primary" onClick={handleShow}>
+      <Button gap={2} variant="outline-primary" onClick={handleShow}>
         상담일지 작성 
       </Button>
 

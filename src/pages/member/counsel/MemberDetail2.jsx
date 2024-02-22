@@ -11,15 +11,13 @@ const MemberDetail2 = () => {
     <div className="container">
       <div className="user-detail">
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상담일지</h2>
         </Col>
         <Col>
           <Stack direction="horizontal" gap={2}>
           </Stack>
         </Col>
-
-          <MemberDetailPage selectedMember={selectedMember} />
-
+          <MemberDetailPage selectedMember={selectedMember}  />
       </div>
     </div>
   );
@@ -36,7 +34,7 @@ export const MemberDetailPage = ({selectedMember}) => {
             <Descriptions.Item label="성별">{selectedMember.CLIENT_GENDER}</Descriptions.Item>
             <Descriptions.Item label="담당자"span={2}>{selectedMember.CLIENT_MANAGER}</Descriptions.Item>
             <Descriptions.Item label="전화번호">{selectedMember.CLIENT_TEL}</Descriptions.Item>
-            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}세</Descriptions.Item>
+            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
             <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
           </Descriptions>
      

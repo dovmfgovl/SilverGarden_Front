@@ -89,8 +89,8 @@ const MemberDetail = () => {
   };
 
   return (
-    <div className="container">
-      <div className="user-detail">
+    <div className="container" >
+      <div className="user-detail" >
         <Col>
           <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
         </Col>
@@ -98,19 +98,24 @@ const MemberDetail = () => {
           <Stack direction="horizontal" gap={3}>
             {editing ? (
               <>
+              <div className='ms-auto'>
                 <Button variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>
+              </div>
                 <Button variant="outline-danger" onClick={handleCancel}>취소</Button>
               </>
             ) : (
               <>
+              <div className=' ms-auto'>
                 <Button variant="outline-success" onClick={handleEdit}>수정</Button>
+              </div>
+              <div >
                 <MemberDelete />
+              </div>
               </>
             )}
           </Stack>
         )}
         {editing ? (
-          <Stack direction="horizontal" gap={3}>
             <Descriptions bordered>
               <Descriptions.Item label="이름">
                 <Input
@@ -128,6 +133,7 @@ const MemberDetail = () => {
               </Descriptions.Item>
               <Descriptions.Item label="성별">
                 <Select
+                  style={{ width: '100%' }}
                   value={updatedMember.CLIENT_GENDER}
                   onChange={e => handleChange('CLIENT_GENDER', e.target)}
                 >
@@ -180,8 +186,6 @@ const MemberDetail = () => {
                 />
               </Descriptions.Item>
             </Descriptions>
-
-          </Stack>
         ) : (
           <Descriptions bordered>
             <Descriptions.Item label="이름">{selectedMember.CLIENT_NAME}</Descriptions.Item>
@@ -191,7 +195,7 @@ const MemberDetail = () => {
             <Descriptions.Item label="성별">{selectedMember.CLIENT_GENDER}</Descriptions.Item>
             <Descriptions.Item label="담당자" span={2}>{selectedMember.CLIENT_MANAGER}</Descriptions.Item>
             <Descriptions.Item label="전화번호">{selectedMember.CLIENT_TEL}</Descriptions.Item>
-            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}세</Descriptions.Item>
+            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
             <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
           </Descriptions>
         )}
