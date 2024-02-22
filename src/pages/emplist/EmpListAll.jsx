@@ -19,6 +19,7 @@ const EmpListAll = ({ empList, sendEmpList,dept }) => {
 
   // empList 배열을 콘솔에 출력하여 확인합니다.
   console.log(empList);
+  console.log(JSON.stringify(empList));
   console.log(dept);
   // empList 배열을 사용하여 데이터를 동적으로 생성합니다.
   const data = empList.map(emp => ({
