@@ -1,0 +1,54 @@
+.programCalWrap{
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    "mainTitleWrap  subTitleWrap"
+    "monthWrap listWrap"
+    "monthWrap listWrap";
+    /* border: 2px solid black; */
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-rows: 0fr 1fr;
+}
+
+.mainTitleWrap, .subTitleWrap{
+    margin-right: 5px;
+    font-size : 1.5rem;
+    padding: 10px;
+    font-weight: bolder;
+}
+
+.headerWrap {
+    display: flex;
+    justify-content: space-between;  
+    margin: 20px;
+}
+
+.searchDropdownWrap {
+    display: flex;
+    margin-left: 10px;
+
+}
+
+.searchDropdownWrap > *:not(:last-child) {
+    margin-right: 10px;
+}
+.monthWrap{
+    grid-area: monthWrap;
+    width: 100%;
+    /* background-color: rgb(117, 120, 74); */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
+    /* border: 1px solid rgb(216, 216, 216); */
+    padding: 8px;
+    text-align: center;
+    margin-right: 2px;
+}
+.listWrap{
+    width: 98%;
+    grid-area: listWrap;
+    /* background-color: rgb(163, 194, 192); */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
+    text-align: center;
+    padding: 8px;
+    /* border: 1px solid rgb(216, 216, 216); */
+    margin-left: 2px;
+}

@@ -1,0 +1,20 @@
+Back
+-pgoramschedule.xml 참고하여 날짜 형식 맞춰서 CRUD 구현
+-ProgramScheduleController 참고하여 각 컨트롤러 CRUD mapping방식 통일하여 작성 필요
+
+Front
+-공통 파일위치 : components>fullcalendar
+-사용법 : return은 수정 금지, const 부분만 수정필요
+1)캘린더 사용하고자 하는 개별 컴포넌트 생성(TestCalendar.jsx 참고)
+2)각 테이블에서 사용중인 컬럼명을 columNames에 작성(자동으로 CommonCalendarLogic을 탐)
+3)commonUrls는 컨트롤러 url 각자 거로 입력
+
+주말표시, 미표시 사용
+-WeekendToggle 사용
+-버튼 넣을 곳에 입력 & import
+<WeekendToggle weekendsVisible={weekendsVisible} setWeekendsVisible={setWeekendsVisible} /> {/* WeekendToggle 컴포넌트 추가 */}
+
+
+주의 
+-공통 파일은 수정 및 삭제 금지
+-다른 모달 사용 혹은 캘린더 수정할 경우, Common파일을 각자의 컴포넌트로 복사해가서 사용하기
