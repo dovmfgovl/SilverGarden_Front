@@ -1,19 +1,20 @@
-import { faComment, faCrosshairs, faFile, faSolarPanel } from '@fortawesome/free-solid-svg-icons';
+import { faBusinessTime, faCaretRight, faCheck, faCheckDouble, faComment, faCrosshairs, faFile, faPlay, faUserPlus, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react'
 import styles from './admin.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import EmpInfos from './EmpInfos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Attendance from './Attendance';
 
 const Admin = () => {
   const sidebarList = [//이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
   {
     label: '관리자페이지',//목록이름
-    icon: faSolarPanel,//fontAwsome 아이콘 명
+    icon: faCheckDouble,//fontAwsome 아이콘 명
     isOpen:true, // 시작 시 열려있도록 함
     subMenuItems: [//서브목록 정보
-      { label: '인적사항관리', icon: faCrosshairs},//서브목록이름, 아이콘명, 클릭시넘어갈 url
-      { label: '근태관리', icon: faCrosshairs},
+      { label: '인적사항관리', icon: faUserPlus},//서브목록이름, 아이콘명, 클릭시넘어갈 url
+      { label: '근태관리', icon: faBusinessTime},
       { label: '부서관리', icon: faComment},
       { label: '일정관리', icon: faComment},
     ],
@@ -32,11 +33,13 @@ const [adminPage, setPage] = useState("인적사항관리"); // 초기에 진입
         <SidebarCommon list={sidebarList} handleMenu={handleMenu}/>
       </div>      
       <div className={styles.empTitleBar}>
-        <FontAwesomeIcon icon={faFile} />
+        <FontAwesomeIcon icon={faCaretRight} />
+        {' '}
         {adminPage}
       </div>
       <div className={styles.innerContentWrap}>
         {adminPage === "인적사항관리" && <EmpInfos handleMenu={handleMenu} />} {/* 조건부 렌더링 - Home.jsx 참고 */}
+        {adminPage === "근태관리" && <Attendance handleMenu={handleMenu} />}
       </div>  
     </div>
 

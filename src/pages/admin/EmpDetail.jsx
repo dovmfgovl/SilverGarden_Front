@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
+import { Col, Row } from 'antd';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
@@ -68,15 +69,10 @@ const EmpDetail = () => {
   const renderInputField = ({ label, name, type, options }, index) => (
     <div className={styles.empInfoItem} key={name}>
       <div className={styles.label}>{label}</div>
+      <div className={styles.selectContainer}>
       {type === 'select' ? ( /* 셀렉트 박스 생성 */
         <select
-        style={{
-          border: '1px solid lightgray',
-          background: 'transparent',
-          margin: '5px',
-          paddingLeft: '50px',
-          paddingRight: '100px'
-        }}
+          className={styles.selectBox}
           value={updatedEmployee[name] || ''}
           onChange={handleInputChange}
           disabled={!editing}
@@ -87,28 +83,40 @@ const EmpDetail = () => {
           ))}
         </select>
       ) : (
-        <input
+        <input className={styles.inputFields}
           type={type}
-          style={{ border: '1px solid lightgray', background: 'transparent', margin: '5px', paddingLeft: '50px' }}
           value={updatedEmployee[name] || ''}
           onChange={handleInputChange}
           readOnly={!editing}
           name={name}
         />
       )}
+      </div>
       {index !== inputFields.length - 1 && <div className={styles.divider} />}
     </div>
   );
 
   return (
-    <div style={{ padding: '20px', borderLeft: '1px solid lightgray' }}>
-      <h5>직원 상세 정보</h5>
-      <div className="col-2">
-        {editing && <Button variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>}
-        <Button variant="outline-success" onClick={editing ? handleCancel : handleEdit}>
-          {editing ? '취소' : '수정'}
-        </Button>
-      </div>
+    <div className={styles.empDetailInfo}>
+      <Row style={{marginBottom:"10px"}}>
+        <Col md = {19}>          
+          <h5>직원 상세 정보</h5>          
+        </Col>
+        <Col md ={5}>          
+          <div className="col-9">
+            <Row>
+              <Col md={16}>
+                {editing && <Button style = {{width : "80px"}} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>}
+              </Col>
+              <Col md={8}>
+                <Button style = {{width : "80px"}} variant="outline-success" onClick={editing ? handleCancel : handleEdit}>
+                  {editing ? '취소' : '수정'}
+                </Button>
+              </Col>
+            </Row>
+          </div>          
+        </Col>
+      </Row>
       <div className={styles.empInfoWrap}>
         <div className={styles.empPicture}>
           사진
