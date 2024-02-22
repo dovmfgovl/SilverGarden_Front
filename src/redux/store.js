@@ -22,18 +22,14 @@ const persisteduserInfoReducer = persistReducer(persistConfig, userInfoSlice.red
 const rootReducer = combineReducers({
   programSlice:programSlice.reducer,
   userInfoSlice:persisteduserInfoReducer,
-  empInfos:empInfosSlice
+  empInfos:empInfosSlice,
+  memberSlice: memberReducer,
+  deptDetail:deptDetail.reducer,
 });
 
-
 const store = configureStore({
-  reducer:{
-    programSlice:programSlice.reducer,
-    userInfoSlice:userInfoSlice.reducer,
-    empInfos:empInfosSlice,
-    memberSlice: memberReducer,
-    deptDetail:deptDetail.reducer,
-  }
+  reducer:   rootReducer,
+  
 });
 
 export default store;
