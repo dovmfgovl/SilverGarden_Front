@@ -6,11 +6,12 @@ import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MessageReceive from './MessageReceive';
 import MessageSend from './MessageSend';
-import MessageTemp from './MessageTemp';
 import MessageDeleted from './MessageDeleted';
-import MessageDetail from './MessageDetail';
 import MessageWrite from './MessageWrite';
 import MessageProfile from './MessageProfile';
+import MessageReceiveDetail from './MessageReceiveDetail';
+import MessageSendDetail from './MessageSendDetail';
+import MessageStored from './MessageStored';
 
 const Message = () => {
   const list = [{
@@ -38,10 +39,14 @@ const Message = () => {
 
 const [messagePage, setPage] = useState("받은쪽지함");//기본페이지 결재대기함
 const empData = useSelector(state => state.userInfoSlice)//empData내 데이터 형태는 아래와 같음
+const [messageDetail, setMessageDetail] = useState("");
 
-const handleMenu = (menuTitle, d_no) =>{//사이드바 메뉴를 조작하는 함수
+const handleMenu = (menuTitle, messageDetail) =>{//사이드바 메뉴를 조작하는 함수
+  console.log(menuTitle, messageDetail);
   setPage(menuTitle)
-  }
+  if(messageDetail){
+    setMessageDetail(messageDetail)
+  }}
 
   return (
     <div className={styles.messageWrap}>
@@ -54,10 +59,11 @@ const handleMenu = (menuTitle, d_no) =>{//사이드바 메뉴를 조작하는 �
     <div className={styles.messageContentWrap}>
       {messagePage === "받은쪽지함" && <MessageReceive handleMenu={handleMenu} empData={empData}/>}
       {messagePage === "보낸쪽지함" && <MessageSend handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "쪽지보관함" && <MessageTemp handleMenu={handleMenu} empData={empData}/>}
+      {messagePage === "쪽지보관함" && <MessageStored handleMenu={handleMenu} empData={empData}/>}
       {messagePage === "휴지통" && <MessageDeleted handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "쪽지상세" && <MessageDetail handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "쪽지쓰기" && <MessageWrite handleMenu={handleMenu} empData={empData}/>}
+      {messagePage === "받은쪽지상세" && <MessageReceiveDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
+      {messagePage === "보낸쪽지상세" && <MessageSendDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
+      {messagePage === "쪽지쓰기" && <MessageWrite handleMenu={handleMenu} empData={empData} />}
     </div>
   </div>
   )

@@ -11,9 +11,10 @@ const MessageDeleted = ({empData, handleMenu}) => {
   const getList = async () =>{
     const response = await messageDeletedList({e_no: empData.e_no})
     setReceiveList(response.data);
+    console.log(response.data);
   }
   useEffect(()=>{
-    //getList();
+    getList();
   },[])
 
   //pagination start//
@@ -34,7 +35,7 @@ const MessageDeleted = ({empData, handleMenu}) => {
   return (
     <div className={styles.messageListWrap}>
       <div className={styles.messageListHeader}><MessageListHeader/></div>
-      <div className={styles.messageListContent}><MessageListTable messagePage={"휴지통"}/></div>
+      <div className={styles.messageListContent}><MessageListTable messagePage={"휴지통"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
       </div>

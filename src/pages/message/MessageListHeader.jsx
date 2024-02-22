@@ -39,6 +39,10 @@ const MessageListHeader = () => {
 
   const handleButtonClick = (period) => {
     setActiveBtn(period); // Update the active button state
+    if(period !== "datePick"){
+      setStartDate("");
+      setEndDate("");
+    }
   };
 
   const isActive = (period) => {
@@ -89,7 +93,7 @@ const MessageListHeader = () => {
         </div>
         <div style={{display:"flex"}}>
           <div style={{margin: "0 20px 0 0"}}>
-            <label for="start-date">시작일자</label>
+            <label htmlFor="start-date">시작일자</label>
             <input type="date" id="start-date" name="start-date" value={startDate} onChange={handleDateChange}/>
           </div>
           <div>
@@ -99,7 +103,7 @@ const MessageListHeader = () => {
         </div>
       </div>
       <div className={styles.searchTitle}>
-        게시물검색
+        쪽지검색
       </div>
       <div className={styles.searchBar}>
         <InputGroup style={{width: "700px"}}>

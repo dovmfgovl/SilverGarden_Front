@@ -11,9 +11,10 @@ const MessageReceive = ({empData, handleMenu}) => {
   const getList = async () =>{
     const response = await messageReceiveList({e_no: empData.e_no})
     setReceiveList(response.data);
+    console.log(response.data);
   }
   useEffect(()=>{
-    //getList();
+    getList();
   },[])
 
   //pagination start//
@@ -34,7 +35,7 @@ const MessageReceive = ({empData, handleMenu}) => {
   return (
     <div className={styles.messageListWrap}>
       <div className={styles.messageListHeader}><MessageListHeader/></div>
-      <div className={styles.messageListContent}><MessageListTable messagePage={"받은쪽지함"}/></div>
+      <div className={styles.messageListContent}><MessageListTable messagePage={"받은쪽지함"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
       </div>

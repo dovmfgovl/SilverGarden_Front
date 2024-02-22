@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { approvalDelete, approvalWithdrawal, getApprovalDetail } from '../../../services/api/approvalApi';
+import { approvalDelete, approvalFileDownload, approvalWithdrawal, getApprovalDetail } from '../../../services/api/approvalApi';
 import { Button} from 'react-bootstrap';
 import styles from './approvalDetail.module.css'
 import QuillEditor from '../../../components/Quill/QuillEditor';
@@ -35,7 +35,7 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
   console.log(docDetail);
 
   const handleFileDownload = (filename) =>{
-    const response = noticeFileDownload(filename);
+    const response = approvalFileDownload(filename);
     console.log(response);
 }
 

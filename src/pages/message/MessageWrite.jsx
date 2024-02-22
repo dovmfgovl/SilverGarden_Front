@@ -71,7 +71,7 @@ const MessageWrite = ({empData, handleMenu}) => {
     <div className={styles.writeWrap}>
       <div className={styles.writeBtnGroup}>
         <Button variant="primary" onClick={handleSubmit}>보내기</Button>{' '}
-        <Button variant="danger">취소</Button>{' '}
+        <Button variant="danger" onClick={()=>handleMenu("받은쪽지함")}>취소</Button>{' '}
       </div>
       <div className={styles.writeHeader}>
         <InputGroup className="mb-1">
