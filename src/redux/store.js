@@ -31,6 +31,6 @@ const store = configureStore({
     userInfoSlice:userInfoSlice.reducer,
     empInfos:empInfosSlice,
     deptDetail:deptDetail.reducer,
-})
+}})
 
 export default store;
