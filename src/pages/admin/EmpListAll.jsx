@@ -7,15 +7,19 @@ import ExcelForm from './ExcelForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, setDetail, setSearchKeywords, setShowAll, toggleIncludeResigned } from '../../redux/empInfosSlice';
 import EmpCreateModal from './EmpCreateModal';
+import EmpListPagination from './EmpListPagination';
 
 const EmpListAll = () => {
+    // 검색어 상태와 퇴사자 포함 여부를 관리
     const [searchKeyword, setSearchKeyword] = useState('');
     const includeResigned = useSelector(state => state.empInfos.includeResigned);
     const empList = useSelector(state => {
         const { value } = state.empInfos;
+        // 검색어가 없을 때는 모든 직원을 표시하고, 퇴사자가 아닌 경우 필터링
         if (!searchKeyword) {
             return includeResigned ? value : value.filter(emp => emp.E_STATUS !== '퇴직');
         } else {
+            // 검색어에 따라 필터링
             const filteredList = value.filter(emp =>
                 emp.E_NAME.includes(searchKeyword) || emp.E_STATUS.includes(searchKeyword) || emp.E_RANK.includes(searchKeyword)
             );
@@ -24,27 +28,42 @@ const EmpListAll = () => {
     });
     const dispatch = useDispatch();
 
+    // 초기 데이터 가져오기
     useEffect(() => {
         dispatch(getEmpList());
     }, [dispatch]);
 
+    // 검색어 입력 처리
     const handleSearch = () => {
         dispatch(setSearchKeywords(searchKeyword));
     };
 
+    // 엔터 키 처리
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             handleSearch();
         }
     };
 
+    // 전체 조회 버튼 클릭 처리
     const handleShowAll = () => {
         dispatch(setShowAll());
     };
 
-    const handleUpdate = (selectedEmployee) => {
-        dispatch(setDetail(selectedEmployee)); // 선택된 직원을 store에 저장
-    };
+    // 페이지네이션 관련 상태 변수 및 함수
+    const[currentPage, setCurrentPage] = useState(1);
+    const postPerPage = 10;
+    const totalPosts = empList.length;
+
+    // 페이지 변경 처리 함수
+    const handleSetCurrentPage = (pageNo) => {
+        setCurrentPage(pageNo);
+    }
+
+    // 현재 페이지에 해당하는 게시물의 인덱스 계산
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const selectedlist = empList.slice(indexOfFirstPost, indexOfLastPost);
 
     return (
         <>
@@ -92,20 +111,26 @@ const EmpListAll = () => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>사원번호</th>
-                                <th>현황</th>
-                                <th>사원명</th>
-                                <th>부서</th>
-                                <th>직급</th>
-                                <th>전화번호</th>
+                                <th style={{width: "5%"}}>#</th>
+                                <th style={{width: "18%"}}>사원번호</th>
+                                <th style={{width: "8%"}}>현황</th>
+                                <th style={{width: "10%"}}>사원명</th>
+                                <th style={{width: "12%"}}>부서</th>
+                                <th style={{width: "10%"}}>직급</th>
+                                <th style={{width: "10%"}}>전화번호</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {empList.map(emp => (
-                                <EmpRow key={emp.E_NO} emp={emp} />
-                            ))}
+                            {/* 현재 페이지에 해당하는 직원 목록 표시 */}
+                            {selectedlist.map((emp, index) => (
+                            <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
+                        ))}
                         </tbody>
                     </Table>
+                    {/* 페이지네이션 컴포넌트 */}
+                    <div className={styles.empListPagination}>
+                        <EmpListPagination currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurrentPage={handleSetCurrentPage}></EmpListPagination>
+                    </div>
 
                     <hr />
                     <span className={`${styles.empListFooter} row`}>

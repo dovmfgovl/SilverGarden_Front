@@ -90,3 +90,11 @@
   overflow-x: auto;  /* 가로 스크롤을 허용하여 내용이 너무 길 때 스크롤 가능하도록 설정 */
   padding: 15px;
 }
+
+.empListPagination{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
