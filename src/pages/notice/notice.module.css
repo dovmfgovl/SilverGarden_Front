@@ -18,7 +18,8 @@
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
-  grid-area: sidebarLayout
+  grid-area: sidebarLayout;
+  border-right: 1px solid lightgray;
 }
 
 .noticeTitleBar{
@@ -29,7 +30,7 @@
 }
 
 .innerContentLayout{
-  background-color: rgb(71, 102, 133);
+  background-color: rgb(255, 255, 255);
   grid-area: innerContentLayout;
 }
 
@@ -42,7 +43,7 @@
   "noticePagenation noticePagenation"
   ;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 8fr 1fr;
+  grid-template-rows: 3fr 8fr 50px;
 }
 
 .noticeHeader{

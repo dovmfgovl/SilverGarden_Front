@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const WeekendToggle = () => {
-    const [weekendsVisible, setWeekendsVisible] = useState(true);
-
+const WeekendToggle = ({ weekendsVisible, setWeekendsVisible }) => {
     const handleWeekendsToggle = () => {
         setWeekendsVisible(!weekendsVisible);
     };

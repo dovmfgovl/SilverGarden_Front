@@ -1,0 +1,114 @@
+/* 캘린더 설정 /////////////////////////////////////////////////////////*/
+
+html, body {
+  overflow: hidden; /* don't do scrollbars */
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 0.9rem; /* 글씨 전체 크기 */
+}
+
+.fc {
+  width: 100%; /*캘린더 넓이*/
+}
+
+.fc .fc-toolbar .fc-toolbar-title{
+  font-size: 1rem; /*타이틀 크기*/
+}
+
+.fc .fc-toolbar.fc-header-toolbar.fc-toolbar-title {
+  font-size: 0.2rem;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin: 0;
+  padding: 0 20px;
+  background-color: #4a6bff96;
+  height: 30px;
+  font-weight: 200;
+  line-height: 20px;
+  color: white;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.fc .fc-button-primary {
+  background-color: transparent;
+  border: none;
+  :hover {
+    background-color: transparent;
+  }
+}
+
+.fc-theme-standard th {
+  height: 0rem;
+  padding-top: 1px;
+  background: #e5edff;
+  border: 1px solid #dddee0;
+  font-weight: 500;
+  line-height: 19px;
+  color: #7b7b7b;
+}
+/*totday css 설정*/
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #c8cbeb35;
+  color: #89a5ea;
+}
+
+/*각 날짜칸*/
+.fc .fc-daygrid-day-frame {
+  padding: 0rem;
+}
+
+.fc .fc-daygrid-day-top {
+  flex-direction: row;
+}
+/*이벤트 날짜 설정*/
+.fc-event {
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+/*요일*/
+.fc-col-header-cell-cushion{
+  color: rgb(0, 0, 0) !important;
+  font-size: 0.8rem;
+  text-decoration: none  !important; /* 밑줄 제거 */
+}
+/*날짜*/
+.fc-daygrid-day-number{
+  color: black !important;
+  font-size: 0.7rem;
+  text-decoration: none  !important; /* 밑줄 제거 */
+}
+
+/* 이벤트 시간 설정 */
+.fc-event-time{
+  color: rgba(0, 0, 0, 0.535);
+}
+
+.fc-event-title{
+  color: rgba(0, 0, 0, 0.535);
+}
+
+.fc-daygrid-event-harness{
+  /* background-color: #89eae526; */
+  height: 28px;
+  width: auto;
+}
+
+.fc-timegrid-slot-label-frame fc-scrollgrid-shrink-frame{
+  font-size: 0.2rem;
+}
+
+/* 리스트 */
+/* 시간을 나타내는 부분의 글씨 크기 조절 */
+.fc-timegrid-slot-label {
+  font-size: 0.8rem; /* 원하는 크기로 조절 */
+  text-align: center;
+}
+
+/* 시간을 나타내는 부분의 선의 크기 조절 (선택 사항) */
+.fc-timegrid-slot-frame {
+  height: 1rem; /* 선의 높이를 조절하여 시간 표시 영역을 조절할 수 있습니다. */
+  color: rgba(0, 0, 0, 0.535);
+}
+
+

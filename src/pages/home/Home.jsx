@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
     const sidebarList = [{
@@ -14,7 +15,7 @@ const Home = () => {
 
   return (
     <div className={styles.homeWrap}>
-      <div className={styles.profileWrap}><HomeProfile/></div>
+      <div className={styles.profileWrap}><HomeProfile /></div>
       <div className={styles.sidebarWrap}><SidebarCommon list={sidebarList}/></div>
       <div className={styles.homeInnerContentWrap}>Home 화면</div>
     </div>

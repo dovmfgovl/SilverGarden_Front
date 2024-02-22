@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 
 const ApprovalSearchBar = () => {
+
   return (
     <>
     <InputGroup style={{alignItems: "center"}} size='sm'>

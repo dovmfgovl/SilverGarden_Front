@@ -5,14 +5,17 @@ import AppRouter from "./components/rourter/AppRouter";
 import styles from "./app.module.css"
 import NavigationBar from "./components/header/NavigationBar";
 import FootBar from "./components/footer/FootBar";
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import persistStore from "redux-persist/es/persistStore";
+
+let persistor = persistStore(store);
 
 function App() {
 
   return (
     <div className="App">
       <Provider store={store}>{/* 리덕스 툴킷을 사용하기 위해 선언 */}
+        <PersistGate persistor={persistor}></PersistGate>
         <BootInclude/>
         <div className={styles.appWrap}>
           <div className={styles.appHeaderWrap}><NavigationBar/></div>

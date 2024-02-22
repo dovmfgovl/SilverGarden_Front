@@ -19,7 +19,7 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
 
     ////quillEditor/////////////////////////
     const  quillRef = useRef()
-    const [files, setFiles] = useState([])
+    const [images, setImages] = useState([])
   
     const handleContent = useCallback((value) => {
       console.log(value)
@@ -27,13 +27,13 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
     },[])
   
     useEffect(() => {
-      for(let i=0;i<files.length;i++){//files는 배열이다 files.length=3
-        if(!noticeDetail.n_content.match(files[i])){// 사진이 있으면
-          console.log(files)
-          setFiles(files.filter(file=>file!==files[i]))
+      for(let i=0;i<images.length;i++){//files는 배열이다 files.length=3
+        if(!noticeDetail.n_content.match(images[i])){// 사진이 있으면
+          console.log(images)
+          setImages(images.filter(image=>image!==images[i]))
         }
       }
-    },[noticeDetail, files])
+    },[noticeDetail, images])
 
   const handleUpdate = async () =>{//서브밋이 요청되었을 때 일하는 함수
     const response = await noticeUpdate(noticeDetail);
@@ -77,7 +77,7 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
           </Button>
       </div>
       <div className={styles.noticeWriteContent}>
-        <QuillEditor isReadOnly={false} value={noticeDetail.n_content} handleContent={handleContent} quillRef={quillRef} files={files} />
+        <QuillEditor isReadOnly={false} value={noticeDetail.n_content} handleContent={handleContent} quillRef={quillRef} images={images} />
       </div>
       <div className={styles.noticeWriteAttachment}>
       <FontAwesomeIcon icon={faPaperclip} />첨부파일:
