@@ -29,6 +29,7 @@ const EmpListAll = ({ empList, sendEmpList,dept }) => {
     e_occup: emp.E_OCCUP,     // 직종
     e_email: emp.E_EMAIL,     // 이메일
     e_status: emp.E_STATUS,
+    ext_value:emp.EXT_VALUE,
   }));
 
   //empList.map()은 empList 배열의 각 요소에 대해 새로운 객체를 반환합니다.
@@ -77,7 +78,7 @@ const EmpListAll = ({ empList, sendEmpList,dept }) => {
         <Table.Column title="직급" dataIndex="e_rank" key="E_RANK" align='center'/>
         <Table.Column title="직종" dataIndex="e_occup" key="E_OCCUP"align='center' />
         <Table.Column title="이메일" dataIndex="e_email" key="E_EMAIL" align='center'/>
-        <Table.Column title="내선번호" dataIndex="e_status" key="nae"  align='center'/>
+        <Table.Column title="내선번호" dataIndex="ext_value" key="EXT_VALUE"  align='center'/>
       </Table>
       <Title level={5} className={styles.result} >전체: {numOfRecords}건</Title> {/* 추가: 출력된 정보 개수 표시 */}
     </ConfigProvider>
