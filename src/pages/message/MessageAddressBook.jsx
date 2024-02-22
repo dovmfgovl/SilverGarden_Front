@@ -46,7 +46,10 @@ const MessageAddressBook = (props) => {
       {/* approval의 deptView에서 가져와 재활용함 */}
     </Modal.Body>
     <Modal.Footer>
-      <Button onClick={props.onHide}>선택</Button>
+      <Button onClick={()=>{
+        props.addReceiverList(empData)
+        props.onHide();  
+      }}>추가</Button>
       <Button onClick={props.onHide}>닫기</Button>
     </Modal.Footer>
   </Modal>

@@ -58,3 +58,23 @@ export const messageTempList = (params) => {
     }
   });
 };
+
+export const messageSend = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "post",
+        url: process.env.REACT_APP_SPRING_IP + "message/messageSend",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        processData: false,
+        contentType: false,
+        data: data,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

@@ -34,7 +34,7 @@ const MessageDeleted = ({empData, handleMenu}) => {
   return (
     <div className={styles.messageListWrap}>
       <div className={styles.messageListHeader}><MessageListHeader/></div>
-      <div className={styles.messageListContent}><MessageListTable/></div>
+      <div className={styles.messageListContent}><MessageListTable messagePage={"휴지통"}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
       </div>
