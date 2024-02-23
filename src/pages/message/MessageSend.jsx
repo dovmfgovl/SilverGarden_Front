@@ -16,6 +16,10 @@ const MessageSend = ({empData, handleMenu}) => {
   useEffect(()=>{
     getList();
   },[])
+  
+  const handleList = (filteredList) =>{
+    setSendList(filteredList)
+  }
 
   //pagination start//
   const[currentPage, setCurrentPage] = useState(1);
@@ -34,7 +38,7 @@ const MessageSend = ({empData, handleMenu}) => {
   //pagination end//
   return (
     <div className={styles.messageListWrap}>
-      <div className={styles.messageListHeader}><MessageListHeader/></div>
+      <div className={styles.messageListHeader}><MessageListHeader handleList={handleList}/></div>
       <div className={styles.messageListContent}><MessageListTable messagePage={"보낸쪽지함"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>

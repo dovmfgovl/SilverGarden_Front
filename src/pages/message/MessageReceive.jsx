@@ -17,6 +17,10 @@ const MessageReceive = ({empData, handleMenu}) => {
     getList();
   },[])
 
+  const handleList = (filteredList) =>{
+    setReceiveList(filteredList)
+  }
+
   //pagination start//
   const[currentPage, setCurrentPage] = useState(1);
 
@@ -34,7 +38,7 @@ const MessageReceive = ({empData, handleMenu}) => {
   //pagination end//
   return (
     <div className={styles.messageListWrap}>
-      <div className={styles.messageListHeader}><MessageListHeader/></div>
+      <div className={styles.messageListHeader}><MessageListHeader handleList={handleList} empData={empData}/></div>
       <div className={styles.messageListContent}><MessageListTable messagePage={"받은쪽지함"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>

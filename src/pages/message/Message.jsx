@@ -12,6 +12,8 @@ import MessageProfile from './MessageProfile';
 import MessageReceiveDetail from './MessageReceiveDetail';
 import MessageSendDetail from './MessageSendDetail';
 import MessageStored from './MessageStored';
+import MessageDeletedDetail from './MessageDeletedDetail';
+import MessageStoredDetail from './MessageStoredDetail';
 
 const Message = () => {
   const list = [{
@@ -57,12 +59,14 @@ const handleMenu = (menuTitle, messageDetail) =>{//사이드바 메뉴를 조작
       {messagePage}
     </div>
     <div className={styles.messageContentWrap}>
-      {messagePage === "받은쪽지함" && <MessageReceive handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "보낸쪽지함" && <MessageSend handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "쪽지보관함" && <MessageStored handleMenu={handleMenu} empData={empData}/>}
-      {messagePage === "휴지통" && <MessageDeleted handleMenu={handleMenu} empData={empData}/>}
+      {messagePage === "받은쪽지함" && <MessageReceive handleMenu={handleMenu} empData={empData} messagePage={messagePage}/>}
+      {messagePage === "보낸쪽지함" && <MessageSend handleMenu={handleMenu} empData={empData} messagePage={messagePage}/>}
+      {messagePage === "쪽지보관함" && <MessageStored handleMenu={handleMenu} empData={empData} messagePage={messagePage}/>}
+      {messagePage === "휴지통" && <MessageDeleted handleMenu={handleMenu} empData={empData} messagePage={messagePage}/>}
       {messagePage === "받은쪽지상세" && <MessageReceiveDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
       {messagePage === "보낸쪽지상세" && <MessageSendDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
+      {messagePage === "보관된쪽지" && <MessageStoredDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
+      {messagePage === "삭제된쪽지" && <MessageDeletedDetail handleMenu={handleMenu} empData={empData} messageDetail={messageDetail}/>}
       {messagePage === "쪽지쓰기" && <MessageWrite handleMenu={handleMenu} empData={empData} />}
     </div>
   </div>

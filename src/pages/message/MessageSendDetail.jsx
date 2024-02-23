@@ -15,7 +15,6 @@ const MessageSendDetail = ({handleMenu, empData, messageDetail}) => {
     <div className={styles.detailWrap}>
     <div className={styles.detailBtnGroup}>
       <Button className="mt-3" variant="outline-secondary" onClick={()=>handleMenu("보낸쪽지함")}>목록</Button>{' '}
-      <Button className="mt-3" variant="outline-danger">삭제</Button>{' '}
     </div>
     <div className={styles.detailHeader}>
       <InputGroup className="mb-1">

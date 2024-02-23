@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import userInfoSlice from '../../redux/userInfoSlice'
+import { useSelector } from 'react-redux'
 import AtStart from '../admin/AtStart'
 import AtEnd from '../admin/AtEnd'
 import styles from './home.module.css'

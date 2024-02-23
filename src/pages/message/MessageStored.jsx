@@ -17,6 +17,10 @@ const MessageStored = ({empData, handleMenu}) => {
     getList();
   },[])
 
+  const handleList = (filteredList) =>{
+    setStoredList(filteredList)
+  }
+
   //pagination start//
   const[currentPage, setCurrentPage] = useState(1);
 

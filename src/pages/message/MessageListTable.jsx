@@ -76,17 +76,17 @@ const MessageListTable = ({messageList, handleMenu, messagePage}) => {
         messageList && messageList.map((message)=>(
           <tr key={message.me_no}>
             <td><Form.Check aria-label="option 1"/></td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>
               {message.read_status === 'N' && <FontAwesomeIcon icon={faEnvelope} />}
               {message.read_status === 'Y' && <FontAwesomeIcon icon={faEnvelopeOpen} />}
             </td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.me_no}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.me_title}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.writer_name}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>{message.me_no}</td>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>{message.me_title}</td>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>{message.writer_name}</td>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>
               {message.file.length !== 0 && <FontAwesomeIcon icon={faPaperclip} />}
             </td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.reg_date}</td>
+            <td onClick={()=>handleMenu("보관된쪽지", message)}>{message.reg_date}</td>
           </tr>
         ))
       }
@@ -95,17 +95,17 @@ const MessageListTable = ({messageList, handleMenu, messagePage}) => {
         messageList && messageList.map((message)=>(
           <tr key={message.me_no}>
             <td><Form.Check aria-label="option 1"/></td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>
               {message.read_status === 'N' && <FontAwesomeIcon icon={faEnvelope} />}
               {message.read_status === 'Y' && <FontAwesomeIcon icon={faEnvelopeOpen} />}
             </td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.me_no}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.me_title}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.writer_name}</td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>{message.me_no}</td>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>{message.me_title}</td>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>{message.writer_name}</td>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>
               {message.file.length !== 0 && <FontAwesomeIcon icon={faPaperclip} />}
             </td>
-            <td onClick={()=>handleMenu("받은쪽지상세", message)}>{message.reg_date}</td>
+            <td onClick={()=>handleMenu("삭제된쪽지", message)}>{message.reg_date}</td>
           </tr>
         ))
       }

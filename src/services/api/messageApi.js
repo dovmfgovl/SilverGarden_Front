@@ -109,6 +109,21 @@ export const messageDelete = (params) => {
   });
 };
 
+export const messageCompleteDelete = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "message/messageCompleteDelete",
+        params: params
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const messageStore = (params) => {
   return new Promise((resolve, reject) => {
     try {

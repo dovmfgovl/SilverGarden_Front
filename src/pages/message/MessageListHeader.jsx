@@ -3,17 +3,37 @@ import { Container, Row, Col, Button, ButtonGroup, Dropdown, DropdownButton, For
 import { InputGroup } from 'react-bootstrap/esm';
 import styles from './message.module.css'
 import 'react-datepicker/dist/react-datepicker.css';
-const MessageListHeader = () => {
+import { messageDeletedList, messageReceiveList, messageSendList, messageStoredList } from '../../services/api/messageApi';
+const MessageListHeader = ({messagePage, handleList, empData}) => {
   const [activeBtn, setActiveBtn] = useState(null);
   const [gubun, setGubun] = useState("");
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("전체");
-
+  
   const[startDate, setStartDate] = useState(null);
   const[endDate, setEndDate] = useState(null);
 
-  const handleSubmit =() =>{
-    
+  let dataSet = {}
+
+  const handleSubmit = async () =>{
+    if("받은쪽지함" === messagePage){
+      if(activeBtn){//기간검색이라면
+        dataSet  = {gubun:"period", }
+      }else{
+        
+      }
+      const response = await messageReceiveList();
+      handleList(response.data)
+    }else if("보낸쪽지함" === messagePage){
+      const response = await messageSendList();
+      handleList(response.data)
+    }else if("쪽지보관함" === messagePage){
+      const response = await messageStoredList();
+      handleList(response.data)
+    }else if("휴지통" === messagePage){
+      const response = await messageDeletedList();
+      handleList(response.data)
+    }
   }
 
   const handleDateChange = (e) =>{
@@ -38,11 +58,24 @@ const MessageListHeader = () => {
   }
 
   const handleButtonClick = (period) => {
+    setKeyword("")
+    setTitle("전체")
     setActiveBtn(period); // Update the active button state
-    if(period !== "datePick"){
+    if(period === "datePick"){
       setStartDate("");
       setEndDate("");
+    }else if(period === "week"){
+      const today = new Date();
+      console.log(today);
+      const start_date = today.toISOString().split('T')[0];
+      console.log(start_date);
+      today.setDate(today.getDate()+6)
+    }else if(period === "month"){
+
+    }else if(period === "3months"){
+
     }
+
   };
 
   const isActive = (period) => {
@@ -58,7 +91,7 @@ const MessageListHeader = () => {
   return (
     <>
       <div className={styles.datepickerTitle}>
-        기간설정
+        기간검색
       </div>
       <div className={styles.datepicker}>
         <div>
@@ -103,7 +136,7 @@ const MessageListHeader = () => {
         </div>
       </div>
       <div className={styles.searchTitle}>
-        쪽지검색
+        조건검색
       </div>
       <div className={styles.searchBar}>
         <InputGroup style={{width: "700px"}}>
@@ -117,7 +150,7 @@ const MessageListHeader = () => {
                     <Dropdown.Item id="me_content" onClick={handleChange}>내용</Dropdown.Item>
                     <Dropdown.Item id="e_name"  onClick={handleChange}>작성자</Dropdown.Item>
                   </DropdownButton>
-                  <Form.Control aria-label="Text input with dropdown button"/>
+                  <Form.Control aria-label="Text input with dropdown button" value={keyword} onChange={(e)=>setKeyword(e.target.value)}/>
                   <Button variant="secondary">검색</Button>
           </InputGroup>
       </div>
