@@ -6,6 +6,7 @@ import memberReducer from "./memberSlice";
 import deptDetail from "./deptSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
+import chooseEmpSlice from "./chooseEmpSlice";
 
 
 const persistConfig ={//persist redux를 사용하고자 할 때 필요한 설정
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   programSlice:programSlice.reducer,
   userInfoSlice:persisteduserInfoReducer,
   empInfos:empInfosSlice,
+  chooseEmp:chooseEmpSlice,
   memberSlice: memberReducer,
   deptDetail:deptDetail.reducer,
 });

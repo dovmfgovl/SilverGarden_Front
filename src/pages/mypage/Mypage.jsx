@@ -4,16 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGroupArrowsRotate,
   faPerson,
-  faUsersRectangle,
 } from "@fortawesome/free-solid-svg-icons";
 import MypageMainCon from "./MypageMainCon";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import ChangePwModal from "./ChangePwModal";
-import { Select } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { getEmpList, setDetail } from "../../redux/empInfosSlice";
-import { UserAPage } from "../../services/auth/UserApi";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getEmpList, setDetail } from "../../redux/chooseEmpSlice";
+import { UserAPage } from "../../services/auth/UserApi";
 const Mypage = () => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
@@ -26,11 +24,17 @@ const Mypage = () => {
       });
   }
 
-  // 선택된 직원 정보를 가져옵니다.
-  const selectedEmployee =
-    useSelector((state) => state.empInfos.selectedEmployee) || {};
+  const empList = useSelector((state) => state.chooseEmp.value);
+  const empDetail =useSelector((state) => state.chooseEmp.selectedEmployee) || {};
   const dispatch = useDispatch();
+  const userData =useSelector(state => state.userInfoSlice);
 
+  useEffect(()=>{
+    dispatch(getEmpList())
+  },[dispatch])
+
+    const selectedEmp = empList.find((emp) => emp.E_NO === userData.e_no);
+    dispatch(setDetail(selectedEmp));
   //토큰과 비교하고 그 토큰에 적힌 정보와 empinfo 리덕스에서 가진 정보가 일치하는지 보는 것
 
   // 모달 상태 및 핸들러
@@ -81,7 +85,6 @@ const Mypage = () => {
         )}
         <div className={styles.innerContentLayout}>
           {/* 직원 선택 컴포넌트 */}
-          <SelectWho />
           <MypageMainCon />
         </div>
       </div>
@@ -89,46 +92,6 @@ const Mypage = () => {
   );
 };
 
-// 직원 선택 컴포넌트
-export const SelectWho = () => {
-  const empList = useSelector((state) => state.empInfos.value);
-  const empDetail =
-    useSelector((state) => state.empInfos.selectedEmployee) || {};
-  const dispatch = useDispatch();
 
-  // 직원 리스트 가져오기
-  useEffect(() => {
-    dispatch(getEmpList());
-  }, [dispatch]);
-
-  // 직원 선택 이벤트 핸들러
-  const onChange = (value) => {
-    dispatch(setDetail(value));
-    // 선택한 직원의 상세 정보 설정
-    const selectedEmp = empList.find((emp) => emp.E_NAME === value);
-    dispatch(setDetail(selectedEmp));
-  };
-
-  // 직원 옵션 리스트 생성 및 정렬
-  const empOptions = empList.map((emp) => ({
-    key: emp.E_NO,
-    value: emp.E_NAME,
-    label: emp.E_NAME,
-  }));
-
-  const sortOptions = (options) =>
-    options.sort((a, b) => a.label.localeCompare(b.label));
-  const sortedOptions = sortOptions(empOptions);
-
-  return (
-    <Select
-      showSearch
-      placeholder="직원 선택"
-      optionFilterProp="children"
-      onChange={onChange}
-      options={sortedOptions}
-    />
-  );
-};
 
 export default Mypage;
