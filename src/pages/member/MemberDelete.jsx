@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { memberDelete } from '../../services/api/memberApi';
+import { useDispatch, useSelector } from 'react-redux';
 
-const MemberDelete = ({ show, handleClose,selectedMember }) => {
+const MemberDelete = () => {
+  const dispatch = useDispatch();
+  const selectedMember = useSelector(state => state.memberSlice.selectedMember) || {};
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleDelete= async()=>{
     const client={
@@ -12,8 +18,13 @@ const MemberDelete = ({ show, handleClose,selectedMember }) => {
     console.log(res.data);
     alert("삭제되었습니다");
     handleClose()
+    window.location.reload(); 
   }
   return (
+    <>
+    <Button variant="outline-danger" onClick={handleShow}>
+    삭제
+  </Button>
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>이용자삭제</Modal.Title>
@@ -36,6 +47,7 @@ const MemberDelete = ({ show, handleClose,selectedMember }) => {
         </Button>
       </Modal.Footer>
     </Modal>
+    </>
   );
 };
 

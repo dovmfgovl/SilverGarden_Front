@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import styles from './approval.module.css'
-import LineSelectBar from './approvalwrite/LineSelectBar'
-import SelectedAgreementLine from './approvalwrite/SelectedAgreementLine'
-import SelectedApprovalLine from './approvalwrite/SelectedApprovalLine'
-import { getDeptData } from '../../services/api/approvalApi'
-import DeptView from './approvalwrite/DeptView'
+import styles from './approvalWrite.module.css'
+import LineSelectBar from './LineSelectBar'
+import SelectedAgreementLine from './SelectedAgreementLine'
+import SelectedApprovalLine from './SelectedApprovalLine'
+import { getDeptData } from '../../../services/api/approvalApi'
+import DeptView from './DeptView'
 
 const ApprovalLineModal = (props) => {
   const[deptData, setDeptData] = useState([]);

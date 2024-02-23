@@ -4,7 +4,7 @@ import styles from './notice.module.css'
 import { noticeDelete } from '../../services/api/noticeApi';
 import { useNavigate } from 'react-router-dom';
 
-const NoticeDetailHeader = ({noticeDetail, handlePage}) => {
+const NoticeDetailHeader = ({noticeDetail, handlePage, empData}) => {
   const detail = {...noticeDetail}
   const navigation = useNavigate();
 
@@ -30,8 +30,12 @@ const NoticeDetailHeader = ({noticeDetail, handlePage}) => {
         <div>조회수:{noticeDetail.N_HIT}</div>
       </div>
       <div className={styles.noticeDetailHeadetBtn}>
-        <Button variant="primary" onClick={handleUpdate}>수정</Button>{' '}
-        <Button variant="danger" onClick={handleDelete}>삭제</Button>{' '}
+        {noticeDetail.reg_id === empData.e_no &&
+        <>
+          <Button variant="primary" onClick={handleUpdate}>수정</Button>{' '}
+          <Button variant="danger" onClick={handleDelete}>삭제</Button>{' '}
+        </>
+        }
       </div>
     </>
   )
