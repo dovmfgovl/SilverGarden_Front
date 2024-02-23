@@ -5,9 +5,9 @@ function AuthProvider({ children }) {
 
   const user = accessToken ? JSON.stringify(accessToken) : null;
 
-  // if (!user) {
-  //   return <Navigate to="/" />;
-  // }
+  if (!user) {
+    return <Navigate to="/" />;
+  }
 
   return children;
 }
