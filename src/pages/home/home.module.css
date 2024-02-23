@@ -29,6 +29,8 @@
 .sidebarWrap{
   background-color: rgb(241, 241, 241);
   grid-area: sidebarWrap;
+  border-right: 1px solid lightgray;
+  
 }
 
 .firstContentWrap{

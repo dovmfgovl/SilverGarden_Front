@@ -1,0 +1,86 @@
+.approvalDetailWrap{
+  height: 100%;
+  max-width: 950px;
+  min-width: 950px;
+  margin: auto;
+  display: grid;
+  grid-template-areas: 
+  "approvalDetailBtnGroup approvalDetailBtnGroup"
+  "approvalDetailHeader approvalDetailLine"
+  "approvalDetailTable approvalDetailTable"
+  "approvalDetailContent approvalDetailContent"
+  "fileDownload fileDownload"
+  ;
+  grid-template-columns: 3fr 3fr;
+  grid-template-rows: 60px 190px 200px 600px 1fr;
+  border: 1px solid rgb(231, 229, 229);
+}
+
+/* .approvalWriteWrap div{
+  border: 1px solid red;
+} */
+
+.approvalDetailBtnGroup{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+  grid-area: approvalDetailBtnGroup;
+}
+
+.approvalDetailBtnGroup :nth-child(1){
+  margin-left: 5px;
+  margin-right: auto;
+  flex-basis: content;
+}
+
+.approvalDetailHeader{
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: approvalDetailHeader;
+  font-size: 2.2rem;
+}
+.approvalDetailLine{
+  grid-area: approvalDetailLine;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+}
+
+.approvalDetailTable{
+  height: 100%;
+  grid-area: approvalDetailTable;
+  display: flex;
+  flex-direction: column;
+}
+
+.approvalDetailContent{
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 229, 229);
+  grid-area: approvalDetailContent;
+  overflow-y: auto;
+}
+
+.fileDownload{
+  grid-area: fileDownload;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  align-items: center;
+}
+.fileDownload div{
+  margin: 0 20px;
+}
+
+.fileDownload div button{
+  margin: 0 10px;
+  border: none;
+  background-color: white;
+}
+
+/* approvalWrite end */
+

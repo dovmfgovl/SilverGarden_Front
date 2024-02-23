@@ -48,7 +48,7 @@ const EmpListAll = () => {
 
     return (
         <>
-            <div className={styles.container} style={{ padding: '20px', borderLeft: 'none' }}>
+            <div className={styles.container} style={{ padding: '0px 20px 0px 0px', borderLeft: 'none' }}>
                 <div className={styles.pageHeader}>
                     <h5>직원목록</h5>
                     <hr />

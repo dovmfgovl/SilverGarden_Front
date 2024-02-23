@@ -14,7 +14,6 @@ const CounselRow = ({ selectedMember, counselList }) => {
             <th className='text-center'>상담일시</th>
             <th className='text-center'>상담시간</th>
             <th className='text-center'>상담방법</th>
-            <th className='text-center'>대상자번호</th>
             <th className='text-center'>상세보기</th>
           </tr>
         </thead>
@@ -25,7 +24,6 @@ const CounselRow = ({ selectedMember, counselList }) => {
               <td className='text-center'><h6 className="pe-auto">{counsel.COUNSEL_DATE}</h6></td>
               <td className='text-center'><h6 className="pe-auto">{counsel.COUNSEL_TIME}</h6></td>
               <td className='text-center'><h6 className="pe-auto">{counsel.COUNSEL_HOW}</h6></td>
-              <td className='text-center'><h6 className="pe-auto">{counsel.CLIENT_ID}</h6></td>
               <CounselDetail counsel={counsel} />
             </tr>
           ))}

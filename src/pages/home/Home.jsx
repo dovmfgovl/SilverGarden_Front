@@ -9,10 +9,11 @@ import ProgramCalendar from '../programcalendar/ProgramCalendar';
 import ChartComponent from '../programdashboard/ChartComponent';
 
 const Home = () => {
-    const sidebarList = [{
-      label: '홈',
+  const sidebarList = [
+    {
+      label: "홈",
       icon: faHome,
-      isOpen:true,//시작시 열려있도록 함
+      isOpen: true, //시작시 열려있도록 함
     },
   ];
 
