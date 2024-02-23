@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
 import { counselInsert } from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList } from '../../../redux/empInfosSlice';
+import { getEmpList } from '../../../redux/chooseEmpSlice';
 
 const CounselCreate = ({selectedMember}) => {
     const [show, setShow] = useState(false);
@@ -49,7 +49,7 @@ const CounselCreate = ({selectedMember}) => {
     },[]);
 
 
-  const empList = useSelector(state => state.empInfos.value);
+  const empList = useSelector(state => state.chooseEmp.value);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEmpList());

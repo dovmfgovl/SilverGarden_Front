@@ -3,7 +3,7 @@ import {  Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MypageExp = () => {
-  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {};
     const dispatch = useDispatch();
   
   const { Column } = Table;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
 import MemberDelete from './MemberDelete';
-import { getEmpList } from '../../redux/empInfosSlice';
+import { getEmpList } from '../../redux/chooseEmpSlice';
 
 const MemberDetail = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const MemberDetail = () => {
   const [updatedMember, setUpdatedMember] = useState(selectedMember);
   const [originalMember, setOriginalMember] = useState(selectedMember);
 
-  const empList = useSelector(state => state.empInfos.value);
+  const empList = useSelector(state => state.chooseEmp.value);
   useEffect(() => {
     dispatch(getEmpList());
   }, [dispatch]);

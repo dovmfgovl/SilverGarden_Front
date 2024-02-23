@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
 import { counselUpdate } from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList } from '../../../redux/empInfosSlice';
+import { getEmpList } from '../../../redux/chooseEmpSlice';
 const CounselUpdate = ({counsel}) => {
   const [counselDetail,setCounselDetail]=useState(
     {
@@ -25,7 +25,7 @@ console.table(counselDetail);
     const [time,setTime]=useState("")
 
 
-    const empList = useSelector(state => state.empInfos.value);
+    const empList = useSelector(state => state.chooseEmp.value);
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(getEmpList());

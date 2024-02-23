@@ -7,7 +7,7 @@ const { RangePicker } = DatePicker;
 
 const MypageSubcon2 = () => {
   const [mypageDate, setMypageDate] = useState([]); // mypage 데이터 상태
-  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; // 선택된 직원 정보
+  const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {}; // 선택된 직원 정보
   const dispatch = useDispatch(); // Redux dispatch 함수
   const [selectedDates, setSelectedDates] = useState([null, null]); // 선택된 날짜 범위 상태
 

@@ -5,7 +5,7 @@ import { memberInsert } from '../../services/api/memberApi';
 import { useNavigate } from 'react-router-dom';
 import { Descriptions, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList } from '../../redux/empInfosSlice';
+import { getEmpList } from '../../redux/chooseEmpSlice';
 
 const MemberInsert = () => {
   
@@ -17,7 +17,7 @@ const MemberInsert = () => {
   const [manager, setManager] = useState('');
   const [photo,setPhoto]=useState('');
 
-  const empList = useSelector(state => state.empInfos.value);
+  const empList = useSelector(state => state.chooseEmp.value);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEmpList());
