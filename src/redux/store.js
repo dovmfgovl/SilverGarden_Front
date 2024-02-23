@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userInfoSlice from './userInfoSlice';
 import programSlice from "./programSlice"
 import empInfosSlice from "./empInfosSlice";
+import memberReducer from "./memberSlice";
+import deptDetail from "./deptSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from "redux-persist";
 
@@ -20,12 +22,14 @@ const persisteduserInfoReducer = persistReducer(persistConfig, userInfoSlice.red
 const rootReducer = combineReducers({
   programSlice:programSlice.reducer,
   userInfoSlice:persisteduserInfoReducer,
-  empInfos:empInfosSlice
+  empInfos:empInfosSlice,
+  memberSlice: memberReducer,
+  deptDetail:deptDetail.reducer,
 });
 
-
 const store = configureStore({
-  reducer:rootReducer,
-})
+  reducer:   rootReducer,
+  
+});
 
 export default store;

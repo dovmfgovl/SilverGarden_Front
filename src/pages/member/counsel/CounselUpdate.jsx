@@ -1,10 +1,8 @@
-import React, { useCallback, useState }from 'react';
+import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
 import { counselUpdate } from '../../../services/api/memberApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmpList } from '../../../redux/empInfosSlice';
 const CounselUpdate = ({counsel}) => {
   const [counselDetail,setCounselDetail]=useState(
     {
@@ -27,27 +25,22 @@ console.table(counselDetail);
     const [time,setTime]=useState("")
 
 
-  const handleDate = useCallback((value) => {
-    console.log(value);
-    setDate(value) 
-    },[]);
+    const empList = useSelector(state => state.empInfos.value);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getEmpList());
+  }, [dispatch]);
 
-    const handleTime= useCallback((value)=>{
-      setTime(value);
-      console.log(time);
-    },[]);
 
     const handleSubmit = async () => {
       const updatedCounsel = {
         ...counselDetail,
-        COUNSEL_DATE: date,
-        COUNSEL_TIME: time
       };
       try {
         const res = await counselUpdate(updatedCounsel);
         console.log(res.data);
         alert("회원 정보가 성공적으로 저장되었습니다.");
-        handleClose()
+        window.location.reload(); 
   
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
@@ -68,8 +61,9 @@ console.table(counselDetail);
         <Row xs={1} md={2}>
         <Col>날짜
           <Col>
-        <DatePicker  placeholderText={counselDetail.COUNSEL_DATE} dateFormat="yyyy-MM-dd" onChange={handleDate}  
-        value={date} selected={date}/>
+        <input type='date'  placeholderText={counselDetail.COUNSEL_DATE} dateFormat="yyyy-MM-dd"  value={counselDetail.COUNSEL_DATE} 
+        onChange={e=>{
+          setCounselDetail({...counselDetail,COUNSEL_DATE:e.target.value}) }}/>
           </Col>
 
     </Col>
@@ -90,20 +84,20 @@ console.table(counselDetail);
        </Col>
         <Col>상담시간
         <Card style={{ width: '13rem' }}>
-        <TimePicker  value={time} disableClock={true} locale='ko'
-          onChange={handleTime}/>
-          <h6>수정전 : {counselDetail.COUNSEL_TIME}</h6>
+        <input type='time'  value={counselDetail.COUNSEL_TIME} disableClock={true} locale='ko'
+           onChange={e=>{
+            setCounselDetail({...counselDetail,COUNSEL_TIME:e.target.value}) }}/>
         </Card>
 </Col>
         <Col>상담자
         <Card style={{ width: '13rem' }}>
           <Col>
-            <Form.Control id='counsel_manager' 
-            value={counselDetail.COUNSEL_MANAGER}
-            onChange={e=>{
-              setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}
-            >
-            </Form.Control>
+          <Form.Select aria-label="Default select example"  value={counselDetail.COUNSEL_MANAGER} onChange={e=>{
+              setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}>
+                      {empList.map(emp=>(
+                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
+                      ))}
+                    </Form.Select>
           </Col>
        </Card></Col>
         <Col>내용

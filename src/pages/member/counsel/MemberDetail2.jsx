@@ -1,24 +1,23 @@
 import React from 'react'
-import {Col, Image, Row, Stack, Table } from 'react-bootstrap'
+import {Col, Image,  Stack} from 'react-bootstrap'
 import Counsel from './Counsel'
+import { useDispatch, useSelector } from 'react-redux';
+import { Descriptions } from 'antd';
 
-const MemberDetail2 = ({selectedMember}) => {
-
+const MemberDetail2 = () => {
+  const dispatch = useDispatch();
+  const selectedMember = useSelector(state => state.memberSlice.selectedMember) || {};
   return (
     <div className="container">
       <div className="user-detail">
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상담일지</h2>
         </Col>
         <Col>
           <Stack direction="horizontal" gap={2}>
           </Stack>
         </Col>
-        {selectedMember ? (
-          <MemberDetailPage selectedMember={selectedMember} />
-        ) : (
-          <p>선택된 회원이 없습니다.</p>
-        )}
+          <MemberDetailPage selectedMember={selectedMember}  />
       </div>
     </div>
   );
@@ -27,45 +26,18 @@ const MemberDetail2 = ({selectedMember}) => {
 export const MemberDetailPage = ({selectedMember}) => {
   return (
     <>
-          <Stack direction="horizontal" gap={3}>
-      <Image width={210}
-        height={180}
-        alt="171x180" src="logo192.png" rounded 
-        className='p-2 ms-auto'/>
-              <Table className='shadow  w-100 ms-auto' >
-                <tbody>
-                  <tr>
-                    <th><strong>이름:</strong></th>
-                    <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_NAME : ''}</td>
-                    <th><strong>이용자번호:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_ID : ''}</td>
-                  </tr>
-                  <tr>
-                    <th><strong>생년월일:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_BIRTH : ''}</td>
-                    <th><strong>나이:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> </td>
-                  </tr>
-                  <tr>
-                    <th><strong>등록일:</strong></th>
-                     <td style={{width: '35%'}} className='px-2'>{selectedMember ? selectedMember.REG_DATE : ''}</td>
-                    <th><strong>성별:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_GENDER : ''}</td>
-                  </tr>
-                  <tr>
-                  <th><strong>담당자:</strong></th>
-                     <td style={{width: '1%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_MANAGER : ''}</td>
-                    <th><strong>전화번호:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'>{selectedMember ? selectedMember.CLIENT_TEL : ''}</td>
-                  </tr>
-                  <tr>
-                     <th><strong>주소:</strong></th>
-                     <td style={{width: '20%'}} className='px-2'> {selectedMember ? selectedMember.CLIENT_ADDRESS : ''}</td>
-                  </tr>
-              </tbody>
-              </Table>
-      </Stack>
-      <Counsel selectedMember={selectedMember}/>
+   <Descriptions bordered >
+            <Descriptions.Item label="이름">{selectedMember.CLIENT_NAME}</Descriptions.Item>
+            <Descriptions.Item label="이용자번호" span={2}>{selectedMember.CLIENT_ID}</Descriptions.Item>
+            <Descriptions.Item label="생년월일">{selectedMember.CLIENT_BIRTH}</Descriptions.Item>
+            <Descriptions.Item label="등록일" span={2}>{selectedMember.REG_DATE}</Descriptions.Item>
+            <Descriptions.Item label="성별">{selectedMember.CLIENT_GENDER}</Descriptions.Item>
+            <Descriptions.Item label="담당자"span={2}>{selectedMember.CLIENT_MANAGER}</Descriptions.Item>
+            <Descriptions.Item label="전화번호">{selectedMember.CLIENT_TEL}</Descriptions.Item>
+            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
+            <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
+          </Descriptions>
+       <Counsel selectedMember={selectedMember}/>
     </>
   )
 }

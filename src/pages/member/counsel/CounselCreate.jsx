@@ -1,15 +1,19 @@
-import React, { useCallback, useState }from 'react';
+import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
 import { counselInsert } from '../../../services/api/memberApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmpList } from '../../../redux/empInfosSlice';
 
 const CounselCreate = ({selectedMember}) => {
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+      setDate('')
+      setHow('')
+      setTime('')
+      setManager('')
+      setContent('')
+      setShow(false)
+    };
     const handleShow = () => setShow(true);
 
     //등록 항목
@@ -44,6 +48,13 @@ const CounselCreate = ({selectedMember}) => {
       console.log(content);
     },[]);
 
+
+  const empList = useSelector(state => state.empInfos.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEmpList());
+}, [dispatch]);
+
     const handleSubmit = async () => {
      const counsel= {
               CLIENT_ID: selectedMember.CLIENT_ID,
@@ -56,12 +67,12 @@ const CounselCreate = ({selectedMember}) => {
               MOD_ID: '202402-00000008',
           };
       try {
-        console.table(counsel);
+        // console.table(counsel);
         const res = await counselInsert(counsel);
         const responseData = JSON.parse(res.data);
         console.log(responseData);
         alert("회원 정보가 성공적으로 저장되었습니다.");
-        handleClose();
+        window.location.reload(); 
   
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
@@ -71,10 +82,13 @@ const CounselCreate = ({selectedMember}) => {
   
   return (
     <>
-      <Button gap={2} variant="primary" onClick={handleShow}>
-        상담일지 작성 
-      </Button>
-
+   {Object.keys(selectedMember).length > 0 ? (
+        <Button gap={2} variant="outline-primary" onClick={handleShow}>
+          상담일지 작성
+        </Button>
+      ) : (
+        <Button disabled>상담일지 작성</Button>
+      )}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>상담일지 작성</Modal.Title>
@@ -83,7 +97,7 @@ const CounselCreate = ({selectedMember}) => {
         <Row xs={1} md={2}>
         <Col>날짜
           <Col>
-        <DatePicker  id="tb_date"  dateFormat="yyyy-MM-dd" onChange={changeDate}  value={date} selected={date}/>
+        <input type='date'  id="tb_date"  dateFormat="yyyy-MM-dd" onChange={e=>{changeDate(e.target.value)}}  value={date} selected={date}/>
           </Col>
 
     </Col>
@@ -104,17 +118,17 @@ const CounselCreate = ({selectedMember}) => {
        </Col>
         <Col>상담시간
         <Card style={{ width: '13rem' }}>
-        <TimePicker value={time} onChange={handleTime} disableClock={true} locale='ko'/>
+        <input type='time'  onChange={e =>{handleTime(e.target.value)}} disableClock={true} locale='ko'/>
         </Card>
 </Col>
         <Col>상담자
         <Card style={{ width: '13rem' }}>
           <Col>
-            <Form.Control id='counsel_manager' 
-            value={manager}
-            onChange={e => {{handleManager(e.target.value)}}}
-            >
-            </Form.Control>
+            <Form.Select aria-label="Default select example"   value={manager} onChange={e => {handleManager(e.target.value)}}>
+                      {empList.map(emp=>(
+                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
+                      ))}
+                    </Form.Select>
           </Col>
        </Card></Col>
         <Col>내용
