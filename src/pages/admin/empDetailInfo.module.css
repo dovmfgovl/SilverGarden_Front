@@ -18,9 +18,9 @@
 }
 
 .empPicture{
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   grid-area: empPicture;
-  background-color: aliceblue;
+  background-color: white;
 
 }
 .empInfo1{

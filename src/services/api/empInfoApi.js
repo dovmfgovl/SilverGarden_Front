@@ -68,6 +68,28 @@ export const empUpdateDB = (emp) => {
     });
 };
 
+/* export const empUpdateDB = (emp, file) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const formData = new FormData();
+            formData.append('profile', file); // 파일 추가
+            for (const key in emp) {
+                formData.append(key, emp[key]); // 직원 정보 추가
+            }
+            const response = axios.put(process.env.REACT_APP_SPRING_IP + "emp/empUpdate", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                processData: false,
+                contentType: false,
+            });
+            resolve(response);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}; */
+
 export const excelDownDB = (emp) => {
     return new Promise((resolve, reject) => {
         try {

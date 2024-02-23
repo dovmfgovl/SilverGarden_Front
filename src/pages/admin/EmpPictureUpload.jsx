@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from './notice.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSquareMinus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,7 +18,7 @@ const EmpPictureUpload = ({handleFile, fileList}) => {
 
   return (
     <>
-    <div className={styles.noticeFileUploadBar}>
+    <div /* className={styles.empPictureUploadBar} */>
       <div>
         <input type="file" onChange={handleFileChange} />
         <button onClick={(e)=> {

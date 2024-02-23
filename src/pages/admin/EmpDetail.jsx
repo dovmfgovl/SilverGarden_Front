@@ -4,18 +4,20 @@ import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 import { Col, Row } from 'antd';
+import EmpPictureUpload from './EmpPictureUpload';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee);
   const memoSelectedEmployee = useMemo(() => selectedEmployee || {}, [selectedEmployee]);
-  const [editing, setEditing] = useState(false);
-  const [updatedEmployee, setUpdatedEmployee] = useState(memoSelectedEmployee);
-  const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee);
+  const [editing, setEditing] = useState(false); // 수정 모드 여부를 관리하는 state
+  const [updatedEmployee, setUpdatedEmployee] = useState(memoSelectedEmployee); // 수정된 직원 정보를 관리하는 state
+  const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee); // 원래의 직원 정보를 관리하는 state
+  const [fileList, setFileList] = useState([]); // 파일 리스트를 관리하는 state
 
   useEffect(() => {
+    // 선택된 직원 정보가 변경되면 해당 정보로 state 업데이트
     setUpdatedEmployee(prevEmployee => {
-      // memoSelectedEmployee와 비교하여 변경된 경우에만 업데이트
       if (prevEmployee !== memoSelectedEmployee) {
         return memoSelectedEmployee;
       }
@@ -43,61 +45,63 @@ const EmpDetail = () => {
   ];
 
   const handleEdit = () => {
-    setEditing(true); // 수정 모드 활성화
+    setEditing(true); // 수정 버튼을 누를 때 수정 모드 활성화
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => { // 입력 필드 값 변경 시 상태 업데이트
     const { name, value } = e.target;
     setUpdatedEmployee(prevState => ({
       ...prevState, [name]: value
     }));
   };
 
+  const handleFile = (list) => { // 파일 선택 시 파일 리스트 업데이트
+    setFileList([...list])
+  }
+
   const handleCancel = () => {
-    setEditing(false); // 수정 모드 비활성화
-    setUpdatedEmployee(originalEmployee); // 수정 취소 시 원래 정보로 되돌림
+    setEditing(false); // 수정 취소 시 수정 모드 비활성화
+    setUpdatedEmployee(originalEmployee); // 수정 취소 시 이전 상태로 되돌림
   };
 
-  // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져오도록 수정
+  // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져옴
   const handleSaveChanges = () => {
-    dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
-    .then(() => {
-      dispatch(setDetail(updatedEmployee)); // Redux 스토어에서 선택된 직원 정보 업데이트
-      setEditing(false); // 수정 모드 비활성화
-
-      // 수정된 직원 정보를 Redux 스토어에서 가져와 전체 직원 목록을 업데이트
-      dispatch(getEmpList()); // 전체 직원 목록 다시 가져오기
-    })
-    .catch(error => {
-      console.error('Error saving employee details: ', error);
-    });
+    dispatch(saveEmpDetails(updatedEmployee))
+      .then(() => {
+        dispatch(setDetail(updatedEmployee));
+        setEditing(false); // 저장 후 수정 모드 비활성화
+        dispatch(getEmpList()); // 저장 후 전체 목록 갱신
+      })
+      .catch(error => {
+        console.error('Error saving employee details: ', error);
+      });
   }
 
   const renderInputField = ({ label, name, type, options }, index) => (
     <div className={styles.empInfoItem} key={name}>
       <div className={styles.label}>{label}</div>
       <div className={styles.selectContainer}>
-      {type === 'select' ? ( /* 셀렉트 박스 생성 */
-        <select
-          className={styles.selectBox}
-          value={updatedEmployee[name] || ''}
-          onChange={handleInputChange}
-          disabled={!editing}
-          name={name}
-        >
-          {options.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
-          ))}
-        </select>
-      ) : (
-        <input className={styles.inputFields}
-          type={type}
-          value={updatedEmployee[name] || ''}
-          onChange={handleInputChange}
-          readOnly={!editing}
-          name={name}
-        />
-      )}
+        {type === 'select' ? (
+          <select
+            className={styles.selectBox}
+            value={updatedEmployee[name] || ''}
+            onChange={handleInputChange}
+            disabled={!editing}
+            name={name}
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+        ) : (
+          <input className={styles.inputFields}
+            type={type}
+            value={updatedEmployee[name] || ''}
+            onChange={handleInputChange}
+            readOnly={!editing}
+            name={name}
+          />
+        )}
       </div>
       {index !== inputFields.length - 1 && <div className={styles.divider} />}
     </div>
@@ -105,28 +109,35 @@ const EmpDetail = () => {
 
   return (
     <div className={styles.empDetailInfo}>
-      <Row style={{marginBottom:"10px"}}>
-        <Col md = {19}>          
-          <h5>직원 상세 정보</h5>          
+      <Row style={{ marginBottom: "10px" }}>
+        <Col md={19}>
+          <h5>직원 상세 정보</h5>
         </Col>
-        <Col md ={5}>          
+        <Col md={5}>
           <div className="col-9">
             <Row>
               <Col md={16}>
-                {editing && <Button style = {{width : "80px"}} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>}
+                {editing ? (
+                  <Button style={{ width: "80px" }} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>
+                ) : (
+                  <Button style={{ width: "80px" }} variant="outline-success" onClick={handleEdit}>수정</Button>
+                )}
               </Col>
               <Col md={8}>
-                <Button style = {{width : "80px"}} variant="outline-success" onClick={editing ? handleCancel : handleEdit}>
-                  {editing ? '취소' : '수정'}
-                </Button>
+                {editing && (
+                  <Button style={{ width: "80px" }} variant="outline-danger" onClick={handleCancel}>취소</Button>
+                )}
               </Col>
             </Row>
-          </div>          
+          </div>
         </Col>
       </Row>
       <div className={styles.empInfoWrap}>
         <div className={styles.empPicture}>
-          사진
+          {editing && <EmpPictureUpload handleFile={handleFile} fileList={fileList} />} {/* 수정 모드일 때만 파일 업로드 활성화 */}
+          {fileList.length > 0 && ( // 파일 선택 시 미리보기 표시
+            <img src={URL.createObjectURL(fileList[0])} alt="Employee Preview" style={{ width: '160px', height: '180px' }} />
+          )}
         </div>
         {inputFields.map(renderInputField)}
       </div>

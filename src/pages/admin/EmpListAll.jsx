@@ -112,12 +112,12 @@ const EmpListAll = () => {
                         <thead>
                             <tr>
                                 <th style={{width: "5%"}}>#</th>
-                                <th style={{width: "18%"}}>사원번호</th>
-                                <th style={{width: "8%"}}>현황</th>
-                                <th style={{width: "10%"}}>사원명</th>
-                                <th style={{width: "12%"}}>부서</th>
-                                <th style={{width: "10%"}}>직급</th>
-                                <th style={{width: "10%"}}>전화번호</th>
+                                <th style={{width: "12%"}}>사원번호</th>
+                                <th style={{width: "9%"}}>현황</th>
+                                <th style={{width: "13%"}}>사원명</th>
+                                <th style={{width: "15%"}}>부서</th>
+                                <th style={{width: "12%"}}>직급</th>
+                                <th style={{width: "17%"}}>전화번호</th>
                             </tr>
                         </thead>
                         <tbody>
