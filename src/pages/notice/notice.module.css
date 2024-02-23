@@ -18,7 +18,8 @@
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
-  grid-area: sidebarLayout
+  grid-area: sidebarLayout;
+  border-right: 1px solid lightgray;
 }
 
 .noticeTitleBar{
@@ -29,7 +30,7 @@
 }
 
 .innerContentLayout{
-  background-color: rgb(71, 102, 133);
+  background-color: rgb(255, 255, 255);
   grid-area: innerContentLayout;
 }
 
@@ -42,7 +43,7 @@
   "noticePagenation noticePagenation"
   ;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 8fr 1fr;
+  grid-template-rows: 3fr 8fr 50px;
 }
 
 .noticeHeader{
@@ -62,7 +63,7 @@
   margin:10px;
   padding:10px;
 }
-.noticePagenation{
+.noticePagination{
   grid-area: noticePagenation;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -74,7 +75,7 @@
 
 .noticeDetailLayout{
   height: 100%;
-  background-color: rgb(159, 198, 237);
+  background-color: rgb(227, 227, 227);
   display:grid;
   grid-template-areas:
   "noticeDetailBtn"
@@ -96,7 +97,7 @@
   flex-direction:column;
   align-items: start;
   grid-area: noticeDetailHeader;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(255, 255, 255);
   margin:0 20px 0 20px;
   padding: 0 10px
 }
@@ -131,14 +132,20 @@
   align-items: center;
 }
 .noticeDetailAttachment div{
-  cursor: pointer;
   margin: 0 20px;
 }
+
+.noticeDetailAttachment div button{
+  margin: 0 10px;
+  border: none;
+  background-color: white;
+}
+
+
 .noticeDatailContent{
   grid-area: noticeDatailContent;
   background-color: rgb(255, 255, 255);
   margin:20px;
-  padding: 20px;
   overflow-y: auto;
 }
 
@@ -149,7 +156,7 @@
 
 .noticeWriteLayout{
   height: 100%;
-  background-color: rgb(81, 134, 188);
+  background-color: rgb(227, 227, 227);
   display:grid;
   grid-template-areas:
   "noticeWriteHeader"
@@ -163,7 +170,7 @@
 
 .noticeWriteHeader{
   grid-area: noticeWriteHeader;
-  background-color: rgb(207, 207, 207);
+  background-color: rgb(255, 255, 255);
   padding:10px 50px 10px 10px;
   margin:0 20px;
 }
@@ -182,6 +189,11 @@
 }
  .noticeFileUploadBar div{
   margin: 5px;
+  vertical-align: middle;
+ }
+ .noticeFileUploadBar div button{
+  border: none;
+  background-color: white;
  }
 
 .noticeWriteContent{

@@ -1,14 +1,79 @@
+/* approval start */
 .approvalWrap{
   height: 100%;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-areas: 
+  "approvalSidebarWrap approvalTitleBar"
+  "approvalSidebarWrap approvalContentWrap"
+  ;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 70px 3fr;
 }
 
 .approvalSidebarWrap{
+  grid-area: approvalSidebarWrap;
   background-color: rgb(255, 255, 255);
+  border-right: 1px solid lightgray;
+}
+
+.approvalTitleBar{
+  grid-area: approvalTitleBar;
+  background-color: rgb(255, 255, 255);
+  font-size: 2.0rem;
+  padding:10px;
 }
 
 .approvalContentWrap{
-  background-color: rgb(139, 139, 198);
-  flex-grow: 1;
+  grid-area: approvalContentWrap;
+  background-color: rgb(227, 227, 227);
 }
+/* approval end */
+
+
+/* waitList start */
+
+.approvalListWrap{
+  height:100%;
+  display: grid;
+  grid-template-areas: 
+  "approvalListHeader approvalListHeader"
+  "approvalListContent approvalListContent"
+  "approvalListPagination approvalListPagination"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 8fr 50px;
+}
+
+.approvalListHeader{
+  grid-area: approvalListHeader;
+  background-color: rgb(255, 255, 255);
+  min-width: 790px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  padding:10px 10px;
+  margin:10px;
+}
+
+.approvalListHeader div:nth-child(1){
+  align-self: flex-end;
+}
+
+.approvalListContent{
+  background-color: rgb(255, 255, 255);
+  grid-area: approvalListContent;
+  margin:10px;
+  padding:10px;
+}
+
+.approvalListPagination{
+  grid-area: approvalListPagination;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
+/* waitList end */

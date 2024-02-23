@@ -1,0 +1,92 @@
+.innerEmpInfoWrap {
+  height: 90%;
+  display: grid;
+  grid-template-areas: 
+  "empListContentWrap empDetailWrap"
+  "empListContentWrap empBaseInfoWrap"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.empListContentWrap{
+  grid-area: empListContentWrap;
+  background-color: white;
+}
+
+.empDetailWrap{
+  grid-area: empDetailWrap;
+  background-color: white;
+}
+
+.empBaseInfoWrap{
+  grid-area: empBaseInfoWrap;
+  background-color: white;
+}
+
+.listGroup {
+  width: 200px;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+.listGroupItem {
+  border: none;
+  color: #000;
+  background-color: #f8f9fa;
+}
+
+.listGroupItemHover:hover {
+  background-color: #e9ecef;
+}
+
+.content {
+  margin-left: 50px;
+  padding: 15px;
+}
+
+/* 페이지 전체를 꽉 채우도록 설정 */
+.container {
+  width: 100%;
+  height: 100vh; /* 100% 높이로 설정 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 페이지 헤더 스타일 조정 */
+.page-header {
+  text-align: center;
+}
+
+/* 검색 및 버튼 컨테이너 스타일 조정 */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 테이블 푸터 스타일 조정 */
+.empListFooter {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.pageHeader {
+  text-align: left;
+}
+
+
+/* 버튼 스타일을 조정하여 검색 버튼과 엑셀 다운로드 버튼이 인접하도록 설정 */
+#btn_search, #btn_excelDown {
+  margin-right: 10px; /* 원하는 간격으로 조절 */
+}
+
+/* 테이블 스타일 조정 */
+.empList {
+  flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+  overflow-x: auto;  /* 가로 스크롤을 허용하여 내용이 너무 길 때 스크롤 가능하도록 설정 */
+  padding: 15px;
+}

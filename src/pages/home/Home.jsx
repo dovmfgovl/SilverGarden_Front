@@ -1,34 +1,56 @@
-import {faList, faPenNib, faPenToSquare,} from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react'
+import {faHome} from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
+import ApprovalListHeader from '../approval/ApprovalListHeader';
+import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
+import ProgramCalendar from '../programcalendar/ProgramCalendar';
+import ChartComponent from '../programdashboard/ChartComponent';
 
 const Home = () => {
-    const sidebarList = [{
-      label: '홈',
-      icon: faPenNib,
-      isOpen:true,//시작시 열려있도록 함
-      subMenuItems: [
-        { label: '전체공지', icon: faList},
-        { label: '공지작성', icon: faPenToSquare },
-      ],
+  const sidebarList = [
+    {
+      label: "홈",
+      icon: faHome,
+      isOpen: true, //시작시 열려있도록 함
     },
   ];
-  const handleMenu = (menuTitle) =>{//사이드바 메뉴를 클릭했들 때 해당 페이지를 렌더링하기 위해 함수를 선언
-    setPage(menuTitle);
-  } 
-
-  const [page, setPage] = useState("전체공지");
-  console.log(page);
 
   return (
     <div className={styles.homeWrap}>
       <div className={styles.profileWrap}><HomeProfile/></div>
       <div className={styles.sidebarWrap}><SidebarCommon list={sidebarList}/></div>
-      <div className={styles.homeInnerContentWrap}>내용물</div>
+      <div className={styles.firstContentWrap}>
+        <div className={styles.subContentWrap}>
+          <h4 className={styles.titleWrap}>전자결재</h4>
+          {/* <ApprovalListHeader /> */}
+        </div>
+        <div className={styles.subContentWrap2}>
+          <h4 className={styles.titleWrap}>쪽지함</h4>
+          {/* <ApprovalListHeader /> */}
+        </div>
+      </div>
+      <div className={styles.secondContentWrap}>
+        <h4 className={styles.titleWrap}>일정표</h4>
+        {/* <ProgramCalendar /> */}
+      </div>
+      <div className={styles.thirdContentWrap}>
+        <h4 className={styles.titleWrap}>공지사항</h4>
+      </div>
+      <div className={styles.forthContentWrap}>
+        <div className={styles.subContentWrap}>
+          <h4 className={styles.titleWrap}>대시보드</h4>
+          {/* <CustomShapeLineChartComponent /> */}
+        </div>
+        <div className={styles.subContentWrap2}>
+          <h4 className={styles.titleWrap}>대시보드2</h4>
+          {/* <ChartComponent /> */}
+        </div>
+
+      </div>
     </div>
   )
 }
 
-export default Home
+export default Home;

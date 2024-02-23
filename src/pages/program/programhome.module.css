@@ -1,0 +1,103 @@
+input, option, select{
+    width: 100%;
+}
+
+textarea{
+    width: 100%;
+    height: 25vh;
+}
+
+
+.programWrap{
+    height: 90vh;
+    display: grid;
+    grid-template-areas: 
+    "programSidebarWrap programTitleBar"
+    "programSidebarWrap innerContentLayout"
+    "programSidebarWrap innerContentLayout";
+    /* background-color: rgb(139, 238, 139); */
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 70px 1fr;
+}
+
+.programTitleBar{
+    grid-area: programTitleBar;
+    padding: 10px;
+    font-size: 2.0rem;
+    font-weight: bolder;
+}
+
+.programSidebarWrap{
+    display : flex;
+    grid-area: programSidebarWrap;
+    /* background-color: rgb(21, 0, 253); */
+}
+
+.innerContentLayout{
+    grid-area: innerContentLayout;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.programInfoWrap{
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    "programContentWrap programDetailWrap"
+    "programContentWrap programDetailWrap"
+    "programContentWrap programDetailWrap";
+    /* background-color: rgb(255, 0, 208); */
+    grid-template-columns: 3fr 3fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.programContentWrap{
+    grid-area: programContentWrap;
+    /* background-color: rgb(117, 120, 74); */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
+    border: 1px solid rgb(216, 216, 216);
+    padding: 8px;
+    text-align: center;
+    margin-right: 2px;
+}
+.programDetailWrap{
+    grid-area: programDetailWrap;
+    /* background-color: rgb(163, 194, 192); */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
+    text-align: center;
+    padding: 8px;
+    border: 1px solid rgb(216, 216, 216);
+    margin-left: 2px;
+}
+.littleTitleBar{
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-align: left;
+}
+
+/* 세로 페이지 출력시(화면 절반에 적당) */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 20mm;
+    }
+    body {
+        zoom: 0.7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+}
+
+.programPagination{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 10px 10px 10px;
+}

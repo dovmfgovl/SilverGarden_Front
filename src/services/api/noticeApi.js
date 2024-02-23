@@ -22,6 +22,7 @@ export const getNoticeDetail = (n_no) => {
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "notice/noticeDetail",
         params: {'n_no': n_no},
+
       });
       resolve(response);
     } catch (error) {
@@ -29,7 +30,6 @@ export const getNoticeDetail = (n_no) => {
     }
   });
 };
-
 
 export const noticeInsert = (data) => {
   return new Promise((resolve, reject) => {
@@ -112,3 +112,23 @@ export const noticeFileDownload = (filename) => {
     });
   });
 };
+
+export const noticeImageUpload = (file) =>{
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "post",
+        url: process.env.REACT_APP_SPRING_IP+"notice/imageUpload",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        processData: false,
+        contentType: false,
+        data: file,
+      })
+      resolve(response)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}

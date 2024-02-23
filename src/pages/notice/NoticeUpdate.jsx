@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import styles from './notice.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { noticeUpdate } from '../../services/api/noticeApi';
+import QuillEditor from '../../components/Quill/QuillEditor';
 
 const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
   const detail = [...noticeList.filter((detail)=>detail.N_NO === noticeNo)][0]//공지리스트에서 공지번호로 글정보를 가져옴
@@ -16,6 +17,23 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
     });
     console.log(noticeDetail);
 
+    ////quillEditor/////////////////////////
+    const  quillRef = useRef()
+    const [images, setImages] = useState([])
+  
+    const handleContent = useCallback((value) => {
+      console.log(value)
+      setNoticeDetail({...noticeDetail, n_content: value})
+    },[])
+  
+    useEffect(() => {
+      for(let i=0;i<images.length;i++){//files는 배열이다 files.length=3
+        if(!noticeDetail.n_content.match(images[i])){// 사진이 있으면
+          console.log(images)
+          setImages(images.filter(image=>image!==images[i]))
+        }
+      }
+    },[noticeDetail, images])
 
   const handleUpdate = async () =>{//서브밋이 요청되었을 때 일하는 함수
     const response = await noticeUpdate(noticeDetail);
@@ -27,6 +45,7 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
   const handleCancel = async () =>{//취소버튼을 눌렀을 때 상세페이지로 이동
     handlePage("공지상세", noticeNo);
   }
+
 
 
   return (
@@ -58,16 +77,7 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
           </Button>
       </div>
       <div className={styles.noticeWriteContent}>
-        <InputGroup>
-          <InputGroup.Text>내용</InputGroup.Text>
-          <Form.Control 
-          as="textarea" 
-          value={noticeDetail.n_content}
-          onChange={(e)=>{
-            setNoticeDetail({...noticeDetail, n_content: e.target.value})
-          }}
-          />
-        </InputGroup>
+        <QuillEditor isReadOnly={false} value={noticeDetail.n_content} handleContent={handleContent} quillRef={quillRef} images={images} />
       </div>
       <div className={styles.noticeWriteAttachment}>
       <FontAwesomeIcon icon={faPaperclip} />첨부파일:

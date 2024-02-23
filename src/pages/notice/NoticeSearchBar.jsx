@@ -22,6 +22,7 @@ const NoticeSearchBar = ({getList}) => {
       setKeyword('');
     }
   }
+  
   const handleKeyDown = (e) =>{
     if(e.keyCode === 13){
       handleSearch();

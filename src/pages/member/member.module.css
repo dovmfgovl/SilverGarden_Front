@@ -1,0 +1,54 @@
+.MemberContainerLayout{
+    height: 100%;
+    display:grid;
+    grid-template-areas:
+    "sidebarLayout memberTitlebar"
+    "sidebarLayout innerContentLayout";
+    grid-template-columns: 0.5fr 5fr;
+    grid-template-rows: 0.5fr 5fr;
+}
+
+.sidebarLayout{
+    grid-area: sidebarLayout;
+    background-color: white;
+}
+
+.innerContentLayout{
+    grid-area: innerContentLayout;
+    background-color: white;
+}
+
+.memberTitlebar{
+    grid-area: memberTitlebar;
+    background-color: white;
+    font-size: 2.0rem;
+    padding: 10px;
+}
+
+.InnerMemberLayout{
+    height: 100%;
+    display:grid;
+    grid-template-areas:
+    "leftMemberLayout rightMemberLayout1"
+    "leftMemberLayout rightMemberLayout2"
+    ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+}
+
+.leftMemberLayout{
+    grid-area: leftMemberLayout;
+    background-color: rgb(255, 255, 255);
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+   
+}
+.rightMemberLayout1{
+    grid-area: rightMemberLayout1;
+    background-color: rgb(255, 255, 255);
+     flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+    
+}
+.rightMemberLayout2{
+    grid-area: rightMemberLayout2;
+    background-color: white;
+}
