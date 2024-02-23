@@ -40,9 +40,7 @@ const LoginForm = () => {
             e_rank: response.e_rank,
           })
         );
-        setTimeout(() => {
-          navigate("home");
-        }, 2000);
+        navigate("home");
       })
       .catch((error) => {
         alert("아이디 혹은 비밀번호를 올바르게 입력해주세요.");

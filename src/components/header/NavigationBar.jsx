@@ -8,13 +8,16 @@ import { Nav, Navbar } from "react-bootstrap";
 import Roboto from "../../assets/fonts/Roboto";
 import styles from "./navigation.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import userInfoSlice from "../../redux/userInfoSlice";
 
 const NavigationBar = ({ isLogin }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    localStorage.removeItem("persist:root");
+    dispatch(userInfoSlice.actions.setEmpInfo({}));
     navigate("/");
   };
   return (
