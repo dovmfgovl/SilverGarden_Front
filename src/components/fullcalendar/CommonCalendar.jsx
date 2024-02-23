@@ -18,6 +18,7 @@ const CommonCalendar = ({
   onEventDelete,
   urls,
   columnNames,
+  eventData
 }) => {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,10 +55,7 @@ const CommonCalendar = ({
       }
     };
     fetchAndDispatch();
-  }, []);
-
-  const eventTest = useSelector((state)=>state.calendarSlice.events);
-  console.log(eventTest);
+  }, [isModalOpen]);
   
   //모달 핸들링
   const handleModalAction = (action, event) => {
@@ -163,7 +161,7 @@ const CommonCalendar = ({
       center: "title",
       right: "dayGridMonth,timeGridWeek,listWeek",
     },
-    events: eventTest,
+    events: eventData,
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
@@ -200,7 +198,7 @@ const CommonCalendar = ({
     <>
       <div className="customCalendar">
         <FullCalendar
-          key={eventTest.size} // 이벤트 배열의 길이를 키로 사용
+          key={eventData.size} // 이벤트 배열의 길이를 키로 사용
           plugins={[
             dayGridPlugin,
             interactionPlugin,
