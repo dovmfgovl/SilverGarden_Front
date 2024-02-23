@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userInfoSlice from './userInfoSlice';
 import programSlice from "./programSlice";
 import calendarSlice from "./calendarSlice";
-import programSlice from "./programSlice"
 import empInfosSlice from "./empInfosSlice";
 import memberReducer from "./memberSlice";
 import deptDetail from "./deptSlice";
@@ -26,6 +25,7 @@ const rootReducer = combineReducers({
   programSlice:programSlice.reducer,
   userInfoSlice:persisteduserInfoReducer,
   empInfos:empInfosSlice,
+  calendarSlice:calendarSlice,
   chooseEmp:chooseEmpSlice,
   memberSlice: memberReducer,
   deptDetail:deptDetail.reducer,
