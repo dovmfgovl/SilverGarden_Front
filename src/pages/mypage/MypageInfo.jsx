@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const MypageInfo = () => {
    const dispatch = useDispatch();
-   const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {}; 
+   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
+   const userData = useSelector(state=> state.userInfoSlice)
 
 
    // select who에서 선택한 직원을 selectedEmployee로 설정하고 사용합니다.
