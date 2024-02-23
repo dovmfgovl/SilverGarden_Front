@@ -5,7 +5,7 @@ import { ProgramDeleteDB, ProgramUpdateDB } from '../../services/api/programApi'
 import { Form } from "react-bootstrap";
 import styles from '../program/programhome.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRotateRight, faFile, faPenToSquare, faPrint, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const FormControl = ({ value, name, onChange, type = 'text', textarea = false }) => {
     return (
@@ -32,17 +32,20 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
     const pNO = useSelector((state) => state.programSlice.value);
     //삭제하기
     const handleDelete = async () => {
-        console.log(pNO);
         console.log('삭제 버튼이 클릭되었습니다.!');
-        try {
-            const res = await ProgramDeleteDB(pNO);
-            console.log(res);
-            getProgramList(); // 초기화 진행
-            handleReset(); // 등록화면 이동
-        } catch (error) {
-            console.error('삭제 에러:', error);
-        }
-    };
+        const confirmDelete = window.confirm("삭제하시겠습니까?");
+        if(confirmDelete){
+            try {
+                const res = await ProgramDeleteDB(pNO);
+                console.log(res);
+                getProgramList(); // 초기화 진행
+                handleReset(); // 등록화면 이동
+            } catch (error) {
+                console.error('삭제 에러:', error);
+            }
+        };
+        getProgramList(); // 초기화 진행
+    }
     //입력값 변경
     const handleInputChange = (e, name) => {
         const { value } = e.target;
@@ -79,11 +82,16 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
             PG_CONTENT: pNO.PG_CONTENT,
             PG_REPEAT_TYPE: pNO.PG_REPEAT_TYPE
         };
-        //수정하기
-        const res = await ProgramUpdateDB(data);
-        console.log(res);
-        console.log(data);
-        alert("프로그램이 수정되었습니다!!");
+        const confirmUpdate = window.confirm("수정하시겠습니까?");
+        if(confirmUpdate){
+            //수정하기
+            const res = await ProgramUpdateDB(data);
+            console.log(res);
+            console.log(data);
+            alert("프로그램이 수정되었습니다!!");
+            getProgramList(); // 초기화 진행
+            handleReset(); // 등록화면 이동
+        }
         getProgramList(); // 초기화 진행
         handleReset(); // 등록화면 이동
     };
@@ -92,16 +100,16 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
         <div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '3px' }}>
             <button className="btn btn-outline-danger" style={buttonStyles} onClick={handleDelete}>
-            삭제
+                <FontAwesomeIcon icon={faTrashCan}  style={{marginRight:'2px'}}/>삭제
             </button>
             <button className="btn btn-outline-secondary" style={buttonStyles} onClick={handleOutput}>
-            출력
+                <FontAwesomeIcon icon={faPrint} style={{marginRight:'2px'}}/>출력
             </button>
             <button className="btn btn-outline-warning" style={buttonStyles} onClick={handleReset}>
-            초기화
+                <FontAwesomeIcon icon={faArrowRotateRight} style={{marginRight:'2px'}}/>초기화
             </button>
             <button className="btn btn-outline-primary" style={buttonStyles} onClick={onSubmit}>
-            수정
+                <FontAwesomeIcon icon={faPenToSquare}  style={{marginRight:'2px'}}/>수정
             </button>
         </div>
         <div ref={componentRef}>
