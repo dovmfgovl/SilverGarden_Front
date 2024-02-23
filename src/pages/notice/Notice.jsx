@@ -14,6 +14,7 @@ import { getNoticeList } from "../../services/api/noticeApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
+import { useSelector } from "react-redux";
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -48,6 +49,7 @@ const Notice = () => {
   const [noticeNo, setNoticeNo] = useState({});
   const [noticeList, setNoticeList] = useState([]);
   const [fileList, setFileList] = useState([]); //공지상세에서 가져온 파일정보를 관리할 state
+  const empData = useSelector(state => state.userInfoSlice)
 
   const getList = async (params) => {
     //DB에서 리스트를 불러오는 함수
@@ -98,6 +100,7 @@ const Notice = () => {
             handlePage={handlePage}
             fileList={fileList}
             handleFileList={handleFileList}
+            empData={empData}
           />
         )}
         {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} />}

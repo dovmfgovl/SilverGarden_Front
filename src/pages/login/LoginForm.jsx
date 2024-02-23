@@ -15,6 +15,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
   const {
     handleSubmit,
     register,
@@ -40,9 +41,7 @@ const LoginForm = () => {
             e_rank: response.e_rank,
           })
         );
-        setTimeout(() => {
           navigate("home");
-        }, 2000);
       })
       .catch((error) => {
         alert("아이디 혹은 비밀번호를 올바르게 입력해주세요.");

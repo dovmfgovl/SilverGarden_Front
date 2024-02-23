@@ -7,7 +7,7 @@ import {faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import QuillEditor from '../../components/Quill/QuillEditor'
 
-const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
+const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList, empData}) => {
 
   const [noticeDetail, setNoticeDetail] = useState({});
 
@@ -47,7 +47,7 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList}) => {
         handlePage("전체공지")
       }}>목록</Button>{' '}
       </div>
-      <div className={styles.noticeDetailHeader}><NoticeDetailHeader noticeDetail={noticeDetail} fileList={fileList} handlePage={handlePage}/></div>
+      <div className={styles.noticeDetailHeader}><NoticeDetailHeader noticeDetail={noticeDetail} fileList={fileList} handlePage={handlePage} empData={empData}/></div>
       <div className={styles.noticeDatailContent}>
         <QuillEditor isReadOnly={true} value={noticeDetail.N_CONTENT}/>
         {/* {noticeDetail.N_CONTENT} */}

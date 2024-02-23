@@ -8,7 +8,7 @@ const MessageProfile = ({handleMenu}) => {
   return (
     <>
     <div>
-      <img src={empData.e_profile} alt="프로필" />
+      <img src={empData.e_profile ===null ?"https://picsum.photos/200/200" : empData.e_profile} alt="프로필" />
     </div>
     <div>{empData.e_name}</div>
     <div>{empData.e_no}</div>
