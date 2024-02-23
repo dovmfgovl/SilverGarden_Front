@@ -1,7 +1,7 @@
 import React from 'react';
 import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
 
-const ProgramCalendar = ({handleEvents}) => {
+const ProgramCalendar = ({handleEvents, selectedCategory}) => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -33,6 +33,7 @@ const ProgramCalendar = ({handleEvents}) => {
         category: 'PS_CATEGORY', //색상을 구분하는 카테고리
         content: 'PS_INFO'
     };
+    
 
     return (
         <div>
@@ -42,7 +43,7 @@ const ProgramCalendar = ({handleEvents}) => {
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
-                handleEvents={handleEvents}
+                handleEvents={(events) => handleEvents(events, selectedCategory)}
             />
         </div>
     );

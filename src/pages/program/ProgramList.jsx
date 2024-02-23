@@ -4,14 +4,14 @@ import ExcelForm from './ExceltDown';
 import { useDispatch } from 'react-redux';
 import { setDetail } from '../../redux/programSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faList, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import ProgramPagination from './ProgramPagination';
 
 const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
     const[currentPage, setCurrentPage] = useState(1)
     const postPerPage = 10;
     const totalPosts = programList.length
-    console.log(totalPosts);
+    // console.log(totalPosts);
     // 시작 인덱스와 끝 인덱스 계산
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -74,7 +74,7 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
                     setSearchKeyword(''); // 검색어 초기화
                     }}
                 >
-                전체조회
+                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{marginRight:'2px'}}/>전체조회
                 </button>
                 <ExcelForm/>
             </div>

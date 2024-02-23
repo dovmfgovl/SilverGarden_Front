@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styles from '../program/programhome.module.css';
 import { programInsertDB } from '../../services/api/programApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRotateRight, faDownload, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { Popconfirm } from 'antd';
 
 function ProgramInsert({ componentRef, handleReset, getProgramList }) {
     const [newData, setNewData] = useState({
@@ -16,7 +17,7 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
         PG_CONTENT: '',
     });
     const handleInsert = async () => {
-        console.log('등록 버튼이 클릭되었습니다.');
+        // console.log('등록 버튼이 클릭되었습니다.');
         const endHHMM = newData.PG_END.slice(11, 16);
         const startHHMM = newData.PG_START.slice(11, 16);
         if (newData.PG_START&&endHHMM === startHHMM) {
@@ -30,8 +31,8 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
         }
         const confirmInsert = window.confirm("등록하시겠습니까?");
         if(confirmInsert){
+            // eslint-disable-next-line no-unused-vars
             const response = await programInsertDB(newData);
-            console.log(response);
             // 등록 성공 시 상태 초기화
             setNewData({
                 PG_NAME: '',
@@ -49,12 +50,11 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
     };
 
     const periodOptions = ['하루','매주', '격주']; // 주기 옵션들
-    const categoryOptions = ['신체', '교양', '문화', '교육', '여가']; // 분류 옵션들
+    const categoryOptions = ['건강', '문화', '봉사', '교육', '여가','예술']; // 분류 옵션들
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         let updatedData = { ...newData, [name]: value };
-    
         if (name === 'PG_START') {
             // 시작일시가 변경되었을 때 요일 계산
             const startDate = new Date(value);
@@ -69,10 +69,10 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
         <>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '3px' }}>
             <button className="btn btn-outline-warning" onClick={() => { setNewData({ PG_NAME: '', PG_CATEGORY: '', PG_TEACHER: '', PG_DAYSOFWEEK: '', PG_REPEAT_TYPE: '', PG_START: '', PG_END: '', PG_CONTENT: '' }); handleReset(); }}>
-            초기화
+                <FontAwesomeIcon icon={faArrowRotateRight} style={{marginRight:'2px'}}/>초기화
             </button>
             <button className="btn btn-outline-success" onClick={handleInsert}>
-            등록
+                <FontAwesomeIcon icon={faPenToSquare}  style={{marginRight:'2px'}}/>등록
             </button>
         </div>
         <div ref={componentRef}>

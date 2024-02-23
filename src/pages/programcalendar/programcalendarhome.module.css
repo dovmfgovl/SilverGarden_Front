@@ -7,7 +7,8 @@
     "monthWrap listWrap";
     /* border: 2px solid black; */
     grid-template-columns: 2.5fr 1fr;
-    grid-template-rows: 0fr 1fr;
+    grid-template-rows: 1fr fr;
+    align-items: stretch; /* 섹션 높이 일치 */
 }
 
 .mainTitleWrap, .subTitleWrap{
@@ -20,12 +21,13 @@
 .headerWrap {
     display: flex;
     justify-content: space-between;  
-    margin: 20px;
+    align-items: baseline; /* 섹션 높이 일치 */
+
 }
 
 .searchDropdownWrap {
     display: flex;
-    margin-left: 10px;
+    margin-right: 30px;
 
 }
 
@@ -38,9 +40,10 @@
     /* background-color: rgb(117, 120, 74); */
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
     /* border: 1px solid rgb(216, 216, 216); */
-    padding: 8px;
+    padding: 2px;
     text-align: center;
     margin-right: 2px;
+    height: 100%;
 }
 .listWrap{
     width: 98%;
@@ -48,7 +51,8 @@
     /* background-color: rgb(163, 194, 192); */
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
     text-align: center;
-    padding: 8px;
+    padding: 2px;
     /* border: 1px solid rgb(216, 216, 216); */
     margin-left: 2px;
+    height: 100%;
 }

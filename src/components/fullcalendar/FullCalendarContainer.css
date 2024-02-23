@@ -1,11 +1,3 @@
-/* 캘린더 설정 /////////////////////////////////////////////////////////*/
-
-html, body {
-  overflow: hidden; /* don't do scrollbars */
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 0.9rem; /* 글씨 전체 크기 */
-}
-
 .fc {
   width: 100%; /*캘린더 넓이*/
 }
@@ -22,7 +14,7 @@ html, body {
   margin: 0;
   padding: 0 20px;
   background-color: #4a6bff96;
-  height: 30px;
+  height: 33px;
   font-weight: 200;
   line-height: 20px;
   color: white;
@@ -52,7 +44,6 @@ html, body {
   background-color: #c8cbeb35;
   color: #89a5ea;
 }
-
 /*각 날짜칸*/
 .fc .fc-daygrid-day-frame {
   padding: 0rem;
@@ -111,6 +102,7 @@ html, body {
   font-size: 0.8rem; /* 원하는 크기로 조절 */
   text-align: center;
   color: rgba(0, 0, 0, 0.748);
+  cursor: pointer;
 }
 
 /* 시간을 나타내는 부분의 선의 크기 조절 (선택 사항) */

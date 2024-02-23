@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -9,19 +9,22 @@ import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import CommonCalendarModal from '../../components/fullcalendar/CommonCalendarModal';
 import moment from 'moment-timezone';
 import '../../components/fullcalendar/FullCalendarContainer.css';
+import { useSelector } from 'react-redux';
 
-const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames,sharedEvent}) => {
-    const [weekendsVisible, setWeekendsVisible] = useState(true);
+const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
     const categories=['신체', '교양', '문화', '교육', '여가'];
-    //기본 초기화 세트
+    //상태 초기화 세트
     const updateModalState = () => {
         setIsModalOpen(false);
         setModalAction(null);
     };
+    const eventTest = useSelector((state)=>state.calendarSlice.events);
+    console.log(eventTest);
+
 
     //모달 핸들링
     const handleModalAction = (action, event) => {
@@ -97,21 +100,19 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
     };
     // FullCalendar 옵션 설정
     const calendarOptions = {
-        height: 600, //캘린더 높이
+        height: 660, //캘린더 높이
         slotMinTime: '08:00', //최소시간
         slotMaxTime: '24:00', //최대시간
         expandRows: true, //드래그로 확장
         navLinks: true, //버튼 링크 사용
         selectable: true,
         selectMirror: true,
-        selectInfo: true,
+        select: true,
         nowIndicator: true,
         initialView: 'timeGridDay',
         locale:'ko',
-        timezone: 'local',
         editable: true,
         dayMaxEvents: true,
-        weekends: weekendsVisible, // 주말 표시 여부 설정
         dayMaxEventRows: true, // for all non-TimeGrid views
         views: {
             timeGrid: {
@@ -127,9 +128,7 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
             month: 'long',
             day: 'numeric'
         },
-        events: sharedEvent,
-        textColor: 'black',
-        color:'{color}', //카테고리별 색상
+        events: eventTest,
         eventTextColor: 'black', 
         // 이벤트를 클릭한 경우
         eventClick: (info) => {
@@ -139,21 +138,30 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
         eventDrop: (info) => {
             handleModalAction('수정', info.event, categories);
         },
+        // 이벤트를 드래그해서 확장(또는 줄이는) 경우
+        eventResize: (info) => {
+            // 확장(또는 줄이기)한 이벤트의 날짜 정보를 전달
+            handleModalAction('수정', info.event, categories);
+        },
         // 날짜가 선택되는경우(하루, 영역)
         selectAllow: () => {
             return true;
         },
-        select: (selectInfo) => {
-            const isSingleDay = selectInfo.startStr === selectInfo.endStr;
-            let endDate = isSingleDay ? selectInfo.startStr : selectInfo.endStr;
+        select: ({ startStr, endStr }) => {
+            const isSingleDay = startStr === endStr;
+            let endDate = isSingleDay ? startStr : endStr;
         
-            // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
-            if (!isSingleDay) {
-                const endMoment = moment(endDate).subtract(1, 'days');
-                endDate = endMoment.toISOString();
-            }
-            handleModalAction('생성', { start: selectInfo.startStr, end: endDate }, categories);
-            return true; // 
+        // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
+        if (!isSingleDay) {
+            const endMoment = moment(endDate).subtract(1, "days");
+            endDate = endMoment.toISOString();
+        }
+        handleModalAction(
+            "생성",
+            { start: startStr, end: endDate },
+            categories
+        );
+        return true;
         },
     };
     return (

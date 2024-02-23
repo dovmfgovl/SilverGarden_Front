@@ -1,44 +1,48 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const CustomShapeLineChartComponent = () => {
-    const data = [
-        { name: '12월', 2024: 30, 2023: 50 },
-        { name: '1월', 2024: 70, 2023: 60 },
-        { name: '2월', 2024: 20, 2023: 80 },
-        { name: '3월', 2024: 0, 2023: 30 },
-        { name: '4월', 2024: 0, 2023: 40 },
-        { name: '5월', 2024: 0, 2023: 10 },
-        { name: '6월', 2024: 0, 2023: 30 },
-        { name: '7월', 2024: 0, 2023: 70 },
-        { name: '8월', 2024: 0, 2023: 40 },
-        { name: '9월', 2024: 0, 2023: 10 },
-        { name: '10월', 2024: 0, 2023: 20 },
-        { name: '11월', 2024: 0, 2023: 20 },
-        { name: '12월', 2024: 0, 2023: 60 },
-        // 추가적인 데이터 항목들...
-    ];
+    const events = useSelector((state) => state.calendarSlice.events);
+    const groupedData = events.reduce((acc, event) => {
+        const month = event.start.split('-')[1]; // '2024-01-01 14:00'에서 월만 추출
+        if (!acc[month]) {
+            acc[month] = { month, count: 1 }; // 객체로 저장하여 월 정보를 유지
+        } else {
+            acc[month].count++;
+        }
+        return acc;
+    }, {});
+
+    // 객체를 [월, { month, count }] 형태의 배열로 변환
+    const dataForSorting = Object.entries(groupedData).map(([month, { count }]) => ({
+        month,
+        count,
+    }));
+
+    // 배열을 월을 기준으로 정렬
+    const sortedData = dataForSorting.sort((a, b) => a.month.localeCompare(b.month));
+
+    // 데이터 포맷을 LineChart에 맞게 변환
+    const data = sortedData.map(({ month, count }) => ({
+        월: `${month}월`, // x축
+        횟수: count, // y축
+    }));
 
     const customShapePath = 'M10,10C50,200,50,200,10,390C60,410,90,390,90,390C90,390,110,430,90,470C70,510,50,490,10,470C-10,430,-30,10,10,10Z';
 
     return (
-        <LineChart width={450} height={400} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-
-            <Line type="monotone" dataKey="2024" stroke="#82ca9d" isAnimationActive={true} />
-
-            <defs>
-                <clipPath id="customShape">
-                    <path d={customShapePath} />
-                </clipPath>
-            </defs>
-
-            <Line type="monotone" dataKey="2023" stroke="#8884d8" clipPath="url(#customShape)" isAnimationActive={true} />
-        </LineChart>
+        <>
+            <h4>월별 프로그램 횟수</h4>
+            <LineChart width={500} height={600} data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="월" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="횟수" stroke="#8884d8" strokeWidth={3} isAnimationActive={true} />
+            </LineChart>
+        </>
     );
 };
 

@@ -5,7 +5,7 @@ import { ProgramDeleteDB, ProgramUpdateDB } from '../../services/api/programApi'
 import { Form } from "react-bootstrap";
 import styles from '../program/programhome.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRotateRight, faFile, faPenToSquare, faPrint, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const FormControl = ({ value, name, onChange, type = 'text', textarea = false }) => {
     return (
@@ -100,16 +100,16 @@ const ProgramDetail = ({ handleOutput, componentRef, getProgramList, handleReset
         <div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '3px' }}>
             <button className="btn btn-outline-danger" style={buttonStyles} onClick={handleDelete}>
-            삭제
+                <FontAwesomeIcon icon={faTrashCan}  style={{marginRight:'2px'}}/>삭제
             </button>
             <button className="btn btn-outline-secondary" style={buttonStyles} onClick={handleOutput}>
-            출력
+                <FontAwesomeIcon icon={faPrint} style={{marginRight:'2px'}}/>출력
             </button>
             <button className="btn btn-outline-warning" style={buttonStyles} onClick={handleReset}>
-            초기화
+                <FontAwesomeIcon icon={faArrowRotateRight} style={{marginRight:'2px'}}/>초기화
             </button>
             <button className="btn btn-outline-primary" style={buttonStyles} onClick={onSubmit}>
-            수정
+                <FontAwesomeIcon icon={faPenToSquare}  style={{marginRight:'2px'}}/>수정
             </button>
         </div>
         <div ref={componentRef}>
