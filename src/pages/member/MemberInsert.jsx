@@ -5,7 +5,7 @@ import { memberInsert } from '../../services/api/memberApi';
 import { useNavigate } from 'react-router-dom';
 import { Descriptions, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList } from '../../redux/empInfosSlice';
+import { getEmpList } from '../../redux/chooseEmpSlice';
 
 const MemberInsert = () => {
   
@@ -17,11 +17,14 @@ const MemberInsert = () => {
   const [manager, setManager] = useState('');
   const [photo,setPhoto]=useState('');
 
-  const empList = useSelector(state => state.empInfos.value);
+  const empList = useSelector(state => state.chooseEmp.value);
+  const userData =useSelector(state => state.userInfoSlice);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEmpList());
   }, [dispatch]);
+
+// console.log(JSON.stringify(empList));
 
   const navigate = useNavigate();
   const [roadAddress, setRoadAddress] = useState('');
@@ -91,8 +94,8 @@ const MemberInsert = () => {
       CLIENT_ADDRESS: fullAddress,
       CLIENT_MANAGER: manager,
       CLIENT_AGE: age,
-      REG_ID: '202402-00000008',
-      MOD_ID: '202402-00000008',
+      REG_ID: userData.e_no,
+      MOD_ID: userData.e_no,
     };
     try {
       console.table(client);
@@ -146,9 +149,12 @@ const MemberInsert = () => {
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}> 
                 <Form.Select aria-label="Default select example"    value={manager} onChange={e => {handleManager(e.target.value)}}>
-                  {empList.map(emp=>(
-                    <option value={emp.E_NAME}>{emp.E_NAME}</option> 
-                  ))}
+                  <option>담당자 선택</option>
+                    {empList.map(emp => (
+                      emp.DEPT_NAME === "사회복지팀" && (
+                        <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
+                      )
+                    ))}
                 </Form.Select>
               </Descriptions.Item>
               <Descriptions.Item label="전화번호">

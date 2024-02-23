@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
 import MemberDelete from './MemberDelete';
-import { getEmpList } from '../../redux/empInfosSlice';
+import { getEmpList } from '../../redux/chooseEmpSlice';
 
 const MemberDetail = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,8 @@ const MemberDetail = () => {
   const [updatedMember, setUpdatedMember] = useState(selectedMember);
   const [originalMember, setOriginalMember] = useState(selectedMember);
 
-  const empList = useSelector(state => state.empInfos.value);
+  const empList = useSelector(state => state.chooseEmp.value);
+  const userData =useSelector(state => state.userInfoSlice);
   useEffect(() => {
     dispatch(getEmpList());
   }, [dispatch]);
@@ -43,7 +44,8 @@ const MemberDetail = () => {
     const fullAddress = `${roadAddress} ${detailAddress}`;
     const updatedMemberDetail = {
       ...updatedMember,
-      CLIENT_ADDRESS: fullAddress
+      CLIENT_ADDRESS: fullAddress,
+      MOD_ID: userData.e_no,
     };
 
     dispatch(saveMemDetails(updatedMemberDetail))
@@ -143,8 +145,10 @@ const MemberDetail = () => {
                 <Form.Select  onChange={e => { handleChange('CLIENT_MANAGER', e.target.value) }}>
                   <option >{updatedMember.CLIENT_MANAGER}</option>
                   {empList.map(emp => (
-                    <option value={emp.E_NAME}>{emp.E_NAME}</option>
-                  ))}
+                      emp.DEPT_NAME === "사회복지팀" && (
+                        <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
+                      )
+                    ))}
                 </Form.Select>
               </Descriptions.Item>
               <Descriptions.Item label="전화번호">

@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
+import { getEmpList, saveEmpDetails, setDetail } from '../../redux/chooseEmpSlice';
 
 // 비밀번호 변경 모달 컴포넌트
 const ChangePwModal = ({ show, handleClose }) => {
   // useForm을 사용하여 폼 상태 관리
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
-  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
+  const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {}; 
   const [originalEmployee, setOriginalEmployee] = useState(selectedEmployee);
   const [updatedEmployee, setUpdatedEmployee] = useState(selectedEmployee);
   
@@ -35,7 +35,7 @@ const ChangePwModal = ({ show, handleClose }) => {
   }, [selectedEmployee]);
 
   // 선택된 직원의 비밀번호 가져오기
-  const empDetail = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const empDetail = useSelector(state => state.chooseEmp.selectedEmployee) || {};
   const selectedUserPw = empDetail.E_PASSWORD;
 
   // 입력 필드 변경 핸들러

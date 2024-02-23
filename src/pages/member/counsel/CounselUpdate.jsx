@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
 import { counselUpdate } from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList } from '../../../redux/empInfosSlice';
+import { getEmpList } from '../../../redux/chooseEmpSlice';
 const CounselUpdate = ({counsel}) => {
   const [counselDetail,setCounselDetail]=useState(
     {
@@ -25,7 +25,8 @@ console.table(counselDetail);
     const [time,setTime]=useState("")
 
 
-    const empList = useSelector(state => state.empInfos.value);
+    const empList = useSelector(state => state.chooseEmp.value);
+    const userData =useSelector(state => state.userInfoSlice);
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(getEmpList());
@@ -35,6 +36,7 @@ console.table(counselDetail);
     const handleSubmit = async () => {
       const updatedCounsel = {
         ...counselDetail,
+        MOD_ID:userData.e_no,
       };
       try {
         const res = await counselUpdate(updatedCounsel);
@@ -94,9 +96,11 @@ console.table(counselDetail);
           <Col>
           <Form.Select aria-label="Default select example"  value={counselDetail.COUNSEL_MANAGER} onChange={e=>{
               setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}>
-                      {empList.map(emp=>(
-                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
-                      ))}
+                        {empList.map(emp => (
+                      emp.DEPT_NAME === "사회복지팀" && (
+                        <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
+                      )
+                    ))}
                     </Form.Select>
           </Col>
        </Card></Col>

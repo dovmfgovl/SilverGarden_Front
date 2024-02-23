@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const MypageEdu = () => {
     const { Column } = Table;
 
-    const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+    const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {};
     const dispatch = useDispatch();
 
   
