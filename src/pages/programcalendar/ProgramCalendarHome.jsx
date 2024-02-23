@@ -5,21 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
+import { useSelector } from 'react-redux';
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     // eslint-disable-next-line no-unused-vars
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [sharedEvent, setSharedEvent] = useState([]);
-    
-    const handleEvents = (events) =>{
-        // console.log("받아옴:"+JSON.stringify(events));
-        setSharedEvent(events)
-    }
 
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
     };
+
+    const eventData = useSelector((state)=>state.calendarSlice.events);
+    console.log(eventData);
     
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
@@ -61,10 +59,10 @@ const ProgramCalendarHome = () => {
                 오늘의 일정
             </div>
             <div className={styles.monthWrap }>
-                <ProgramCalendar handleEvents={handleEvents} selectedCategory={selectedCategory}/>
+                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory}/>
             </div>
             <div className={styles.listWrap }>
-                <ProgramListCalendar sharedEvent={sharedEvent} handleEvents={handleEvents}/>
+                <ProgramListCalendar eventData={eventData} />
             </div>
         </div>
     );

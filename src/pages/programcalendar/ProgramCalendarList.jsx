@@ -11,7 +11,7 @@ import moment from 'moment-timezone';
 import '../../components/fullcalendar/FullCalendarContainer.css';
 import { useSelector } from 'react-redux';
 
-const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames}) => {
+const ProgramCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, columnNames, eventData}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalAction, setModalAction] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -22,9 +22,6 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
         setIsModalOpen(false);
         setModalAction(null);
     };
-    const eventTest = useSelector((state)=>state.calendarSlice.events);
-    console.log(eventTest);
-
 
     //모달 핸들링
     const handleModalAction = (action, event) => {
@@ -128,7 +125,7 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
             month: 'long',
             day: 'numeric'
         },
-        events: eventTest,
+        events: eventData,
         eventTextColor: 'black', 
         // 이벤트를 클릭한 경우
         eventClick: (info) => {
@@ -188,4 +185,4 @@ const CommonCalendarList = ({ onEventAdd, onEventUpdate, onEventDelete, urls, co
     );
 };
 
-export default CommonCalendarList;
+export default ProgramCalendarList;

@@ -18,9 +18,9 @@ const MessageListHeader = ({messagePage, handleList, empData}) => {
   const handleSubmit = async () =>{
     if("받은쪽지함" === messagePage){
       if(activeBtn){//기간검색이라면
-        dataSet  = {gubun:"period", }
-      }else{
-        
+        dataSet = {gubun:"period", start_date:startDate, end_date:endDate}
+      }else{//키워드검색이라면
+        dataSet = {gubun:title, start_date:startDate, end_date:endDate}
       }
       const response = await messageReceiveList();
       handleList(response.data)
@@ -61,21 +61,23 @@ const MessageListHeader = ({messagePage, handleList, empData}) => {
     setKeyword("")
     setTitle("전체")
     setActiveBtn(period); // Update the active button state
-    if(period === "datePick"){
-      setStartDate("");
-      setEndDate("");
+    const today = new Date();
+    let start_date = today.toISOString().split('T')[0];
+    let end_date = "";
+    if(period === "datePick"){//직접 날짜를 지정할 때는 state를 비워준다
+      start_date = "";
     }else if(period === "week"){
-      const today = new Date();
-      console.log(today);
-      const start_date = today.toISOString().split('T')[0];
-      console.log(start_date);
-      today.setDate(today.getDate()+6)
+      end_date = new Date(today.setDate(today.getDate()+6))//현재날짜부터 7일
+      end_date = end_date.toISOString().split('T')[0];
     }else if(period === "month"){
-
+      end_date = new Date(today.setMonth(today.getMonth()+1))//1개월 후
+      end_date = end_date.toISOString().split('T')[0];
     }else if(period === "3months"){
-
+      end_date = new Date(today.setMonth(today.getMonth()+3))//3개월 후
+      end_date = end_date.toISOString().split('T')[0];
     }
-
+    setStartDate(start_date);
+    setEndDate(end_date);
   };
 
   const isActive = (period) => {
@@ -133,13 +135,16 @@ const MessageListHeader = ({messagePage, handleList, empData}) => {
           <label for="end-date">종료일자</label>
           <input type="date" id="end-date" name="end-date"  value={endDate} onChange={handleDateChange}/>
           </div>
+          <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}> 
+              <Button className='ms-5' variant='secondary'>기간검색</Button>
+          </div>
         </div>
       </div>
       <div className={styles.searchTitle}>
         조건검색
       </div>
       <div className={styles.searchBar}>
-        <InputGroup style={{width: "700px"}}>
+        <InputGroup style={{width: "480px"}}>
                   <DropdownButton
                     variant="outline-secondary"
                     title={title}
@@ -151,8 +156,8 @@ const MessageListHeader = ({messagePage, handleList, empData}) => {
                     <Dropdown.Item id="e_name"  onClick={handleChange}>작성자</Dropdown.Item>
                   </DropdownButton>
                   <Form.Control aria-label="Text input with dropdown button" value={keyword} onChange={(e)=>setKeyword(e.target.value)}/>
-                  <Button variant="secondary">검색</Button>
           </InputGroup>
+          <Button className='ms-3' variant="secondary">검색</Button>
       </div>
     </>
   )

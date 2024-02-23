@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 
-const ExpenseReportForm = ({handleContent}) => {
+const ExpenseReportForm = ({handleContent , formContent}) => {
   const [rows, setRows] = useState([
     { id: 1, content:'', amount:'', note:'' },
     { id: 2, content:'', amount:'', note:'' },
@@ -15,6 +15,13 @@ const ExpenseReportForm = ({handleContent}) => {
     { id: 10, content:'', amount:'', note:'' },
     { id: 11, content:'총계', amount:'', note:'' },
   ]);
+
+  useEffect(()=>{
+    if(formContent){//formContent 있는 경우 -> 임시문서를 수정하는 경우에만 상세페이지 값을 입력해줌
+      const rows = JSON.parse(formContent)
+      setRows([...rows])
+    }
+  },[])
 
   const handleInputChange = (id, target, value) => {
     // 먼저 입력된 값으로 행을 업데이트

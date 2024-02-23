@@ -1,7 +1,7 @@
 import React from 'react';
-import CommonCalendarList from './ProgramCalendarList';
+import ProgramCalendarList from './ProgramCalendarList';
 
-const ProgramListCalendar = ({sharedEvent}) => {
+const ProgramListCalendar = ({eventData}) => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -36,14 +36,13 @@ const ProgramListCalendar = ({sharedEvent}) => {
     
     return (
         <div>
-
-            <CommonCalendarList
+            <ProgramCalendarList
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
-                sharedEvent={sharedEvent}
+                eventData={eventData}
             />
         </div>
     );
