@@ -50,6 +50,7 @@ const CounselCreate = ({selectedMember}) => {
 
 
   const empList = useSelector(state => state.chooseEmp.value);
+  const userData =useSelector(state => state.userInfoSlice);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEmpList());
@@ -63,8 +64,8 @@ const CounselCreate = ({selectedMember}) => {
               COUNSEL_TIME: time,
               COUNSEL_MANAGER: manager,
               COUNSEL_CONTENT: content,
-              REG_ID: '202402-00000008',
-              MOD_ID: '202402-00000008',
+              REG_ID: userData.e_no,
+              MOD_ID: userData.e_no,
           };
       try {
         // console.table(counsel);
@@ -125,9 +126,11 @@ const CounselCreate = ({selectedMember}) => {
         <Card style={{ width: '13rem' }}>
           <Col>
             <Form.Select aria-label="Default select example"   value={manager} onChange={e => {handleManager(e.target.value)}}>
-                      {empList.map(emp=>(
-                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
-                      ))}
+            {empList.map(emp => (
+                      emp.DEPT_NAME === "사회복지팀" && (
+                        <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
+                      )
+                    ))}
                     </Form.Select>
           </Col>
        </Card></Col>

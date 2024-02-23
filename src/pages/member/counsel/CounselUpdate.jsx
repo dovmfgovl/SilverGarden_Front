@@ -26,6 +26,7 @@ console.table(counselDetail);
 
 
     const empList = useSelector(state => state.chooseEmp.value);
+    const userData =useSelector(state => state.userInfoSlice);
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(getEmpList());
@@ -35,6 +36,7 @@ console.table(counselDetail);
     const handleSubmit = async () => {
       const updatedCounsel = {
         ...counselDetail,
+        MOD_ID:userData.e_no,
       };
       try {
         const res = await counselUpdate(updatedCounsel);
@@ -94,9 +96,11 @@ console.table(counselDetail);
           <Col>
           <Form.Select aria-label="Default select example"  value={counselDetail.COUNSEL_MANAGER} onChange={e=>{
               setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}>
-                      {empList.map(emp=>(
-                        <option value={emp.E_NAME}>{emp.E_NAME}</option> 
-                      ))}
+                        {empList.map(emp => (
+                      emp.DEPT_NAME === "사회복지팀" && (
+                        <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
+                      )
+                    ))}
                     </Form.Select>
           </Col>
        </Card></Col>

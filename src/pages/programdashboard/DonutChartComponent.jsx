@@ -1,41 +1,53 @@
-// DonutChartComponent.jsx
+// ChartComponent.jsx
 
 import React from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { useSelector } from 'react-redux';
+import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 
-const DonutChartComponent = () => {
-    const data = [
-        { name: '이지연', value: 20 },
-        { name: '이슬기', value: 20 },
-        { name: '박정원', value: 20 },
-        { name: '고태규', value: 20 },
-        { name: '안수연', value: 20 },
-        // 추가적인 데이터 항목들...
-    ];
+const ChartComponent = () => {
+    // useSelector를 사용하여 리덕스 스토어에서 데이터 가져오기
+    const events = useSelector((state) => state.calendarSlice.events);
 
-    const COLORS = ['#0088FE', '#00C49F', '#82ca9d', '#8884d8']; // 각 부분에 대한 색상 설정
+    const groupedData = events.reduce((acc, item) => {
+        const date = new Date(item.start); // 예제 데이터에서는 start 프로퍼티를 날짜로 가정
+        const dayOfWeek = date.toLocaleDateString('ko', { weekday: 'long' }); // 요일을 추출
+        if (!acc[dayOfWeek]) {
+            acc[dayOfWeek] = 1;
+        } else {
+            acc[dayOfWeek]++;
+        }
+        return acc;
+    }, {});
+    delete groupedData["일요일"];
+
+    // 그룹화된 데이터를 차트에 표시할 형태로 변환
+    const chartData = Object.keys(groupedData).map(dayOfWeek => ({
+        name: dayOfWeek,
+        value: groupedData[dayOfWeek],
+    }));
+
+    // 차트에 사용할 색상 정의
+    const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00C49F', '#FFBB28', '#FF8042'];
 
     return (
         <PieChart width={450} height={400}>
-        <Pie
-            dataKey="value"
-            isAnimationActive={true}
-            data={data}
-            cx={250}
-            cy={200}
-            outerRadius={80}
-            innerRadius={40} // innerRadius를 설정하여 도넛 차트로 만듭니다.
-            fill="#8884d8"
-            label
-        >
-            {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
+            <Pie
+                data={chartData}
+                cx={225}
+                cy={200}
+                labelLine={false}
+                label={(entry) => entry.name}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+            >
+                {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+            </Pie>
+            <Tooltip formatter={(value) => [value, 'Count']} />
         </PieChart>
     );
 };
 
-export default DonutChartComponent;
+export default ChartComponent;

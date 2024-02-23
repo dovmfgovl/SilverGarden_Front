@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 
 const ProgramChart = ({ programList }) => {
     const [data, setChartData] = useState();
@@ -26,24 +26,37 @@ const ProgramChart = ({ programList }) => {
         }
 
         // 차트에 사용할 데이터 포맷으로 변환
-        const data = Object.keys(categoryCounts).map((category) => ({
-            category,
-            '프로그램 수': categoryCounts[category],
+        const chartData = Object.keys(categoryCounts).map((category) => ({
+            name: category,
+            value: categoryCounts[category],
         }));
 
-        setChartData(data);
+        setChartData(chartData);
     }, [programList]);
+
+    // 차트에 사용할 색상 정의
+    const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00C49F', '#FFBB28', '#FF8042'];
 
     return (
         <div>
             <h4>카테고리별 프로그램</h4>
-            <BarChart width={450} height={400} data={data}>
-                <XAxis dataKey="category" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="프로그램 수" fill="rgba(75,192,192,0.6)" />
-            </BarChart>
+            <PieChart width={600} height={600} >
+                <Pie
+                    data={data}
+                    cx={260} // 가로 중심 위치 조절
+                    cy={300} // 세로 중심 위치 조절
+                    labelLine={false}
+                    label={(entry) => entry.name}
+                    outerRadius={200}
+                    fill="#8884d8"
+                    dataKey="value"
+                >
+                    {data && data.map((category, index) => (
+                        <Cell key={`cell-${category}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                </Pie>
+                <Tooltip formatter={(value, name) => [value, '프로그램 수']} />
+            </PieChart>
         </div>
     );
 };
