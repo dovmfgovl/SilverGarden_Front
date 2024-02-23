@@ -8,7 +8,15 @@ import ProgramListCalendar from './ProgramListCalendar'
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
+    // eslint-disable-next-line no-unused-vars
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [sharedEvent, setSharedEvent] = useState([]);
+    
+    const handleEvents = (events) =>{
+        // console.log("받아옴:"+JSON.stringify(events));
+        setSharedEvent(events)
+    }
+
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
     };
@@ -16,19 +24,12 @@ const ProgramCalendarHome = () => {
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
     };
-
-    const [sharedEvent, setSharedEvent] = useState([]);
-
-    const handleEvents = (events) =>{
-        console.log("받아옴:"+events);
-        setSharedEvent(events)
-    }
     
     return (
         <div className={styles.programCalWrap}>
             <div className={styles.headerWrap }>
-                <div className={styles.mainTitleWrap}>
-                    <FontAwesomeIcon icon={faCalendarDays} style={{ marginRight: '5px', fontSize:'1.5rem'}} />
+                <div className={styles.subTitleWrap }>
+                    <FontAwesomeIcon icon={faCalendarDays} style={{ marginRight: '5px', fontSize:'1.5rem'}}/>
                     월간 일정
                 </div>
                 <div className={styles.searchDropdownWrap}>
@@ -45,7 +46,8 @@ const ProgramCalendarHome = () => {
                             검색
                         </Button>
                     </InputGroup>
-                    <DropdownButton id="dropdown-basic-button" title="카테고리" onSelect={handleCategorySelect}>
+                    <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체 카테고리'} onSelect={handleCategorySelect} style={{width:'100px'}}>
+                        <Dropdown.Item eventKey="신체">전체 카테고리</Dropdown.Item>
                         <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
                         <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
                         <Dropdown.Item eventKey="문화">문화</Dropdown.Item>
@@ -59,10 +61,10 @@ const ProgramCalendarHome = () => {
                 오늘의 일정
             </div>
             <div className={styles.monthWrap }>
-                <ProgramCalendar handleEvents={handleEvents}/>
+                <ProgramCalendar handleEvents={handleEvents} selectedCategory={selectedCategory}/>
             </div>
             <div className={styles.listWrap }>
-                <ProgramListCalendar sharedEvent={sharedEvent} />
+                <ProgramListCalendar sharedEvent={sharedEvent} handleEvents={handleEvents}/>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommonCalendarLogic from "./CommonCalendarLogic";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,56 +9,61 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
-import { useDispatch, useSelector } from "react-redux";
-import {setPgEvents} from '../../redux/calendarSlice'
 
-const CommonCalendar = ({
+const CommonCalendar2 = ({
   onEventAdd,
   onEventUpdate,
   onEventDelete,
   urls,
   columnNames,
+  handleEvents,
 }) => {
+  // console.log(urls);//컨트롤러 Url 확인 가능
   const [weekendsVisible, setWeekendsVisible] = useState(true);
+  const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
   //기본 초기화 세트
-  const dispatch = useDispatch();
-  
   const updateModalState = () => {
     setIsModalOpen(false);
     setModalAction(null);
+    fetchEvents();
   };
-  
+
   // 일정 조회 로직
-  useEffect(() => {
-    const fetchAndDispatch = async () => {
-      try {
-        const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
-        const formattedEvents = eventsData.map((eventsData) => ({
-          title: eventsData[columnNames.title],
-          start: eventsData[columnNames.start],
-          end: eventsData[columnNames.end],
-          no: eventsData[columnNames.no],
-          color: eventsData[columnNames.color],
-          content: eventsData[columnNames.content],
-          category: eventsData[columnNames.category],
-        }));
-        //setEvents(formattedEvents);
-        dispatch(setPgEvents(formattedEvents)); // 이 부분을 여기로 이동
+  const fetchEvents = async () => {
+    try {
+      const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
+      const formattedEvents = eventsData.map((event) => ({
+        title: event[columnNames.title],
+        start: event[columnNames.start],
+        end: event[columnNames.end],
+        no: event[columnNames.no],
+        color: event[columnNames.color],
+        content: event[columnNames.content],
+        category: event[columnNames.category],//여기의 카테고리값으로 모달에 전달하고 싶은건데
+        // 추가 필드들도 필요에 따라 변환
+      }));
+      setEvents(formattedEvents);
       } catch (error) {
         // 에러 처리
       }
     };
-    fetchAndDispatch();
-  }, []);
-
-  const eventTest = useSelector((state)=>state.calendarSlice.events);
-  console.log(eventTest);
+    //최초 한 번 이벤트 조회해서 띄우기
+    useEffect(() => {
+      fetchEvents();
+    }, []);
   
+  useEffect(() => {
+    // events 상태가 변화할 때마다 실행
+    if (typeof handleEvents === 'function') {
+      handleEvents(events);
+    }
+  }, [events]); 
+
   //모달 핸들링
   const handleModalAction = (action, event) => {
     setModalAction(action);
@@ -130,19 +135,9 @@ const CommonCalendar = ({
   const handleEventClose = () => {
     updateModalState();
   };
-
-  const calendarRef = useRef(null);
-
-  const handleEventAddOrUpdate = () => {
-    // 이벤트 추가 또는 수정 로직 수행
-    // 변경 사항 적용을 위해 캘린더 이벤트를 새로고침
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.refetchEvents();
-  };
-
   // FullCalendar 옵션 설정
   const calendarOptions = {
-    height: 660,
+    height: 650,
     eventTimeFormat: { 
       hour: '2-digit', 
       minute: '2-digit', 
@@ -163,7 +158,7 @@ const CommonCalendar = ({
       center: "title",
       right: "dayGridMonth,timeGridWeek,listWeek",
     },
-    events: eventTest,
+    events: events,
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
@@ -200,7 +195,6 @@ const CommonCalendar = ({
     <>
       <div className="customCalendar">
         <FullCalendar
-          key={eventTest.size} // 이벤트 배열의 길이를 키로 사용
           plugins={[
             dayGridPlugin,
             interactionPlugin,
@@ -227,4 +221,4 @@ const CommonCalendar = ({
   );
 };
 
-export default CommonCalendar;
+export default CommonCalendar2;

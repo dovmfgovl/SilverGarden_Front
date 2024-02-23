@@ -16,8 +16,7 @@ const Print = ({componentRef}) => {
     return (
         <div>
             <button className="btn btn-outline-primary" onClick={handlePrint}>
-            <FontAwesomeIcon icon={faPrint} />
-                출력
+            <FontAwesomeIcon icon={faPrint} style={{marginRight:'2px'}}/> 출력
             </button>
             <br />
             <br />

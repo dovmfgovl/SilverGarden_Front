@@ -1,6 +1,8 @@
 import React from 'react';
 import XLSX from 'xlsx-js-style';
 import { programListDB } from '../../services/api/programApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 const ExcelForm = () => {
   const excelDown = async () => {
@@ -28,7 +30,7 @@ const ExcelForm = () => {
       };
 
       // 열의 폭을 정의
-      const colWidths = [80, 120, 80, 80, 130];
+      const colWidths = [80, 120, 120, 120, 80,80,300];
 
       // cols 속성을 사용하여 각 열의 폭을 조절
       const cols = colWidths.map(width => ({ wpx: width }));
@@ -82,7 +84,7 @@ const ExcelForm = () => {
         style={{minWidth: '10%', marginRight: '0.5rem'}}
         onClick={excelDown}
         >
-        엑셀
+          <FontAwesomeIcon icon={faFileExcel}  style={{ marginRight: '5px' }}/>엑셀
         </button>
     </>
   );

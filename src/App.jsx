@@ -3,7 +3,6 @@ import AppRouter from "./components/rourter/AppRouter";
 import styles from "./app.module.css";
 import NavigationBar from "./components/header/NavigationBar";
 import FootBar from "./components/footer/FootBar";
-
 function App() {
   return (
     <div className="App">
