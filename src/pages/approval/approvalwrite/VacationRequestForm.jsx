@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Form, InputGroup } from 'react-bootstrap'
 
-const VacationRequestForm = ({handleContent}) => {
+const VacationRequestForm = ({handleContent, formContent}) => {
 
   const [vacationInfo, setVacationInfo] = useState({
     startDate: null,
@@ -10,6 +10,13 @@ const VacationRequestForm = ({handleContent}) => {
     vacationType: "",
     vacationReason: ""
   });
+
+  useEffect(()=>{
+    if(formContent){
+      const rows = JSON.parse(formContent)
+      setVacationInfo([...rows])
+    }
+  },[])
 
   const handleDateChange = (e) => {
     const { id, value } = e.target;

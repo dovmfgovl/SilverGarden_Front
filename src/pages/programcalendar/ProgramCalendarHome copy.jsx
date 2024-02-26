@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import WeekendToggle from '../../components/fullcalendar/WeekendToggle';
 
 const ProgramCalendarHome = () => {
@@ -13,13 +13,13 @@ const ProgramCalendarHome = () => {
     const [weekendsVisible, setWeekendsVisible] = useState(true); // 주말 표시 여부 상태 추가
     const [selectedCategory, setSelectedCategory] = useState('');
 
-    const eventData = useSelector((state) => state.calendarSlice.events);
-    const dispatch = useDispatch();
-
 
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
     };
+
+    const eventData = useSelector((state)=>state.calendarSlice.events);
+    console.log(eventData);
     
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
