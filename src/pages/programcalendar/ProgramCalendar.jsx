@@ -1,7 +1,7 @@
 import React from 'react';
 import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
 
-const ProgramCalendar = ({eventData, weekendsVisible, dispatch}) => {
+const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch}) => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -45,7 +45,7 @@ const ProgramCalendar = ({eventData, weekendsVisible, dispatch}) => {
                 columnNames={columnNames}
                 eventData={eventData}
                 weekendsVisible={weekendsVisible}
-                dispatch={dispatch}
+                handleDispatch={handleDispatch}
             />
         </div>
     );
