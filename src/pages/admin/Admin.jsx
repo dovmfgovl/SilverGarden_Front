@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Attendance from "./Attendance";
 import Dept from "../dept/Dept";
 import { AdminPage } from "../../services/auth/UserApi";
+import AdminCalendar from "../schedule/TestCalendar";
 
 const Admin = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -68,6 +69,7 @@ const Admin = () => {
         {/* 조건부 렌더링 - Home.jsx 참고 */}
         {adminPage === "근태관리" && <Attendance handleMenu={handleMenu} />}
         {adminPage === "부서관리" && <Dept handleMenu={handleMenu} />}{" "}
+        {adminPage === "일정관리" && <AdminCalendar handleMenu={handleMenu} />}{" "}
       </div>
     </div>
   );
