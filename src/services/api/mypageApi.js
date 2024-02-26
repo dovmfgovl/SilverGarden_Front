@@ -19,9 +19,9 @@ export const changePw = (updatedPassword) => {
   return new Promise((resolve, reject) => {
     try {
       const response = axios({
-        method: "get",
+        method: "post",
         url: process.env.REACT_APP_SPRING_IP + "my/changePassword",
-        params: updatedPassword,
+        data: updatedPassword,
       });
       resolve(response);
     } catch (error) {

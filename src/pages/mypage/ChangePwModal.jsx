@@ -45,6 +45,7 @@ const ChangePwModal = ({ show, handleClose }) => {
       const res = await changePw(updatedPassword)
       console.log(res.data);
       alert("비밀번호가 변경되었습니다!")
+      handleClose()
    } catch (error) {
       console.error("비밀번호 변경에 실패했습니다.",error);
       alert("비밀번호 변경에 실패했습니다. 다시 시도해주십시오")
