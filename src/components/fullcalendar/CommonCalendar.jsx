@@ -22,15 +22,16 @@ const CommonCalendar = ({
   calendarListOptions, //리스트 캘린더 옵션
   initialView, // 새로운 prop 추가
   eventData,
+  handleDispatch
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
-  //기본 초기화 세트
   
-  const updateModalState = () => {
+  //기본 초기화 세트
+    const updateModalState = () => {
     setIsModalOpen(false);
     setModalAction(null);
   };
@@ -49,6 +50,7 @@ const CommonCalendar = ({
           content: eventsData[columnNames.content],
           category: eventsData[columnNames.category],
         }));
+        handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
         const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
         setCategories(uniqueCategories);
         console.log(uniqueCategories);
@@ -57,7 +59,7 @@ const CommonCalendar = ({
       }
     };
     fetchAndDispatch();
-  }, [eventData, onEventAdd]);
+}, [isModalOpen]);
   
   //모달 핸들링
   const handleModalAction = (action, event) => {

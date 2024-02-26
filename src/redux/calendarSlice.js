@@ -11,6 +11,7 @@ const calendarSlice = createSlice({
     },
     reducers: {
         setPgEvents: (state, action) => {
+            console.log("calendarSlice setPgEvents", action.payload);
             state.events = action.payload;
         },
         setFilters: (state, action) => {

@@ -1,7 +1,9 @@
 import React from 'react';
-import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import CommonCalendar from '/Users/a/silverGarden/front/src/components/fullcalendar/CommonCalendar.jsx';
 
-const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch}) => {
+const CarTestCalendar = () => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -25,7 +27,7 @@ const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch}) => {
     };
       // 개별 컴포넌트에서 사용할 데이터의 컬럼명 정의
     const columnNames = {
-        no: 'PS_NO',
+        no: 'PS_NO', 
         title: 'PS_NAME',
         start: 'PS_START',
         end: 'PS_END',
@@ -33,22 +35,22 @@ const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch}) => {
         category: 'PS_CATEGORY', //색상을 구분하는 카테고리
         content: 'PS_INFO'
     };
-    
 
     return (
         <div>
+            <div style={{ marginRight: '5px', fontSize:'1.5rem'}}>
+                <FontAwesomeIcon icon={faCalendar} style={{ marginRight: '5px', fontSize:'1.5rem'}} />
+                프로그램 일정
+            </div>            
             <CommonCalendar
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
-                eventData={eventData}
-                weekendsVisible={weekendsVisible}
-                handleDispatch={handleDispatch}
             />
         </div>
     );
 }
 
-export default ProgramCalendar;
+export default CarTestCalendar;

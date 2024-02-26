@@ -56,7 +56,7 @@ const Program = () => {
   const handleMenu = (menuTitle) => {
     setPage(menuTitle);
   };
-  const [page, setPage] = useState("일정"); //기본 페이지
+  const [page, setPage] = useState("일정테스트(공통)"); //기본 페이지
   const [programList, setProgramList] = useState([]);
   const [programDetail, setProgramDetail] = useState(null);
   const dispatch = useDispatch();
