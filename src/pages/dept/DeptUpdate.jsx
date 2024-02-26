@@ -91,6 +91,7 @@ const DeptUpdate = ({ handlepage, handleRefresh }) => {
     const value = {
       B_CD: data.CD,
       CD: values.CD,
+      B_CD_VALUE: data.CD_VALUE,
       CD_VALUE: values.CD_VALUE,
       EXT: data.EXT,
       EXT_VALUE: values.EXT_VALUE,
@@ -163,6 +164,7 @@ const DeptUpdate = ({ handlepage, handleRefresh }) => {
                 style={{ width: "150px", marginBottom: "10px" }}
                 {...register("CD_VALUE", {
                   required: "* 부서명을 입력해주세요.",
+                  onChange: (e) => handleName(e.target.value),
                 })}
                 name="CD_VALUE"
                 type="text"

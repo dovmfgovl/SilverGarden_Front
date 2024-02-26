@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDetail } from '../../redux/empInfosSlice';
 
-const EmpRow = ({ emp }) => {
+const EmpRow = ({ emp, currentPage, postPerPage, index }) => {
     const dispatch = useDispatch();
 
     const handleRowClick = () => {
@@ -13,6 +13,7 @@ const EmpRow = ({ emp }) => {
     return (
         <>
             <tr key={emp.E_NO} onClick={handleRowClick}>
+                <td>{(currentPage - 1) * postPerPage + index + 1}</td>
                 <td>{emp.E_NO}</td>
                 <td>{emp.E_STATUS}</td>
                 <td>{emp.E_NAME}</td>
