@@ -4,11 +4,13 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import timelinePlugin from '@fullcalendar/timeline';
 import listPlugin from "@fullcalendar/list";
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
-import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
+import CommonCalendarModal from "./CommonCalendarModal";
 
 const CommonCalendar2 = ({
   onEventAdd,
@@ -16,152 +18,195 @@ const CommonCalendar2 = ({
   onEventDelete,
   urls,
   columnNames,
-  handleEvents,
+  headerToolbar,
 }) => {
-  // console.log(urls);//컨트롤러 Url 확인 가능
-  const [weekendsVisible, setWeekendsVisible] = useState(true);
-  const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
+  const [resources, setResources] = useState([]);
+  const [formattedEvents, setFormattedEvents] = useState([]); // 상태값으로 변경
   const [categories, setCategories] = useState([]);
-  //기본 초기화 세트
+
+
+
   const updateModalState = () => {
     setIsModalOpen(false);
     setModalAction(null);
-    fetchEvents();
   };
-
-  // 일정 조회 로직
-  const fetchEvents = async () => {
-    try {
-      const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
-      const formattedEvents = eventsData.map((event) => ({
-        title: event[columnNames.title],
-        start: event[columnNames.start],
-        end: event[columnNames.end],
-        no: event[columnNames.no],
-        color: event[columnNames.color],
-        content: event[columnNames.content],
-        category: event[columnNames.category],//여기의 카테고리값으로 모달에 전달하고 싶은건데
-        // 추가 필드들도 필요에 따라 변환
-      }));
-      setEvents(formattedEvents);
+    //모달 핸들링
+    const handleModalAction = (action, event) => {
+      setModalAction(action);
+      setSelectedEvent(event);
+      setIsModalOpen(true);
+    };
+  
+    //저장 모달
+    const handleEventAdd = async (formData) => {
+      console.log(formData);
+      try {
+        const transformedData = {
+          [columnNames.title]: formData.title, 
+          [columnNames.start]: formData.start, 
+          [columnNames.end]: formData.end,
+          [columnNames.category]: formData.category,
+          [columnNames.content]: formData.content,
+          // 추가 필드들도 필요에 따라 변환
+        };
+        console.log(transformedData);
+        await CommonCalendarLogic.addDB(urls.addURL, transformedData);
+        onEventAdd(transformedData);
+        updateModalState();
       } catch (error) {
         // 에러 처리
       }
     };
-    //최초 한 번 이벤트 조회해서 띄우기
-    useEffect(() => {
-      fetchEvents();
-    }, []);
+    //업데이트 모달
+    const handleEventUpdate = async (formData) => {
+      try {
+        // 컬럼명을 변환하여 서버로 데이터 전송
+        const transformedData = {
+          [columnNames.title]: formData.title,
+          [columnNames.start]: formData.start,
+          [columnNames.end]: formData.end,
+          [columnNames.no]: formData.no,
+          [columnNames.category]: formData.category,
+          [columnNames.content]: formData.content,
+          // 추가 필드들도 필요에 따라 변환
+        };
+        console.log(transformedData);
+        await CommonCalendarLogic.updateDB(urls.updateURL, transformedData);
+        onEventUpdate(transformedData);
+        updateModalState();
+      } catch (error) {
+        // 에러 처리
+      }
+    };
+    //삭제액션 모달
+    const handleEventDelete = async (formData) => {
+      console.log("handleModalDelete");
+      try {
+        // 컬럼명을 변환하여 서버로 데이터 전송
+        const transformedData = {
+          [columnNames.title]: formData.title,
+          [columnNames.start]: formData.start,
+          [columnNames.end]: formData.end,
+          [columnNames.no]: formData.no,
+          // 추가 필드들도 필요에 따라 변환
+        };
+        await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
+        onEventDelete(transformedData);
+        updateModalState();
+      } catch (error) {
+        // 에러 처리
+      }
+    };
+    //모달 닫기
+    const handleEventClose = () => {
+      updateModalState();
+    };
   
   useEffect(() => {
-    // events 상태가 변화할 때마다 실행
-    if (typeof handleEvents === 'function') {
-      handleEvents(events);
-    }
-  }, [events]); 
+    const fetchAndDispatch = async () => {
+      try {
+        const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
+        const formattedEvents = eventsData.map((eventData) => {
+          return {
+            resourceId: eventData[columnNames.category], //타임라인 세로값으로 들어가는 이름(예 : 차량1, 차량2, 차량3)
+            title: eventData[columnNames.title],         //타임라인 표시제목
+            start: eventData[columnNames.start],
+            end: eventData[columnNames.end],
+            color: eventData[columnNames.color],
+          };
+        });
+        const uniqueCategories = [...new Set(formattedEvents.map(event => event.resourceId))]; //모달에 이벤트의 카테고리 목록으로 뜨게하는부분
+        setCategories(uniqueCategories);
+        console.log(uniqueCategories);
+        const resources = eventsData.reduce((resourceArray, eventData) => {
+          const id = eventData[columnNames.category]; //위 리소스 아이디와 동일한 값으로 사용함. 
+          const existingResource = resourceArray.find((resource) => resource.id === id); //리소스Id = id값들이 매칭처리 -> 타임라인으로 표시 
+          if (!existingResource) {
+            resourceArray.push({
+              id: id,    //테이블의 카테고리로 들어가는 값(예 : 차1, 차2, 차3), 아래 타이틀과 같아도 상관없음. 
+              title: id, //리소스의 이름으로 하고 싶은 값(예 : 모닝, 스파크, 스타렉스)
+            });
+          }
+          return resourceArray;
+        }, []);
+        setResources(resources);
+        setFormattedEvents(formattedEvents); // 상태값 업데이트
+        console.log(formattedEvents);
+        console.log(resources);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAndDispatch();
+  }, []);
 
-  //모달 핸들링
-  const handleModalAction = (action, event) => {
-    setModalAction(action);
-    setSelectedEvent(event);
-    setIsModalOpen(true);
-  };
-
-  //저장 모달
-  const handleEventAdd = async (formData) => {
-    console.log(formData);
-    try {
-      const transformedData = {
-        [columnNames.title]: formData.title,
-        [columnNames.start]: formData.start,
-        [columnNames.end]: formData.end,
-        [columnNames.category]: formData.category,
-        [columnNames.content]: formData.content,
-        // 추가 필드들도 필요에 따라 변환
-      };
-      console.log(transformedData);
-      await CommonCalendarLogic.addDB(urls.addURL, transformedData);
-      onEventAdd(transformedData);
-      updateModalState();
-    } catch (error) {
-      // 에러 처리
-    }
-  };
-  //업데이트 모달
-  const handleEventUpdate = async (formData) => {
-    try {
-      // 컬럼명을 변환하여 서버로 데이터 전송
-      const transformedData = {
-        [columnNames.title]: formData.title,
-        [columnNames.start]: formData.start,
-        [columnNames.end]: formData.end,
-        [columnNames.no]: formData.no,
-        [columnNames.category]: formData.category,
-        [columnNames.content]: formData.content,
-        // 추가 필드들도 필요에 따라 변환
-      };
-      console.log(transformedData);
-      await CommonCalendarLogic.updateDB(urls.updateURL, transformedData);
-      onEventUpdate(transformedData);
-      updateModalState();
-    } catch (error) {
-      // 에러 처리
-    }
-  };
-  //삭제액션 모달
-  const handleEventDelete = async (formData) => {
-    console.log("handleModalDelete");
-    try {
-      // 컬럼명을 변환하여 서버로 데이터 전송
-      const transformedData = {
-        [columnNames.title]: formData.title,
-        [columnNames.start]: formData.start,
-        [columnNames.end]: formData.end,
-        [columnNames.no]: formData.no,
-        // 추가 필드들도 필요에 따라 변환
-      };
-      await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
-      onEventDelete(transformedData);
-      updateModalState();
-    } catch (error) {
-      // 에러 처리
-    }
-  };
-  //모달 닫기
-  const handleEventClose = () => {
-    updateModalState();
-  };
   // FullCalendar 옵션 설정
   const calendarOptions = {
-    height: 650,
+    height: 660,
     eventTimeFormat: { 
       hour: '2-digit', 
       minute: '2-digit', 
-      hour12: false 
+      meridiem: false
     },
     selectable: true,
     selectMirror: true,
-    select: true,
-    initialView: "dayGridMonth",
+    // select: true,
     locale: "ko",
     expandRows: true, //드`래`그로 확장
     editable: true,
-    weekends: weekendsVisible, // 주말 표시 여부 설정
     dayMaxEventRows: true, 
     dayMaxEvents: 3, 
     headerToolbar: {
       left: "prev,next today",
       center: "title",
-      right: "dayGridMonth,timeGridWeek,listWeek",
+      right: headerToolbar || "dayGridMonth,timeGridWeek,listWeek",
     },
-    events: events,
+    scrollTime: '08:00',
+    aspectRatio: 1.5,
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
+    select: ({ startStr, endStr }) => {
+      const isSingleDay = startStr === endStr;
+      let endDate = isSingleDay ? startStr : endStr;
+      
+      // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
+      if (!isSingleDay) {
+        const endMoment = moment(endDate).subtract(1, "days");
+        endDate = endMoment.format(); // ISO8601 문자열로 변환
+      }
+    },
+    // 타임라인
+    eventSources: [
+      {
+        events: formattedEvents, 
+        color: 'black',
+        textColor: 'white',
+      },
+    ],
+    views: {
+      resourceTimelineDay: {
+        buttonText: ':15 slots',
+        slotDuration: '00:15',
+        slotLabelFormat: {
+          hour: 'numeric',
+          minute: '2-digit',
+          omitZeroMinute: false,
+          meridiem: 'short',
+        },
+      },
+      resourceTimelineTenDay: {
+        type: 'resourceTimeline',
+        duration: { days: 10 },
+        buttonText: '10 days',
+      },
+    },
+    resources :resources,
+    initialView: 'resourceTimelineDay',
+    schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     // 이벤트를 클릭한 경우
     eventClick: (info) => {
       handleModalAction("수정", info.event, categories);
@@ -191,6 +236,7 @@ const CommonCalendar2 = ({
       return true;
     },
   };
+
   return (
     <>
       <div className="customCalendar">
@@ -201,6 +247,8 @@ const CommonCalendar2 = ({
             timeGridPlugin,
             listPlugin,
             bootstrap5Plugin,
+            resourceTimelinePlugin,
+            timelinePlugin,
           ]}
           {...calendarOptions}
         />

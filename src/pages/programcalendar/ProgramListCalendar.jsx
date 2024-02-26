@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgramCalendarList from './ProgramCalendarList';
+import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
 
 const ProgramListCalendar = ({eventData}) => {
     const handleIndividualEventAdd = (event) => {
@@ -34,15 +34,26 @@ const ProgramListCalendar = ({eventData}) => {
         content: 'PS_INFO'
     };
     
+    const calendarListOptions = {
+        height: 660,
+        slotMinTime: '08:00',
+        slotMaxTime: '24:00',
+        expandRows: true,
+        navLinks: true,
+        // 원하는 다른 옵션들을 추가할 수 있습니다.
+    };
+    const initialViewOption = 'timeGridDay'; // 원하는 초기 뷰로 설정
     return (
         <div>
-            <ProgramCalendarList
+            <CommonCalendar
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
                 eventData={eventData}
+                calendarListOptions={calendarListOptions}
+                initialView={initialViewOption}
             />
         </div>
     );
