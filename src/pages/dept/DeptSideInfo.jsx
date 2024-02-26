@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const DeptSideInfo = ({ handleRefresh }) => {
-  const dispatch = useDispatch();
   const data = useSelector((state) => state.deptDetail.value);
+  const empData = useSelector((state) => state.userInfoSlice);
   const [job, setJob] = useState([]);
   const [emp, setEmp] = useState([]);
   console.log(data);
@@ -50,8 +50,20 @@ const DeptSideInfo = ({ handleRefresh }) => {
 
   const handleDelete = async () => {
     console.log("handleDelete");
-    const response = await JobDeleteDB(selectedRow);
-    handleRefresh();
+    console.log(selectedRow.CD);
+    if (selectedRow) {
+      const value = {
+        CD: selectedRow.CD,
+        MOD_ID: empData.e_no,
+      };
+      console.log(value);
+      const response = await JobDeleteDB(value);
+      alert("직종이 삭제되었습니다.");
+      jobList();
+      handleRefresh();
+    } else {
+      alert("삭제할 직종을 선택해주세요.");
+    }
   };
 
   ///모달
@@ -80,10 +92,14 @@ const DeptSideInfo = ({ handleRefresh }) => {
     const value = {
       CD: data.CD,
       CD_VALUE: values.CD_VALUE,
+      REG_ID: empData.e_no,
+      MOD_ID: empData.e_no,
     };
     console.log(value);
     const res = await JobInsertDB(value);
     handleClose();
+    jobList();
+    handleRefresh();
   };
 
   const empList = async () => {

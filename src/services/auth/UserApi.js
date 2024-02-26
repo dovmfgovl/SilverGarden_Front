@@ -111,7 +111,7 @@ export const UserAPage = async() => {
       //alert("해당 페이지에 대한 권한이 없습니다")
       navigate("/home")
     }
-  });
+  });     
 }
 
 export const UserBPage = async() => {

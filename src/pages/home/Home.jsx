@@ -12,8 +12,19 @@ import { messageReceiveList } from '../../services/api/messageApi';
 import { getNoticeList } from '../../services/api/noticeApi';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UserAPage } from '../../services/auth/UserApi';
 
 const Home = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    UserAPage()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   const sidebarList = [
     {
       label: "근태현황",

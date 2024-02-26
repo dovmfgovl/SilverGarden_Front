@@ -14,8 +14,19 @@ import MessageSendDetail from './MessageSendDetail';
 import MessageStored from './MessageStored';
 import MessageDeletedDetail from './MessageDeletedDetail';
 import MessageStoredDetail from './MessageStoredDetail';
+import { UserAPage } from '../../services/auth/UserApi';
 
 const Message = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    UserAPage()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   const list = [{
     label: '받은쪽지함',//목록이름
     icon: faEnvelope,//fontAwsome 아이콘 명

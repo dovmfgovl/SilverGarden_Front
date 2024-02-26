@@ -1,7 +1,7 @@
 import React from 'react';
-import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
+import CommonCalendar2 from './CommonCalendar2';
 
-const ProgramListCalendar = ({eventData}) => {
+const TestTimeLine = () => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -25,38 +25,31 @@ const ProgramListCalendar = ({eventData}) => {
     };
       // 개별 컴포넌트에서 사용할 데이터의 컬럼명 정의
     const columnNames = {
-        no: 'PS_NO',
-        title: 'PS_NAME',
-        start: 'PS_START',
-        end: 'PS_END',
-        color: 'COLOR', //카테고리별로 생성되는 색상
-        category: 'PS_CATEGORY', //색상을 구분하는 카테고리
-        content: 'PS_INFO'
+        no: 'PG_NO',       //구분값
+        title: 'PS_NAME',  //타임라인에 표시되는 이름(예 : 병원동행, 은행방문 등)
+        start: 'PS_START', //예약 시작일시
+        end: 'PS_END',     //예약 종료일시
+        color: 'COLOR',           //카테고리별로 생성되는 색상
+        category: 'PS_CATEGORY',  ////타임라인 세로값으로 들어가는 이름(예 : 차량1, 차량2, 차량3) & 색상을 구분하는 카테고리, 
+        content: 'PS_INFO'        //클릭시 세부내용값(예 : content)
     };
     
-    const calendarListOptions = {
-        height: 660,
-        slotMinTime: '08:00',
-        slotMaxTime: '24:00',
-        expandRows: true,
-        navLinks: true,
-        // 원하는 다른 옵션들을 추가할 수 있습니다.
-    };
-    const initialViewOption = 'timeGridDay'; // 원하는 초기 뷰로 설정
+    //타임라인용
+    const headerToolbarRight = 'resourceTimelineDay,resourceTimelineTenDay,resourceTimelineMonth,resourceTimelineYear'; //타임라인용
+    //참고 : https://fullcalendar.io/docs/resourceAreaColumns
     return (
         <div>
-            <CommonCalendar
+            <CommonCalendar2
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
-                eventData={eventData}
-                calendarListOptions={calendarListOptions}
-                initialView={initialViewOption}
+                //타임라인 사용시
+                headerToolbar={headerToolbarRight}
             />
         </div>
     );
 }
 
-export default ProgramListCalendar;
+export default TestTimeLine;

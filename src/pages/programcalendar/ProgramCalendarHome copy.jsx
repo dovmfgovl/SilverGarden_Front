@@ -1,27 +1,25 @@
 import React, { useState } from 'react'
 import ProgramCalendar from './ProgramCalendar'
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
+import { useSelector } from 'react-redux';
 import WeekendToggle from '../../components/fullcalendar/WeekendToggle';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPgEvents } from '../../redux/calendarSlice';
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     const [weekendsVisible, setWeekendsVisible] = useState(true); // 주말 표시 여부 상태 추가
     const [selectedCategory, setSelectedCategory] = useState('');
 
-    const eventData = useSelector((state)=>state.calendarSlice.events);
-    console.log(eventData);
-    const dispatch = useDispatch();
-    const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
-    
+
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
     };
+
+    const eventData = useSelector((state)=>state.calendarSlice.events);
+    console.log(eventData);
     
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
@@ -70,7 +68,7 @@ const ProgramCalendarHome = () => {
                 오늘의 일정
             </div>
             <div className={styles.monthWrap }>
-                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory} weekendsVisible={weekendsVisible} handleDispatch={handleDispatch}/>
+                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory} weekendsVisible={weekendsVisible}/>
             </div>
             <div className={styles.listWrap }>
                 <ProgramListCalendar eventData={eventData} />
