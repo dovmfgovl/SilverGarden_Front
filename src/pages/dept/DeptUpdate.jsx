@@ -14,6 +14,7 @@ import { setDeptDetail } from "../../redux/deptSlice";
 
 const DeptUpdate = ({ handlepage, handleRefresh }) => {
   const dispatch = useDispatch();
+  const empData = useSelector((state) => state.userInfoSlice);
 
   const {
     handleSubmit,
@@ -95,6 +96,7 @@ const DeptUpdate = ({ handlepage, handleRefresh }) => {
       CD_VALUE: values.CD_VALUE,
       EXT: data.EXT,
       EXT_VALUE: values.EXT_VALUE,
+      MOD_ID: empData.e_no,
     };
     console.log(value);
     if (checkcd === true) {

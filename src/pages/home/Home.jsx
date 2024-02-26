@@ -7,8 +7,19 @@ import ApprovalListHeader from '../approval/ApprovalListHeader';
 import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
 import ProgramCalendar from '../programcalendar/ProgramCalendar';
 import ChartComponent from '../programdashboard/ChartComponent';
+import { UserAPage } from '../../services/auth/UserApi';
 
 const Home = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    UserAPage()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   const sidebarList = [
     {
       label: "홈",
