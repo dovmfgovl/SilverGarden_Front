@@ -2,8 +2,17 @@ import React from "react";
 import CommonCalendar from "../../components/fullcalendar/CommonCalendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setAtEvents } from "../../redux/calendarAtSlice";
 
 const AdminCalendar = () => {
+  //이부분 추가 & 프롭전달 추가///////////////////////////////////////////
+  const eventData = useSelector((state) => state.calendarAtSlice.events);
+  console.log(eventData);
+  const dispatch = useDispatch();
+  const handleDispatch = (events) => dispatch(setAtEvents(events));
+  //이부분 추가/////////////////////////////////////////////////////////
+
   const handleIndividualEventAdd = (event) => {
     console.log("Individual Calendar: Event Added", event);
     // 개별 캘린더에서 추가 이벤트 처리
@@ -38,19 +47,16 @@ const AdminCalendar = () => {
 
   return (
     <div>
-      <div style={{ marginRight: "5px", fontSize: "1.5rem" }}>
-        <FontAwesomeIcon
-          icon={faCalendar}
-          style={{ marginRight: "5px", fontSize: "1.5rem" }}
-        />
-        전사일정
-      </div>
       <CommonCalendar
         onEventAdd={handleIndividualEventAdd}
         onEventUpdate={handleIndividualEventUpdate}
         onEventDelete={handleIndividualEventDelete}
         urls={commonUrls}
         columnNames={columnNames}
+        //이부분 추가///////////////////////////////
+        eventData={eventData}
+        handleDispatch={handleDispatch}
+        //이부분 추가///////////////////////////////
       />
     </div>
   );
