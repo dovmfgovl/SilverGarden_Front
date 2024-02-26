@@ -13,8 +13,7 @@
   "empPicture empInfo10 empInfo11"
   "empPicture empInfo12 empInfo13"
   "empPicture empInfo14 empInfo15"
-  "empPicture empInfo16 empInfo17"
-  ;
+  "empPicture empInfo16 empInfo17";
 }
 
 .empPicture{
@@ -96,7 +95,6 @@
 .selectContainer {
   position: relative; /* 상대 위치 지정 */
   margin-right: 15px;
-  font-size: 15px;
 }
 
 .inputFields {
@@ -104,6 +102,7 @@
   background: transparent;
   margin: 1px;
   padding-left: 50px;
+  font-size: 0.8rem;
 }
 
 .empDetailInfo {
@@ -118,5 +117,5 @@
 }
 
 .empBaseTable {
-  font-size: 15px;
+  font-size: 0.8rem;
 }

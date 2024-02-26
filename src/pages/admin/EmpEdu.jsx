@@ -63,10 +63,9 @@ const EmpEdu = () => {
   return (
     <div className={styles.empBaseInfo} >
       <Row style={{marginBottom:"10px"}}>
-        <Col md = {19}>          
-          <h5>학력</h5>          
+        <Col md = {11}>          
         </Col>
-        <Col md ={5}>          
+        <Col md ={13}>          
           <div className="col-9">
             <Row>
               <Col md={16}>

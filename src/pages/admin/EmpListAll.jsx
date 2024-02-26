@@ -75,15 +75,15 @@ const EmpListAll = () => {
 
                 <div className={styles.row}>
                     <div className="col-2">
-                        <select id="gubun" className="form-select" aria-label="분류">
+                        <select style={{ width: "80%", fontSize: "0.8rem" }} id="gubun" className="form-select" aria-label="분류">
                             <option defaultValue>분류</option>
                             <option value="E_NAME">사원명</option>
                             <option value="E_STATUS">현황</option>
                             <option value="E_RANK">직급</option>
                         </select>
                     </div>
-                    <div className="col-7">
-                        <input
+                    <div className="col-5">
+                        <input style={{ width: "80%", fontSize: "0.8rem" }}
                             type="text"
                             id="keyword"
                             className="form-control"
@@ -95,13 +95,13 @@ const EmpListAll = () => {
                             onKeyDown={handleKeyPress}
                         />
                     </div>
-                    <div className="col-1">
-                        <Button variant="dark" id="btn_search" onClick={handleSearch}>
+                    <div className="col-2">
+                        <Button style={{ width: "60%", fontSize: "0.8rem" }} variant="dark" id="btn_search" onClick={handleSearch}>
                             검색
                         </Button>
                     </div>
-                    <div className="col-2">
-                        <Button variant="outline-secondary" onClick={() => handleShowAll()}>
+                    <div className="col-3">
+                        <Button style={{ width: "55%", fontSize: "0.8rem" }} variant="outline-secondary" onClick={() => handleShowAll()}>
                             전체조회
                         </Button>
                     </div>
@@ -117,7 +117,7 @@ const EmpListAll = () => {
                                 <th style={{width: "13%"}}>사원명</th>
                                 <th style={{width: "15%"}}>부서</th>
                                 <th style={{width: "12%"}}>직급</th>
-                                <th style={{width: "17%"}}>전화번호</th>
+                                <th style={{width: "18%"}}>전화번호</th>
                             </tr>
                         </thead>
                         <tbody>

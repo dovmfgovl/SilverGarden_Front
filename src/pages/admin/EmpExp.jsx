@@ -101,7 +101,6 @@ const EmpExp = ({ empDetail }) => {
 
   return (
     <div className={styles.empBaseInfo}>
-      <h5>경력</h5>
       <Table striped bordered hover className={styles.empBaseTable}>
         <thead>
           <tr>
