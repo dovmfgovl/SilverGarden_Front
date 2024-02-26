@@ -30,7 +30,12 @@ const EmpDetail = () => {
     setOriginalEmployee(memoSelectedEmployee);
   }, [memoSelectedEmployee]);
 
-  /*   const deptName = () => {
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 한 번 부서 정보를 가져오도록 설정
+    deptName();
+  }, []);
+
+    const deptName = () => {
     console.log("deptName");
     DeptNameDB()
       .then((response) => {
@@ -40,7 +45,7 @@ const EmpDetail = () => {
       .catch((error) => {
         console.log(error);
       });
-  }; */
+  };
 
   const passwordGenerate = () => {
     const chars =
@@ -57,18 +62,6 @@ const EmpDetail = () => {
       E_PASSWORD: randomStr // E_PASSWORD 항목만 업데이트
     }))
   };
-
-/*   const PasswordField = () => (
-    <>
-      <div>
-        <label htmlFor="E_PASSWORD">비밀번호</label>
-        <input id="E_PASSWORD" name="E_PASSWORD" type="password" />
-      </div>
-      <MyButton type="button" onClick={passwordGenerate}>
-        임시비밀번호발급
-      </MyButton>
-    </>
-  ); */
 
   const handleEdit = () => {
     setEditing(true); // 수정 버튼을 누를 때 수정 모드 활성화
@@ -124,7 +117,7 @@ const EmpDetail = () => {
               name={name}
             />
             <MyButton type="button" onClick={passwordGenerate}>
-              임시비밀번호발급
+              임시비밀번호재발급
             </MyButton>
           </div>
           {index !== inputFields.length - 1 && <div className={styles.divider} />}
