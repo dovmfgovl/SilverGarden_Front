@@ -7,8 +7,7 @@ export const AuthApi = axios.create({
   }
 })
 
-export const SignupAPI = async({e_birth, e_name, e_phone, dept_name, e_email, e_password, e_auth})=> {
-  const data = {e_birth, e_name, e_phone, dept_name, e_email, e_password, e_auth}
+export const SignupAPI = async(data)=> {
   const response = await AuthApi.post(`/empcreate/signup`, data);
   console.log(response.data)
   return response.data

@@ -9,10 +9,16 @@ import DeleteModal from "./DeleteModal";
 
 const DeptDetail = ({ handlepage, handleRefresh }) => {
   const data = useSelector((state) => state.deptDetail.value);
+  const empData = useSelector((state) => state.userInfoSlice);
   const dispatch = useDispatch();
   console.log(data);
   const handleDelete = async () => {
-    const response = await DeptDeleteDB(data);
+    const value = {
+      CD: data.CD,
+      EXT: data.EXT,
+      MOD_ID: empData.e_no,
+    };
+    const response = await DeptDeleteDB(value);
     alert("삭제되었습니다");
     dispatch(
       setDeptDetail({
@@ -23,6 +29,7 @@ const DeptDetail = ({ handlepage, handleRefresh }) => {
       })
     );
     handleRefresh();
+    handleClose();
   };
 
   //모달
