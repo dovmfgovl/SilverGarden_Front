@@ -11,10 +11,6 @@
   grid-template-rows: 70px 1fr 1fr 1fr;
 }
 
-.profileLayout{
-  background-color: rgb(89, 93, 97);
-  grid-area: profileLayout
-}
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
@@ -75,7 +71,7 @@
 
 .noticeDetailLayout{
   height: 100%;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   display:grid;
   grid-template-areas:
   "noticeDetailBtn"
@@ -85,8 +81,9 @@
   ;
   grid-template-columns: 1fr;
   grid-template-rows: 0.3fr 1fr 4fr 0.5fr;
-  margin: 20px;
+  margin: 0 20px;
   padding:20px;
+
 }
 .noticeDetailBtn{
   grid: noticeDetailBtn;
@@ -97,7 +94,9 @@
   flex-direction:column;
   align-items: start;
   grid-area: noticeDetailHeader;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(242, 242, 242);
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
   margin:0 20px 0 20px;
   padding: 0 10px
 }
@@ -130,6 +129,7 @@
   margin:0 20px 20px 20px;
   padding: 10px;
   align-items: center;
+  border-top: 1px solid lightgrey;
 }
 .noticeDetailAttachment div{
   margin: 0 20px;

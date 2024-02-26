@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPgEvents } from '../../redux/calendarSlice';
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     // eslint-disable-next-line no-unused-vars
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [originData, setOriginData] = useState([]);
 
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
@@ -18,9 +20,12 @@ const ProgramCalendarHome = () => {
 
     const eventData = useSelector((state)=>state.calendarSlice.events);
     console.log(eventData);
+    const dispatch = useDispatch();
     
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
+        const newData = [...eventData.filter((element)=> element.category === category)]
+        dispatch(setPgEvents(newData))
     };
     
     return (
@@ -45,7 +50,7 @@ const ProgramCalendarHome = () => {
                         </Button>
                     </InputGroup>
                     <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체 카테고리'} onSelect={handleCategorySelect} style={{width:'100px'}}>
-                        <Dropdown.Item eventKey="신체">전체 카테고리</Dropdown.Item>
+                        <Dropdown.Item eventKey="전체">전체 카테고리</Dropdown.Item>
                         <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
                         <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
                         <Dropdown.Item eventKey="문화">문화</Dropdown.Item>

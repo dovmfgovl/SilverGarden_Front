@@ -34,6 +34,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
     const [content, setContent] = useState('');//품의서내용이 담김
     const [images, setImages] = useState([])
     let temp = [];//함수가 새로 생성(재렌더링)되더라도 처음에 대입된 이미지를 계속 기억해야함
+
     const memoTemp = useMemo(() => {
       return temp;
     },[])
@@ -148,7 +149,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
       <div className={styles.approvalWriteLine}><ApprovalWriteLine lineData={lineData}/></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
       <div className={styles.approvalWriteContent}>
-        {docType === '품의서' && <QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
+        {docType === '품의서' && <QuillEditor memoTemp={memoTemp} isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
         {docType === '휴가신청서' && <VacationRequestForm handleContent={handleContent}/>}
         {docType === '지출결의서' && <ExpenseReportForm handleContent={handleContent}/>}
       </div>

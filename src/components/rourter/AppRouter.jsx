@@ -9,6 +9,7 @@ import Admin from '../../pages/admin/Admin'
 import Program from '../../pages/program/Program'
 import Mypage from '../../pages/mypage/Mypage'
 import Message from '../../pages/message/Message'
+import ErrorPage from '../../pages/error/ErrorPage'
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
     <Route path="/admin" exact={true} element={<Admin/>}></Route>
     <Route path="/mypage" exact={true} element={<Mypage/>}></Route>
     <Route path="/message" exact={true} element={<Message/>}></Route>
+    <Route path="/error" exact={true} element={<ErrorPage/>}></Route>
   </Routes>
   )
 }

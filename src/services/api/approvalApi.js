@@ -108,15 +108,18 @@ export const approvalFileDownload = (filename) => {
 
 
 export const approvalWaitList = (params) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
-      const response = axios({
+      const response = await axios({
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "approval/approvalWaitList",
         params: params,
       });
       resolve(response);
     } catch (error) {
+      console.log("여기여기");
+      console.log(error.response.data);
+      console.log(error.response.status);
       reject(error);
     }
   });
