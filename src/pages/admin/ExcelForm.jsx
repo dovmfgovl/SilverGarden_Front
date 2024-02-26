@@ -78,7 +78,7 @@ const ExcelForm = ({empList}) => {
 
   return (
     <div>
-      <Button variant="success" id="btn_excelDown" onClick={excelDown}>
+      <Button style={{ width: "80%", fontSize: "0.8rem" }} variant="success" id="btn_excelDown" onClick={excelDown}>
         Excel Down
       </Button>
     </div>
