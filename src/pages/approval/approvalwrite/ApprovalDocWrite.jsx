@@ -19,7 +19,6 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
   //approvalLine : [{e_no:empData.e_no, e_name:empData.e_name, ap_category:"결재", e_rank:empData.e_rank}...]
   //agreement : [{e_no:empData.e_no, e_name:empData.e_name, ap_category:"힙의", e_rank:empData.e_rank}...]
 
-  console.log(lineData);
   const handleLineData = (data) =>{
     setLineData(data)
   }

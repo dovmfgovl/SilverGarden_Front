@@ -12,10 +12,11 @@ import { programListDB } from "../../services/api/programApi";
 import { useDispatch } from "react-redux";
 import ProgramInfo from "./ProgramInfo";
 import { setDetail } from "../../redux/programSlice";
-import TestCalendar from "../../components/fullcalendar/TestCalendar";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
 import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
+import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
+import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -40,6 +41,7 @@ const Program = () => {
         { label: "프로그램 정보", icon: faBook },
         { label: "일정", icon: faCalendar },
         { label: "일정테스트(공통)", icon: faCalendar },
+        { label: "일정테스트(타임라인)", icon: faCalendar },
       ],
     },
 
@@ -54,7 +56,7 @@ const Program = () => {
   const handleMenu = (menuTitle) => {
     setPage(menuTitle);
   };
-  const [page, setPage] = useState("일정"); //기본 페이지
+  const [page, setPage] = useState("일정테스트(공통)"); //기본 페이지
   const [programList, setProgramList] = useState([]);
   const [programDetail, setProgramDetail] = useState(null);
   const dispatch = useDispatch();
@@ -104,6 +106,7 @@ const Program = () => {
         )}
         {page === "일정" && <ProgramCalendarHome programList={programList} />}
         {page === "일정테스트(공통)" && <TestCalendar />}
+        {page === "일정테스트(타임라인)" && <TestTimeLine />}
       </div>
     </div>
   );

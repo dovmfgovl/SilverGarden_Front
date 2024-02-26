@@ -2,18 +2,16 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styles from '../approvalwrite/approvalWrite.module.css'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 import ApprovalDetailLine from '../approvaldetail/ApprovalDetailLine'
-import ApprovalDetailTable from '../approvaldetail/ApprovalDetailTable'
 import QuillEditor from '../../../components/Quill/QuillEditor'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { approvalInsert, getApprovalDetail } from '../../../services/api/approvalApi'
-import { noticeFileDownload } from '../../../services/api/noticeApi'
-import { faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons'
 import ApprovalLineModal from '../approvalwrite/ApprovalLineModal'
 import ApprovalWriteTable from '../approvalwrite/ApprovalWriteTable'
 import ApprovalFileUpload from '../approvalwrite/ApprovalFileUpload'
+import VacationRequestForm from '../approvalwrite/VacationRequestForm'
+import ExpenseReportForm from '../approvalwrite/ExpenseReportForm'
 
 const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
-  const[docType, setDocType] = useState("품의서");//문서 종류를 관리할 state
+  const[docType, setDocType] = useState(null);//문서 종류를 관리할 state
   const [docDetail, setDocDetail] = useState([]);
   const [lineData, setLineData] = useState({
     approvalLine: [],
@@ -33,6 +31,8 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
     setLineData({...lineData, approvalLine: approval, agreement: agreement})
     setFileList(files);
     setDocType(response.data[0].d_category)
+    titleRef.current.textContent = response.data[0].d_title
+    console.log(response.data[0].d_title);
   }
 
   const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
@@ -141,7 +141,7 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
           </DropdownButton>
           <Form.Control value={docType} aria-label="Text input with dropdown button"/>
         </InputGroup>
-        <Button className="mx-2" variant="secondary" onClick={()=>handleMenu("결재대기함")}>목록</Button>
+        <Button className="mx-2" variant="secondary" onClick={()=>handleMenu("임시보관함")}>목록</Button>
         <Button className="mx-2" variant="secondary" onClick={() => setModalShow(true)}>결재선관리</Button>
         <Button className="mx-2" variant="danger" onClick={()=>handleMenu("결재문서상세", docNo)}>수정취소</Button>
         <Button className="mx-2" variant="primary" onClick={(e) => {handleSubmit(e)}}>상신</Button>
@@ -152,7 +152,11 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
       </div>
       <div className={styles.approvalWriteLine}><ApprovalDetailLine lineData={lineData} /></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
-      <div className={styles.approvalWriteContent}><QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/></div>
+      <div className={styles.approvalWriteContent}>
+        {docType === '품의서' && <QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
+        {docType === '휴가신청서' && <VacationRequestForm handleContent={handleContent} formContent={content}/>}
+        {docType === '지출결의서' && <ExpenseReportForm handleContent={handleContent} formContent={content}/>}
+        </div>
       <div className={styles.approvalWriteFileUpload}>
         <ApprovalFileUpload handleFile={handleFile} fileList={fileList} />
       </div>
