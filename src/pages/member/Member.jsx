@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserBPage } from "../../services/auth/UserApi";
 import MemberInfo2 from "./counsel/MemberInfo2";
 import CarTimeLine from "./car/CarTimeLine";
+import CarInfo from "./car/CarInfo";
 
 
 const Member = () => {
@@ -70,7 +71,7 @@ const Member = () => {
           <>
             {memberPage === "이용자기본정보" && <MemberInfo />}
             {memberPage === "이용자상담관리" && <MemberInfo2 />}
-            {memberPage === "차량관리"}
+            {memberPage === "차량관리" && <CarInfo />}
             {memberPage === "차량서비스관리" && <CarTimeLine />}
           </>
         )}
