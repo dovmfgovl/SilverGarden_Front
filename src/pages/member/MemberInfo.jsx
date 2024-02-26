@@ -5,7 +5,7 @@ import MemberRow from './MemberRow';
 import MemberDetail from './MemberDetail';
 import MemberInsert from './MemberInsert'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMemList, setSearchKeywords, setShowAll } from '../../redux/memberSlice';
+import { getMemList } from '../../redux/memberSlice';
 
 const MemberInfo = () => {
     const dispatch = useDispatch();
