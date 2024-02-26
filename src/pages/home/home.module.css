@@ -7,7 +7,7 @@
   "sidebarWrap thirdContentWrap forthContentWrap";
   grid-template-columns: 1fr 4fr 4fr;
   grid-template-rows: 1fr 1fr;
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(231, 233, 246);
   border: 1px solid gray;
 
 }
@@ -17,7 +17,13 @@
   justify-content: baseline;
   align-items:center;
   grid-area: profileWrap;
-  background-color: rgb(129, 175, 216);
+  background-color: rgba(255, 255, 255, 0.774);
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  height: 95%;
+  width: 92%;
 }
 .profileWrap img{
   height: 200px;
@@ -30,51 +36,194 @@
   background-color: rgb(241, 241, 241);
   grid-area: sidebarWrap;
   border-right: 1px solid lightgray;
-  
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  border-radius: 20px;  
+  padding: 20px;
+  margin: 20px;
+  width: 92%;
 }
 
 .firstContentWrap{
-  padding: 20px;
-  margin: 10px;
+  padding: 30px;
+  margin: 20px;
+  margin-left: 20px;
   background-color:white;
-  border-radius: 40px;
+  border-radius: 20px;
   grid-area: firstContentWrap;
   display: flex;
   flex-direction: row;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  width: 97%;
+  height: 95%;
 }
 .secondContentWrap{
-  padding: 20px;
-  margin: 10px;
+  padding: 30px;
+  margin: 20px 20px 20px 10px;
   background-color:white;
-  border-radius: 40px;
+  border-radius: 20px;
   grid-area: secondContentWrap;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  width: 97%;
+  height: 95%;
 }
 .thirdContentWrap{
-  padding: 20px;
-  margin: 10px;
+  padding: 30px;
+  margin: 20px;
+  margin-left: 20px;
   background-color:white;
-  border-radius: 40px;
+  border-radius: 20px;
   grid-area: thirdContentWrap;
+  width: 97%;
+  height: 93%;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 .forthContentWrap{
-  padding: 20px;
-  margin: 10px;
+  padding: 30px;
+  margin: 20px 20px 20px 10px;
   background-color:white;
-  border-radius: 40px;
+  border-radius: 20px;
   grid-area: forthContentWrap;
   display: flex;
   flex-direction: row;
-  height: 94%;
+  width: 97%;
+  height: 93%;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 .subContentWrap {
   flex-basis: 50%;
 }
 
 .subContentWrap2 {
-  flex-basis: 50%;
-  
+  flex-basis: 50%;  
 }
+
 .titleWrap {
-  display: block;
+  display: inline-block;
+  margin-right: 10px;
   font-size: 1.1rem;
+  padding-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+}
+.titleWrap:hover {
+  color: #5c27ee;
+}
+.titleWrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 2px;
+  background-color: #53a0f3;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+.titleWrap:hover::after {
+  transform: scaleX(1);
+}
+
+.moreButton {
+  border-radius: 20px;
+  padding: 5px 10px;
+  background: linear-gradient(to bottom right, #b9b9b9, #a8a8a8); /* 그라데이션 배경 */
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 10px;
+  display: inline-block; /* 인라인 레벨로 설정하여 titleWrap과 같은 라인에 배치 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+.moreButton:hover {
+  background: linear-gradient(to bottom right, #6b6b6b, #5a5a5a); /* 호버 시 그라데이션 배경 변경 */
+}
+
+.approvalWrap1 {
+  background: linear-gradient(to bottom right, #c165dd, #5c27fe); /* 그라데이션 배경 */
+  border-radius: 15px; /* 테두리를 둥글게 */
+  padding: 20px; /* 내부 여백 */
+  width: 90%;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 설정 */
+  color: whitesmoke;
+}
+.approvalWrap1:hover {
+  transform: translateY(-2px); /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 강화 */
+}
+
+.approvalWrap2 {
+  background: linear-gradient(to bottom right, #5581f1, #1153fc); /* 그라데이션 배경 */
+  border-radius: 15px; /* 테두리를 둥글게 */
+  padding: 20px; /* 내부 여백 */
+  width: 90%;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 설정 */
+  color: whitesmoke;
+}
+.approvalWrap2:hover {
+  transform: translateY(-2px); /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 강화 */
+}
+
+.approvalWrap3 {
+  background: linear-gradient(to bottom right, #ffcb52, #ff7b02); /* 그라데이션 배경 */
+  border-radius: 15px; /* 테두리를 둥글게 */
+  padding: 20px; /* 내부 여백 */
+  width: 90%;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 설정 */
+  color: whitesmoke;
+}
+.approvalWrap3:hover {
+  transform: translateY(-2px); /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 강화 */
+}
+
+.approval {
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 13px;
+}
+
+.message_table_container {
+  max-height: 100rem; /* 원하는 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤을 표시하고 필요할 때만 표시 */
+}
+.messageTable {
+  border-collapse: separate; /* 셀 테두리 분리 */
+  border-spacing: 0; /* 셀 테두리 간격 없애기 */
+  width: 100%;
+}
+
+.messageTable th,
+.messageTable td {
+  padding: 12px;
+  text-align: left;
+  border-radius: 10px; /* 셀 모서리 둥글게 */
+  text-align: center;
+}
+
+.messageTable tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.messageTable tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.messageTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.notice {
+  font-weight: bold;
+  padding-bottom: 10px;
 }
