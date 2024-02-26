@@ -8,6 +8,7 @@ import EmpCerti from './EmpCerti'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList, setDetail } from '../../redux/empInfosSlice' // 액션 및 셀럭터 import
 import EmpExpInsert from './EmpExpInsert'
+import { Tab, Tabs } from 'react-bootstrap'
 
 const EmpInfos = () => {
   const dispatch = useDispatch();
@@ -38,20 +39,22 @@ const EmpInfos = () => {
         />
       </div>
       <div className={styles.empBaseInfoWrap}>
-        <EmpEdu 
-          empDetail={empDetail}
-        />
-        <EmpExp 
-          empDetail={empDetail}
-        />
-        {/* <EmpCerti
-          empDetail={empDetail}
-        /> */}
+        <Tabs defaultActiveKey="edu" id="emp-tabs">
+          <Tab eventKey="edu" title="학력">
+            <EmpEdu empDetail={empDetail} />
+          </Tab>
+          <Tab eventKey="exp" title="경력">
+            <EmpExp empDetail={empDetail} />
+          </Tab>
+        </Tabs>
       </div> 
-    </div>
-    
+    </div>    
     </>
   )
 }
 
 export default EmpInfos
+
+//<EmpCerti
+//          empDetail={empDetail}
+//        />
