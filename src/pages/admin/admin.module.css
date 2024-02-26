@@ -8,7 +8,7 @@
   "empSidebarWrap innerContentWrap" */
   ;
   grid-template-columns: 1fr 6fr;
-/*   grid-template-rows: 70px 1fr 1fr;*/  
+  grid-template-rows: 70px 1fr;  
   background-color: white;
 }
 
@@ -24,6 +24,9 @@
   font-size: 2.0rem;
   padding: 10px;
 }
-
+.innerContentWrap{
+  height: 100%;
+  
+}
 
 

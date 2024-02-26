@@ -64,8 +64,10 @@ const EmpCreateModal = () => {
     setPassword("");
   };
   const handleShow = () => {
+    console.log("팝업 열림");
     setShow(true);
     deptName();
+    console.log(dept);
   };
 
   return (

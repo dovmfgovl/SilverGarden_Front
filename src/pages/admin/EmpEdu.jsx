@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import EmpEduRow from './EmpEduRow';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,15 +9,22 @@ import { Col, Row } from 'antd';
 
 const EmpEdu = () => {
   const dispatch = useDispatch();
-  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {};
+  const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee);
+  const memoSelectedEmployee = useMemo(() => selectedEmployee || {}, [selectedEmployee]);
   const [editing, setEditing] = useState(false);
-  const [updatedEdu, setUpdatedEdu] = useState(selectedEmployee);
-  const [originalEdu, setOriginalEdu] = useState(selectedEmployee);
+  const [updatedEdu, setUpdatedEdu] = useState(memoSelectedEmployee);
+  const [originalEdu, setOriginalEdu] = useState(memoSelectedEmployee);
 
   useEffect(() => {
-    setUpdatedEdu(selectedEmployee);
-    setOriginalEdu(selectedEmployee);
-  }, [selectedEmployee]);
+    setUpdatedEdu(prevEmployee => {
+      // memoSelectedEmployee와 비교하여 변경된 경우에만 업데이트
+      if (prevEmployee !== memoSelectedEmployee) {
+        return memoSelectedEmployee;
+      }
+      return prevEmployee;
+    });
+    setOriginalEdu(memoSelectedEmployee);
+  }, [memoSelectedEmployee]);
 
   const handleEdit = () => {
     setEditing(true);
@@ -48,18 +55,17 @@ const EmpEdu = () => {
   }
 
   const educations = [
-    { label: 'HIGH_SCHOOL', period: selectedEmployee.HIGH_SCHOOL_PERIOD, name: selectedEmployee.HIGH_SCHOOL_NAME, major: selectedEmployee.HIGH_SCHOOL_MAJOR, status: selectedEmployee.HIGH_SCHOOL_STATUS },
-    { label: 'UNIVERSITY', period: selectedEmployee.UNIVERSITY_PERIOD, name: selectedEmployee.UNIVERSITY_NAME, major: selectedEmployee.UNIVERSITY_MAJOR, status: selectedEmployee.UNIVERSITY_STATUS },
-    { label: 'GRADUATE_SCHOOL', period: selectedEmployee.GRADUATE_SCHOOL_PERIOD, name: selectedEmployee.GRADUATE_SCHOOL_NAME, major: selectedEmployee.GRADUATE_SCHOOL_MAJOR, status: selectedEmployee.GRADUATE_SCHOOL_STATUS }
+    { label: 'HIGH_SCHOOL', period: memoSelectedEmployee.HIGH_SCHOOL_PERIOD, name: memoSelectedEmployee.HIGH_SCHOOL_NAME, major: memoSelectedEmployee.HIGH_SCHOOL_MAJOR, status: memoSelectedEmployee.HIGH_SCHOOL_STATUS },
+    { label: 'UNIVERSITY', period: memoSelectedEmployee.UNIVERSITY_PERIOD, name: memoSelectedEmployee.UNIVERSITY_NAME, major: memoSelectedEmployee.UNIVERSITY_MAJOR, status: memoSelectedEmployee.UNIVERSITY_STATUS },
+    { label: 'GRADUATE_SCHOOL', period: memoSelectedEmployee.GRADUATE_SCHOOL_PERIOD, name: memoSelectedEmployee.GRADUATE_SCHOOL_NAME, major: memoSelectedEmployee.GRADUATE_SCHOOL_MAJOR, status: memoSelectedEmployee.GRADUATE_SCHOOL_STATUS }
   ];
 
   return (
     <div className={styles.empBaseInfo} >
       <Row style={{marginBottom:"10px"}}>
-        <Col md = {19}>          
-          <h5>학력</h5>          
+        <Col md = {11}>          
         </Col>
-        <Col md ={5}>          
+        <Col md ={13}>          
           <div className="col-9">
             <Row>
               <Col md={16}>
