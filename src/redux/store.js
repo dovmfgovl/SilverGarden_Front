@@ -10,6 +10,7 @@ import chooseEmpSlice from "./chooseEmpSlice";
 import calendarSlice from "./calendarSlice";
 import calendarAtSlice from "./calendarAtSlice";
 import carSlice from "./carSlice";
+import calendarCarSlice from "./calendarCarSlice";
 
 
 
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   deptDetail:deptDetail.reducer,
   calendarSlice:calendarSlice,     //지연 캘린더
   calendarAtSlice:calendarAtSlice, //슬기 캘린더
+  calendarCarSlice:calendarCarSlice, //태규 캘린더
 });
 
 const store = configureStore({

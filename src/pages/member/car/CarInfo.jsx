@@ -4,7 +4,6 @@ import styles from '../member.module.css';
 import CarRow from './CarRow';
 import CarDetail from './CarDetail';
 import CarInsert from './CarInsert';
-import { getShuttleList } from '../../../services/api/carApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarList } from '../../../redux/carSlice';
 

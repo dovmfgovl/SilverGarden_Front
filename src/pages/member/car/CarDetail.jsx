@@ -38,6 +38,7 @@ const CarDetail = () => {
     <div>
     </div>
     </Stack>
+    
   )
 }
 

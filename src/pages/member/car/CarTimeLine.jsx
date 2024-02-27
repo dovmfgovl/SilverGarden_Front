@@ -1,7 +1,14 @@
 import React from 'react';
-import CommonCalendar2 from '/Users/a/silverGarden/front/src/components/fullcalendar/CommonCalendar2.jsx'
+import CarCalendar from './CarCalendar';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCarEvents } from '../../../redux/calendarCarSlice';
 
 const CarTimeLine = () => {
+
+    const eventData = useSelector((state) => state.calendarCarSlice.events);
+    const dispatch = useDispatch();
+    const handleDispatch = (events)=>dispatch(setCarEvents(events)); 
+
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -39,7 +46,7 @@ const CarTimeLine = () => {
     //참고 : https://fullcalendar.io/docs/resourceAreaColumns
     return (
         <div>
-            <CommonCalendar2
+            <CarCalendar
                 onEventAdd={handleIndividualEventAdd}
                 onEventUpdate={handleIndividualEventUpdate}
                 onEventDelete={handleIndividualEventDelete}
@@ -47,6 +54,8 @@ const CarTimeLine = () => {
                 columnNames={columnNames}
                 //타임라인 사용시
                 headerToolbar={headerToolbarRight}
+                eventData={eventData}
+                handleDispatch={handleDispatch}
             />
         </div>
     );
