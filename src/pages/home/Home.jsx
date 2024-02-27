@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
+import AdminCalendar from '../schedule/TestCalendar';
 import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
-import ProgramCalendar from '../programcalendar/ProgramCalendar';
 import ChartComponent from '../programdashboard/ChartComponent';
 import { useSelector } from 'react-redux';
 import { getApprovalDocCount } from '../../services/api/approvalApi';
@@ -143,7 +143,7 @@ const Home = () => {
           </div>
         <div className={styles.secondContentWrap}>
           <h4 className={styles.titleWrap}>일정표</h4>
-          {/*<ProgramCalendar />*/}
+          <AdminCalendar className={styles.calendar}/>
         </div>
         <div className={styles.thirdContentWrap}>
           <h4 className={styles.titleWrap}>공지사항</h4>

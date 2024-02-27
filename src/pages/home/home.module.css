@@ -8,8 +8,6 @@
   grid-template-columns: 1fr 4fr 4fr;
   grid-template-rows: 1fr 1fr;
   background-color: rgb(231, 233, 246);
-  border: 1px solid gray;
-
 }
 .profileWrap{
   display: flex;
@@ -33,7 +31,7 @@
 }
 
 .sidebarWrap{
-  background-color: rgb(241, 241, 241);
+  background-color: rgba(255, 255, 255, 0.774);
   grid-area: sidebarWrap;
   border-right: 1px solid lightgray;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
@@ -226,4 +224,48 @@
 .notice {
   font-weight: bold;
   padding-bottom: 10px;
+}
+
+.calendar {
+  height: 90%;
+}
+
+.atStart {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #ff69b4; /* 분홍 계열 색상 */
+  color: white;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+  background-image: linear-gradient(to bottom, #ff69b4 50%, #ff1493 100%); /* 그라디언트 배경색 */
+}
+.atStart:hover {
+  background-image: linear-gradient(to bottom, #ff1493 0%, #ff69b4 50%); /* 호버 시 그라디언트 색상 변경 */
+}
+.atEnd {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #800080; /* 보라 계열 색상 */
+  color: white;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(128, 0, 128, 0.2);
+  background-image: linear-gradient(to bottom, #800080 50%, #4b0082 100%); /* 그라디언트 배경색 */
+}
+.atEnd:hover {
+  background-image: linear-gradient(to bottom, #4b0082 0%, #800080 50%); /* 호버 시 그라디언트 색상 변경 */
+}
+
+.atContainer {
+  display: flex;
+  justify-content: space-around; /* 두 버튼을 컨테이너 양쪽 끝에 배치 */
+}
+.at1 {
+  margin: 10px;
+}
+.at2 {
+  margin: 10px;
 }
