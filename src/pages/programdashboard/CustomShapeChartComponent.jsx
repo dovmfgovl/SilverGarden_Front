@@ -29,7 +29,6 @@ const CustomShapeLineChartComponent = () => {
         횟수: count, // y축
     }));
 
-    const customShapePath = 'M10,10C50,200,50,200,10,390C60,410,90,390,90,390C90,390,110,430,90,470C70,510,50,490,10,470C-10,430,-30,10,10,10Z';
 
     return (
         <>

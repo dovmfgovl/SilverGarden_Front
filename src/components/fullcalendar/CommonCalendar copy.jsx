@@ -11,6 +11,8 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
+import { useDispatch } from "react-redux";
+import { setPgEvents } from '../../redux/calendarSlice'; // 동일한 리듀서 이름으로 수정
 
 const CommonCalendar = ({
   onEventAdd,
@@ -19,19 +21,19 @@ const CommonCalendar = ({
   weekendsVisible,
   urls,
   columnNames,
-  calendarListOptions, //리스트 캘린더 옵션
-  initialView, // 새로운 prop 추가
   eventData,
-  handleDispatch
+  calendarListOptions, //리스트 캘린더 옵션
+  initialView // 새로운 prop 추가
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
-  
   //기본 초기화 세트
-    const updateModalState = () => {
+  const dispatch = useDispatch();
+  
+  const updateModalState = () => {
     setIsModalOpen(false);
     setModalAction(null);
   };
@@ -50,7 +52,7 @@ const CommonCalendar = ({
           content: eventsData[columnNames.content],
           category: eventsData[columnNames.category],
         }));
-        handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
+        dispatch(setPgEvents(formattedEvents)); // 이 부분을 여기로 이동
         const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
         setCategories(uniqueCategories);
         console.log(uniqueCategories);
@@ -59,7 +61,7 @@ const CommonCalendar = ({
       }
     };
     fetchAndDispatch();
-}, [isModalOpen]);
+  }, [isModalOpen]);
   
   //모달 핸들링
   const handleModalAction = (action, event) => {

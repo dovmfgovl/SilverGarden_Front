@@ -17,7 +17,6 @@ const MemberApp = () => {
             <MemberHome></MemberHome>
           </div>
           <div className={styles.memberappFooterWrap}>footbar</div>
-          
         </div>
       </Provider>
   </div>

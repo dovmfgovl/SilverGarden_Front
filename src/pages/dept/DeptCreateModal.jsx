@@ -4,8 +4,10 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { DeptCheckDB, DeptInsertDB } from "../../services/api/deptApi";
+import { useSelector } from "react-redux";
 
 const DeptCreateModal = ({ handleRefresh }) => {
+  const empData = useSelector((state) => state.userInfoSlice);
   const {
     setValue,
     handleSubmit,
@@ -78,7 +80,15 @@ const DeptCreateModal = ({ handleRefresh }) => {
   const onSubmit = async (values) => {
     console.log(values);
     if (checkcd === true) {
-      const response = await DeptInsertDB(values);
+      const value = {
+        CD: values.CD,
+        CD_VALUE: values.CD_VALUE,
+        EXT: values.EXT,
+        EXT_VALUE: values.EXT_VALUE,
+        REG_ID: empData.e_no,
+        MOD_ID: empData.e_no,
+      };
+      const response = await DeptInsertDB(value);
       console.log(response.data);
       alert("부서가 등록되었습니다");
       handleClose();
