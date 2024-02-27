@@ -18,20 +18,20 @@ const CarTimeLine = () => {
     };
     //스프링 컨트롤러 url 입력(기본 CRUD)
     const commonUrls = {
-        listURL: 'calendar/list',
-        addURL: 'calendar/add',
-        updateURL: 'calendar/update',
-        deleteURL: 'calendar/delete',
+        listURL: 'member/shuttleCalList',
+        addURL: 'member/shuttleCalAdd',
+        updateURL: 'member/shuttleCalupdate',
+        deleteURL: 'member/shuttleCaldelete',
     };
       // 개별 컴포넌트에서 사용할 데이터의 컬럼명 정의
     const columnNames = {
-        no: 'PG_NO',       //구분값
-        title: 'PS_NAME',  //타임라인에 표시되는 이름(예 : 병원동행, 은행방문 등)
-        start: 'PS_START', //예약 시작일시
-        end: 'PS_END',     //예약 종료일시
+        no: 'SERV_NO',       //구분값
+        title: 'SERV_TITLE',  //타임라인에 표시되는 이름(예 : 병원동행, 은행방문 등)
+        start: 'SERV_START', //예약 시작일시
+        end: 'SERV_END',     //예약 종료일시
         color: 'COLOR',           //카테고리별로 생성되는 색상
-        category: 'PS_CATEGORY',  ////타임라인 세로값으로 들어가는 이름(예 : 차량1, 차량2, 차량3) & 색상을 구분하는 카테고리, 
-        content: 'PS_INFO'        //클릭시 세부내용값(예 : content)
+        category: 'SERV_CARTYPE',  ////타임라인 세로값으로 들어가는 이름(예 : 차량1, 차량2, 차량3) & 색상을 구분하는 카테고리, 
+        content: 'SERV_INFO'        //클릭시 세부내용값(예 : content)
     };
     
     //타임라인용
