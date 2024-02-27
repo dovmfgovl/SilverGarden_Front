@@ -1,4 +1,4 @@
-import {faHome} from '@fortawesome/free-solid-svg-icons';
+import {faBusinessTime} from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
@@ -28,7 +28,7 @@ const Home = () => {
   const sidebarList = [
     {
       label: "근태현황",
-      icon: faHome,
+      icon: faBusinessTime,
       isOpen: true, //시작시 열려있도록 함
     },
   ];

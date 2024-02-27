@@ -52,13 +52,17 @@ const HomeProfile = () => {
       <div>
         <img src={empData.e_profile ===null ?"https://picsum.photos/200/200" : empData.e_profile} alt="프로필" />
       </div>
-      <div>{empData.e_name}</div>
-      <div>{empData.e_no}</div>
-      <div className={styles.atButtonWrap}>
-        <div className={styles.atButtonStart}>
+      <div className={styles.eName}>
+        {empData.e_name}
+      </div>
+      <div className={styles.eNo}>
+        {empData.e_no}
+      </div>
+      <div className={styles.atTimeWrap}>
+        <div className={styles.atTimeStart}>
           출근시간: {atList.AT_START ? atList.AT_START : '미확인'}
         </div>
-        <div className={styles.atButtonEnd}>
+        <div className={styles.atTimeEnd}>
           퇴근시간: {atList.AT_END ? atList.AT_END : '미확인'}
         </div>
       </div>
