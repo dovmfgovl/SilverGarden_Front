@@ -18,14 +18,14 @@
   
   .empListTitleBar{
     grid-area: empTitleBar;
-    background-color: rgb(51, 184, 255);
+    background-color: rgb(255, 255, 255);
     font-size: 2.0rem;
     padding: 10px;
   }
 
   .innerContentWrap{
     grid-area: innerContentWrap;
-    background-color: rgb(168, 211, 255);
+    background-color: rgb(255, 255, 255);
     font-size: 2.0rem;
     padding: 10px;
   }
