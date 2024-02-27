@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
-import AdminCalendar from '../schedule/TestCalendar';
 import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
 import ChartComponent from '../programdashboard/ChartComponent';
 import { useSelector } from 'react-redux';
@@ -13,6 +12,7 @@ import { getNoticeList } from '../../services/api/noticeApi';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserAPage } from '../../services/auth/UserApi';
+import HomeCalendarInfo from './HomeCalendarInfo';
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -88,7 +88,7 @@ const Home = () => {
       <div className={styles.sidebarWrap}><SidebarCommon list={sidebarList}/></div>
       <div className={styles.firstContentWrap}>
         <div className={styles.subContentWrap}>
-          <h4 className={styles.titleWrap}>전자결재</h4>
+          <h4 className={styles.titleWrap}>결재</h4>
           <Link to="/approval">
             <button className={styles.moreButton}>
               더보기
@@ -123,7 +123,7 @@ const Home = () => {
                         <th>#</th>
                         <th>발신자</th>
                         <th>제목</th>
-                        <th>받은날짜</th>
+                        <th>발신날짜</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -143,7 +143,7 @@ const Home = () => {
           </div>
         <div className={styles.secondContentWrap}>
           <h4 className={styles.titleWrap}>일정표</h4>
-          <AdminCalendar className={styles.calendar}/>
+          <HomeCalendarInfo />
         </div>
         <div className={styles.thirdContentWrap}>
           <h4 className={styles.titleWrap}>공지사항</h4>
@@ -180,7 +180,7 @@ const Home = () => {
         </div>      
       <div className={styles.forthContentWrap}>
         <div className={styles.subContentWrap}>
-          {/* <h4 className={styles.titleWrap}>대시보드</h4> */}
+          <h4 className={styles.titleWrap}>대시보드</h4>
           {/* <CustomShapeLineChartComponent /> */}
         </div>
         <div className={styles.subContentWrap2}>
