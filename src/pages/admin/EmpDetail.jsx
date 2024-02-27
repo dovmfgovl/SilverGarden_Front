@@ -4,9 +4,9 @@ import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 import { Col, Row } from 'antd';
-import EmpPictureUpload from './EmpPictureUpload';
 import { DeptNameDB } from '../../services/api/empCreateApi';
 import styled from 'styled-components';
+import EmpUploadImg from './EmpUploadImg';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,6 @@ const EmpDetail = () => {
   const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee); // 원래의 직원 정보를 관리하는 state
   const [dept, setDept] = useState([]);
   const [e_password, setPassword] = useState("");
-  const [fileList, setFileList] = useState([]); // 파일 리스트를 관리하는 state
 
   useEffect(() => {
     // 선택된 직원 정보가 변경되면 해당 정보로 state 업데이트
@@ -74,28 +73,29 @@ const EmpDetail = () => {
     }));
   };
 
-  const handleFile = (list) => { // 파일 선택 시 파일 리스트 업데이트
-    setFileList([...list])
-  }
-
   const handleCancel = () => {
     setEditing(false); // 수정 취소 시 수정 모드 비활성화
     setUpdatedEmployee(originalEmployee); // 수정 취소 시 이전 상태로 되돌림
   };
 
+  const handleImageUrlChange = (imageUrl) => {
+    // 이미지 URL을 updatedEmployee에 추가
+    setUpdatedEmployee(prevState => ({
+      ...prevState,
+      E_PROFILE: imageUrl
+    }));
+  }
+
   // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져옴
   const handleSaveChanges = () => {
-    const formData = new FormData();
-    formData.append('profile', fileList[0]); // 파일을 formData에 추가
-
-    for(const key in updatedEmployee) {
-      formData.append(key, updatedEmployee[key]); // 직원 정보를 formData에 추가
-    }
-    dispatch(saveEmpDetails(formData))
+    dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
       .then(() => {
-        dispatch(setDetail(updatedEmployee));
+        dispatch(setDetail(updatedEmployee)); // 리덕스 스토어에서 선택된 직원 정보 업데이트
         setEditing(false); // 저장 후 수정 모드 비활성화
         dispatch(getEmpList()); // 저장 후 전체 목록 갱신
+
+        // 수정된 직원 정보를 UI에 반영하기 위해 상태 업데이트
+        setOriginalEmployee(updatedEmployee);
       })
       .catch(error => {
         console.error('Error saving employee details: ', error);
@@ -142,7 +142,7 @@ const EmpDetail = () => {
                     <option key={index} value={item.CD_VALUE}>{item.CD_VALUE}</option>
                   ))
                 ) : (
-                  // 기존의 옵션들을 그대로 사용
+                  // 기존의 옵션들은 그대로 사용
                   options.map((option, index) => (
                     <option key={index} value={option}>{option}</option>
                   ))
@@ -183,7 +183,6 @@ const EmpDetail = () => {
     { label: '직급', name: 'E_RANK', type: 'select', options: ['시설장', '팀장', '사원'] },
   ];
   
-
   return (
     <div className={styles.empDetailInfo}>
       <Row style={{ marginBottom: "10px" }}>
@@ -210,11 +209,13 @@ const EmpDetail = () => {
         </Col>
       </Row>
       <div className={styles.empInfoWrap}>
-        <div className={styles.empPicture}>
-          {editing && <EmpPictureUpload handleFile={handleFile} fileList={fileList} />} {/* 수정 모드일 때만 파일 업로드 활성화 */}
-          {fileList.length > 0 && ( // 파일 선택 시 미리보기 표시
-            <img src={URL.createObjectURL(fileList[0])} alt="Employee Preview" style={{ width: '160px', height: '180px' }} />
+        <div className={styles.empPicture} style={{ width: '150px', height: '150px', overflow: 'hidden', border: '1px solid #ccc', borderRadius: '4px' }}>
+          {updatedEmployee.E_PROFILE ? (
+            <img src={updatedEmployee.E_PROFILE} alt="프로필 사진" style={{ width: '100%', height: '100%' }} />
+          ) : (
+            <span>프로필 사진이 없습니다.</span>
           )}
+          { editing && <EmpUploadImg imageUrlChange={handleImageUrlChange}/> }
         </div>
         {inputFields.map(renderInputField)}
       </div>

@@ -28,6 +28,7 @@ const EmpListAll = () => {
             return includeResigned ? filteredList : filteredList.filter(emp => emp.E_STATUS !== '퇴직');
         }
     });
+    const {empListAll, setEmpListAll} = useState();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -62,6 +63,17 @@ const EmpListAll = () => {
             emp.DEPT_NAME.includes(searchKeyword)
         );
     };
+
+    // 직원 전체 목록 업데이트
+    const updatedEmpList = () => {
+        dispatch(getEmpList())
+        .then((response) => {
+            setEmpListAll(response); // 직원 전체 목록 업데이트
+        })
+        .catch((error) => {
+            console.error("직원 전체 목록 업데이트 중 에러: ", error);
+        });
+    }
 
     const filteredList = empList.filter(handleFilter);
 
@@ -155,7 +167,7 @@ const EmpListAll = () => {
                             </Form>
                         </span>                    
                         <span className="col-7">
-                            <EmpCreateModal/>
+                            <EmpCreateModal empCreated={updatedEmpList}/>
                         </span>
                     </span>
                 </div>
