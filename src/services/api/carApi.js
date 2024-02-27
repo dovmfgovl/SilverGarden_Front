@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const getCarList = (params) => {
+export const getShuttleList = (params) => {
   return new Promise((resolve, reject) => {
     try {
       const response = axios({
         method: "get",
-        url: process.env.REACT_APP_SPRING_IP + "shuttle/shuttleList",
+        url: process.env.REACT_APP_SPRING_IP + "member/shuttleList",
         params: params,
       });
       resolve(response);
@@ -20,7 +20,7 @@ export const shuttleInsert = (shuttle) => {
     try {
       const response = axios({
         method: "post",
-        url: process.env.REACT_APP_SPRING_IP + "shuttle/shuttleInsert",
+        url: process.env.REACT_APP_SPRING_IP + "member/shuttleInsert",
         data: shuttle,
       });
       resolve(response);
@@ -35,7 +35,7 @@ export const shuttleDelete = (shuttle_no) => {
     try {
       const response = axios({
         method: "get",
-        url: process.env.REACT_APP_SPRING_IP + "shuttle/shuttleDelete",
+        url: process.env.REACT_APP_SPRING_IP + "member/shuttleDelete",
         params: {'SHUTTLE_NO': shuttle_no},
       });
       resolve(response);
@@ -50,7 +50,7 @@ export const shuttleUpdate = (params) => {
     try {
       const response = axios({
         method: "get",
-        url: process.env.REACT_APP_SPRING_IP + "shuttle/shuttleUpdate",
+        url: process.env.REACT_APP_SPRING_IP + "member/shuttleUpdate",
         params: params
       });
       resolve(response);
