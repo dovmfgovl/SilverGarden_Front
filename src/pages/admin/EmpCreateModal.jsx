@@ -7,7 +7,7 @@ import { Col, Row } from "antd";
 import { DeptNameDB, SignupAPI } from "../../services/api/empCreateApi";
 import { useSelector } from "react-redux";
 
-const EmpCreateModal = () => {
+const EmpCreateModal = ({ empCreated }) => {
   const [e_password, setPassword] = useState("");
   const [dept, setDept] = useState([]);
   const empData = useSelector((state) => state.userInfoSlice);
@@ -39,6 +39,7 @@ const EmpCreateModal = () => {
         reset();
         alert("신규 등록이 완료되었습니다");
         handleClose();
+        empCreated();
       })
       .catch((error) => {
         alert(error);
