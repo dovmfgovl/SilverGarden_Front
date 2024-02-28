@@ -24,7 +24,8 @@ const CommonCalendar = ({
   initialView, // 새로운 prop 추가
   eventData,
   handleDispatch,
-  filteredEvents
+  filteredEvents,
+  defaultCategories
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
@@ -223,6 +224,7 @@ const CommonCalendar = ({
           onDelete={handleEventDelete}
           onClose={handleEventClose}
           categories={categories}
+          defaultCategories={defaultCategories}
         />
       )}
     </>

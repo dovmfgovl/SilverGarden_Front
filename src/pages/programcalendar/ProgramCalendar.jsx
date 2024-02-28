@@ -2,6 +2,9 @@ import React from 'react';
 import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
 
 const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch, filteredEvents}) => {
+    //기본설정 카테고리 있을때! 사용////////
+    // const defaultCategories = ["1", "2", "3"];
+    
     //스프링 컨트롤러 url 입력(기본 CRUD)
     const commonUrls = {
         listURL: 'calendar/list',
@@ -19,9 +22,7 @@ const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch, filteredEv
         category: 'PS_CATEGORY', //색상을 구분하는 카테고리
         content: 'PS_INFO'
     };
-    const categories = {
         
-    }
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -50,6 +51,7 @@ const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch, filteredEv
                 weekendsVisible={weekendsVisible}
                 handleDispatch={handleDispatch}
                 filteredEvents={filteredEvents}
+                // defaultCategories={defaultCategories}
             />
         </div>
     );

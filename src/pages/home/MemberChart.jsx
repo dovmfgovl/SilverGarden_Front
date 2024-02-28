@@ -29,14 +29,13 @@ const MemberChart = ({ memberList }) => {
 
     return (
         <>
-            <h4>이용자 인원(여/남)</h4>
-            <PieChart width={800} height={400} onMouseEnter={onPieEnter}>
+            <PieChart width={1000} height={500} onMouseEnter={onPieEnter}> {/* 여기를 조정했습니다. */}
                 <Pie
                     data={data}
-                    cx={200}
-                    cy={200}
-                    innerRadius={60}
-                    outerRadius={80}
+                    cx={500} /* 중심 X 좌표도 조정하여 차트를 중앙에 위치시킵니다. */
+                    cy={250} /* 중심 Y 좌표도 조정하여 차트를 중앙에 위치시킵니다. */
+                    innerRadius={120} /* 내부 반지름 크기 조정 */
+                    outerRadius={200} /* 외부 반지름 크기 조정 */
                     fill="#8884d8"
                     paddingAngle={5}
                     dataKey="value"

@@ -1,4 +1,3 @@
-import {faHome} from '@fortawesome/free-solid-svg-icons';
 import {faBusinessTime} from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
@@ -8,8 +7,6 @@ import { getMemberList } from '../../services/api/memberApi';
 import MemberChart from './MemberChart';
 import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
 import ProgramChart from './ProgramChart';
-import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
-import ChartComponent from '../programdashboard/ChartComponent';
 import { useSelector } from 'react-redux';
 import { getApprovalDocCount } from '../../services/api/approvalApi';
 import { messageReceiveList } from '../../services/api/messageApi';
@@ -37,13 +34,13 @@ const Home = () => {
       isOpen: true, //시작시 열려있도록 함
     },
   ];
-  /////////////////// 대쉬보드 /////////////////////////////////////////////////
+  /////////////////// 대쉬보드(프로그램, 이용자) /////////////////////////////////////////////////
   const [memberList, setMemberList] = useState([]);
   const [pgCalList, setPgCalList] = useState([]);
   const memberData = async () => {
     try {
       const response = await getMemberList();
-      setMemberList(response); 
+      setMemberList(response.data); 
     } catch (error) {
       console.error('Error fetching member list:', error);
     }
@@ -76,6 +73,7 @@ const Home = () => {
     getDocCount();
     memberData();
     fetchData();
+    console.log(memberList);
   },[])
 
   ///////////////// 쪽지 //////////////////////////////////////////////////////
@@ -207,10 +205,12 @@ const Home = () => {
       <div className={styles.forthContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>대시보드</h4>
+          <div className={styles.notice}>월별 프로그램 횟수</div> 
           <ProgramChart  pgCalList={pgCalList}/>
         </div>
         <div className={styles.subContentWrap2}>
           <h4 className={styles.titleWrap}>대시보드2</h4>
+          <div className={styles.notice}>이용자 인원(여/남)</div> 
           <MemberChart memberList={memberList}/>
         </div>
       </div>
