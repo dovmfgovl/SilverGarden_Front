@@ -10,60 +10,79 @@ import EmpCreateModal from './EmpCreateModal';
 import EmpListPagination from './EmpListPagination';
 
 const EmpListAll = () => {
-    // 검색어 상태와 퇴사자 포함 여부를 관리
     const [searchKeyword, setSearchKeyword] = useState('');
     const includeResigned = useSelector(state => state.empInfos.includeResigned);
     const empList = useSelector(state => {
         const { value } = state.empInfos;
         // 검색어가 없을 때는 모든 직원을 표시하고, 퇴사자가 아닌 경우 필터링
-        if (!searchKeyword) {
+        if (!searchKeyword || searchKeyword.trim() === '') {
             return includeResigned ? value : value.filter(emp => emp.E_STATUS !== '퇴직');
         } else {
             // 검색어에 따라 필터링
             const filteredList = value.filter(emp =>
-                emp.E_NAME.includes(searchKeyword) || emp.E_STATUS.includes(searchKeyword) || emp.E_RANK.includes(searchKeyword)
+                (emp.E_NAME && emp.E_NAME.includes(searchKeyword)) ||
+                (emp.E_STATUS && emp.E_STATUS.includes(searchKeyword)) ||
+                (emp.E_RANK && emp.E_RANK.includes(searchKeyword)) ||
+                (emp.DEPT_NAME && emp.DEPT_NAME.includes(searchKeyword))
             );
             return includeResigned ? filteredList : filteredList.filter(emp => emp.E_STATUS !== '퇴직');
         }
     });
+    const {empListAll, setEmpListAll} = useState();
     const dispatch = useDispatch();
 
-    // 초기 데이터 가져오기
     useEffect(() => {
         dispatch(getEmpList());
     }, [dispatch]);
 
-    // 검색어 입력 처리
     const handleSearch = () => {
         dispatch(setSearchKeywords(searchKeyword));
     };
 
-    // 엔터 키 처리
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             handleSearch();
         }
     };
 
-    // 전체 조회 버튼 클릭 처리
     const handleShowAll = () => {
         dispatch(setShowAll());
     };
 
-    // 페이지네이션 관련 상태 변수 및 함수
-    const[currentPage, setCurrentPage] = useState(1);
-    const postPerPage = 10;
-    const totalPosts = empList.length;
+    const handleFilter = (emp) => {
+        // 검색어가 없거나 퇴사자를 포함할 경우 모든 직원을 반환
+        if (!searchKeyword || includeResigned) {
+            return true;
+        }
 
-    // 페이지 변경 처리 함수
-    const handleSetCurrentPage = (pageNo) => {
-        setCurrentPage(pageNo);
+        // 검색어가 포함된 경우 해당 직원을 반환
+        return (
+            emp.E_NAME.includes(searchKeyword) ||
+            emp.E_STATUS.includes(searchKeyword) ||
+            emp.E_RANK.includes(searchKeyword) ||
+            emp.DEPT_NAME.includes(searchKeyword)
+        );
+    };
+
+    // 직원 전체 목록 업데이트
+    const updatedEmpList = () => {
+        dispatch(getEmpList())
+        .then((response) => {
+            setEmpListAll(response); // 직원 전체 목록 업데이트
+        })
+        .catch((error) => {
+            console.error("직원 전체 목록 업데이트 중 에러: ", error);
+        });
     }
 
-    // 현재 페이지에 해당하는 게시물의 인덱스 계산
+    const filteredList = empList.filter(handleFilter);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const postPerPage = 10;
+
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const selectedlist = empList.slice(indexOfFirstPost, indexOfLastPost);
+    const selectedlist = filteredList.slice(indexOfFirstPost, indexOfLastPost);
 
     return (
         <>
@@ -79,6 +98,7 @@ const EmpListAll = () => {
                             <option defaultValue>분류</option>
                             <option value="E_NAME">사원명</option>
                             <option value="E_STATUS">현황</option>
+                            <option value="DEPT_NAME">부서</option>
                             <option value="E_RANK">직급</option>
                         </select>
                     </div>
@@ -121,21 +141,19 @@ const EmpListAll = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* 현재 페이지에 해당하는 직원 목록 표시 */}
                             {selectedlist.map((emp, index) => (
-                            <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
-                        ))}
+                                <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
+                            ))}
                         </tbody>
                     </Table>
-                    {/* 페이지네이션 컴포넌트 */}
                     <div className={styles.empListPagination}>
-                        <EmpListPagination currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurrentPage={handleSetCurrentPage}></EmpListPagination>
+                        <EmpListPagination currentPage={currentPage} totalPosts={filteredList.length} postPerPage={postPerPage} handleSetCurrentPage={setCurrentPage}></EmpListPagination>
                     </div>
 
                     <hr />
                     <span className={`${styles.empListFooter} row`}>
                         <span className="col-2">
-                            <ExcelForm empList={empList}/>
+                            <ExcelForm empList={filteredList}/>
                         </span>
                         <span className="col-3">
                             <Form>
@@ -149,7 +167,7 @@ const EmpListAll = () => {
                             </Form>
                         </span>                    
                         <span className="col-7">
-                            <EmpCreateModal/>
+                            <EmpCreateModal empCreated={updatedEmpList}/>
                         </span>
                     </span>
                 </div>

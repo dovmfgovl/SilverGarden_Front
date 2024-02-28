@@ -1,7 +1,14 @@
 import React from 'react';
 import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAtEvents } from '../../redux/calendarAtSlice';
 
 const AtCalendar = () => {
+    const eventData = useSelector((state) => state.calendarAtSlice.events);
+    console.log(eventData);
+    const dispatch = useDispatch();
+    const handleDispatch = (events) => dispatch(setAtEvents(events));
+
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -42,6 +49,8 @@ const AtCalendar = () => {
                 onEventDelete={handleIndividualEventDelete}
                 urls={commonUrls}
                 columnNames={columnNames}
+                eventData={eventData}
+                handleDispatch={handleDispatch}
             />
         </div>
     );
