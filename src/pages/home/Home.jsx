@@ -13,6 +13,7 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserAPage } from '../../services/auth/UserApi';
 import HomeCalendarInfo from './HomeCalendarInfo';
+import ChattingBar from '../../components/chatting/ChattingBar';
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -25,13 +26,6 @@ const Home = () => {
         console.log(error);
       });
   }
-  const sidebarList = [
-    {
-      label: "근태현황",
-      icon: faBusinessTime,
-      isOpen: true, //시작시 열려있도록 함
-    },
-  ];
 
   const empData = useSelector((state) => state.userInfoSlice);
 
@@ -85,7 +79,9 @@ const Home = () => {
     <>
     <div className={styles.homeWrap}>
       <div className={styles.profileWrap}><HomeProfile/></div>
-      <div className={styles.sidebarWrap}><SidebarCommon list={sidebarList}/></div>
+      <div className={styles.sidebarWrap}>
+        <ChattingBar empData={empData}/>
+      </div>
       <div className={styles.firstContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>결재</h4>

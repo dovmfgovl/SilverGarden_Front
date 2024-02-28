@@ -4,32 +4,22 @@
   grid-template-areas: 
   "sidebarLayout  noticeTitleBar noticeTitleBar"
   "sidebarLayout  innerContentLayout innerContentLayout"
-  "chattingBar  innerContentLayout innerContentLayout"
-  "chattingBar innerContentLayout innerContentLayout"
+  "sidebarLayout  innerContentLayout innerContentLayout"
+  "sidebarLayout innerContentLayout innerContentLayout"
   ;
   grid-template-columns: 0.5fr 2fr 2fr;
   grid-template-rows: 70px 1fr 1fr 1fr;
+  background-color: rgb(231, 233, 246);
 }
 
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
   grid-area: sidebarLayout;
-  border-right: 1px solid lightgray;
-}
-
-.chattingBar{
-  grid-area: chattingBar;
-  height: 100%;
-  display: flex;
-  background-color: rgb(232, 232, 232);
-}
-
-.chattingBarContent{
-  width: 100%;
-  display: flex;
-  border: 1px solid lightgray;
-  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 20px;
 }
 
 .noticeTitleBar{
@@ -37,11 +27,15 @@
   background-color: white;
   font-size: 2.0rem;
   padding: 10px;
+  background-color: rgb(231, 233, 246);
 }
 
 .innerContentLayout{
   background-color: rgb(255, 255, 255);
   grid-area: innerContentLayout;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 20px 20px 0;
 }
 
 .noticeListLayout{
@@ -59,7 +53,6 @@
 .noticeHeader{
   grid-area: noticeHeader;
   background-color: rgb(255, 255, 255);
-  border: 1px solid lightgray;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -70,7 +63,6 @@
 }
 .noticeContent{
   background-color: rgb(255, 255, 255);
-  border: 1px solid lightgray;
   grid-area: noticeContent;
   margin:10px;
   padding:10px;
@@ -172,7 +164,7 @@
 
 .noticeWriteLayout{
   height: 100%;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   display:grid;
   grid-template-areas:
   "noticeWriteHeader"
