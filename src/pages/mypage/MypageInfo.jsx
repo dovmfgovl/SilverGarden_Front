@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const MypageInfo = () => {
    const dispatch = useDispatch();
-   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
    const userData = useSelector(state=> state.userInfoSlice)
 
 
@@ -51,7 +50,7 @@ const MypageInfo = () => {
     <>
     <Stack direction="horizontal" gap={0}>
       <Col span={5}>
-      <Image width={210} height={180} alt="171x180" src={empDetail.e_profile} rounded className='p-2 ms-auto'/>
+      <img width={210} height={180} alt="프로필사진" src={empDetail.E_PROFILE} rounded className='p-2 ms-auto'/>
       </Col>
       <Col span={16}>
       <Descriptions title="내 정보" bordered items={items} />

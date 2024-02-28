@@ -170,7 +170,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                         >
                             <option  >카테고리를 선택하세요</option>
                             {CarList.map((category) => (
-                                <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE}>
+                                <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE} >
                                     {category.SHUTTLE_TYPE}
                                 </option>
                             ))}
