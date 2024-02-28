@@ -9,29 +9,32 @@
   ;
   grid-template-columns: 0.5fr 2fr 2fr;
   grid-template-rows: 70px 1fr 1fr 1fr;
+  background-color: rgb(231, 233, 246);
 }
 
-.profileLayout{
-  background-color: rgb(89, 93, 97);
-  grid-area: profileLayout
-}
 
 .sidebarLayout{
   background-color: rgb(255, 255, 255);
   grid-area: sidebarLayout;
-  border-right: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 20px;
 }
 
 .noticeTitleBar{
-  background-color: rgb(255, 255, 255);
-  grid-area:noticeTitleBar;
+  grid-area: noticeTitleBar;
   font-size: 2.0rem;
-  padding:10px;
+  padding: 10px;
+  background-color: rgb(231, 233, 246);
 }
 
 .innerContentLayout{
   background-color: rgb(255, 255, 255);
   grid-area: innerContentLayout;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 20px 20px 0;
 }
 
 .noticeListLayout{
@@ -48,7 +51,7 @@
 
 .noticeHeader{
   grid-area: noticeHeader;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -58,7 +61,7 @@
   margin:10px;
 }
 .noticeContent{
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   grid-area: noticeContent;
   margin:10px;
   padding:10px;
@@ -75,7 +78,7 @@
 
 .noticeDetailLayout{
   height: 100%;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   display:grid;
   grid-template-areas:
   "noticeDetailBtn"
@@ -85,8 +88,9 @@
   ;
   grid-template-columns: 1fr;
   grid-template-rows: 0.3fr 1fr 4fr 0.5fr;
-  margin: 20px;
+  margin: 0 20px;
   padding:20px;
+
 }
 .noticeDetailBtn{
   grid: noticeDetailBtn;
@@ -97,7 +101,9 @@
   flex-direction:column;
   align-items: start;
   grid-area: noticeDetailHeader;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(242, 242, 242);
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
   margin:0 20px 0 20px;
   padding: 0 10px
 }
@@ -130,6 +136,7 @@
   margin:0 20px 20px 20px;
   padding: 10px;
   align-items: center;
+  border-top: 1px solid lightgrey;
 }
 .noticeDetailAttachment div{
   margin: 0 20px;
@@ -156,7 +163,7 @@
 
 .noticeWriteLayout{
   height: 100%;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
   display:grid;
   grid-template-areas:
   "noticeWriteHeader"

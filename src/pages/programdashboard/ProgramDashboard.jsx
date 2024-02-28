@@ -24,8 +24,9 @@ const ProgramDashboard = ({programList}) => {
     
     return (
         <>
+        <div className={styles.dashboardWrap}>
             <Print componentRef={componentRef}/>
-            <div ref={componentRef} className="d-flex justify-content-center align-items-top vh-100">
+            <div ref={componentRef} className="d-flex justify-content-center align-items-center">
                 <div className={styles.chartWrap}>
                         <ChartComponent pgCalList={pgCalList}  />
                 </div>
@@ -36,7 +37,7 @@ const ProgramDashboard = ({programList}) => {
                         <CustomShapeChartComponent pgCalList={pgCalList}/>
                 </div>
             </div>
-
+        </div>
         </>
     );
 };

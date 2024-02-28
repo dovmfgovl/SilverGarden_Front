@@ -12,14 +12,28 @@
 
 .deptListWrap{
   grid-area: deptListWrap;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .deptDetailWrap{
   grid-area: deptDetailWrap;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 20px 10px 10px;
 }
 
 .deptSideInfoWrap{
   grid-area: deptSideInfoWrap;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 20px 0 10px;
 }
 /*deptlist/deptdetail/deptupdate*/
 /* 페이지 전체를 꽉 채우도록 설정 */

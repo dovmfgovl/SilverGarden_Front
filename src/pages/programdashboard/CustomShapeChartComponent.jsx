@@ -31,7 +31,7 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
     return (
         <>
             <h4>월별 프로그램 횟수</h4>
-            <LineChart width={500} height={600} data={data}>
+            <LineChart width={300} height={300} data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="월" />
                 <YAxis />

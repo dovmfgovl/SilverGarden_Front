@@ -38,7 +38,7 @@ const MessageStored = ({empData, handleMenu}) => {
   //pagination end//
   return (
     <div className={styles.messageListWrap}>
-      <div className={styles.messageListHeader}><MessageListHeader/></div>
+      <div className={styles.messageListHeader}><MessageListHeader messagePage={"쪽지보관함"} handleList={handleList} empData={empData}/></div>
       <div className={styles.messageListContent}><MessageListTable messagePage={"쪽지보관함"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
