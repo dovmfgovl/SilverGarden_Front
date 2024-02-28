@@ -140,7 +140,7 @@ const MemberDetail = () => {
                 <Select
                   style={{ width: '100%' }}
                   value={updatedMember.CLIENT_GENDER}
-                  onChange={e => handleChange('CLIENT_GENDER', e.target)}
+                  onChange={e => handleChange('CLIENT_GENDER', e.target.value)}
                 >
                   <Select.Option value="남">남</Select.Option>
                   <Select.Option value="여">여</Select.Option>

@@ -1,6 +1,6 @@
 import { Descriptions, Input, Select } from 'antd'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Stack } from 'react-bootstrap'
+import { Button, Form, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList } from '../../../redux/chooseEmpSlice'
 import { saveCarDetails, setDetail } from '../../../redux/carSlice'
@@ -86,21 +86,16 @@ const handleSaveChanges=()=>{
                         />
                     </Descriptions.Item>
                     <Descriptions.Item label="차량종류"span={3}> 
-                      <Select
-                            style={{ width: '100%' }}
-                            value={updatedCar.SHUTTLE_TYPE}
-                            onChange={e => handleChange('SHUTTLE_TYPE', e.target)}
-                          >
-                            <Select.Option>분류선택</Select.Option>
-                            <Select.Option  value="스타렉스">스타렉스</Select.Option>
-                            <Select.Option value="모닝">모닝</Select.Option>
-                      </Select>  
+                    <Input
+                          value={updatedCar.SHUTTLE_TYPE}
+                          onChange={e => handleChange('SHUTTLE_TYPE', e.target.value)}
+                        />
                     </Descriptions.Item>
                     <Descriptions.Item label="차량운전자" span={3}>
-                    <Select
+                    <Form.Select
                             style={{ width: '100%' }}
                             value={updatedCar.SHUTTLE_DRIVER}
-                            onChange={e => handleChange('SHUTTLE_DRIVER', e.target)}
+                            onChange={e => handleChange('SHUTTLE_DRIVER', e.target.value)}
                           >
                             <Select.Option>분류선택</Select.Option>
                             {empList.map(emp => (
@@ -108,7 +103,7 @@ const handleSaveChanges=()=>{
                             <Select.Option  key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</Select.Option>
                             )
                             ))}
-                      </Select>  
+                      </Form.Select>  
                     </Descriptions.Item>
                   </Descriptions>
       ):(

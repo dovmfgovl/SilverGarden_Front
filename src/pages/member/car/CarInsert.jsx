@@ -65,11 +65,7 @@ const CarInsert = () => {
         <Form >
       <Col>
           <Form.Label>차량종류</Form.Label>
-            <Form.Select aria-label="Default select example"   value={type} onChange={e => {handleType(e.target.value)}}>
-              <option>분류선택</option> 
-              <option value="스타렉스">스타렉스</option> 
-              <option value="모닝">모닝</option>
-            </Form.Select>
+          <Form.Control   value={type} onChange={e => {handleType(e.target.value)}} />
       </Col>
       <Col>
             <Form.Label>차량번호</Form.Label>
