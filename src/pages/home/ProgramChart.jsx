@@ -31,13 +31,13 @@ const ProgramChart = ({ pgCalList }) => {
 
     return (
         <>
-            <LineChart width={500} height={600} data={data}>
+            <LineChart width={200} height={250} data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="월" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="횟수" stroke="#8884d8" strokeWidth={3} isAnimationActive={true} />
+                <Line type="monotone" dataKey="횟수" stroke="#8884d8" strokeWidth={1} isAnimationActive={true} />
             </LineChart>
         </>
     );

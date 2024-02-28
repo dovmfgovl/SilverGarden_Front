@@ -14,8 +14,6 @@ import { setDetail } from "../../redux/programSlice";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
 import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
-// import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
-// import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -95,7 +93,6 @@ const Program = () => {
           />
         )}
         {page === "일정" && <ProgramCalendarHome programList={programList} />}
-        {/* {page === "일정테스트(공통)" && <TestCalendar />} */}
       </div>
     </div>
   );

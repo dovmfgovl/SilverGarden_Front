@@ -198,16 +198,17 @@ const Home = () => {
             </div>
           </div>
         </div>      
+        {/* 컨테이너로 감싸서 css width 50%, height auto; */}
       <div className={styles.forthContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>대시보드</h4>
           <div className={styles.notice}>월별 프로그램 횟수</div> 
-          {/* <ProgramChart  pgCalList={pgCalList}/> */}
+          <ProgramChart  pgCalList={pgCalList}/>
         </div>
         <div className={styles.subContentWrap2}>
           <h4 className={styles.titleWrap}>대시보드2</h4>
           <div className={styles.notice}>이용자 인원(여/남)</div> 
-          {/* <MemberChart memberList={memberList}/> */}
+          <MemberChart memberList={memberList}/>
         </div>
       </div>
     </div>

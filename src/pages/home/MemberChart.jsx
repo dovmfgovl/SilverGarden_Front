@@ -29,15 +29,15 @@ const MemberChart = ({ memberList }) => {
 
     return (
         <>
-            <PieChart width={1000} height={500} onMouseEnter={onPieEnter}> {/* 여기를 조정했습니다. */}
+            <PieChart width={200} height={250} onMouseEnter={onPieEnter}> 
                 <Pie
                     data={data}
-                    cx={500} /* 중심 X 좌표도 조정하여 차트를 중앙에 위치시킵니다. */
-                    cy={250} /* 중심 Y 좌표도 조정하여 차트를 중앙에 위치시킵니다. */
-                    innerRadius={120} /* 내부 반지름 크기 조정 */
-                    outerRadius={200} /* 외부 반지름 크기 조정 */
+                    cx={80} 
+                    cy={120} 
+                    innerRadius={60} 
+                    outerRadius={80} 
                     fill="#8884d8"
-                    paddingAngle={5}
+                    paddingAngle={1}
                     dataKey="value"
                     label
                 >
