@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAdminEvents } from "../../redux/calendarAdminSlice";
 
 const AdminCalendar = () => {
+  //기본설정 카테고리 있을때! 사용////////
+  const defaultCategories = ["공통", "교육", "행사"];
   //이부분 추가 & 프롭전달 추가///////////////////////////////////////////
   const eventData = useSelector((state) => state.calendarAdminSlice.events);
   console.log(eventData);
@@ -57,6 +59,7 @@ const AdminCalendar = () => {
         eventData={eventData}
         handleDispatch={handleDispatch}
         //이부분 추가///////////////////////////////
+        defaultCategories={defaultCategories}
       />
     </div>
   );

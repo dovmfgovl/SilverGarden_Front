@@ -10,6 +10,7 @@ import styles from "./navigation.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
+import styled from "styled-components";
 
 const NavigationBar = ({ isLogin }) => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const NavigationBar = ({ isLogin }) => {
                 />
               </Nav.Link>
               <Nav.Link href="/mypage">마이페이지</Nav.Link>
-              <button onClick={handleSignOut}>로그아웃</button>
+              <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -71,3 +72,13 @@ const NavigationBar = ({ isLogin }) => {
 };
 
 export default NavigationBar;
+
+const LogoutBtn = styled.button`
+  border-radius: 10px;
+  text-align: center;
+  border: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #666666;
+  background-color: transparent;
+`;
