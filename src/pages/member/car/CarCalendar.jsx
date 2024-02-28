@@ -210,8 +210,8 @@ const CarCalendar = ({
     ],
     views: {
       resourceTimelineDay: {
-        buttonText: ':15 slots',
-        slotDuration: '00:15',
+        buttonText: '10 minutes',
+        slotDuration: '00:10',
         slotLabelFormat: {
           hour: 'numeric',
           minute: '2-digit',
