@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import { noticeImageUpload } from "../../services/api/noticeApi";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
+import "./quillEditor.css"
 
 const QuillEditor = ({ value, handleContent, quillRef, handleImages, isReadOnly, memoTemp }) => {
 
@@ -63,7 +64,7 @@ const QuillEditor = ({ value, handleContent, quillRef, handleImages, isReadOnly,
             
             quill.clipboard.dangerouslyPasteHTML(
                 range,
-                `<img src=${encodedURL} style="width: 100%; height: auto;" alt="image" />`);
+                `<img src="${encodedURL}" style="width: 100%; height: auto;" alt="image" />`);
                 //handleFiles(res.data, `${Math.floor(file.size/(1024*1024)*10)/10}MB`);
             }   //주어진 인덱스에 HTML로 작성된 내용물을 에디터에 삽입한다.
             //console.log(files);

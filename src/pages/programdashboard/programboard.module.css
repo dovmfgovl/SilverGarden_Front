@@ -1,10 +1,17 @@
+.dashboardWrap{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 20px 0;
+    padding: 10px;
+    height: 100%;
+}
+
 .chartWrap{
+    height: 100%;
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
-    border: 1px solid rgb(216, 216, 216);
     padding: 5px;
     text-align: center;
-    width: 100%;
-    min-width: 100px;
     align-items: center;
 }
 

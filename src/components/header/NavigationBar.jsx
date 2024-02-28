@@ -10,6 +10,7 @@ import styles from "./navigation.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
+import logofile from '../../assets/images/silvergarden.png'
 
 const NavigationBar = ({ isLogin }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const NavigationBar = ({ isLogin }) => {
       <Roboto></Roboto>
       <div className={styles.navigationWrap}>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-          <FontAwesomeIcon className="ms-2" icon={faPersonShelter} size="2x" />
+          <img src={logofile} alt="description" className="your-custom-class" style={{ width: '60px', height: 'auto', margin:"0 0 0 10px"}} />
           <Navbar.Brand className="ms-2">SilverGarden</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

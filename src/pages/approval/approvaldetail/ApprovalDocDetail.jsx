@@ -111,10 +111,7 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
         }
        {lineData.approvalLine && docDetail.d_status !== '반려' && lineData.approvalLine.map(/* 내가 결재자이면서 문서가 반려되지 않은 경우 */
         (approval)=> approval.ap_id === empData.e_no && approval.ap_result === '대기중' && 
-        <>
         <Button className="mx-2" variant="primary" onClick={handleApprovalClick}>결재</Button>
-        <Button className="mx-2" variant="primary" onClick={handleApprovalClick}>전결</Button>
-        </>
         )}
        {lineData.agreement && lineData.agreement.map(/* 내가 합의자인 경우 */
         (agreement)=> agreement.ap_id === empData.e_no && agreement.ap_result === '대기중' && <Button className="mx-2" variant="primary" onClick={()=>setModalShow(true)}>합의</Button>)}

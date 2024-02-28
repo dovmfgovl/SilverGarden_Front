@@ -38,7 +38,7 @@ const MessageSend = ({empData, handleMenu}) => {
   //pagination end//
   return (
     <div className={styles.messageListWrap}>
-      <div className={styles.messageListHeader}><MessageListHeader handleList={handleList}/></div>
+      <div className={styles.messageListHeader}><MessageListHeader messagePage={"보낸쪽지함"} handleList={handleList} empData={empData}/></div>
       <div className={styles.messageListContent}><MessageListTable messagePage={"보낸쪽지함"} messageList={selectedlist} handleMenu={handleMenu}/></div>
       <div className={styles.messageListPagination}>
         <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>
