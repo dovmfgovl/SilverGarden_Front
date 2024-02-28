@@ -3,7 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Form, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList } from '../../../redux/chooseEmpSlice'
-import { saveCarDetails, setDetail } from '../../../redux/carSlice'
+import { getCarList, saveCarDetails, setDetail } from '../../../redux/carSlice'
+import { shuttleDelete } from '../../../services/api/carApi'
 
 const CarDetail = () => {
   const dispatch= useDispatch();
@@ -50,13 +51,23 @@ const handleSaveChanges=()=>{
   dispatch(saveCarDetails(FinalupdatedCar))
   .then(()=>{
     dispatch(setDetail(FinalupdatedCar))
+    alert("차량 정보가 성공적으로 저장되었습니다.");
     setEditing(false);
+    dispatch(getCarList())
   })
   .catch(error=>{
     console.error('Error saving car details: ', error);
   })
 }
+const handleDelete= async()=>{
+  if(window.confirm("이 차량을 삭제하시겠습니까?")){
+    const res = await shuttleDelete(selectedCar.SHUTTLE_NO);
+    console.log(res.data);
+    alert("삭제되었습니다");
+    window.location.reload(); 
+  }
 
+}
 
   return (
     <Stack direction='vertical'>      
@@ -72,7 +83,7 @@ const handleSaveChanges=()=>{
           ):(
           <div className='ms-auto'>
       <Button variant="outline-success" onClick={handleEdit}>정보수정</Button>
-        <Button>정보삭제</Button>
+        <Button onClick={handleDelete}>정보삭제</Button>
         </div>
           )}
         </Stack>
@@ -97,10 +108,10 @@ const handleSaveChanges=()=>{
                             value={updatedCar.SHUTTLE_DRIVER}
                             onChange={e => handleChange('SHUTTLE_DRIVER', e.target.value)}
                           >
-                            <Select.Option>분류선택</Select.Option>
+                            <option>분류선택</option>
                             {empList.map(emp => (
-                              emp.DEPT_NAME === "사회복지팀" && (
-                            <Select.Option  key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</Select.Option>
+                              emp.DEPT_NAME === "사회복지팀" &&emp.E_STATUS !=="퇴직" && (
+                            <option  key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                             )
                             ))}
                       </Form.Select>  
@@ -115,8 +126,9 @@ const handleSaveChanges=()=>{
       )}  
     <div>
     </div>
+    <h2>차량 이용 통계</h2>
+    <div>여기에 해당 차량을 이용한 고객, 이용시간 등과 관련된 통계추가 예정</div>
     </Stack>
-    
   )
 }
 

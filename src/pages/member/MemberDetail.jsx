@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Col, Stack, Button, Modal, Form } from 'react-bootstrap';
 import { Descriptions, Input, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetail, saveMemDetails } from '../../redux/memberSlice';
+import { setDetail, saveMemDetails, getMemList } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
 import MemberDelete from './MemberDelete';
 import { getEmpList } from '../../redux/chooseEmpSlice';
@@ -57,7 +57,9 @@ const MemberDetail = () => {
     dispatch(saveMemDetails(updatedMemberDetail))
       .then(() => {
         dispatch(setDetail(updatedMember));
+        alert("이용자 정보가 성공적으로 저장되었습니다.");
         setEditing(false);
+        dispatch(getMemList())
       })
       .catch(error => {
         console.error('Error saving member details: ', error);
@@ -150,7 +152,7 @@ const MemberDetail = () => {
                 <Form.Select  onChange={e => { handleChange('CLIENT_MANAGER', e.target.value) }}>
                   <option >{updatedMember.CLIENT_MANAGER}</option>
                   {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                      emp.DEPT_NAME === "사회복지팀" && emp.E_STATUS !=="퇴직" && (
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}

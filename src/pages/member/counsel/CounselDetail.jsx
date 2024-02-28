@@ -4,6 +4,7 @@ import CounselUpdate from './CounselUpdate';
 import { counselDelete } from '../../../services/api/memberApi';
 
 const CounselDetail = ({counsel}) => {
+ 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -16,7 +17,6 @@ const CounselDetail = ({counsel}) => {
         const res = await counselDelete(counsel.COUNSEL_NO);
         console.log(res.data);
         alert("삭제되었습니다");
-        handleClose();
         window.location.reload(); 
       }
 

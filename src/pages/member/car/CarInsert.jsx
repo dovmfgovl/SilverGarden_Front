@@ -3,6 +3,7 @@ import { Button, Col, Form, Modal, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
 import { shuttleInsert } from '../../../services/api/carApi';
+import { getCarList } from '../../../redux/carSlice';
 
 const CarInsert = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,7 @@ const CarInsert = () => {
                 console.log(res.data);
                 alert("차량이 등록되었습니다.")
                 handleClose()
-                window.location.reload(); // 화면 리로드
+               dispatch(getCarList());
 
             } catch (error) {
                    console.error("차량 정보 저장 실패:", error);
@@ -76,7 +77,7 @@ const CarInsert = () => {
             <Form.Select aria-label="Default select example"    value={driver} onChange={e => {handleDriver(e.target.value)}}>
               <option>담당자 선택</option>
                 {empList.map(emp => (
-                  emp.DEPT_NAME === "사회복지팀" && (
+                  emp.DEPT_NAME === "사회복지팀" && emp.E_STATUS !=="퇴직" && (
                     <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                   )
                 ))}
