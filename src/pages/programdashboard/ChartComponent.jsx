@@ -33,7 +33,7 @@ const ChartComponent = ({pgCalList}) => {
     return (
         <>
             <h4>프로그램별 진행 횟수(예정)</h4>
-            <BarChart width={500} height={600} data={chartData} layout="vertical">
+            <BarChart width={300} height={300} data={chartData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" />
                 <YAxis dataKey="title" type="category" />
