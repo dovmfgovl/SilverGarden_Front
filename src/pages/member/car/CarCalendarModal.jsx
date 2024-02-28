@@ -44,7 +44,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
-                content: event.extendedProps?.content || '',
+                content: event.extendedProps?.content || '', // 수정된 부분
                 car_no: event.extendedProps?.car_no || '',
                 userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
@@ -57,8 +57,8 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 start: '',
                 end: '',
                 no: undefined,
-                category: '',
-                content:'',
+                category: '', // 수정된 부분
+                content: '', // 수정된 부분
                 car_no: '',
                 userno: '',
                 user: '',
@@ -66,6 +66,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             console.table(formData);
         }
     }, [event]);
+    
 
     //폼 안의 값이 바뀌는 것 처리
     const handleChange = (e) => {

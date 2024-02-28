@@ -65,6 +65,7 @@ const CarCalendar = ({
         await CarCalendarLogic.addDB(urls.addURL, transformedData);
         onEventAdd(transformedData);
         updateModalState();
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -90,7 +91,7 @@ const CarCalendar = ({
         await CarCalendarLogic.updateDB(urls.updateURL, transformedData);
         onEventUpdate(transformedData);
         updateModalState();
-        
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -107,6 +108,7 @@ const CarCalendar = ({
         await CarCalendarLogic.deleteDB(urls.deleteURL, transformedData);
         onEventDelete(transformedData);
         updateModalState();
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -116,7 +118,6 @@ const CarCalendar = ({
       updateModalState();
     };
   
-  useEffect(() => {
     const fetchAndDispatch = async () => {
       try {
         const eventsData = await CarCalendarLogic.listDB(urls.listURL);
@@ -156,6 +157,7 @@ const CarCalendar = ({
         console.log(error);
       }
     };
+  useEffect(() => {
     fetchAndDispatch();
   }, []);
 
