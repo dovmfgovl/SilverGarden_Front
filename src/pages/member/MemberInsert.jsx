@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Descriptions, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../redux/chooseEmpSlice';
+import { getMemList } from '../../redux/memberSlice';
 
 const MemberInsert = () => {
   
@@ -103,7 +104,8 @@ const MemberInsert = () => {
       const responseData = JSON.parse(res.data);
       console.log(responseData);
       alert("회원 정보가 성공적으로 저장되었습니다.");
-      window.location.reload(); // 화면 리로드
+      handleClose();
+      dispatch(getMemList())
     } catch (error) {
       console.error("회원 정보 저장 실패:", error);
       alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -151,7 +153,7 @@ const MemberInsert = () => {
                 <Form.Select aria-label="Default select example"    value={manager} onChange={e => {handleManager(e.target.value)}}>
                   <option>담당자 선택</option>
                     {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                      emp.DEPT_NAME === "사회복지팀" && emp.E_STATUS !=="퇴직" &&(
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}
