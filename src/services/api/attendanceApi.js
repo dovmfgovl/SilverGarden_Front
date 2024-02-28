@@ -18,6 +18,24 @@ export const atListDB = (at) => {
     });
 };
 
+export const atDetailDB = (E_NO) => {
+    return new Promise((resolve, reject) => {
+        try {
+            console.log(E_NO);
+            const response = axios({
+                method: "get",
+                url: process.env.REACT_APP_SPRING_IP + "at/atDetail",
+                params: {E_NO: E_NO},
+            });
+            resolve(response);
+            console.log(response);
+            
+        } catch (error) {
+            reject(error); 
+        }
+    });
+};
+
 export const atInsertDB = (at) => {
     console.log(at); 
     return new Promise((resolve, reject) => {
