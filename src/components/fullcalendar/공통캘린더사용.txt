@@ -3,11 +3,13 @@ Back
 -ProgramScheduleController 참고하여 각 컨트롤러 CRUD mapping방식 통일하여 작성 필요
 
 Front
--공통 파일위치 : components>fullcalendar
--사용법 : return은 수정 금지, const 부분만 수정필요
-1)캘린더 사용하고자 하는 개별 컴포넌트 생성(TestCalendar.jsx 참고)
+-공통 파일위치 : components>CommonCalendar
+-사용법 : const 부분, Return 부분 표시해둔 곳 수정필요
+1)캘린더 사용하고자 하는 개별 컴포넌트 생성(TestMonthCalendar.jsx 참고)
 2)각 테이블에서 사용중인 컬럼명을 columNames에 작성(자동으로 CommonCalendarLogic을 탐)
 3)commonUrls는 컨트롤러 url 각자 거로 입력
+4)useSelector, dispatch 사용
+5)각자 리덕스 슬라이스 생성 & 스토어 설정필요(redux 폴더의 calendarAtSlice(슬기), store 참고)
 
 주말표시, 미표시 사용
 -WeekendToggle 사용

@@ -5,28 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
+import { useSelector } from 'react-redux';
 import WeekendToggle from '../../components/fullcalendar/WeekendToggle';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPgEvents } from '../../redux/calendarSlice';
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     const [weekendsVisible, setWeekendsVisible] = useState(true); // 주말 표시 여부 상태 추가
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [originData, setOriginData] = useState([]);
 
-    const eventData = useSelector((state)=>state.calendarSlice.events);
-    console.log(eventData);
-    const dispatch = useDispatch();
-    const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
-    
+
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
     };
+
+    const eventData = useSelector((state)=>state.calendarSlice.events);
+    console.log(eventData);
+    
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
-        const newData = [...eventData.filter((element)=> element.category === category)]
-        dispatch(setPgEvents(newData))
     };
     
     return (
@@ -51,14 +47,20 @@ const ProgramCalendarHome = () => {
                             검색
                         </Button>
                     </InputGroup>
-                    <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체 카테고리'} onSelect={handleCategorySelect} style={{width:'100px'}}>
-                        <Dropdown.Item eventKey="전체">전체 카테고리</Dropdown.Item>
-                        <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
-                        <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
-                        <Dropdown.Item eventKey="문화">문화</Dropdown.Item>
-                        <Dropdown.Item eventKey="교육">교육</Dropdown.Item>
-                        <Dropdown.Item eventKey="여가">여가</Dropdown.Item>
-                    </DropdownButton>
+                    <div className="btn-group">
+                        <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            {selectedCategory || '전체 카테고리'}
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('전체 카테고리')}>전체 카테고리</a></li>
+                            <li><hr className="dropdown-divider"></hr></li>
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('신체')}>신체</a></li>
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('교양')}>교양</a></li>
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('문화')}>문화</a></li>
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('교육')}>교육</a></li>
+                            <li><a className="dropdown-item" href="#" onClick={() => handleCategorySelect('여가')}>여가</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div className={styles.subTitleWrap }>
@@ -66,7 +68,7 @@ const ProgramCalendarHome = () => {
                 오늘의 일정
             </div>
             <div className={styles.monthWrap }>
-                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory} weekendsVisible={weekendsVisible} handleDispatch={handleDispatch}/>
+                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory} weekendsVisible={weekendsVisible}/>
             </div>
             <div className={styles.listWrap }>
                 <ProgramListCalendar eventData={eventData} />

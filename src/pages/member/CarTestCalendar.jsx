@@ -1,9 +1,9 @@
 import React from 'react';
-import CommonCalendar from './CommonCalendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import CommonCalendar from '/Users/a/silverGarden/front/src/components/fullcalendar/CommonCalendar.jsx';
 
-const TestCalendar = () => {
+const CarTestCalendar = () => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -53,4 +53,4 @@ const TestCalendar = () => {
     );
 }
 
-export default TestCalendar;
+export default CarTestCalendar;

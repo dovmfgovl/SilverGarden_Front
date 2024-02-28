@@ -4,14 +4,21 @@ const calendarSlice = createSlice({
     name: "calendarSlice",
     initialState: {
         events: [],
+        filters: {
+            searchTitle: "",
+            selectedCategory: "",
+        },
     },
     reducers: {
         setPgEvents: (state, action) => {
+            console.log("calendarSlice setPgEvents", action.payload);
             state.events = action.payload;
         },
-        // 다른 액션들 추가 가능
+        setFilters: (state, action) => {
+            state.filters = action.payload;
+        },
     },
 });
 
-export const { setPgEvents } = calendarSlice.actions;
+export const { setPgEvents, setFilters } = calendarSlice.actions;
 export default calendarSlice.reducer;

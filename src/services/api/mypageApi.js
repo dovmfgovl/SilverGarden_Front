@@ -15,3 +15,18 @@ export const callMypage = (params) => {
   });
 };
 
+export const changePw = (updatedPassword) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "post",
+        url: process.env.REACT_APP_SPRING_IP + "my/changePassword",
+        data: updatedPassword,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
