@@ -10,7 +10,8 @@ import styles from "./navigation.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
-import logofile from '../../assets/images/silvergarden.png'
+import styled from "styled-components";
+import logofile from "../../assets/images/silvergarden.png";
 
 const NavigationBar = ({ isLogin }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,12 @@ const NavigationBar = ({ isLogin }) => {
       <Roboto></Roboto>
       <div className={styles.navigationWrap}>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-          <img src={logofile} alt="description" className="your-custom-class" style={{ width: '60px', height: 'auto', margin:"0 0 0 10px"}} />
+          <img
+            src={logofile}
+            alt="description"
+            className="your-custom-class"
+            style={{ width: "60px", height: "auto", margin: "0 0 0 10px" }}
+          />
           <Navbar.Brand className="ms-2">SilverGarden</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -62,7 +68,7 @@ const NavigationBar = ({ isLogin }) => {
                 />
               </Nav.Link>
               <Nav.Link href="/mypage">마이페이지</Nav.Link>
-              <button onClick={handleSignOut}>로그아웃</button>
+              <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -72,3 +78,13 @@ const NavigationBar = ({ isLogin }) => {
 };
 
 export default NavigationBar;
+
+const LogoutBtn = styled.button`
+  border-radius: 10px;
+  text-align: center;
+  border: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #666666;
+  background-color: transparent;
+`;
