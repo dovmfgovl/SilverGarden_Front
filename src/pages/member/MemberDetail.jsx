@@ -58,7 +58,6 @@ const MemberDetail = () => {
       .then(() => {
         dispatch(setDetail(updatedMember));
         setEditing(false);
-        window.location.reload();
       })
       .catch(error => {
         console.error('Error saving member details: ', error);

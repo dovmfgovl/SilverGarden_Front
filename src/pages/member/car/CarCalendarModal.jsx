@@ -3,10 +3,17 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import moment from 'moment-timezone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMemList } from '../../../redux/memberSlice';
 
 const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
     // 날짜 형식을 변환하는 함수
+    const dispatch=useDispatch();
+    const memberList = useSelector(state => state.memberSlice.value);
+    useEffect(()=>{
+        dispatch(getMemList())
+    },[dispatch])
+
     const formatDateForInput = (dateString) => {
         const momentDate = moment.tz(dateString, 'Asia/Seoul');
         return momentDate.format('YYYY-MM-DDTHH:mm');
@@ -116,20 +123,37 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                     </Form.Group>
                     <Form.Group controlId="formCategory" style={{marginTop:'10px'}}>
                         <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>카테고리</Form.Label>
-                        <Form.Control
+                        <Form.Select
                             style={{fontSize:'0.8rem'}}
                             as="select"
                             name="category"
                             value={formData.category}
                             onChange={handleChange}
                         >
-                            <option value="" >카테고리를 선택하세요</option>
+                            <option  >카테고리를 선택하세요</option>
                             {categories.map((category) => (
                                 <option key={category} value={category}>
                                     {category}
                                 </option>
                             ))}
-                        </Form.Control>
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group controlId="formUser" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자</Form.Label>
+                        <Form.Select
+                            style={{fontSize:'0.8rem'}}
+                            as="select"
+                            name="user"
+                            value={formData.user}
+                            onChange={handleChange}
+                        >
+                            <option >이용자를 선택하세요</option>
+                            {memberList.map((user) => (
+                                <option key={user.CLIENT_ID} value={user.CLIENT_NAME}>
+                                    {user.CLIENT_NAME}
+                                </option>
+                            ))}
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group controlId="formStart" style={{marginTop:'10px'}}>
                     <Form.Label style={{ fontSize: '1rem', fontWeight: 'bolder', marginRight: '10px' }}>시작 일시</Form.Label>

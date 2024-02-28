@@ -17,7 +17,12 @@ const CarInsert = () => {
   }, [dispatch]);
 
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false); 
+  const handleClose = () => {
+    setShow(false)
+    setType('')
+    setDriver('')
+    setCarNo('')
+  }; 
       const handleType = useCallback((value) => {
           setType(value);
         }, []);
@@ -41,6 +46,8 @@ const CarInsert = () => {
                 const res = await shuttleInsert(shuttle)
                 console.log(res.data);
                 alert("차량이 등록되었습니다.")
+                handleClose()
+                window.location.reload(); // 화면 리로드
 
             } catch (error) {
                    console.error("차량 정보 저장 실패:", error);
