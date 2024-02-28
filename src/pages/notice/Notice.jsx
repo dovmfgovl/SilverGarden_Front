@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
+import ChattingBarTest from "./ChattingBarTest";
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -85,6 +86,9 @@ const Notice = () => {
       <div className={styles.noticeTitleBar}>
         <FontAwesomeIcon icon={faVolumeHigh} />
         {noticePage}
+      </div>
+      <div className={styles.chattingBar}>
+        <ChattingBarTest empData={empData}/>
       </div>
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (

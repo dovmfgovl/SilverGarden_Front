@@ -6,7 +6,7 @@ import QuillEditor from '../../../components/Quill/QuillEditor'
 import ApprovalWriteLine from './ApprovalWriteLine'
 import ApprovalFileUpload from './ApprovalFileUpload'
 import ApprovalLineModal from './ApprovalLineModal'
-import { approvalInsert } from '../../../services/api/approvalApi'
+import { approvalInsert, approvalVacationRequest } from '../../../services/api/approvalApi'
 import VacationRequestForm from './VacationRequestForm'
 import ExpenseReportForm from './ExpenseReportForm'
 
@@ -86,11 +86,20 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
 
         if(line.length!==0){// 합의나 결재가 있는경우에만 결재라인을 넣어줌
           formDataToSend.append('line', JSON.stringify(line))
-          const response  = await approvalInsert(formDataToSend);
-          if(response.data === 'ok'){
-            alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
-            handleMenu('결재요청함');
+          if(docType === '휴가신청서'){//휴가신청서의 경우 다른 api를 태움
+            const response  = await approvalVacationRequest(formDataToSend);
+            if(response.data === 'ok'){
+              alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
+              handleMenu('결재요청함');
+            }
+          }else{//나머지의 경우 동일하게 처리함
+            const response  = await approvalInsert(formDataToSend);
+            if(response.data === 'ok'){
+              alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
+              handleMenu('결재요청함');
+            }
           }
+
         }else{
           alert("결재라인이 지정되지 않았습니다.")
           return;
