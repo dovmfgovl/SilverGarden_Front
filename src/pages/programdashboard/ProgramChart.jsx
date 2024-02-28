@@ -40,7 +40,7 @@ const ProgramChart = ({ programList }) => {
     return (
         <div>
             <h4>카테고리별 프로그램</h4>
-            <PieChart width={600} height={600} >
+            <PieChart width={300} height={300} >
                 <Pie
                     data={data}
                     cx={260} // 가로 중심 위치 조절

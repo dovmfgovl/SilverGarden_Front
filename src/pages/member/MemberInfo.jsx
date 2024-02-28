@@ -5,7 +5,7 @@ import MemberRow from './MemberRow';
 import MemberDetail from './MemberDetail';
 import MemberInsert from './MemberInsert'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMemList, setSearchKeywords, setShowAll } from '../../redux/memberSlice';
+import { getMemList } from '../../redux/memberSlice';
 
 const MemberInfo = () => {
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const MemberInfo = () => {
 
     return (
         <>
-            <div className={styles.InnerMemberLayout}>
+            <div className={styles.InnerMemberLayout2}>
                 <div className={styles.leftMemberLayout}>
                     <h2>▶︎&nbsp;이용자목록</h2>
                     <InputGroup className="mb-3">

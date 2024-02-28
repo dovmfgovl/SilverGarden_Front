@@ -16,9 +16,10 @@ const SidebarCommon = ({list, handleMenu}) => {
       rootStyles={{
         [`.${sidebarClasses.container}`]: {
           backgroundColor: 'white',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
         },
       }}
+      style={{border:'none'}}
     >
       <Menu>
         {list.map((item, index) => (

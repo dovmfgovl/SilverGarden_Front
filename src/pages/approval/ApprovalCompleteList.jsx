@@ -13,6 +13,10 @@ const ApprovalCompleteList = ({handleMenu, empData}) => {
     console.log(response.data);
     setCompleteList(response.data);
   }
+  const handleFilterdList = async (gubun, keyword) =>{
+    const response = await approvalCompleteList({e_no: empData.e_no, gubun: gubun, keyword: keyword})
+    setCompleteList(response.data);
+  }
   useEffect(()=>{
     getList();
   },[])
@@ -35,7 +39,7 @@ const ApprovalCompleteList = ({handleMenu, empData}) => {
 
   return (
     <div className={styles.approvalListWrap}>
-    <div className={styles.approvalListHeader}><ApprovalListHeader handleMenu={handleMenu} empData={empData}/></div>
+    <div className={styles.approvalListHeader}><ApprovalListHeader handleMenu={handleMenu} empData={empData} handleFilterdList={handleFilterdList}/></div>
     <div className={styles.approvalListContent}><ApprovalTable appList={selectedlist} handleMenu={handleMenu}/></div>
     <div className={styles.approvalListPagination}>
       <PaginationCommon currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></PaginationCommon>

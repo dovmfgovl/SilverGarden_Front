@@ -11,19 +11,19 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
-import { useDispatch } from "react-redux";
-import { setPgEvents } from '../../redux/calendarSlice'; // 동일한 리듀서 이름으로 수정
 
-const CommonCalendar = ({
+const CommonCalendar3 = ({
   onEventAdd,
   onEventUpdate,
   onEventDelete,
   weekendsVisible,
   urls,
   columnNames,
-  eventData,
   calendarListOptions, //리스트 캘린더 옵션
-  initialView // 새로운 prop 추가
+  initialView, // 새로운 prop 추가
+  eventData,
+  handleDispatch,
+  filteredEvents
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
@@ -31,37 +31,38 @@ const CommonCalendar = ({
   //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
   //기본 초기화 세트
-  const dispatch = useDispatch();
-  
   const updateModalState = () => {
     setIsModalOpen(false);
     setModalAction(null);
   };
   
   // 일정 조회 로직
+  const fetchAndDispatch = async () => {
+    try {
+      const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
+      const formattedEvents = eventsData.map((eventData) => ({
+        title: eventData[columnNames.title],
+        start: eventData[columnNames.start],
+        end: eventData[columnNames.end],
+        no: eventData[columnNames.no],
+        color: eventData[columnNames.color],
+        content: eventData[columnNames.content],
+        category: eventData[columnNames.category],
+      }));
+      handleDispatch(formattedEvents);
+      const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
+      setCategories(uniqueCategories);
+      console.log(uniqueCategories);
+    } catch (error) {
+      // 에러 처리
+    }
+  };
+
   useEffect(() => {
-    const fetchAndDispatch = async () => {
-      try {
-        const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
-        const formattedEvents = eventsData.map((eventsData) => ({
-          title: eventsData[columnNames.title],
-          start: eventsData[columnNames.start],
-          end: eventsData[columnNames.end],
-          no: eventsData[columnNames.no],
-          color: eventsData[columnNames.color],
-          content: eventsData[columnNames.content],
-          category: eventsData[columnNames.category],
-        }));
-        dispatch(setPgEvents(formattedEvents)); // 이 부분을 여기로 이동
-        const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
-        setCategories(uniqueCategories);
-        console.log(uniqueCategories);
-      } catch (error) {
-        // 에러 처리
-      }
-    };
     fetchAndDispatch();
   }, [isModalOpen]);
+
+  
   
   //모달 핸들링
   const handleModalAction = (action, event) => {
@@ -89,7 +90,7 @@ const CommonCalendar = ({
       onEventAdd(transformedData);
       updateModalState();
     } catch (error) {
-      // 에러 처리
+      console.log(error);
     }
   };
   //업데이트 모달
@@ -161,7 +162,7 @@ const CommonCalendar = ({
       right: calendarListOptions? null :"dayGridMonth,timeGridWeek,listWeek",
 
     },
-    events: eventData,
+    events: filteredEvents? filteredEvents : eventData,
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
@@ -229,4 +230,4 @@ const CommonCalendar = ({
   );
 };
 
-export default CommonCalendar;
+export default CommonCalendar3;

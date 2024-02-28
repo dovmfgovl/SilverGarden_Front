@@ -6,7 +6,7 @@ import QuillEditor from '../../../components/Quill/QuillEditor'
 import ApprovalWriteLine from './ApprovalWriteLine'
 import ApprovalFileUpload from './ApprovalFileUpload'
 import ApprovalLineModal from './ApprovalLineModal'
-import { approvalInsert } from '../../../services/api/approvalApi'
+import { approvalInsert, approvalVacationRequest } from '../../../services/api/approvalApi'
 import VacationRequestForm from './VacationRequestForm'
 import ExpenseReportForm from './ExpenseReportForm'
 
@@ -34,6 +34,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
     const [content, setContent] = useState('');//품의서내용이 담김
     const [images, setImages] = useState([])
     let temp = [];//함수가 새로 생성(재렌더링)되더라도 처음에 대입된 이미지를 계속 기억해야함
+
     const memoTemp = useMemo(() => {
       return temp;
     },[])
@@ -85,11 +86,20 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
 
         if(line.length!==0){// 합의나 결재가 있는경우에만 결재라인을 넣어줌
           formDataToSend.append('line', JSON.stringify(line))
-          const response  = await approvalInsert(formDataToSend);
-          if(response.data === 'ok'){
-            alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
-            handleMenu('결재요청함');
+          if(docType === '휴가신청서'){//휴가신청서의 경우 다른 api를 태움
+            const response  = await approvalVacationRequest(formDataToSend);
+            if(response.data === 'ok'){
+              alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
+              handleMenu('결재요청함');
+            }
+          }else{//나머지의 경우 동일하게 처리함
+            const response  = await approvalInsert(formDataToSend);
+            if(response.data === 'ok'){
+              alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
+              handleMenu('결재요청함');
+            }
           }
+
         }else{
           alert("결재라인이 지정되지 않았습니다.")
           return;
@@ -148,7 +158,7 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
       <div className={styles.approvalWriteLine}><ApprovalWriteLine lineData={lineData}/></div>
       <div className={styles.approvalWriteTable}><ApprovalWriteTable empData={empData} titleRef={titleRef}/></div>
       <div className={styles.approvalWriteContent}>
-        {docType === '품의서' && <QuillEditor isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
+        {docType === '품의서' && <QuillEditor memoTemp={memoTemp} isReadOnly={false} value={content} handleContent={handleContent} quillRef={quillRef} handleImages={handleImages}/>}
         {docType === '휴가신청서' && <VacationRequestForm handleContent={handleContent}/>}
         {docType === '지출결의서' && <ExpenseReportForm handleContent={handleContent}/>}
       </div>

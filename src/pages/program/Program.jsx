@@ -5,7 +5,6 @@ import {
   faBook,
   faCalendar,
   faChartPie,
-  faFile,
   faServer,
 } from "@fortawesome/free-solid-svg-icons";
 import { programListDB } from "../../services/api/programApi";
@@ -15,7 +14,7 @@ import { setDetail } from "../../redux/programSlice";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
 import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
-import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
+// import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
 import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
 
 const Program = () => {
@@ -41,29 +40,20 @@ const Program = () => {
         { label: "프로그램 정보", icon: faBook },
         { label: "일정", icon: faCalendar },
         { label: "일정테스트(공통)", icon: faCalendar },
-        { label: "일정테스트(타임라인)", icon: faCalendar },
       ],
-    },
-
-    {
-      label: "프로그램 기록",
-      icon: faFile,
-      isOpen: false, //열린 상태, 닫힌 상태
-      subMenuItems: [{ label: "기록물 관리", icon: faFile }],
     },
   ];
   //사이드바 조작 함수
   const handleMenu = (menuTitle) => {
     setPage(menuTitle);
   };
-  const [page, setPage] = useState("일정테스트(공통)"); //기본 페이지
+  const [page, setPage] = useState("현황"); //기본 페이지
   const [programList, setProgramList] = useState([]);
   const [programDetail, setProgramDetail] = useState(null);
   const dispatch = useDispatch();
   const getProgramList = async () => {
     const response = await programListDB();
     const data = response.data;
-    // console.log(data);
     setProgramList(data);
   };
   const onRowClick = async (program) => {
@@ -106,7 +96,7 @@ const Program = () => {
         )}
         {page === "일정" && <ProgramCalendarHome programList={programList} />}
         {page === "일정테스트(공통)" && <TestCalendar />}
-        {page === "일정테스트(타임라인)" && <TestTimeLine />}
+        {/* {page === "일정테스트(타임라인)" && <TestTimeLine />} */}
       </div>
     </div>
   );
