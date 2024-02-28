@@ -30,7 +30,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
         category: '',
         content:'',
         car_no: '',
-        user_no: '',
+        userno: '',
         user: '',
     });
     
@@ -46,9 +46,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 category: event.extendedProps?.category || '', // 수정된 부분
                 content: event.extendedProps?.content || '',
                 car_no: event.extendedProps?.car_no || '',
-                user_no: event.extendedProps?.user_no || '',
+                userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
             });
+            console.table(formData);
         } else {
             // 날짜 클릭 시 -> create
             setFormData({
@@ -59,9 +60,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 category: '',
                 content:'',
                 car_no: '',
-                user_no: '',
+                userno: '',
                 user: '',
             });
+            console.table(formData);
         }
     }, [event]);
 
@@ -90,7 +92,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             if (selectedUser) {
                 setFormData(prevFormData => ({
                     ...prevFormData,
-                    user_no: selectedUser.CLIENT_ID,
+                    userno: selectedUser.CLIENT_ID,
                 }));
             }
         }
@@ -210,7 +212,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             onChange={handleChange}
                             />
                     </Form.Group>
-                    <Form.Group >
+                    <Form.Group hidden >
                     <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자와 차번호</Form.Label>
                         <Form.Control
                             style={{fontSize:'0.8rem'}}
@@ -227,7 +229,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             disabled
                             placeholder='이용자번호'
                             name="user_no"
-                            value={formData.user_no}
+                            value={formData.userno}
                             
                             />
                     </Form.Group>

@@ -90,6 +90,7 @@ const CarCalendar = ({
         await CarCalendarLogic.updateDB(urls.updateURL, transformedData);
         onEventUpdate(transformedData);
         updateModalState();
+        
       } catch (error) {
         // 에러 처리
       }
@@ -100,9 +101,6 @@ const CarCalendar = ({
       try {
         // 컬럼명을 변환하여 서버로 데이터 전송
         const transformedData = {
-          [columnNames.title]: formData.title,
-          [columnNames.start]: formData.start,
-          [columnNames.end]: formData.end,
           [columnNames.no]: formData.no,
           // 추가 필드들도 필요에 따라 변환
         };
@@ -129,6 +127,10 @@ const CarCalendar = ({
             start: eventData[columnNames.start],
             end: eventData[columnNames.end],
             color: eventData[columnNames.color],
+            car_no: eventData[columnNames.car_no],
+            user: eventData[columnNames.user],
+            userno: eventData[columnNames.userno],
+            no: eventData[columnNames.no],
           };
         });
         handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
