@@ -209,13 +209,17 @@ const EmpDetail = () => {
         </Col>
       </Row>
       <div className={styles.empInfoWrap}>
-        <div className={styles.empPicture} style={{ width: '150px', height: '150px', overflow: 'hidden', border: '1px solid #ccc', borderRadius: '4px' }}>
-          {updatedEmployee.E_PROFILE ? (
-            <img src={updatedEmployee.E_PROFILE} alt="프로필 사진" style={{ width: '100%', height: '100%' }} />
-          ) : (
-            <span>프로필 사진이 없습니다.</span>
-          )}
-          { editing && <EmpUploadImg imageUrlChange={handleImageUrlChange}/> }
+        <div className={styles.empPicture}>
+          <div className={styles.imgSquare}>
+            {updatedEmployee.E_PROFILE ? (
+              <img src={updatedEmployee.E_PROFILE} alt="프로필 사진" />
+            ) : (
+              <span>프로필 사진이 없습니다.</span>
+            )}
+          </div>
+          <div className={styles.imgSaveButton}>
+            { editing && <EmpUploadImg imageUrlChange={handleImageUrlChange}/> }
+          </div>
         </div>
         {inputFields.map(renderInputField)}
       </div>

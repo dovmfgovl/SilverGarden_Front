@@ -45,10 +45,11 @@ const EmpUploadImg = ({ imageUrlChange }) => {
   return (
     <div>
       <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>사진 저장</button>
+      <button onClick={handleUpload}>사진업로드</button>
       {imageUrl && ( /* 이미지 URL 존재할 경우 이미지 출력 */
         <div>
-          <img src={imageUrl} alt="Uploaded" style={{ width: '200px' }} />
+          <h5>미리보기</h5>
+          <img src={imageUrl} alt="업로드사진" style={{ width: '150px' }} />
         </div>
       )}
     </div>
