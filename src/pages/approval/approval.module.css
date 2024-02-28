@@ -25,7 +25,7 @@
 
 .approvalContentWrap{
   grid-area: approvalContentWrap;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
 }
 /* approval end */
 
@@ -47,6 +47,7 @@
 .approvalListHeader{
   grid-area: approvalListHeader;
   background-color: rgb(255, 255, 255);
+  border: 1px solid lightgrey;
   min-width: 790px;
   align-items: center;
   display: flex;
@@ -64,6 +65,7 @@
 .approvalListContent{
   background-color: rgb(255, 255, 255);
   grid-area: approvalListContent;
+  border: 1px solid lightgrey;
   margin:10px;
   padding:10px;
 }
