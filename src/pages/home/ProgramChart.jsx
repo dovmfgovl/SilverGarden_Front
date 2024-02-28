@@ -1,7 +1,8 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const CustomShapeLineChartComponent = ({pgCalList}) => {
+const ProgramChart = ({ pgCalList }) => {
+    console.log(pgCalList);
     const groupedData = pgCalList.reduce((acc, event) => {
         const month = event.PS_START.split('-')[1]; // '2024-01-01 14:00'에서 월만 추출
         if (!acc[month]) {
@@ -30,7 +31,6 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
 
     return (
         <>
-            <h4>월별 프로그램 횟수</h4>
             <LineChart width={500} height={600} data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="월" />
@@ -43,4 +43,4 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
     );
 };
 
-export default CustomShapeLineChartComponent;
+export default ProgramChart;

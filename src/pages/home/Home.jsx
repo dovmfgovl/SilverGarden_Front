@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
-import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
-import ChartComponent from '../programdashboard/ChartComponent';
+import { getMemberList } from '../../services/api/memberApi';
+import MemberChart from './MemberChart';
+import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
+import ProgramChart from './ProgramChart';
 import { useSelector } from 'react-redux';
 import { getApprovalDocCount } from '../../services/api/approvalApi';
 import { messageReceiveList } from '../../services/api/messageApi';
@@ -26,6 +28,25 @@ const Home = () => {
         console.log(error);
       });
   }
+  /////////////////// 대쉬보드(프로그램, 이용자) /////////////////////////////////////////////////
+  const [memberList, setMemberList] = useState([]);
+  const [pgCalList, setPgCalList] = useState([]);
+  const memberData = async () => {
+    try {
+      const response = await getMemberList();
+      setMemberList(response.data); 
+    } catch (error) {
+      console.error('Error fetching member list:', error);
+    }
+  };
+  const fetchData = async () => {
+    try {
+      const response = await CommonCalendarLogic.listDB('calendar/list');
+      setPgCalList(response); 
+    } catch (error) {
+      console.error('Error fetching member list:', error);
+    }
+  };
 
   const empData = useSelector((state) => state.userInfoSlice);
 
@@ -44,6 +65,9 @@ const Home = () => {
 
   useEffect(()=>{
     getDocCount();
+    memberData();
+    fetchData();
+    console.log(memberList);
   },[])
 
   ///////////////// 쪽지 //////////////////////////////////////////////////////
@@ -177,11 +201,13 @@ const Home = () => {
       <div className={styles.forthContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>대시보드</h4>
-          {/* <CustomShapeLineChartComponent /> */}
+          <div className={styles.notice}>월별 프로그램 횟수</div> 
+          {/* <ProgramChart  pgCalList={pgCalList}/> */}
         </div>
         <div className={styles.subContentWrap2}>
-          {/* <h4 className={styles.titleWrap}>대시보드2</h4> */}
-          {/* <ChartComponent /> */}
+          <h4 className={styles.titleWrap}>대시보드2</h4>
+          <div className={styles.notice}>이용자 인원(여/남)</div> 
+          {/* <MemberChart memberList={memberList}/> */}
         </div>
       </div>
     </div>

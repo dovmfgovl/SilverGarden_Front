@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProgramCalendar from './ProgramCalendar'
 import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import styles from './programcalendarhome.module.css'
 import ProgramListCalendar from './ProgramListCalendar'
 import WeekendToggle from '../../components/fullcalendar/WeekendToggle';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPgEvents } from '../../redux/calendarSlice';
+import { setFilteredEvents, setFilters, setPgEvents } from '../../redux/calendarSlice';
 
 const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
@@ -15,19 +15,35 @@ const ProgramCalendarHome = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [originData, setOriginData] = useState([]);
 
-    const eventData = useSelector((state)=>state.calendarSlice.events);
-    console.log(eventData);
     const dispatch = useDispatch();
     const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
-    
+    const handleFiltersChange = (filters) => dispatch(setFilters(filters));
+
+    const eventData = useSelector((state)=>state.calendarSlice.events);
+    const filters = useSelector((state) => state.calendarSlice.filters);
+    const filteredEvents = useSelector((state) => state.calendarSlice.filteredEvents);
+    console.log(eventData);      //(267) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, …]
+    console.log(filters);        //{searchTitle: '심신', selectedCategory: ''}
+    console.log(filteredEvents); //(13) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+
+    useEffect(() => {
+        dispatch(setFilteredEvents());
+    }, [filters, dispatch]);
+
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
+        handleFiltersChange({ ...filters, searchTitle: e.target.value });
     };
     const handleCategorySelect = (category) => {
         setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
         const newData = [...eventData.filter((element)=> element.category === category)]
         dispatch(setPgEvents(newData))
     };
+
+    const handleSearch = () => {
+        handleFiltersChange({ searchTitle, selectedCategory });
+    };
+
     
     return (
         <div className={styles.programCalWrap}>
@@ -40,14 +56,14 @@ const ProgramCalendarHome = () => {
                     <WeekendToggle weekendsVisible={weekendsVisible} setWeekendsVisible={setWeekendsVisible} />
                     <InputGroup className="mb-3" style={{height:'20px', width:'250px'}}>
                         <FormControl
-                            placeholder="검색어를 입력하세요"
+                            placeholder="일정 이름을 입력하세요"
                             aria-label="Recipient's username"
                             aria-describedby="button-addon2"
                             value={searchTitle}
                             onChange={handleSearchChange}
                             style={{textAlign:'center'}}
                         />
-                        <Button variant="outline-secondary" id="button-addon2" style={{backgroundColor:'#4a6bff96', color:'white', height:'auto'}}>
+                        <Button onClick={handleSearch} variant="outline-secondary" id="button-addon2" style={{backgroundColor:'#4a6bff96', color:'white', height:'auto'}}>
                             검색
                         </Button>
                     </InputGroup>
@@ -66,10 +82,19 @@ const ProgramCalendarHome = () => {
                 오늘의 일정
             </div>
             <div className={styles.monthWrap }>
-                <ProgramCalendar eventData={eventData} selectedCategory={selectedCategory} weekendsVisible={weekendsVisible} handleDispatch={handleDispatch}/>
+                <ProgramCalendar 
+                    weekendsVisible={weekendsVisible} 
+                    eventData={eventData} 
+                    selectedCategory={selectedCategory} 
+                    handleDispatch={handleDispatch} //양쪽 캘린더 동기화됨
+                    filteredEvents={filteredEvents} //title로 필터 검색을 사용한다면 사용
+                    />
             </div>
             <div className={styles.listWrap }>
-                <ProgramListCalendar eventData={eventData} />
+                <ProgramListCalendar
+                    eventData={eventData} 
+                    handleDispatch={handleDispatch} //양쪽 캘린더 동기화됨
+                />
             </div>
         </div>
     );

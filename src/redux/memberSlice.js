@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getMemberList, memberUpdate } from "../services/api/memberApi";
+import { getCounselList, getMemberList, memberUpdate } from "../services/api/memberApi";
 
 export const getMemList = createAsyncThunk(
   'member/getMemList',
@@ -13,6 +13,7 @@ export const getMemList = createAsyncThunk(
     }
   }
 );
+
 
 export const saveMemDetails = createAsyncThunk(
   'member/saveMemDetails',

@@ -1,13 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const ChartComponent = () => {
-    const events = useSelector((state) => state.calendarSlice.events);
+const ChartComponent = ({pgCalList}) => {
 
     // 주어진 데이터의 타이틀별로 그룹화하고 개수를 계산
-    const groupedData = events.reduce((acc, item) => {
-        const title = item.title;
+    const groupedData = pgCalList.reduce((acc, item) => {
+        const title = item.PS_NAME;
         if (!acc[title]) {
             acc[title] = 1;
         } else {

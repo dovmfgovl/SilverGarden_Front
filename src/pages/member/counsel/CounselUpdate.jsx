@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState }from 'react';
+import React, {  useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import { counselUpdate } from '../../../services/api/memberApi';
+import { counselUpdate} from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
 const CounselUpdate = ({counsel}) => {
@@ -16,7 +16,7 @@ const CounselUpdate = ({counsel}) => {
       MOD_ID:counsel.MOD_ID
     }
   )
-console.table(counselDetail);
+
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -33,6 +33,7 @@ console.table(counselDetail);
   }, [dispatch]);
 
 
+
     const handleSubmit = async () => {
       const updatedCounsel = {
         ...counselDetail,
@@ -41,7 +42,8 @@ console.table(counselDetail);
       try {
         const res = await counselUpdate(updatedCounsel);
         console.log(res.data);
-        alert("회원 정보가 성공적으로 저장되었습니다.");
+        alert("상담 정보가 성공적으로 수정되었습니다.");
+        handleClose();
         window.location.reload(); 
   
       } catch (error) {
@@ -97,7 +99,7 @@ console.table(counselDetail);
           <Form.Select aria-label="Default select example"  value={counselDetail.COUNSEL_MANAGER} onChange={e=>{
               setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}>
                         {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                     emp.DEPT_NAME === "사회복지팀" &&emp.E_STATUS !=="퇴직" &&(
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}
