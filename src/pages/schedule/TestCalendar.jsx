@@ -3,14 +3,14 @@ import CommonCalendar from "../../components/fullcalendar/CommonCalendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAtEvents } from "../../redux/calendarAtSlice";
+import { setAdminEvents } from "../../redux/calendarAdminSlice";
 
 const AdminCalendar = () => {
   //이부분 추가 & 프롭전달 추가///////////////////////////////////////////
-  const eventData = useSelector((state) => state.calendarAtSlice.events);
+  const eventData = useSelector((state) => state.calendarAdminSlice.events);
   console.log(eventData);
   const dispatch = useDispatch();
-  const handleDispatch = (events) => dispatch(setAtEvents(events));
+  const handleDispatch = (events) => dispatch(setAdminEvents(events));
   //이부분 추가/////////////////////////////////////////////////////////
 
   const handleIndividualEventAdd = (event) => {
