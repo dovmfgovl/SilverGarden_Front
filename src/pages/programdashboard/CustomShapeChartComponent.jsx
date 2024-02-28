@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const CustomShapeLineChartComponent = () => {
+const CustomShapeLineChartComponent = ({}) => {
     const events = useSelector((state) => state.calendarSlice.events);
     const groupedData = events.reduce((acc, event) => {
         const month = event.start.split('-')[1]; // '2024-01-01 14:00'에서 월만 추출
