@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import moment from 'moment-timezone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import styles from "./fullcalendar.module.css";
 
 const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
     // 날짜 형식을 변환하는 함수

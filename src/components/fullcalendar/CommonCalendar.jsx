@@ -11,6 +11,7 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
+import { useDispatch } from "react-redux";
 
 const CommonCalendar = ({
   onEventAdd,
@@ -22,7 +23,8 @@ const CommonCalendar = ({
   calendarListOptions, //리스트 캘린더 옵션
   initialView, // 새로운 prop 추가
   eventData,
-  handleDispatch
+  handleDispatch,
+  filteredEvents
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
@@ -30,12 +32,13 @@ const CommonCalendar = ({
   //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
   
-  //기본 초기화 세트
-    const updateModalState = () => {
-    setIsModalOpen(false);
-    setModalAction(null);
-  };
-  
+//기본 초기화 세트
+  const updateModalState = () => {
+  setIsModalOpen(false);
+  setModalAction(null);
+};
+  const dispatch = useDispatch();
+
   // 일정 조회 로직
   useEffect(() => {
     const fetchAndDispatch = async () => {
@@ -59,7 +62,7 @@ const CommonCalendar = ({
       }
     };
     fetchAndDispatch();
-}, [isModalOpen]);
+  }, [isModalOpen, dispatch]);
   
   //모달 핸들링
   const handleModalAction = (action, event) => {
@@ -146,9 +149,8 @@ const CommonCalendar = ({
     },
     selectable: true,
     selectMirror: true,
-    select: true,
     locale: "ko",
-    expandRows: true, //드`래`그로 확장
+    expandRows: true, //드래그로 확장
     editable: true,
     weekends: weekendsVisible, // 주말 표시 여부 설정
     dayMaxEventRows: true, 
@@ -159,7 +161,7 @@ const CommonCalendar = ({
       right: calendarListOptions? null :"dayGridMonth,timeGridWeek,listWeek",
 
     },
-    events: eventData,
+    events: filteredEvents? filteredEvents : eventData,
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,

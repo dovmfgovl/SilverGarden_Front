@@ -9,6 +9,7 @@ export const getMemberList = (params) => {
         params: params,
       });
       resolve(response);
+      console.log(response);
     } catch (error) {
       reject(error);
     }

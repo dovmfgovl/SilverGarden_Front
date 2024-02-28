@@ -1,12 +1,13 @@
 import {faHome} from '@fortawesome/free-solid-svg-icons';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
-import ApprovalListHeader from '../approval/ApprovalListHeader';
-import CustomShapeLineChartComponent from '../programdashboard/CustomShapeChartComponent';
-import ProgramCalendar from '../programcalendar/ProgramCalendar';
-import ChartComponent from '../programdashboard/ChartComponent';
+import { getMemberList } from '../../services/api/memberApi';
+import MemberChart from './MemberChart';
+import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
+import ProgramChart from './ProgramChart';
+
 
 const Home = () => {
   const sidebarList = [
@@ -16,6 +17,31 @@ const Home = () => {
       isOpen: true, //시작시 열려있도록 함
     },
   ];
+
+  const [memberList, setMemberList] = useState([]);
+  const [pgCalList, setPgCalList] = useState([]);
+  const memberData = async () => {
+    try {
+      const response = await getMemberList();
+      setMemberList(response); 
+    } catch (error) {
+      console.error('Error fetching member list:', error);
+    }
+  };
+  const fetchData = async () => {
+    try {
+      const response = await CommonCalendarLogic.listDB('calendar/list');
+      setPgCalList(response); 
+    } catch (error) {
+      console.error('Error fetching member list:', error);
+    }
+  };
+  useEffect(() => {
+    memberData();
+    fetchData();
+    console.log(memberList); //{}
+    console.log(pgCalList);
+  }, []); // 컴포넌트가 마운트될 때 한 번만 호출
 
   return (
     <div className={styles.homeWrap}>
@@ -41,13 +67,12 @@ const Home = () => {
       <div className={styles.forthContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>대시보드</h4>
-          {/* <CustomShapeLineChartComponent /> */}
+          <ProgramChart  pgCalList={pgCalList}/>
         </div>
         <div className={styles.subContentWrap2}>
           <h4 className={styles.titleWrap}>대시보드2</h4>
-          {/* <ChartComponent /> */}
+          <MemberChart memberList={memberList}/>
         </div>
-
       </div>
     </div>
   )
