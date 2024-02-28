@@ -14,4 +14,5 @@ const userInfoSlice = createSlice({
   }
 })
 
+export const { setEmpInfo } = userInfoSlice.actions;
 export default userInfoSlice;
