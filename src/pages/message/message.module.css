@@ -7,13 +7,17 @@
   "messageSidebarWrap messageContentWrap"
   ;
   grid-template-columns: 1fr 8fr;
-  grid-template-rows: 70px 260px 3fr;
+  grid-template-rows: 70px 310px 3fr;
+  background-color: rgb(231, 233, 246);
 }
 
 .messageSidebarWrap{
   grid-area: messageSidebarWrap;
   background-color: rgb(255, 255, 255);
-  border-right: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 0 20px 20px 20px;
 }
 .profileWrap{
   display: flex;
@@ -22,7 +26,10 @@
   align-items:center;
   background-color: rgb(255, 255, 255);
   grid-area: profileWrap;
-  border-right: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 20px;
 }
 .profileWrap img{
   height: 200px;
@@ -33,14 +40,17 @@
 
 .messageTitleBar{
   grid-area: messageTitleBar;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(231, 233, 246);
   font-size: 2.0rem;
   padding:10px;
 }
 
 .messageContentWrap{
   grid-area: messageContentWrap;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 20px 20px 0;
 }
 
 .messageListWrap{
@@ -64,13 +74,13 @@
   margin:10px;
   grid-template-columns: 2fr 8fr;
   grid-template-rows: 1.5fr 1fr;
+  
 }
 .datepickerTitle{
   background-color: rgb(244, 244, 244);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid rgb(214, 214, 214);
   font-size: 1.2rem;
 }
 .datepicker{
@@ -79,7 +89,6 @@
   justify-content: center;
   align-items: start;
   padding: 0 10px;
-  border-top: 1px solid rgb(214, 214, 214);
 }
 .datepicker > *{
   padding: 5px;

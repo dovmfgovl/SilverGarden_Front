@@ -7,31 +7,38 @@
   "empListContentWrap empBaseInfoWrap"
   ;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  background-color: rgb(231, 233, 246);
 }
 
 .empListContentWrap{
-  height: 100%;
   grid-area: empListContentWrap;
   background-color: white;
-  width: 100%;
-  display: flex;
   flex-direction: column;
-  padding: 20PX;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 10px 0 0 ;
   font-size: 0.8rem;
 }
 
 .empDetailWrap{
-  height: 100%;
   grid-area: empDetailWrap;
   background-color: white;
   font-size: 0.8rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 10px;
 }
 
 .empBaseInfoWrap{
-  height: 100%;
   grid-area: empBaseInfoWrap;
   background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 10px 0 10px;
 }
 
 .listGroup {

@@ -15,6 +15,7 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserAPage } from '../../services/auth/UserApi';
 import HomeCalendarInfo from './HomeCalendarInfo';
+import ChattingBar from '../../components/chatting/ChattingBar';
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -27,13 +28,6 @@ const Home = () => {
         console.log(error);
       });
   }
-  const sidebarList = [
-    {
-      label: "근태현황",
-      icon: faBusinessTime,
-      isOpen: true, //시작시 열려있도록 함
-    },
-  ];
   /////////////////// 대쉬보드(프로그램, 이용자) /////////////////////////////////////////////////
   const [memberList, setMemberList] = useState([]);
   const [pgCalList, setPgCalList] = useState([]);
@@ -109,7 +103,9 @@ const Home = () => {
     <>
     <div className={styles.homeWrap}>
       <div className={styles.profileWrap}><HomeProfile/></div>
-      <div className={styles.sidebarWrap}><SidebarCommon list={sidebarList}/></div>
+      <div className={styles.sidebarWrap}>
+        <ChattingBar empData={empData}/>
+      </div>
       <div className={styles.firstContentWrap}>
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>결재</h4>
@@ -206,12 +202,12 @@ const Home = () => {
         <div className={styles.subContentWrap}>
           <h4 className={styles.titleWrap}>대시보드</h4>
           <div className={styles.notice}>월별 프로그램 횟수</div> 
-          <ProgramChart  pgCalList={pgCalList}/>
+          {/* <ProgramChart  pgCalList={pgCalList}/> */}
         </div>
         <div className={styles.subContentWrap2}>
           <h4 className={styles.titleWrap}>대시보드2</h4>
           <div className={styles.notice}>이용자 인원(여/남)</div> 
-          <MemberChart memberList={memberList}/>
+          {/* <MemberChart memberList={memberList}/> */}
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ const MessageReceiveDetail = ({handleMenu, empData, messageDetail}) => {
         <Button className="mt-3" variant="outline-secondary" onClick={()=>handleMenu("받은쪽지함")}>목록</Button>{' '}
         <Button className="mt-3" variant="outline-primary">답장</Button>{' '}
         <Button className="mt-3" variant="outline-secondary" onClick={handleStoreBtn}>보관함저장</Button>{' '}
-        <Button className="mt-3" variant="outline-danger" onClick={handleDeleteBtn}>삭제</Button>{' '}
+        <Button className="mt-3" variant="outline-danger" onClick={handleDeleteBtn}>휴지통</Button>{' '}
       </div>
       <div className={styles.detailHeader}>
         <InputGroup className="mb-1">

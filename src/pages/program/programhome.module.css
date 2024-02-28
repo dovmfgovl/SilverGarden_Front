@@ -9,7 +9,7 @@ textarea{
 
 
 .programWrap{
-    height: 90vh;
+    height: 100%;
     /* min-width: 1100px; */
     display: grid;
     grid-template-areas: 
@@ -19,28 +19,33 @@ textarea{
     /* background-color: rgb(139, 238, 139); */
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 70px 1fr;
+    background-color: rgb(231, 233, 246);
+    overflow-y: auto;
 }
 
 .programTitleBar{
     grid-area: programTitleBar;
-    padding: 10px;
     font-size: 2.0rem;
     font-weight: bolder;
+    background-color: rgb(231, 233, 246);
+    font-size: 2.0rem;
+    padding:10px;
 }
 
 .programSidebarWrap{
-    display : flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    margin: 20px;
     grid-area: programSidebarWrap;
     /* background-color: rgb(21, 0, 253); */
 }
 
 .innerContentLayout{
     grid-area: innerContentLayout;
-    min-width: 1100px;
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-    height: 100%;
-    width: 100%;
+    background-color: rgb(231, 233, 246);
+    margin-bottom: 20px;
 }
 
 .programInfoWrap{
@@ -53,28 +58,34 @@ textarea{
     /* background-color: rgb(255, 0, 208); */
     grid-template-columns: 3fr 3fr;
     grid-template-rows: 1fr 1fr;
+    padding: 0;
 }
 
 .programContentWrap{
     grid-area: programContentWrap;
     /* background-color: rgb(117, 120, 74); */
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
-    border: 1px solid rgb(216, 216, 216);
-    padding: 8px;
     text-align: center;
-    margin-right: 2px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 0 0;
+    padding: 10px;
 }
 .programDetailWrap{
     grid-area: programDetailWrap;
     /* background-color: rgb(163, 194, 192); */
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
     text-align: center;
-    padding: 8px;
-    border: 1px solid rgb(216, 216, 216);
-    margin-left: 2px;
-}
-.littleTitleBar{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 20px 0 0;
     padding: 10px;
+}
+
+.littleTitleBar{
+    padding: 0 10px;
     font-size: 1.5rem;
     font-weight: bolder;
     text-align: left;

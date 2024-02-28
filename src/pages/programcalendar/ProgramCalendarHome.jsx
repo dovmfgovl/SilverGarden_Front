@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProgramCalendar from './ProgramCalendar'
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './programcalendarhome.module.css'
@@ -13,6 +13,7 @@ const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     const [weekendsVisible, setWeekendsVisible] = useState(true); // 주말 표시 여부 상태 추가
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [originData, setOriginData] = useState([]);
 
     const dispatch = useDispatch();
     const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
@@ -33,10 +34,10 @@ const ProgramCalendarHome = () => {
         setSearchTitle(e.target.value);
         handleFiltersChange({ ...filters, searchTitle: e.target.value });
     };
-    
     const handleCategorySelect = (category) => {
-        setSelectedCategory(category); 
-        handleFiltersChange({ ...filters, selectedCategory: category });
+        setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
+        const newData = [...eventData.filter((element)=> element.category === category)]
+        dispatch(setPgEvents(newData))
     };
 
     const handleSearch = () => {
@@ -66,20 +67,14 @@ const ProgramCalendarHome = () => {
                             검색
                         </Button>
                     </InputGroup>
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            {selectedCategory || '전체 카테고리'}
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" onClick={() => handleCategorySelect('전체 카테고리')}>전체 카테고리</a></li>
-                            <li><hr className="dropdown-divider"></hr></li>
-                            <li><a className="dropdown-item" onClick={() => handleCategorySelect('신체')}>신체</a></li>
-                            <li><a className="dropdown-item" onClick={() => handleCategorySelect('교양')}>교양</a></li>
-                            <li><a className="dropdown-item"  onClick={() => handleCategorySelect('문화')}>문화</a></li>
-                            <li><a className="dropdown-item"  onClick={() => handleCategorySelect('교육')}>교육</a></li>
-                            <li><a className="dropdown-item"  onClick={() => handleCategorySelect('여가')}>여가</a></li>
-                        </ul>
-                    </div>
+                    <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체 카테고리'} onSelect={handleCategorySelect} style={{width:'100px'}}>
+                        <Dropdown.Item eventKey="전체">전체 카테고리</Dropdown.Item>
+                        <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
+                        <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
+                        <Dropdown.Item eventKey="문화">문화</Dropdown.Item>
+                        <Dropdown.Item eventKey="교육">교육</Dropdown.Item>
+                        <Dropdown.Item eventKey="여가">여가</Dropdown.Item>
+                    </DropdownButton>
                 </div>
             </div>
             <div className={styles.subTitleWrap }>
