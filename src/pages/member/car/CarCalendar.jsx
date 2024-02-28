@@ -11,8 +11,10 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
 import CarCalendarModal from "./CarCalendarModal";
+import { useDispatch, useSelector } from "react-redux";
 
 const CarCalendar = ({
+  
   onEventAdd,
   onEventUpdate,
   onEventDelete,
@@ -28,8 +30,8 @@ const CarCalendar = ({
   const [resources, setResources] = useState([]);
   const [formattedEvents, setFormattedEvents] = useState([]); // 상태값으로 변경
   const [categories, setCategories] = useState([]);
-
-
+  const userData =useSelector(state => state.userInfoSlice);
+  const dispatch=useDispatch();
 
   const updateModalState = () => {
     setIsModalOpen(false);
@@ -52,6 +54,11 @@ const CarCalendar = ({
           [columnNames.end]: formData.end,
           [columnNames.category]: formData.category,
           [columnNames.content]: formData.content,
+          [columnNames.car_no]: formData.car_no,
+          [columnNames.user]: formData.user,
+          [columnNames.userno]: formData.userno,
+          REG_ID: userData.e_no,
+          MOD_ID: userData.e_no,
           // 추가 필드들도 필요에 따라 변환
         };
         console.log(transformedData);
@@ -73,6 +80,10 @@ const CarCalendar = ({
           [columnNames.no]: formData.no,
           [columnNames.category]: formData.category,
           [columnNames.content]: formData.content,
+          [columnNames.car_no]: formData.car_no,
+          [columnNames.user]: formData.user,
+          [columnNames.userno]: formData.userno,
+          MOD_ID: userData.e_no
           // 추가 필드들도 필요에 따라 변환
         };
         console.log(transformedData);
