@@ -114,7 +114,7 @@ const Notice = () => {
           fileList={fileList}
           />
           )}
-        {noticePage === "관련공지" && <CrowlList /> }
+        {/*{noticePage === "관련공지" && <CrowlList /> }*/}
       </div>
     </div>
   );

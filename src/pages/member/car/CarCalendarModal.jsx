@@ -5,13 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMemList } from '../../../redux/memberSlice';
+import { getCarList } from '../../../redux/carSlice';
 
 const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
     // 날짜 형식을 변환하는 함수
     const dispatch=useDispatch();
     const memberList = useSelector(state => state.memberSlice.value);
+    const CarList = useSelector(state => state.carSlice.value);
     useEffect(()=>{
         dispatch(getMemList())
+        dispatch(getCarList())
     },[dispatch])
 
     const formatDateForInput = (dateString) => {
@@ -25,7 +28,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
         end: '',
         no: undefined,
         category: '',
-        content:''
+        content:'',
+        car_no: '',
+        user_no: '',
+        user: '',
     });
     
     //event가 바뀔때 실행->이벤트클릭, 날짜클릭 나눠서 초기값 재세팅
@@ -39,6 +45,9 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
                 content: event.extendedProps?.content || '',
+                car_no: event.extendedProps?.car_no || '',
+                user_no: event.extendedProps?.user_no || '',
+                user: event.extendedProps?.user || '',
             });
         } else {
             // 날짜 클릭 시 -> create
@@ -47,18 +56,44 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 start: '',
                 end: '',
                 no: undefined,
-                category:'',
+                category: '',
                 content:'',
+                car_no: '',
+                user_no: '',
+                user: '',
             });
         }
     }, [event]);
 
     //폼 안의 값이 바뀌는 것 처리
     const handleChange = (e) => {
-        setFormData((prevFormData) => ({
+        const { name, value } = e.target;
+        setFormData(prevFormData => ({
             ...prevFormData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         }));
+
+        // 카테고리가 변경될 때 자동차번호 설정
+        if (name === 'category') {
+            const selectedCar = CarList.find(car => car.SHUTTLE_TYPE === value);
+            if (selectedCar) {
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    car_no: selectedCar.SHUTTLE_NO,
+                }));
+            }
+        }
+
+        // 이용자가 변경될 때 이용자번호 설정
+        if (name === 'user') {
+            const selectedUser = memberList.find(user => user.CLIENT_NAME === value);
+            if (selectedUser) {
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    user_no: selectedUser.CLIENT_ID,
+                }));
+            }
+        }
     };
 
     //저장하기
@@ -131,9 +166,9 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             onChange={handleChange}
                         >
                             <option  >카테고리를 선택하세요</option>
-                            {categories.map((category) => (
-                                <option key={category} value={category}>
-                                    {category}
+                            {CarList.map((category) => (
+                                <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE}>
+                                    {category.SHUTTLE_TYPE}
                                 </option>
                             ))}
                         </Form.Select>
@@ -149,7 +184,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                         >
                             <option >이용자를 선택하세요</option>
                             {memberList.map((user) => (
-                                <option key={user.CLIENT_ID} value={user.CLIENT_NAME}>
+                                <option key={user.CLIENT_ID} >
                                     {user.CLIENT_NAME}
                                 </option>
                             ))}
@@ -173,6 +208,27 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             name="end"
                             value={formData.end}
                             onChange={handleChange}
+                            />
+                    </Form.Group>
+                    <Form.Group >
+                    <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자와 차번호</Form.Label>
+                        <Form.Control
+                            style={{fontSize:'0.8rem'}}
+                            type="text"
+                            disabled
+                            placeholder='자동차번호'
+                            name="car_no"
+                            value={formData.car_no}
+                           
+                            />
+                        <Form.Control
+                            style={{fontSize:'0.8rem'}}
+                            type="text"
+                            disabled
+                            placeholder='이용자번호'
+                            name="user_no"
+                            value={formData.user_no}
+                            
                             />
                     </Form.Group>
                     <br/>

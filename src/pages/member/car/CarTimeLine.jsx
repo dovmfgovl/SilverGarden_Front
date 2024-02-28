@@ -27,8 +27,8 @@ const CarTimeLine = () => {
     const commonUrls = {
         listURL: 'member/shuttleCalList',
         addURL: 'member/shuttleCalAdd',
-        updateURL: 'member/shuttleCalupdate',
-        deleteURL: 'member/shuttleCaldelete',
+        updateURL: 'member/shuttleCalUpdate',
+        deleteURL: 'member/shuttleCalDelete',
     };
       // 개별 컴포넌트에서 사용할 데이터의 컬럼명 정의
     const columnNames = {
@@ -38,7 +38,10 @@ const CarTimeLine = () => {
         end: 'SERV_END',     //예약 종료일시
         color: 'COLOR',           //카테고리별로 생성되는 색상
         category: 'SERV_CARTYPE',  ////타임라인 세로값으로 들어가는 이름(예 : 차량1, 차량2, 차량3) & 색상을 구분하는 카테고리, 
-        content: 'SERV_INFO'        //클릭시 세부내용값(예 : content)
+        content: 'SERV_INFO',       //클릭시 세부내용값(예 : content)    
+        car_no: 'SERV_CAR_NO',    //차량 종류에 따른 셔틀번호 
+        user: 'SERV_USER',       //차량서비스  이용자명
+        userno: 'SERV_USERNO',    //이용자의 이용자번호(대조하기 위함)
     };
     
     //타임라인용
