@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {setAtEvents} from '../../redux/calendarAtSlice'
 
 const TestCalendar = () => {
-
+    //기본설정 카테고리 있을때! 사용////////
+    // const defaultCategories = ["1", "2", "3"];
     //이부분 추가 & 프롭전달 추가///////////////////////////////////////////
     const eventData = useSelector((state) => state.calendarAtSlice.events);
     console.log(eventData);
@@ -57,6 +58,8 @@ const TestCalendar = () => {
                 eventData={eventData}
                 handleDispatch={handleDispatch}
                 //이부분 추가///////////////////////////////
+                // defaultCategories={defaultCategories}
+
             />
         </div>
     );

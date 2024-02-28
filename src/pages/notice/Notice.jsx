@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
+import CrowlList from "./CrawlList";
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -36,6 +37,7 @@ const Notice = () => {
       subMenuItems: [
         { label: "전체공지", icon: faList },
         { label: "공지작성", icon: faPenToSquare },
+        { label: "관련공지", icon: faPenToSquare },
       ],
     },
   ];
@@ -106,12 +108,13 @@ const Notice = () => {
         {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} />}
         {noticePage === "공지수정" && (
           <NoticeUpdate
-            noticeNo={noticeNo}
-            noticeList={noticeList}
-            handlePage={handlePage}
-            fileList={fileList}
+          noticeNo={noticeNo}
+          noticeList={noticeList}
+          handlePage={handlePage}
+          fileList={fileList}
           />
-        )}
+          )}
+        {noticePage === "관련공지" && <CrowlList /> }
       </div>
     </div>
   );
