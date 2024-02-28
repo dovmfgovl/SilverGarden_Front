@@ -1,11 +1,3 @@
-.dashboardWrap{
-    width: 100%;
-    display: grid;
-    grid-template-areas: 
-    "chartWrap1 chartWrap2 chartWrap3";
-    grid-template-columns: 1fr 1fr 1fr;
-
-}
 .chartWrap{
     overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
     border: 1px solid rgb(216, 216, 216);

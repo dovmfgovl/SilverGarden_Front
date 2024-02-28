@@ -15,7 +15,7 @@ import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
 import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
 // import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
-import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
+// import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -39,7 +39,7 @@ const Program = () => {
         { label: "현황", icon: faChartPie }, //서브목록이름, 아이콘명, 클릭시넘어갈 url
         { label: "프로그램 정보", icon: faBook },
         { label: "일정", icon: faCalendar },
-        { label: "일정테스트(공통)", icon: faCalendar },
+        // { label: "일정테스트(공통)", icon: faCalendar },
       ],
     },
   ];
@@ -95,8 +95,7 @@ const Program = () => {
           />
         )}
         {page === "일정" && <ProgramCalendarHome programList={programList} />}
-        {page === "일정테스트(공통)" && <TestCalendar />}
-        {/* {page === "일정테스트(타임라인)" && <TestTimeLine />} */}
+        {/* {page === "일정테스트(공통)" && <TestCalendar />} */}
       </div>
     </div>
   );
