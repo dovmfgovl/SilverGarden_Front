@@ -21,13 +21,13 @@ const CarInfo = () => {
 
   return (
     <>
+    <div className={styles.InnerMemberLayout}>
+      <div className={styles.leftMemberLayout}>
     <Row>
     <Col><h2>차량목록</h2></Col>
-    <Col><h2>차량상세정보</h2> </Col>
     </Row>
-    <div className={styles.InnerMemberLayout}>
     <Stack >
-    <div className="col border border-white border-2" >
+    <div className=" col border border-white border-2">
     <Table striped bordered hover>
         <thead style={{ background: 'hsl(193, 52%, 88%)' }}>
             <tr>
@@ -43,12 +43,12 @@ const CarInfo = () => {
         </tbody>
     </Table>
     <CarInsert />
-</div>
+    </div>
     </Stack>
-<div className={styles.rightMemberLayout1}>
+      </div>
   <CarDetail />
 </div>
-    </div>
+    
     </>
   )
 }

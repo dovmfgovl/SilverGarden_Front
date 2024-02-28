@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../member.module.css';
-import { Button, Table, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap';
+import { Button, Table, Form, InputGroup } from 'react-bootstrap';
 import MemberRow from '../MemberRow';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MemberDetail2 from './MemberDetail2'
-import { getMemList, setSearchKeywords, setShowAll } from '../../../redux/memberSlice';
+import { getMemList} from '../../../redux/memberSlice';
 
 const MemberInfo = () => {
   const dispatch = useDispatch();
@@ -61,13 +61,11 @@ const MemberInfo = () => {
                                 {memberList.map(member => (
                                     <MemberRow key={member.CLIENT_ID} member={member} />
                                 ))}
-                            </tbody>
-                        </Table>
+          </tbody>
+     </Table>
           </div>
-        </div>
-        <div className={styles.rightMemberLayout1}>
+        </div> 
           <MemberDetail2 />
-        </div>
       </div>
     </>
   );

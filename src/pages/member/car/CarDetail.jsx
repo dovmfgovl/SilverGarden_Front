@@ -1,10 +1,12 @@
 import { Descriptions, Input, Select } from 'antd'
+import styles from '../member.module.css';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Form, Stack } from 'react-bootstrap'
+import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList } from '../../../redux/chooseEmpSlice'
 import { getCarList, saveCarDetails, setDetail } from '../../../redux/carSlice'
 import { shuttleDelete } from '../../../services/api/carApi'
+import CarStatistic from './CarStatistic';
 
 const CarDetail = () => {
   const dispatch= useDispatch();
@@ -70,7 +72,9 @@ const handleDelete= async()=>{
 }
 
   return (
-    <Stack direction='vertical'>      
+    <>
+    <div className={styles.rightMemberLayout1}>
+    <Col><h2>차량상세</h2></Col>
       {selectedCar && Object.keys(selectedCar).length>0 &&(
         <Stack direction='horizontal'>
           {editing ? (
@@ -124,11 +128,11 @@ const handleDelete= async()=>{
                   <Descriptions.Item label="차량운전자" span={3}>{memoSelectedCar.SHUTTLE_DRIVER}</Descriptions.Item>
                 </Descriptions>
       )}  
-    <div>
     </div>
-    <h2>차량 이용 통계</h2>
-    <div>여기에 해당 차량을 이용한 고객, 이용시간 등과 관련된 통계추가 예정</div>
-    </Stack>
+    <div className={styles.rightMemberLayout2}>
+        <CarStatistic />
+    </div>
+    </>
   )
 }
 
