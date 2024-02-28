@@ -14,8 +14,8 @@ textarea{
     display: grid;
     grid-template-areas: 
     "programSidebarWrap programTitleBar"
-    "programSidebarWrap innerContentLayout"
     "programSidebarWrap innerContentLayout";
+    /* "programSidebarWrap innerContentLayout"; */
     /* background-color: rgb(139, 238, 139); */
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 70px 1fr;
