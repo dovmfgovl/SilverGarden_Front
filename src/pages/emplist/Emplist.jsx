@@ -3,8 +3,7 @@ import styles from "./emplist.module.css";
 import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
-  faComment,
-  faCrosshairs,
+  faCaretRight,
   faFile,
   faHouseMedical,
   faPeopleArrows,
@@ -84,8 +83,7 @@ const Emplist = () => {
         <SidebarCommon list={sidebarList} handleMenu={handleMenu} />
       </div>
       <div className={styles.empListTitleBar}>
-        <FontAwesomeIcon icon={faFile} />
-        <Space>직원조회 ▶︎{empListpage}</Space>
+        <FontAwesomeIcon icon={faCaretRight} /> 직원조회 <FontAwesomeIcon icon={faCaretRight} /> {empListpage}
       </div>
       <div className={styles.innerContentWrap}>
         {empListpage === "전체" && (

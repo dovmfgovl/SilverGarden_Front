@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
 import { counselUpdate} from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
-const CounselUpdate = ({counsel}) => {
+const CounselUpdate = ({counsel,getCounsel}) => {
   const [counselDetail,setCounselDetail]=useState(
     {
       COUNSEL_NO:counsel.COUNSEL_NO,
@@ -21,8 +21,6 @@ const CounselUpdate = ({counsel}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [date,setDate]=useState('')
-    const [time,setTime]=useState("")
 
 
     const empList = useSelector(state => state.chooseEmp.value);
@@ -44,8 +42,7 @@ const CounselUpdate = ({counsel}) => {
         console.log(res.data);
         alert("상담 정보가 성공적으로 수정되었습니다.");
         handleClose();
-        window.location.reload(); 
-  
+        getCounsel()
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
         alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
