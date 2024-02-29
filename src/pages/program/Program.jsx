@@ -13,9 +13,9 @@ import { useDispatch } from "react-redux";
 import ProgramInfo from "./ProgramInfo";
 import { setDetail } from "../../redux/programSlice";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
-import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProgramDashboardHome from "../programdashboard/ProgramDashboardHome";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -79,7 +79,7 @@ const Program = () => {
       <div className={styles.innerContentLayout}>
         
         {page === "현황" && (
-          <ProgramDashboard
+          <ProgramDashboardHome
             programList={programList}
             getProgramList={getProgramList}
           />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer, Label } from 'recharts';
+import styles from './programboard.module.css'; // 적절한 CSS 파일을 import
 
 const ProgramChart = ({ programList }) => {
     const [data, setChartData] = useState([]);
@@ -40,7 +41,7 @@ const ProgramChart = ({ programList }) => {
     const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00C49F', '#FFBB28', '#FF8042'];
 
     return (
-        <div style={{ width: '95%', height: '92%' }}>
+        <div className={styles.chartContainer}>
             <ResponsiveContainer>
                 <PieChart>
                     <Pie
@@ -52,7 +53,10 @@ const ProgramChart = ({ programList }) => {
                         label={(entry) => entry.name}
                         fill="#8884d8"
                         dataKey="value"
-                        paddingAngle={1}
+                        paddingAngle={-1}
+                        animationBegin={0} // 애니메이션 시작 시간(ms), 0으로 설정하면 초기 렌더링 시 시작
+                        animationDuration={1500} // 애니메이션 지속 시간(ms)
+                        animationEasing="ease-out" 
                     >
                         {data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

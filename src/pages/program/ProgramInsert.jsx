@@ -50,7 +50,7 @@ function ProgramInsert({ componentRef, handleReset, getProgramList }) {
     };
 
     const periodOptions = ['하루','매주', '격주']; // 주기 옵션들
-    const categoryOptions = ['건강', '문화', '봉사', '교육', '여가','예술']; // 분류 옵션들
+    const categoryOptions = ['교육', '문화', '봉사', '신체', '교양','여가']; // 분류 옵션들
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

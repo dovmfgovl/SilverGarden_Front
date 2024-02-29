@@ -159,7 +159,7 @@ const CommonCalendar = ({
     headerToolbar: {
       left: calendarListOptions? "prev,next" :"prev,next today",
       center: "title",
-      right: calendarListOptions? null :"dayGridMonth,timeGridWeek,listWeek",
+      right: calendarListOptions? "today" :"dayGridMonth,timeGridWeek,listWeek",
 
     },
     eventSources:[ 
@@ -195,10 +195,13 @@ const CommonCalendar = ({
     selectAllow: () => {
       return true;
     },
+    eventResize: ({ event }) => {
+      // 일정이 늘어난 경우의 처리 로직
+      handleModalAction("수정", event, categories);
+    },
     select: ({ startStr, endStr }) => {
       const isSingleDay = startStr === endStr;
       let endDate = isSingleDay ? startStr : endStr;
-    
       // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
       if (!isSingleDay) {
         const endMoment = moment(endDate).subtract(1, "days");

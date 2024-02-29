@@ -37,10 +37,9 @@ const ProgramListCalendar = ({eventData, handleDispatch, filteredEvents}) => {
     const calendarListOptions = {
         height: 660,
         slotMinTime: '08:00',
-        slotMaxTime: '24:00',
+        slotMaxTime: '19:00',
         expandRows: true,
         navLinks: true,
-        // 원하는 다른 옵션들을 추가할 수 있습니다.
     };
     const initialViewOption = 'timeGridDay'; // 원하는 초기 뷰로 설정
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ChartComponent = ({pgCalList}) => {
+const ProgramCalChart = ({pgCalList}) => {
     // 주어진 데이터의 타이틀별로 그룹화하고 개수를 계산
     const groupedData = pgCalList.reduce((acc, item) => {
         const title = item.PS_NAME;
@@ -44,4 +44,4 @@ const ChartComponent = ({pgCalList}) => {
     );
 };
 
-export default ChartComponent;
+export default ProgramCalChart;

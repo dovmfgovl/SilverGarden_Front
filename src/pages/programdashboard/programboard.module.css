@@ -1,3 +1,20 @@
+/* 리차트 효과 */
+
+.chartContainer{
+    width: 95%;
+    height: 94%;
+    overflow: hidden; /* 애니메이션 효과를 위해 overflow: hidden; 설정 */
+}
+.recharts-surface {
+    transition: transform 0.5s ease; /* 애니메이션 효과 설정 */
+}
+
+.recharts-legend-item-text {
+    font-weight: bold; /* 범례 텍스트를 두껍게 만듭니다. */
+}
+
+
+/* 전체 효과 */
 .dashboardWrap{
     background-color: rgb(255, 255, 255);
     border-radius: 20px;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import styles from './programboard.module.css'; // 적절한 CSS 파일을 import
 
-const CustomShapeLineChartComponent = ({pgCalList}) => {
+const ProgramProgressChart = ({pgCalList}) => {
     const groupedData = pgCalList.reduce((acc, event) => {
         const month = event.PS_START.split('-')[1]; // '2024-01-01 14:00'에서 월만 추출
         if (!acc[month]) {
@@ -11,7 +12,9 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
         }
         return acc;
     }, {});
-
+    const chartContainerStyle = {
+        animation: "fadeInUp 1s ease-out", // fadeInUp 애니메이션 적용
+    };
     // 객체를 [월, { month, count }] 형태의 배열로 변환
     const dataForSorting = Object.entries(groupedData).map(([month, { count }]) => ({
         month,
@@ -29,7 +32,7 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
 
 
     return (
-        <div style={{ width: '95%', height: '90%' }}>
+        <div className={`${styles.chartContainer} ${styles.chartWithAnimation}`} style={chartContainerStyle}> 
             <ResponsiveContainer>
                 <AreaChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -51,4 +54,4 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
     );
 };
 
-export default CustomShapeLineChartComponent;
+export default ProgramProgressChart;
