@@ -55,7 +55,6 @@ const handleSaveChanges=()=>{
     dispatch(setDetail(FinalupdatedCar))
     alert("차량 정보가 성공적으로 저장되었습니다.");
     setEditing(false);
-    dispatch(getCarList())
   })
   .catch(error=>{
     console.error('Error saving car details: ', error);
@@ -66,7 +65,8 @@ const handleDelete= async()=>{
     const res = await shuttleDelete(selectedCar.SHUTTLE_NO);
     console.log(res.data);
     alert("삭제되었습니다");
-    window.location.reload(); 
+    dispatch(getCarList())
+    dispatch(setDetail())
   }
 
 }
