@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import XLSX from 'xlsx-js-style';
+import styles from './empDetailInfo.module.css';
 
 const ExcelForm = ({empList}) => {
   const excelDown = async () => {
@@ -78,9 +79,9 @@ const ExcelForm = ({empList}) => {
 
   return (
     <div>
-      <Button style={{ width: "80%", fontSize: "0.8rem" }} variant="success" id="btn_excelDown" onClick={excelDown}>
-        Excel Down
-      </Button>
+      <button className={styles.empSaveButton4} id="btn_excelDown" onClick={excelDown}>
+        Excel Download
+      </button>
     </div>
   );
 };

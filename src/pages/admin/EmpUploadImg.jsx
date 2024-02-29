@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { storage } from '../../services/firebase/firebaseEmp';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { useDispatch, useSelector } from 'react-redux';
-import { setEmpInfo } from '../../redux/userInfoSlice'
+import styles from './empDetailInfo.module.css';
 
 const EmpUploadImg = ({ imageUrlChange }) => {
   const [image, setImage] = useState(null); // 이미지 상태 관리
   const [imageUrl, setImageUrl] = useState(''); // 이미지 URL 상태 관리
-  const dispatch = useDispatch();
 
   // 이미지 변경 핸들러
   const handleChange = (e) => {
@@ -34,22 +32,26 @@ const EmpUploadImg = ({ imageUrlChange }) => {
           imageUrlChange(downloadURL); // 함수 호출하여 업로드된 이미지 다운로드 URL 담기
         }
 
-        // e_profile을 변경하여 Redux를 바로 업데이트
-        dispatch(setEmpInfo({ e_profile: downloadURL }))
+        // 업로드 성공 시 알림창
+        alert('업로드 되었습니다.');
+
       } catch (error) {
         console.error('이미지 업로드 중 에러 발생:', error);
+        // 업로드 실패 시 알림창
+        alert('업로드가 되지 않았습니다.')
       }
     }
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>사진업로드</button>
+    <div className={styles.uploadWrap}>
+      <input type="file" id="fileInput" className={styles.choiceHiddenButton} onChange={handleChange} />
+      <label for="fileInput" className={styles.choiceButton}>파일 선택</label>
+      <button className={styles.uploadButton} onClick={handleUpload}>사진업로드</button>
       {imageUrl && ( /* 이미지 URL 존재할 경우 이미지 출력 */
-        <div>
+        <div className={styles.previewImg}>
           <h5>미리보기</h5>
-          <img src={imageUrl} alt="업로드사진" style={{ width: '150px' }} />
+          <img src={imageUrl} alt="업로드사진" />
         </div>
       )}
     </div>
