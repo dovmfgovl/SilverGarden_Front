@@ -1,7 +1,6 @@
-import {faBusinessTime} from '@fortawesome/free-solid-svg-icons';
+
 import React, { useEffect, useState } from 'react'
 import styles from './home.module.css'
-import SidebarCommon from '../../components/sidebar/SidebarCommon';
 import HomeProfile from './HomeProfile';
 import { getMemberList } from '../../services/api/memberApi';
 import MemberChart from './MemberChart';
