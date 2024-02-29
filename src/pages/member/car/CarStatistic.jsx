@@ -33,7 +33,7 @@ const CarStatistic = ({selectedCar}) => {
 
   return (
     <>
-      <h2>차량 이용 통계</h2>
+      <h5>차량 이용 통계</h5>
       {selectedCar && filteredCalList.length > 0 && (
         <Tabs
           defaultActiveKey="all"

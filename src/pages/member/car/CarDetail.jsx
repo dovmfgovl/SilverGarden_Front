@@ -74,7 +74,7 @@ const handleDelete= async()=>{
   return (
     <>
     <div className={styles.rightMemberLayout1}>
-    <Col><h2>&nbsp;▶︎&nbsp;차량상세</h2></Col>
+      <h5>차량상세</h5>
       {selectedCar && Object.keys(selectedCar).length>0 &&(
         <Stack direction='horizontal' gap={3}>
           {editing ? (

@@ -25,7 +25,7 @@ const CarInfo = () => {
         <div className={styles.leftMemberLayout}>
           <Row>
             <Col>
-              <h2>&nbsp;▶︎&nbsp;차량목록</h2>
+              <h5>차량목록</h5>
             </Col>
           </Row>
           <Stack>
