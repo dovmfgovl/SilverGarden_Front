@@ -46,25 +46,25 @@ const MemberDetail = () => {
     setUpdatedMember(originalMember);
   };
 
-  const handleSaveChanges = () => {
-    const fullAddress = `${roadAddress} ${detailAddress}`;
-    const updatedMemberDetail = {
-      ...updatedMember,
-      CLIENT_ADDRESS: fullAddress,
-      MOD_ID: userData.e_no,
-    };
-
-    dispatch(saveMemDetails(updatedMemberDetail))
-      .then(() => {
-        dispatch(setDetail(updatedMember));
-        alert("이용자 정보가 성공적으로 저장되었습니다.");
-        setEditing(false);
-        dispatch(getMemList())
-      })
-      .catch(error => {
-        console.error('Error saving member details: ', error);
-      });
+ const handleSaveChanges = async () => {
+  const fullAddress = `${roadAddress} ${detailAddress}`;
+  const updatedMemberDetail = {
+    ...updatedMember,
+    CLIENT_ADDRESS: fullAddress,
+    MOD_ID: userData.e_no,
   };
+
+  try {
+    dispatch(saveMemDetails(updatedMemberDetail));
+    dispatch(setDetail(updatedMember));
+    alert("이용자 정보가 성공적으로 저장되었습니다.");
+    setEditing(false);
+    dispatch(getMemList());
+  } catch (error) {
+    console.error('Error saving member details: ', error);
+    // 여기서 오류 처리 로직을 추가할 수 있습니다.
+  }
+};
 
   const handleChange = (key, value) => {
     if (key === 'CLIENT_BIRTH') {

@@ -4,7 +4,7 @@ import Title from 'antd/es/typography/Title';
 import { ConfigProvider, Table, Col, DatePicker } from 'antd';
 import moment from 'moment';
 
-const CounselRow = ({ selectedMember, counselList }) => {
+const CounselRow = ({ selectedMember, counselList,getCounsel }) => {
   const [numOfRecords, setNumOfRecords] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(moment().format('YYYYMM'));
   const [filteredCounselList, setFilteredCounselList] = useState([]);
@@ -72,7 +72,7 @@ const CounselRow = ({ selectedMember, counselList }) => {
             key="detail"
             align='center'
             render={(record) => (
-              <CounselDetail counsel={record} />
+              <CounselDetail counsel={record} getCounsel={getCounsel} />
             )}
           />
         </Table>
