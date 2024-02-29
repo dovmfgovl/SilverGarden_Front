@@ -41,7 +41,8 @@ const ProgramCalendarHome = () => {
     const handleRefresh = () => {
         setSearchTitle('');
         handleFiltersChange({ searchTitle: '', selectedCategory: '' }); // 선택된 카테고리 초기화
-        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
+        setSelectedCategory('전체');
+        dispatch(setFilteredEvents('')); // 필터된 이벤트 업데이트
     };
 
     
