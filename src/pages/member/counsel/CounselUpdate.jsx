@@ -21,8 +21,6 @@ const CounselUpdate = ({counsel,getCounsel}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [date,setDate]=useState('')
-    const [time,setTime]=useState("")
 
 
     const empList = useSelector(state => state.chooseEmp.value);
