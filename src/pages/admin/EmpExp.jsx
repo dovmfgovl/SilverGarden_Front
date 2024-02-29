@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 import EmpExpRow from './EmpExpRow';
 import styles from './empDetailInfo.module.css';
 import { empExpListDB, empExpInsertDB, empExpDeleteDB } from '../../services/api/empInfoApi';
@@ -101,7 +100,7 @@ const EmpExp = ({ empDetail }) => {
 
   return (
     <div className={styles.empBaseInfo}>
-      <Table striped bordered hover className={styles.empBaseTable}>
+      <Table responsive className={styles.empBaseTable}>
         <thead>
           <tr>
             <th>회사명</th>
@@ -126,16 +125,12 @@ const EmpExp = ({ empDetail }) => {
               onInputChange={(e) => handleInputChange(index, e)}
               onSave={() => handleSave(index)}
             >
-              {/* 저장 버튼을 각 행마다 보이도록 설정 */}
-              {showSaveButtons[index] && (
-                <Button variant="success" onClick={() => handleSave(index)}>저장</Button>
-              )}
             </EmpExpRow>
           ))}
         </tbody>
       </Table>
       <div>
-        <Button variant="danger" onClick={handleAddRow}>+</Button>
+        <button className={styles.expRowButton} onClick={handleAddRow}>+</button>
       </div>
     </div>
   );

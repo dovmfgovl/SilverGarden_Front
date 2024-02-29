@@ -43,7 +43,7 @@ const HomeCalendar = ({
 
   // FullCalendar 옵션 설정
   const calendarOptions = {
-    height: 430,
+    height: 390,
     eventTimeFormat: { 
       hour: '2-digit', 
       minute: '2-digit', 
@@ -52,7 +52,6 @@ const HomeCalendar = ({
     selectMirror: true,
     select: true,
     locale: "ko",
-    editable: true,
     dayMaxEventRows: true, 
     dayMaxEvents: 3, 
     headerToolbar: {

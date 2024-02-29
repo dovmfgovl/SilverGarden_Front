@@ -17,6 +17,7 @@ const SidebarCommon = ({list, handleMenu}) => {
         [`.${sidebarClasses.container}`]: {
           backgroundColor: 'white',
           fontWeight: 'bold',
+          fontSize: '0.85rem'
         },
       }}
       style={{border:'none'}}

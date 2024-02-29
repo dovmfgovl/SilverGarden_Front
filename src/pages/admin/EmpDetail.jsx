@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 import { Col, Row } from 'antd';
@@ -185,29 +184,7 @@ const EmpDetail = () => {
   
   return (
     <div className={styles.empDetailInfo}>
-      <Row style={{ marginBottom: "10px" }}>
-        <Col md={15}>
-          <h5>직원 상세 정보</h5>
-        </Col>
-        <Col md={9}>
-          <div className="col-11">
-            <Row>
-              <Col md={12}>
-                {editing ? (
-                  <Button style={{ width: "55%", fontSize: "0.8rem" }} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>
-                ) : (
-                  <Button style={{ width: "55%", fontSize: "0.8rem"}} variant="outline-success" onClick={handleEdit}>수정</Button>
-                )}
-              </Col>
-              <Col md={12}>
-                {editing && (
-                  <Button style={{ width: "55%", fontSize: "0.8rem" }} variant="outline-danger" onClick={handleCancel}>취소</Button>
-                )}
-              </Col>
-            </Row>
-          </div>
-        </Col>
-      </Row>
+      <h5>직원 상세 정보</h5>     
       <div className={styles.empInfoWrap}>
         <div className={styles.empPicture}>
           <div className={styles.imgSquare}>
@@ -223,7 +200,24 @@ const EmpDetail = () => {
         </div>
         {inputFields.map(renderInputField)}
       </div>
-    </div>
+    <Row style={{ marginBottom: "10px" }}>
+      <Col md={15}></Col>
+      <Col md={9}>
+      <div className="col-11" style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ marginRight: "10px" }}>
+          {editing ? (
+            <button className={styles.empSaveButton2} onClick={handleSaveChanges}>저장</button>
+          ) : (
+            <button className={styles.empSaveButton1} onClick={handleEdit}>수정</button>
+          )}
+        </div>
+        {editing && (
+          <button className={styles.empSaveButton3} onClick={handleCancel}>취소</button>
+        )}
+      </div>
+      </Col>
+    </Row>
+  </div>
   );
 };
 

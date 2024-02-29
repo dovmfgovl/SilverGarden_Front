@@ -3,11 +3,11 @@
   max-height: 100vh;
   display:grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.3fr 6fr 0.3fr;
+  grid-template-rows: 0.3fr 6fr 0.2fr;
 }
 
 .appHeaderWrap{
-  background-color: azure;
+  background-color: rgb(231, 233, 246);
 }
 
 .appContentWrap{
@@ -17,5 +17,6 @@
 }
 
 .appFooterWrap{
-  background-color: blanchedalmond;
+  font-size: 0.9rem;
+  background-color: rgb(231, 233, 246);
 }
