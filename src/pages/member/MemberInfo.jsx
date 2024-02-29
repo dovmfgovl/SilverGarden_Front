@@ -47,9 +47,9 @@ const MemberInfo = () => {
                 <div className={styles.leftMemberLayout}>
                     <h2>▶︎&nbsp;이용자목록</h2>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text>이용자 검색</InputGroup.Text>
+                        <InputGroup.Text>검색</InputGroup.Text>
                         <Form.Control
-                            placeholder='이용자 이름을 입력해주세요'
+                            placeholder='이용자나 담당자명을 입력해주세요'
                             value={searchKeyword}
                             onChange={(e) => setSearchKeyword(e.target.value)}
                         />  
