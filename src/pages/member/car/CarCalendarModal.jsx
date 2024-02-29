@@ -137,6 +137,23 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                <Form.Group controlId="formUser" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자</Form.Label>
+                        <Form.Select
+                            style={{fontSize:'0.8rem'}}
+                            as="select"
+                            name="user"
+                            value={formData.user}
+                            onChange={handleChange}
+                        >
+                            <option >이용자를 선택하세요</option>
+                            {memberList.map((user) => (
+                                <option key={user.CLIENT_ID} >
+                                    {user.CLIENT_NAME}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
                     <Form.Group controlId="formTitle" style={{marginTop:'10px'}}>
                         <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>일정제목</Form.Label>
                         <Form.Control
@@ -160,7 +177,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                         />
                     </Form.Group>
                     <Form.Group controlId="formCategory" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>카테고리</Form.Label>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용차량</Form.Label>
                         <Form.Select
                             style={{fontSize:'0.8rem'}}
                             as="select"
@@ -168,27 +185,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             value={formData.category}
                             onChange={handleChange}
                         >
-                            <option  >카테고리를 선택하세요</option>
+                            <option  >차량을 선택하세요</option>
                             {CarList.map((category) => (
                                 <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE} >
                                     {category.SHUTTLE_TYPE}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group controlId="formUser" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자</Form.Label>
-                        <Form.Select
-                            style={{fontSize:'0.8rem'}}
-                            as="select"
-                            name="user"
-                            value={formData.user}
-                            onChange={handleChange}
-                        >
-                            <option >이용자를 선택하세요</option>
-                            {memberList.map((user) => (
-                                <option key={user.CLIENT_ID} >
-                                    {user.CLIENT_NAME}
                                 </option>
                             ))}
                         </Form.Select>
