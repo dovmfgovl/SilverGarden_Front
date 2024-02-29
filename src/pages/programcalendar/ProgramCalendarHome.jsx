@@ -15,35 +15,62 @@ const ProgramCalendarHome = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     const dispatch = useDispatch();
-    const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
-    const handleFiltersChange = (filters) => dispatch(setFilters(filters));
+    const handleDispatch = (events)=>dispatch(setPgEvents(events));         //이벤트 리덕스 스토어 저장
+    const handleFiltersChange = (filters) => dispatch(setFilters(filters)); //필터값 리덕스 스토어 저장
 
-    const eventData = useSelector((state)=>state.calendarSlice.events);
-    const filters = useSelector((state) => state.calendarSlice.filters);
-    const filteredEvents = useSelector((state) => state.calendarSlice.filteredEvents);
-
+    const eventData = useSelector((state)=>state.calendarSlice.events);                //이벤트 데이터 가져오기
+    const filters = useSelector((state) => state.calendarSlice.filters);               //필터값 가져오기
+    const filteredEvents = useSelector((state) => state.calendarSlice.filteredEvents); //필터 데이터 가져오기
+    
     useEffect(() => {
-        dispatch(setFilteredEvents());
-    }, [filters, dispatch]);
-
-    const handleSearchChange = (e) => {
-        setSearchTitle(e.target.value);
-        handleFiltersChange({ ...filters, searchTitle: e.target.value });
-    };
+        const fetchData = async () => {
+            await dispatch(setFilteredEvents());
+            console.log(eventData);
+            console.log(filteredEvents);
+        };
+    
+        fetchData();
+    }, [filters, eventData]);
+    
+    //카테고리 선택시
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
-        const newData = [...eventData.filter((element) => element.category === category)];
-        dispatch(setPgEvents(newData));
-        dispatch(setFilters({ ...filters, selectedCategory: category }));
-        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
+        
+        let newFilters = { ...filters, selectedCategory: category };
+    
+        if (category === '전체') {
+            newFilters = { ...newFilters, searchTitle: '' };
+        }
+    
+        dispatch(setFilters(newFilters));
+        dispatch(setFilteredEvents());
     };
     
+    // handleSearchChange 함수에도 선택된 카테고리가 '전체'인 경우의 처리를 추가
+    const handleSearchChange = (e) => {
+        setSearchTitle(e.target.value);
+    
+        const newFilters = { ...filters, searchTitle: e.target.value };
+    
+        if (selectedCategory === '전체') {
+            dispatch(setFilters({ searchTitle: e.target.value, selectedCategory: '' }));
+        } else {
+            dispatch(setFilters(newFilters));
+        }
+    
+        dispatch(setFilteredEvents());
+    };
+    //초기화(필터초기, 이벤트데이터 가져오기)
     const handleRefresh = () => {
         setSearchTitle('');
-        handleFiltersChange({ searchTitle: '', selectedCategory: '' }); // 선택된 카테고리 초기화
         setSelectedCategory('전체');
-        dispatch(setFilteredEvents('')); // 필터된 이벤트 업데이트
+        dispatch(setFilters({ searchTitle: '', selectedCategory: '' }));
+        dispatch(setPgEvents(eventData.slice())); // eventData를 복제하여 사용
+        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
+        console.log(eventData);
+        console.log(filteredEvents);
     };
+    
 
     
     return (
