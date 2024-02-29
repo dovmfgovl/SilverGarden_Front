@@ -1,6 +1,10 @@
 
 .fc {
   width: 100%; /*캘린더 넓이*/
+  background-color: white;
+  border-radius: 20px 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .fc .fc-toolbar .fc-toolbar-title{
@@ -14,7 +18,7 @@
 .fc .fc-toolbar.fc-header-toolbar {
   margin: 0;
   padding: 0 20px;
-  background-color: #4a6bff96;
+  background-color: #794ff7;
   height: 33px;
   font-weight: 200;
   line-height: 20px;
@@ -22,8 +26,8 @@
   border-radius: 20px 20px 0px 0px;
 }
 
-.fc .fc-button-primary {
-  background-color: transparent;
+.fc .fc-button-primary  {
+  background-color: 'black';
   border: none;
   :hover {
     background-color: transparent;
@@ -37,7 +41,7 @@
   border: 1px solid #dddee0;
   font-weight: 500;
   line-height: 19px;
-  color: #7b7b7b;
+  color: #050505;
 }
 
 /*totday css 설정*/
@@ -88,7 +92,6 @@
 }
 
 .fc-daygrid-event-harness{
-  /* background-color: #89eae526; */
   height: 28px;
   width: auto;
 }
@@ -98,6 +101,9 @@
 }
 
 /* 리스트 */
+.fc-scrollgrid  fc-scrollgrid-liquid{
+  border-radius: 20px 20px;
+}
 /* 시간을 나타내는 부분의 글씨 크기 조절 */
 .fc-timegrid-slot-label {
   font-size: 0.8rem; /* 원하는 크기로 조절 */
@@ -112,4 +118,7 @@
   color: rgba(0, 0, 0, 0.535);
 }
 
+.fc-scroller{
+  border-radius: 20px 20px;
+}
 

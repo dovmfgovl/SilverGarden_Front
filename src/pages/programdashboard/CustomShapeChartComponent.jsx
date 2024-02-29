@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const CustomShapeLineChartComponent = ({pgCalList}) => {
     const groupedData = pgCalList.reduce((acc, event) => {
@@ -29,17 +29,25 @@ const CustomShapeLineChartComponent = ({pgCalList}) => {
 
 
     return (
-        <>
-            <h4>월별 프로그램 횟수</h4>
-            <LineChart width={300} height={300} data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="월" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="횟수" stroke="#8884d8" strokeWidth={3} isAnimationActive={true} />
-            </LineChart>
-        </>
+        <div style={{ width: '95%', height: '90%' }}>
+            <ResponsiveContainer>
+                <AreaChart data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="월" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Area 
+                        type="monotone" 
+                        dataKey="횟수" 
+                        stroke="#82ca9d" 
+                        fill="#00C49F" 
+                        isAnimationActive={true} 
+                        position="center"
+                    />
+                </AreaChart>
+            </ResponsiveContainer>
+        </div>
     );
 };
 

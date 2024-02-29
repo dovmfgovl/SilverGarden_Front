@@ -13,7 +13,6 @@ const ProgramCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
     const [weekendsVisible, setWeekendsVisible] = useState(true); // 주말 표시 여부 상태 추가
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [originData, setOriginData] = useState([]);
 
     const dispatch = useDispatch();
     const handleDispatch = (events)=>dispatch(setPgEvents(events)); 
@@ -22,9 +21,6 @@ const ProgramCalendarHome = () => {
     const eventData = useSelector((state)=>state.calendarSlice.events);
     const filters = useSelector((state) => state.calendarSlice.filters);
     const filteredEvents = useSelector((state) => state.calendarSlice.filteredEvents);
-    console.log(eventData);      //(267) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, …]
-    console.log(filters);        //{searchTitle: '심신', selectedCategory: ''}
-    console.log(filteredEvents); //(13) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 
     useEffect(() => {
         dispatch(setFilteredEvents());
@@ -35,13 +31,17 @@ const ProgramCalendarHome = () => {
         handleFiltersChange({ ...filters, searchTitle: e.target.value });
     };
     const handleCategorySelect = (category) => {
-        setSelectedCategory(category); // '신체', '교양' 등의 카테고리 값을 설정
-        const newData = [...eventData.filter((element)=> element.category === category)]
-        dispatch(setPgEvents(newData))
+        setSelectedCategory(category);
+        const newData = [...eventData.filter((element) => element.category === category)];
+        dispatch(setPgEvents(newData));
+        dispatch(setFilters({ ...filters, selectedCategory: category }));
+        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
     };
-
-    const handleSearch = () => {
-        handleFiltersChange({ searchTitle, selectedCategory });
+    
+    const handleRefresh = () => {
+        setSearchTitle('');
+        handleFiltersChange({ searchTitle: '', selectedCategory: '' }); // 선택된 카테고리 초기화
+        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
     };
 
     
@@ -63,12 +63,12 @@ const ProgramCalendarHome = () => {
                             onChange={handleSearchChange}
                             style={{textAlign:'center'}}
                         />
-                        <Button onClick={handleSearch} variant="outline-secondary" id="button-addon2" style={{backgroundColor:'#4a6bff96', color:'white', height:'auto'}}>
-                            검색
+                        <Button onClick={handleRefresh} variant="outline-secondary" id="button-addon2" style={{backgroundColor:'#006BFF', color:'white', height:'auto'}}>
+                            전체조회
                         </Button>
                     </InputGroup>
-                    <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체 카테고리'} onSelect={handleCategorySelect} style={{width:'100px'}}>
-                        <Dropdown.Item eventKey="전체">전체 카테고리</Dropdown.Item>
+                    <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체'} onSelect={handleCategorySelect} style={{width:'100px'}}>
+                        <Dropdown.Item eventKey="전체">전체</Dropdown.Item>
                         <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
                         <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
                         <Dropdown.Item eventKey="문화">문화</Dropdown.Item>
@@ -92,6 +92,7 @@ const ProgramCalendarHome = () => {
             </div>
             <div className={styles.listWrap }>
                 <ProgramListCalendar
+                    filteredEvents={filteredEvents} //title로 필터 검색을 사용한다면 사용
                     eventData={eventData} 
                     handleDispatch={handleDispatch} //양쪽 캘린더 동기화됨
                 />

@@ -1,10 +1,10 @@
 import React from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip, Label } from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip, Label, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#794ff7', '#1153fc'];
 
 const MemberChart = ({ memberList }) => {
-    console.log(memberList);
+    // console.log(memberList);
 
     // Gender 별로 데이터 카운트
     const genderCount = memberList.reduce((count, member) => {
@@ -28,32 +28,32 @@ const MemberChart = ({ memberList }) => {
     };
 
     return (
-        <>
-            <PieChart width={200} height={250} onMouseEnter={onPieEnter}> 
-                <Pie
-                    data={data}
-                    cx={80} 
-                    cy={120} 
-                    innerRadius={60} 
-                    outerRadius={80} 
-                    fill="#8884d8"
-                    paddingAngle={1}
-                    dataKey="value"
-                    label
-                >
-                    {data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                    <Label
-                        value={`총인원: ${totalMembers}명`}
-                        position="center"
+        <div style={{ width: '100%', height: '80%' }}>
+            <ResponsiveContainer>
+                <PieChart onMouseEnter={onPieEnter}> 
+                    <Pie
+                        data={data}
+                        innerRadius={50} 
+                        outerRadius={90} 
                         fill="#8884d8"
-                    />
-                </Pie>
-                <Tooltip formatter={(value) => [`${value}명`, `${((value / totalMembers) * 100).toFixed(1)}%`]} />
-                <Legend />
-            </PieChart>
-        </>
+                        paddingAngle={1}
+                        dataKey="value"
+                        label
+                    >
+                        {data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                        <Label
+                            value={`총인원: ${totalMembers}명`}
+                            position="center"
+                            fill="#8884d8"
+                        />
+                    </Pie>
+                    <Tooltip formatter={(value) => [`${value}명`, `${((value / totalMembers) * 100).toFixed(1)}%`]} />
+                    <Legend />
+                </PieChart>
+            </ResponsiveContainer>
+        </div>
     );
 };
 

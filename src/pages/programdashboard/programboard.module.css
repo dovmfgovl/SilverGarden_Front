@@ -8,15 +8,15 @@
 }
 
 .chartWrap{
-    height: 100%;
-    overflow: auto; /* 내용이 넘칠 경우 스크롤바를 추가 */
-    padding: 5px;
-    text-align: center;
-    align-items: center;
+    flex-basis: 50%;
 }
 
 .chartName{
     text-align: left;
+}
+
+.btn{
+    align-items: flex-end;
 }
 
 /* 가로 페이지(축소정도에 따라 zoom 조절) */

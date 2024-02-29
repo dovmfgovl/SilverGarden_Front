@@ -79,6 +79,9 @@ const Notice = () => {
     setFileList(list);
   };
 
+  const commonEvents = useSelector((state) => state.commoncalendarSlice);
+  console.log(commonEvents.events);
+
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>
