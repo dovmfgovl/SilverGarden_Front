@@ -44,7 +44,7 @@ const MemberInfo2 = () => {
         <>
             <div className={styles.InnerMemberLayout2}>
                 <div className={styles.leftMemberLayout}>
-                    <h2>▶︎&nbsp;이용자목록</h2>
+                    <h5>이용자목록</h5>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>검색</InputGroup.Text>
                         <Form.Control

@@ -99,7 +99,7 @@ const MemberDetail = () => {
     <div className="container" >
       <div className="user-detail" >
         <Col>
-          <h2>&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h5>이용자상세정보</h5>
         </Col>
         {selectedMember && Object.keys(selectedMember).length > 0 && (
           <Stack direction="horizontal" gap={3}>
