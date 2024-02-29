@@ -12,7 +12,7 @@ const MemberDetail2 = () => {
         <>
         <div className={styles.rightMemberLayout1}>
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상담일지</h2>
+          <h2>&nbsp;▶︎&nbsp;이용자상담일지</h2>
         </Col>
           <MemberDetailPage selectedMember={selectedMember}  />
         </div>

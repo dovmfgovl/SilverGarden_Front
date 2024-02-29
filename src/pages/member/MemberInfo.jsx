@@ -5,7 +5,7 @@ import MemberDetail from './MemberDetail';
 import MemberInsert from './MemberInsert'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMemList, setDetail } from '../../redux/memberSlice';
-import { Table } from 'antd';
+import { ConfigProvider, Table } from 'antd';
 import Title from 'antd/es/typography/Title';
 
 const MemberInfo = () => {
@@ -55,17 +55,30 @@ const MemberInfo = () => {
                         />  
                             <Button variant="outline-primary" onClick={handleShowAll}>전체조회</Button>
                     </InputGroup>
+                    <ConfigProvider
+                        theme={{
+                            components: {
+                                Table: {
+                                         borderColor: '#d9d9d9', //hex색표 
+                                        },
+                                    },
+                                }}
+                            >
                     <div className="col border border-white border-2" style={{ background: 'hsl(193, 6%, 88%)' }}>
-                    <Table dataSource={memberList} bordered pagination={{position:['bottomCenter']}}
-                    onRow={(record,index)=>{
-                        return {onClick:() => handleRowClick(record)}
-                    }} >
+                    <Table dataSource={memberList} bordered pagination={{position:['bottomCenter'],defaultPageSize:[5]}}
+                   onRow={(record,index)=>{
+                    return {
+                        onClick:() => handleRowClick(record),
+                        style: { cursor: 'pointer' } // 각 행에 pointer 스타일 적용
+                    };
+                }}  >
                             <Table.Column title="이름" dataIndex="CLIENT_NAME" key="CLIENT_NAME" align='center'/>
                             <Table.Column title="생년월일" dataIndex="CLIENT_BIRTH" key="CLIENT_BIRTH" align='center'/>
                             <Table.Column title="담당자" dataIndex="CLIENT_MANAGER" key="CLIENT_MANAGER" align='center'/>
                         </Table>
                     
                     </div>
+                    </ConfigProvider>
                     <Title level={5}  >전체: {numOfRecords}건</Title> 
                     <MemberInsert />  
                 </div>

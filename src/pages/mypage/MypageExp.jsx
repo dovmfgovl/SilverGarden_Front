@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Table } from 'antd';
+import {  ConfigProvider, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MypageExp = () => {
@@ -18,14 +18,24 @@ const MypageExp = () => {
   ];
   return (
     <>
-    <h1>경력</h1>
-    <Table dataSource={data} pagination={false}>
-        <Column title="회사명" dataIndex="exp_name" key="firstName" />
-        <Column title="부서" dataIndex="exp_dept" key="age" />
-        <Column title="직급" dataIndex="exp_rank" key="address" />
-        <Column title="담당업무" dataIndex="exp_duty" key="address" />
-        <Column title="재직기간" dataIndex="exp_period" key="address" />
-  </Table>
+    <h2>&nbsp;&nbsp;경력</h2>
+    <ConfigProvider
+                theme={{
+                    components: {
+                        Table: {
+                            borderColor: '#d9d9d9', //hex색표 
+                                },
+                            },
+                        }}
+    >
+                <Table dataSource={data} pagination={false} bordered>
+                    <Column title="회사명" dataIndex="exp_name" key="firstName" />
+                    <Column title="부서" dataIndex="exp_dept" key="age" />
+                    <Column title="직급" dataIndex="exp_rank" key="address" />
+                    <Column title="담당업무" dataIndex="exp_duty" key="address" />
+                    <Column title="재직기간" dataIndex="exp_period" key="address" />
+              </Table>
+    </ConfigProvider>
     </>
   )
 }

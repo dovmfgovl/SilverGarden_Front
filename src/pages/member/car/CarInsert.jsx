@@ -57,7 +57,7 @@ const CarInsert = () => {
         }
         return (
             <>
-    <Button onClick={handleShow}>차량등록</Button>
+    <Button variant='outline-primary' onClick={handleShow}>차량등록</Button>
     <Modal size='lg' show={show} onHide={handleClose}>
     <Modal.Header closeButton>
       <Modal.Title>차량등록</Modal.Title>

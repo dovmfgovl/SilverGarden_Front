@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Col, Stack, Button, Modal, Form } from 'react-bootstrap';
-import { Descriptions, Input, Select, Space } from 'antd';
+import {  Descriptions, Input, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails, getMemList } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
@@ -99,7 +99,7 @@ const MemberDetail = () => {
     <div className="container" >
       <div className="user-detail" >
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h2>&nbsp;▶︎&nbsp;이용자상세정보</h2>
         </Col>
         {selectedMember && Object.keys(selectedMember).length > 0 && (
           <Stack direction="horizontal" gap={3}>
@@ -196,6 +196,7 @@ const MemberDetail = () => {
                 />
               </Descriptions.Item>
             </Descriptions>
+
         ) : (
           <Descriptions bordered>
             <Descriptions.Item label="이름">{memoSelectedMember.CLIENT_NAME}</Descriptions.Item>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  Table } from 'antd';
+import {  ConfigProvider, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MypageEdu = () => {
@@ -29,14 +29,23 @@ const MypageEdu = () => {
     ];
       return (
         <>
-        
-        <h1>학력</h1>
-        <Table dataSource={data} pagination={false}>
-            <Column title="기간" dataIndex="period" key="period" />
-            <Column title="학교명" dataIndex="name" key="name" />
-            <Column title="학과명" dataIndex="major" key="major" />
-            <Column title="졸업구분" dataIndex="status" key="status" />
-      </Table>
+        <h2>&nbsp;&nbsp;학력</h2>
+        <ConfigProvider
+                theme={{
+                    components: {
+                        Table: {
+                            borderColor: '#d9d9d9', //hex색표 
+                                },
+                            },
+                        }}
+            >
+                <Table dataSource={data} pagination={false} bordered>
+                    <Column title="기간" dataIndex="period" key="period" />
+                    <Column title="학교명" dataIndex="name" key="name" />
+                    <Column title="학과명" dataIndex="major" key="major" />
+                    <Column title="졸업구분" dataIndex="status" key="status" />
+              </Table>
+        </ConfigProvider>
         </>
       )
     }

@@ -3,8 +3,6 @@ import styles from "./emplist.module.css";
 import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
-  faComment,
-  faCrosshairs,
   faFile,
   faHouseMedical,
   faPeopleArrows,
