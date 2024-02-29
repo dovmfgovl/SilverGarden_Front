@@ -42,7 +42,7 @@ const CarInfo = () => {
                   <Table
                 dataSource={carList}
                 bordered
-                pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [5] }}
+                pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [10] }}
                 onRow={(record) => ({
                   onClick: () => handleRowClick(record),
                   style: { cursor: 'pointer' }
