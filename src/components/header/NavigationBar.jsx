@@ -25,7 +25,7 @@ const NavigationBar = ({ isLogin }) => {
     <>
       <Roboto></Roboto>
       <div className={styles.navigationWrap}>
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
           <img
             src={logofile}
             alt="description"
@@ -35,42 +35,41 @@ const NavigationBar = ({ isLogin }) => {
           <Navbar.Brand className="ms-2">SilverGarden</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link className="mx-2">
-                <Link to="/home" style={{textDecoration:"none", color:"black"}}>Home</Link>
+            <Nav className={styles.linkWrap}>
+              <Nav.Link href="/home" className="mx-4">
+                Home
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/approval" style={{textDecoration:"none", color:"black"}}>결재</Link>
+              <Nav.Link href="/approval" className="mx-4">
+                결재
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/empList" style={{textDecoration:"none", color:"black"}}>직원조회</Link>
+              <Nav.Link href="/empList" className="mx-4">
+                직원조회
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/member" style={{textDecoration:"none", color:"black"}}>이용자관리</Link>
+              <Nav.Link href="/member" className="mx-4">
+                이용자관리
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/program" style={{textDecoration:"none", color:"black"}}>프로그램관리</Link>
+              <Nav.Link href="/program" className="mx-4">
+                프로그램관리
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/notice" style={{textDecoration:"none", color:"black"}}>공지사항</Link>
+              <Nav.Link href="/notice" className="mx-4">
+                공지사항
               </Nav.Link>
-              <Nav.Link className="mx-2">
-                <Link to="/admin" style={{textDecoration:"none", color:"black"}}>관리자페이지</Link>
+              <Nav.Link href="/admin" className="mx-4">
+                관리자페이지
               </Nav.Link>
             </Nav>
-            <Nav className="mx-3">
-              <Nav.Link >
-              <Link to="/message" style={{textDecoration:"none", color:"black"}}>
+            <Nav className="ml-auto" style={{ marginLeft: '540px', fontSize: '0.9rem' }}>
+              <Nav.Link href="/message">
                 <FontAwesomeIcon
                   style={{ margin: "0px" }}
                   className="ms-2"
                   icon={faPaperPlane}
                 />
-              </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link to="/mypage" style={{textDecoration:"none", color:"black"}}>마이페이지</Link>
               </Nav.Link>
+              <Nav.Link className="mx-3" href="/mypage">마이페이지</Nav.Link>
               <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
           </Navbar.Collapse>
@@ -90,4 +89,21 @@ const LogoutBtn = styled.button`
   font-weight: bold;
   color: #666666;
   background-color: transparent;
+  position: relative; /* ::after 가상 요소를 포함하는 요소를 상대 위치로 설정 */
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #b69ff7;
+    transform: scaleX(0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
 `;

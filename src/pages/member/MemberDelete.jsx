@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { memberDelete } from '../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
+import { getMemList } from '../../redux/memberSlice';
 
 const MemberDelete = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const MemberDelete = () => {
     console.log(res.data);
     alert("삭제되었습니다");
     handleClose()
-    window.location.reload(); 
+    dispatch(getMemList())
   }
   return (
     <>

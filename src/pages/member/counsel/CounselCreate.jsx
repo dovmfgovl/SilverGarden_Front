@@ -4,7 +4,7 @@ import { counselInsert, getCounselList } from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
 
-const CounselCreate = ({selectedMember}) => {
+const CounselCreate = ({selectedMember,getCounsel}) => {
   const [counselList,setCounselList]=useState([]);
     const [show, setShow] = useState(false);
     const handleClose = () => {
@@ -49,11 +49,6 @@ const CounselCreate = ({selectedMember}) => {
       console.log(content);
     },[]);
 
-    const Counsel =async (params)=>{
-      const response = await getCounselList()
-      console.log(response.data);
-      setCounselList(response.data);
-    }
   const empList = useSelector(state => state.chooseEmp.value);
   const userData =useSelector(state => state.userInfoSlice);
   const dispatch = useDispatch();
@@ -79,7 +74,7 @@ const CounselCreate = ({selectedMember}) => {
         console.log(responseData);
         alert("상담정보가 성공적으로 저장되었습니다.");
         handleClose();
-        Counsel();
+        getCounsel()
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
         alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");

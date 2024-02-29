@@ -7,21 +7,21 @@ import CounselCreate from './CounselCreate';
 const Counsel = ({selectedMember}) => {
   const [counselList,setCounselList]=useState([]);
 
-  const Counsel =async (params)=>{
+  const getCounsel =async (params)=>{
     const response = await getCounselList(params)
     console.log(response.data);
     setCounselList(response.data);
   }
   
   useEffect(()=>{
-    Counsel();
+    getCounsel();
   },[])
   
   return (
     <>
     <div>
-      <CounselRow  selectedMember={selectedMember} counselList={counselList}/>
-      <CounselCreate selectedMember={selectedMember} />
+      <CounselRow  selectedMember={selectedMember} counselList={counselList} getCounsel={getCounsel}/>
+      <CounselCreate selectedMember={selectedMember} getCounsel={getCounsel}/>
     </div>
     </>
   )

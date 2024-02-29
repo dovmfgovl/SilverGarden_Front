@@ -1,5 +1,6 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap';
+import styles from "./empInfo.module.css";
 
 const EmpListPagination = ({currentPage, totalPosts, postPerPage, handleSetCurrentPage}) => {
   
@@ -26,17 +27,17 @@ const EmpListPagination = ({currentPage, totalPosts, postPerPage, handleSetCurre
     }
   }
   return (
-    <Pagination className="mb-0">
-    <Pagination.First onClick={() => handleSetCurrentPage(1)} />
-      <Pagination.Prev onClick={handlePrev}/>
-      {pageNumbers.map(number => (
-        <Pagination.Item active={number === currentPage} onClick={() => handleSetCurrentPage(number)} key={number}>
-          {number}
-        </Pagination.Item>
-      ))}
-      <Pagination.Next onClick={handleNext} />
-      <Pagination.Last onClick={() => handleSetCurrentPage(totalPages)} />
-    </Pagination>
+      <Pagination className={styles.empListPagination}>
+      <Pagination.First onClick={() => handleSetCurrentPage(1)} />
+        <Pagination.Prev onClick={handlePrev}/>
+        {pageNumbers.map(number => (
+          <Pagination.Item active={number === currentPage} onClick={() => handleSetCurrentPage(number)} key={number}>
+            {number}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next onClick={handleNext} />
+        <Pagination.Last onClick={() => handleSetCurrentPage(totalPages)} />
+      </Pagination>
   )
 }
 

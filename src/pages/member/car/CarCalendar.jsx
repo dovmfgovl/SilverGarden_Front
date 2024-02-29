@@ -65,6 +65,7 @@ const CarCalendar = ({
         await CarCalendarLogic.addDB(urls.addURL, transformedData);
         onEventAdd(transformedData);
         updateModalState();
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -90,6 +91,7 @@ const CarCalendar = ({
         await CarCalendarLogic.updateDB(urls.updateURL, transformedData);
         onEventUpdate(transformedData);
         updateModalState();
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -100,15 +102,13 @@ const CarCalendar = ({
       try {
         // 컬럼명을 변환하여 서버로 데이터 전송
         const transformedData = {
-          [columnNames.title]: formData.title,
-          [columnNames.start]: formData.start,
-          [columnNames.end]: formData.end,
           [columnNames.no]: formData.no,
           // 추가 필드들도 필요에 따라 변환
         };
         await CarCalendarLogic.deleteDB(urls.deleteURL, transformedData);
         onEventDelete(transformedData);
         updateModalState();
+        fetchAndDispatch()
       } catch (error) {
         // 에러 처리
       }
@@ -118,7 +118,6 @@ const CarCalendar = ({
       updateModalState();
     };
   
-  useEffect(() => {
     const fetchAndDispatch = async () => {
       try {
         const eventsData = await CarCalendarLogic.listDB(urls.listURL);
@@ -129,6 +128,12 @@ const CarCalendar = ({
             start: eventData[columnNames.start],
             end: eventData[columnNames.end],
             color: eventData[columnNames.color],
+            content: eventData[columnNames.content],
+            car_no: eventData[columnNames.car_no],
+            category: eventData[columnNames.category],
+            user: eventData[columnNames.user],
+            userno: eventData[columnNames.userno],
+            no: eventData[columnNames.no],
           };
         });
         handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
@@ -154,6 +159,7 @@ const CarCalendar = ({
         console.log(error);
       }
     };
+  useEffect(() => {
     fetchAndDispatch();
   }, []);
 
@@ -204,8 +210,8 @@ const CarCalendar = ({
     ],
     views: {
       resourceTimelineDay: {
-        buttonText: ':15 slots',
-        slotDuration: '00:15',
+        buttonText: '10 minutes',
+        slotDuration: '00:10',
         slotLabelFormat: {
           hour: 'numeric',
           minute: '2-digit',
