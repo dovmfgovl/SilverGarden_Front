@@ -16,7 +16,8 @@ const HomeProfile = () => {
     E_NO : empData.e_no,
     AT_DATE: date,
     AT_START: '',
-    AT_END: ''
+    AT_END: '',
+    AT_STATUS: ''
   }
   console.log("at e_no===>", at.E_NO)
 
@@ -33,7 +34,8 @@ const HomeProfile = () => {
       if(targetData) {
         setAtList({
           AT_START: targetData.AT_START,
-          AT_END: targetData.AT_END
+          AT_END: targetData.AT_END,
+          AT_STATUS: targetData.AT_STATUS
         });
       } else {
         console.log("해당하는 근태데이터가 없습니다.")
@@ -60,10 +62,13 @@ const HomeProfile = () => {
       </div>
       <div className={styles.atTimeWrap}>
         <div className={styles.atTimeStart}>
-          출근시간: {atList.AT_START ? atList.AT_START : '-'}
+          출근: {atList.AT_START ? atList.AT_START : '-'}
         </div>
         <div className={styles.atTimeEnd}>
-          퇴근시간: {atList.AT_END ? atList.AT_END : '-'}
+          퇴근: {atList.AT_END ? atList.AT_END : '-'}
+        </div>
+        <div className={styles.atTimeEnd}>
+          근태현황: {atList.AT_STATUS ? atList.AT_STATUS : '-'}
         </div>
       </div>
       <div className={styles.atContainer}>
