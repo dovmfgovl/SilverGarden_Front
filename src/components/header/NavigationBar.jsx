@@ -58,6 +58,9 @@ const NavigationBar = ({ isLogin }) => {
               <Nav.Link href="/admin" className="mx-2">
                 관리자페이지
               </Nav.Link>
+              <Nav.Link href="/payment" className="mx-2">
+                결제관리
+              </Nav.Link>
             </Nav>
             <Nav className="mx-3">
               <Nav.Link href="/message">
