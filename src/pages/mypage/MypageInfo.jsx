@@ -50,7 +50,7 @@ const MypageInfo = () => {
     <>
     <Stack direction="horizontal" gap={0}>
       <Col span={5}>
-      <img  src={empDetail.e_profile == null ?"https://picsum.photos/200/200" : empDetail.e_profile} rounded className='p-5 ms-auto'  alt="프로필"/>
+      <img  src={empDetail.e_profile == null ?"https://picsum.photos/200/200" : empDetail.e_profile} rounded className='p-4 ms-auto'  alt="프로필"/>
       </Col>
       <Col span={16} >
       <Descriptions title="내 정보" bordered items={items} />
