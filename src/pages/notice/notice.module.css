@@ -24,9 +24,9 @@
 
 .noticeTitleBar{
   grid-area: noticeTitleBar;
-  font-size: 2.0rem;
-  padding: 10px;
   background-color: rgb(231, 233, 246);
+  font-size: 1.2rem;
+  padding-top: 22px;
 }
 
 .innerContentLayout{
@@ -210,4 +210,26 @@
   background-color: rgb(255, 255, 255);
   margin:20px;
   overflow-y: auto;
+}
+
+.noticeTable{
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.noticeTable th,
+.noticeTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.noticeTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.noticeTable tbody td {
+  cursor: pointer;
 }

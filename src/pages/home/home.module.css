@@ -32,15 +32,16 @@
 }
 
 .sidebarWrap{
+  height: 93%;
   background-color: rgba(255, 255, 255, 0.774);
   grid-area: sidebarWrap;
   border-right: 1px solid lightgray;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
   border-radius: 20px;  
   margin: 20px;
-  padding: 10px;
+  padding: 10px 0;
   width: 92%;
-  display: flex;
+  overflow-y: auto;
 }
 
 .firstContentWrap{

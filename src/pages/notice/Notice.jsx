@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import styles from "./notice.module.css";
 import {
+  faCaretRight,
   faList,
   faPenNib,
   faPenToSquare,
-  faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import NoticeList from "./NoticeList";
 import NoticeDetail from "./NoticeDetail";
@@ -16,6 +16,7 @@ import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
 import CrawilngHome from "../crawling/CrawilngHome";
+
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -88,8 +89,8 @@ const Notice = () => {
         <SidebarCommon list={sidebarList} handleMenu={handleMenu} />
       </div>
       <div className={styles.noticeTitleBar}>
-        <FontAwesomeIcon icon={faVolumeHigh} />
-        {noticePage}
+        <FontAwesomeIcon icon={faCaretRight} />
+        {" "+noticePage}
       </div>
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (
