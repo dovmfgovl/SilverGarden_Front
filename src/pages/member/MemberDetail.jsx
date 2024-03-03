@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Col, Stack, Button, Modal, Form } from 'react-bootstrap';
-import { Descriptions, Input, Select, Space } from 'antd';
+import {  Descriptions, Input, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetail, saveMemDetails } from '../../redux/memberSlice';
+import { setDetail, saveMemDetails, getMemList } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
 import MemberDelete from './MemberDelete';
 import { getEmpList } from '../../redux/chooseEmpSlice';
 
 const MemberDetail = () => {
   const dispatch = useDispatch();
-  const selectedMember = useSelector(state => state.memberSlice.selectedMember) || {};
+  const selectedMember = useSelector(state => state.memberSlice.selectedMember);
+  const memoSelectedMember=useMemo(()=>selectedMember || {},[selectedMember])
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [editing, setEditing] = useState(false);
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
-  const [updatedMember, setUpdatedMember] = useState(selectedMember);
-  const [originalMember, setOriginalMember] = useState(selectedMember);
+  const [updatedMember, setUpdatedMember] = useState(memoSelectedMember);
+  const [originalMember, setOriginalMember] = useState(memoSelectedMember);
 
   const empList = useSelector(state => state.chooseEmp.value);
   const userData =useSelector(state => state.userInfoSlice);
@@ -25,9 +26,14 @@ const MemberDetail = () => {
   }, [dispatch]);
 
   useEffect(() => {
-      setUpdatedMember(selectedMember)
-      setOriginalMember(selectedMember)
-  }, [selectedMember])
+      setUpdatedMember(prevMember =>{
+        if (prevMember !== memoSelectedMember) {
+          return memoSelectedMember;
+        }
+        return prevMember
+      })
+      setOriginalMember(memoSelectedMember)
+  }, [memoSelectedMember])
 
   const handleEdit = () => {
     setEditing(true);
@@ -40,24 +46,25 @@ const MemberDetail = () => {
     setUpdatedMember(originalMember);
   };
 
-  const handleSaveChanges = () => {
-    const fullAddress = `${roadAddress} ${detailAddress}`;
-    const updatedMemberDetail = {
-      ...updatedMember,
-      CLIENT_ADDRESS: fullAddress,
-      MOD_ID: userData.e_no,
-    };
-
-    dispatch(saveMemDetails(updatedMemberDetail))
-      .then(() => {
-        dispatch(setDetail(updatedMember));
-        setEditing(false);
-        window.location.reload();
-      })
-      .catch(error => {
-        console.error('Error saving member details: ', error);
-      });
+ const handleSaveChanges = async () => {
+  const fullAddress = `${roadAddress} ${detailAddress}`;
+  const updatedMemberDetail = {
+    ...updatedMember,
+    CLIENT_ADDRESS: fullAddress,
+    MOD_ID: userData.e_no,
   };
+
+  try {
+    dispatch(saveMemDetails(updatedMemberDetail));
+    dispatch(setDetail(updatedMember));
+    alert("이용자 정보가 성공적으로 저장되었습니다.");
+    setEditing(false);
+    dispatch(getMemList());
+  } catch (error) {
+    console.error('Error saving member details: ', error);
+    // 여기서 오류 처리 로직을 추가할 수 있습니다.
+  }
+};
 
   const handleChange = (key, value) => {
     if (key === 'CLIENT_BIRTH') {
@@ -92,9 +99,9 @@ const MemberDetail = () => {
     <div className="container" >
       <div className="user-detail" >
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h5>이용자상세정보</h5>
         </Col>
-        {Object.keys(selectedMember).length > 0 && ( // Check if selectedMember is not empty
+        {selectedMember && Object.keys(selectedMember).length > 0 && (
           <Stack direction="horizontal" gap={3}>
             {editing ? (
               <>
@@ -135,7 +142,7 @@ const MemberDetail = () => {
                 <Select
                   style={{ width: '100%' }}
                   value={updatedMember.CLIENT_GENDER}
-                  onChange={e => handleChange('CLIENT_GENDER', e.target)}
+                  onChange={e => handleChange('CLIENT_GENDER', e.target.value)}
                 >
                   <Select.Option value="남">남</Select.Option>
                   <Select.Option value="여">여</Select.Option>
@@ -145,7 +152,7 @@ const MemberDetail = () => {
                 <Form.Select  onChange={e => { handleChange('CLIENT_MANAGER', e.target.value) }}>
                   <option >{updatedMember.CLIENT_MANAGER}</option>
                   {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                      emp.DEPT_NAME === "사회복지팀" && emp.E_STATUS !=="퇴직" && (
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}
@@ -189,17 +196,18 @@ const MemberDetail = () => {
                 />
               </Descriptions.Item>
             </Descriptions>
+
         ) : (
           <Descriptions bordered>
-            <Descriptions.Item label="이름">{selectedMember.CLIENT_NAME}</Descriptions.Item>
-            <Descriptions.Item label="이용자번호" span={2}>{selectedMember.CLIENT_ID}</Descriptions.Item>
-            <Descriptions.Item label="생년월일">{selectedMember.CLIENT_BIRTH}</Descriptions.Item>
-            <Descriptions.Item label="등록일" span={2}>{selectedMember.REG_DATE}</Descriptions.Item>
-            <Descriptions.Item label="성별">{selectedMember.CLIENT_GENDER}</Descriptions.Item>
-            <Descriptions.Item label="담당자" span={2}>{selectedMember.CLIENT_MANAGER}</Descriptions.Item>
-            <Descriptions.Item label="전화번호">{selectedMember.CLIENT_TEL}</Descriptions.Item>
-            <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
-            <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
+            <Descriptions.Item label="이름">{memoSelectedMember.CLIENT_NAME}</Descriptions.Item>
+            <Descriptions.Item label="이용자번호" span={2}>{memoSelectedMember.CLIENT_ID}</Descriptions.Item>
+            <Descriptions.Item label="생년월일">{memoSelectedMember.CLIENT_BIRTH}</Descriptions.Item>
+            <Descriptions.Item label="등록일" span={2}>{memoSelectedMember.REG_DATE}</Descriptions.Item>
+            <Descriptions.Item label="성별">{memoSelectedMember.CLIENT_GENDER}</Descriptions.Item>
+            <Descriptions.Item label="담당자" span={2}>{memoSelectedMember.CLIENT_MANAGER}</Descriptions.Item>
+            <Descriptions.Item label="전화번호">{memoSelectedMember.CLIENT_TEL}</Descriptions.Item>
+            <Descriptions.Item label="나이" span={2}>{memoSelectedMember.CLIENT_AGE}</Descriptions.Item>
+            <Descriptions.Item label="주소">{memoSelectedMember.CLIENT_ADDRESS}</Descriptions.Item>
           </Descriptions>
         )}
       </div>

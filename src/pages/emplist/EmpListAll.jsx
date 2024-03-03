@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, Space, Table ,Typography} from 'antd';
+import { Button, ConfigProvider, Space, Table } from 'antd';
 import Search from 'antd/es/input/Search';
 import React, { useState, useEffect } from 'react'
 import styles from './emplist.module.css'
@@ -7,7 +7,6 @@ import Title from 'antd/es/typography/Title';
 const EmpListAll = ({ empList, sendEmpList,dept }) => {
   const [keyword, setKeyword] = useState("");
   const [find, setFind]=useState("e_name");
-  const [gubun, setGubun]=useState('');
   const [numOfRecords, setNumOfRecords] = useState(0); // 추가: 출력된 정보의 개수를 저장하기 위한 상태
 
   useEffect(() => {
@@ -15,12 +14,11 @@ const EmpListAll = ({ empList, sendEmpList,dept }) => {
     setNumOfRecords(empList.length);
   }, [empList]);
 
-  const [filteredEmpList, setFilteredEmpList] = useState([]); // 추가: 검색 결과를 저장하기 위한 상태
 
   // empList 배열을 콘솔에 출력하여 확인합니다.
-  console.log(empList);
-  console.log(JSON.stringify(empList));
-  console.log(dept);
+  // console.log(empList);
+  // console.log(JSON.stringify(empList));
+  // console.log(dept);
   // empList 배열을 사용하여 데이터를 동적으로 생성합니다.
   const data = empList.map(emp => ({
     // 각 사원의 정보를 새로운 객체에 매핑합니다.

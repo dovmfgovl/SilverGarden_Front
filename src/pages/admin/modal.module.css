@@ -8,7 +8,8 @@
     "empno birth"
     "name pnumber"
     "dept email"
-    "password role";
+    "rank role"
+    "password password";
   }
   
   .empno{
@@ -35,6 +36,10 @@ grid-area: name;
   .password{
     grid-area:password;
   }
+  .rank{
+    grid-area:rank;
+  }
+
   .role{
     grid-area: role;
   }

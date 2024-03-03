@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState }from 'react';
+import React, {  useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import { counselUpdate } from '../../../services/api/memberApi';
+import { counselUpdate} from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
-const CounselUpdate = ({counsel}) => {
+const CounselUpdate = ({counsel,getCounsel}) => {
   const [counselDetail,setCounselDetail]=useState(
     {
       COUNSEL_NO:counsel.COUNSEL_NO,
@@ -16,13 +16,11 @@ const CounselUpdate = ({counsel}) => {
       MOD_ID:counsel.MOD_ID
     }
   )
-console.table(counselDetail);
+
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [date,setDate]=useState('')
-    const [time,setTime]=useState("")
 
 
     const empList = useSelector(state => state.chooseEmp.value);
@@ -33,6 +31,7 @@ console.table(counselDetail);
   }, [dispatch]);
 
 
+
     const handleSubmit = async () => {
       const updatedCounsel = {
         ...counselDetail,
@@ -41,9 +40,9 @@ console.table(counselDetail);
       try {
         const res = await counselUpdate(updatedCounsel);
         console.log(res.data);
-        alert("회원 정보가 성공적으로 저장되었습니다.");
-        window.location.reload(); 
-  
+        alert("상담 정보가 성공적으로 수정되었습니다.");
+        handleClose();
+        getCounsel()
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
         alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -97,7 +96,7 @@ console.table(counselDetail);
           <Form.Select aria-label="Default select example"  value={counselDetail.COUNSEL_MANAGER} onChange={e=>{
               setCounselDetail({...counselDetail,COUNSEL_MANAGER:e.target.value}) }}>
                         {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                     emp.DEPT_NAME === "사회복지팀" &&emp.E_STATUS !=="퇴직" &&(
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}

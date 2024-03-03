@@ -1,8 +1,8 @@
 import { UserAPage } from "../../services/auth/UserApi";
 import {
+  faCaretRight,
   faCheck,
   faCircleUp,
-  faFile,
   faNewspaper,
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
@@ -84,8 +84,8 @@ const Approval = () => {
         <SidebarCommon list={list} handleMenu={handleMenu} />
       </div>
       <div className={styles.approvalTitleBar}>
-        <FontAwesomeIcon icon={faFile} />
-        {approvalPage}
+        <FontAwesomeIcon icon={faCaretRight} />
+        {" "+approvalPage}
       </div>
       <div className={styles.approvalContentWrap}>
         {approvalPage === "결재대기함" && (

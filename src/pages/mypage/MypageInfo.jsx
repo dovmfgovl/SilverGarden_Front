@@ -1,12 +1,11 @@
 import { Col, Descriptions } from 'antd';
-import { Image, Stack} from 'react-bootstrap'
+import { Stack} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 const MypageInfo = () => {
    const dispatch = useDispatch();
-   const selectedEmployee = useSelector(state => state.empInfos.selectedEmployee) || {}; 
-   const userData = useSelector(state=> state.userInfoSlice)
+
 
 
    // select who에서 선택한 직원을 selectedEmployee로 설정하고 사용합니다.
@@ -51,9 +50,9 @@ const MypageInfo = () => {
     <>
     <Stack direction="horizontal" gap={0}>
       <Col span={5}>
-      <Image width={210} height={180} alt="171x180" src={empDetail.e_profile} rounded className='p-2 ms-auto'/>
+      <img  src={empDetail.e_profile == null ?"https://picsum.photos/200/200" : empDetail.e_profile} rounded className='p-5 ms-auto'  alt="프로필"/>
       </Col>
-      <Col span={16}>
+      <Col span={16} >
       <Descriptions title="내 정보" bordered items={items} />
       </Col>
       <Col span={2}></Col>

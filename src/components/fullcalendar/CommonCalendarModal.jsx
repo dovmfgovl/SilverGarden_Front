@@ -3,8 +3,9 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import moment from 'moment-timezone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import styles from "./fullcalendar.module.css";
 
-const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
+const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories, defaultCategories }) => {
     // 날짜 형식을 변환하는 함수
     const formatDateForInput = (dateString) => {
         const momentDate = moment.tz(dateString, 'Asia/Seoul');
@@ -123,11 +124,21 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
                             onChange={handleChange}
                         >
                             <option value="" >카테고리를 선택하세요</option>
-                            {categories.map((category) => (
-                                <option key={category} value={category}>
-                                    {category}
-                                </option>
-                            ))}
+                            //개별 사전설정 카테고리 있을때
+                            {defaultCategories ? (
+                                defaultCategories.map((category) => (
+                                    <option key={category} value={category}>
+                                        {category}
+                                    </option>
+                                ))
+                                ) : (
+                                //개별 사전설정 카테고리 없을때
+                                categories.map((category) => (
+                                    <option key={category} value={category}>
+                                        {category}
+                                    </option>
+                                ))
+                            )}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="formStart" style={{marginTop:'10px'}}>

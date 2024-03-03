@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 import { Col, Row } from 'antd';
-import EmpPictureUpload from './EmpPictureUpload';
 import { DeptNameDB } from '../../services/api/empCreateApi';
 import styled from 'styled-components';
+import EmpUploadImg from './EmpUploadImg';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const EmpDetail = () => {
   const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee); // 원래의 직원 정보를 관리하는 state
   const [dept, setDept] = useState([]);
   const [e_password, setPassword] = useState("");
-  const [fileList, setFileList] = useState([]); // 파일 리스트를 관리하는 state
 
   useEffect(() => {
     // 선택된 직원 정보가 변경되면 해당 정보로 state 업데이트
@@ -30,7 +28,12 @@ const EmpDetail = () => {
     setOriginalEmployee(memoSelectedEmployee);
   }, [memoSelectedEmployee]);
 
-  /*   const deptName = () => {
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 한 번 부서 정보를 가져오도록 설정
+    deptName();
+  }, []);
+
+    const deptName = () => {
     console.log("deptName");
     DeptNameDB()
       .then((response) => {
@@ -40,7 +43,7 @@ const EmpDetail = () => {
       .catch((error) => {
         console.log(error);
       });
-  }; */
+  };
 
   const passwordGenerate = () => {
     const chars =
@@ -58,18 +61,6 @@ const EmpDetail = () => {
     }))
   };
 
-/*   const PasswordField = () => (
-    <>
-      <div>
-        <label htmlFor="E_PASSWORD">비밀번호</label>
-        <input id="E_PASSWORD" name="E_PASSWORD" type="password" />
-      </div>
-      <MyButton type="button" onClick={passwordGenerate}>
-        임시비밀번호발급
-      </MyButton>
-    </>
-  ); */
-
   const handleEdit = () => {
     setEditing(true); // 수정 버튼을 누를 때 수정 모드 활성화
   };
@@ -81,28 +72,29 @@ const EmpDetail = () => {
     }));
   };
 
-  const handleFile = (list) => { // 파일 선택 시 파일 리스트 업데이트
-    setFileList([...list])
-  }
-
   const handleCancel = () => {
     setEditing(false); // 수정 취소 시 수정 모드 비활성화
     setUpdatedEmployee(originalEmployee); // 수정 취소 시 이전 상태로 되돌림
   };
 
+  const handleImageUrlChange = (imageUrl) => {
+    // 이미지 URL을 updatedEmployee에 추가
+    setUpdatedEmployee(prevState => ({
+      ...prevState,
+      E_PROFILE: imageUrl
+    }));
+  }
+
   // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져옴
   const handleSaveChanges = () => {
-    const formData = new FormData();
-    formData.append('profile', fileList[0]); // 파일을 formData에 추가
-
-    for(const key in updatedEmployee) {
-      formData.append(key, updatedEmployee[key]); // 직원 정보를 formData에 추가
-    }
-    dispatch(saveEmpDetails(formData))
+    dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
       .then(() => {
-        dispatch(setDetail(updatedEmployee));
+        dispatch(setDetail(updatedEmployee)); // 리덕스 스토어에서 선택된 직원 정보 업데이트
         setEditing(false); // 저장 후 수정 모드 비활성화
         dispatch(getEmpList()); // 저장 후 전체 목록 갱신
+
+        // 수정된 직원 정보를 UI에 반영하기 위해 상태 업데이트
+        setOriginalEmployee(updatedEmployee);
       })
       .catch(error => {
         console.error('Error saving employee details: ', error);
@@ -124,7 +116,7 @@ const EmpDetail = () => {
               name={name}
             />
             <MyButton type="button" onClick={passwordGenerate}>
-              임시비밀번호발급
+              임시비밀번호재발급
             </MyButton>
           </div>
           {index !== inputFields.length - 1 && <div className={styles.divider} />}
@@ -149,7 +141,7 @@ const EmpDetail = () => {
                     <option key={index} value={item.CD_VALUE}>{item.CD_VALUE}</option>
                   ))
                 ) : (
-                  // 기존의 옵션들을 그대로 사용
+                  // 기존의 옵션들은 그대로 사용
                   options.map((option, index) => (
                     <option key={index} value={option}>{option}</option>
                   ))
@@ -190,42 +182,42 @@ const EmpDetail = () => {
     { label: '직급', name: 'E_RANK', type: 'select', options: ['시설장', '팀장', '사원'] },
   ];
   
-
   return (
     <div className={styles.empDetailInfo}>
-      <Row style={{ marginBottom: "10px" }}>
-        <Col md={15}>
-          <h5>직원 상세 정보</h5>
-        </Col>
-        <Col md={9}>
-          <div className="col-11">
-            <Row>
-              <Col md={12}>
-                {editing ? (
-                  <Button style={{ width: "55%", fontSize: "0.8rem" }} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>
-                ) : (
-                  <Button style={{ width: "55%", fontSize: "0.8rem"}} variant="outline-success" onClick={handleEdit}>수정</Button>
-                )}
-              </Col>
-              <Col md={12}>
-                {editing && (
-                  <Button style={{ width: "55%", fontSize: "0.8rem" }} variant="outline-danger" onClick={handleCancel}>취소</Button>
-                )}
-              </Col>
-            </Row>
-          </div>
-        </Col>
-      </Row>
+      <h5>직원 상세 정보</h5>     
       <div className={styles.empInfoWrap}>
         <div className={styles.empPicture}>
-          {editing && <EmpPictureUpload handleFile={handleFile} fileList={fileList} />} {/* 수정 모드일 때만 파일 업로드 활성화 */}
-          {fileList.length > 0 && ( // 파일 선택 시 미리보기 표시
-            <img src={URL.createObjectURL(fileList[0])} alt="Employee Preview" style={{ width: '160px', height: '180px' }} />
-          )}
+          <div className={styles.imgSquare}>
+            {updatedEmployee.E_PROFILE ? (
+              <img src={updatedEmployee.E_PROFILE} alt="프로필 사진" />
+            ) : (
+              <span>프로필 사진이 없습니다.</span>
+            )}
+          </div>
+          <div className={styles.imgSaveButton}>
+            { editing && <EmpUploadImg imageUrlChange={handleImageUrlChange}/> }
+          </div>
         </div>
         {inputFields.map(renderInputField)}
       </div>
-    </div>
+    <Row style={{ marginBottom: "10px" }}>
+      <Col md={15}></Col>
+      <Col md={9}>
+      <div className="col-11" style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ marginRight: "10px" }}>
+          {editing ? (
+            <button className={styles.empSaveButton2} onClick={handleSaveChanges}>저장</button>
+          ) : (
+            <button className={styles.empSaveButton1} onClick={handleEdit}>수정</button>
+          )}
+        </div>
+        {editing && (
+          <button className={styles.empSaveButton3} onClick={handleCancel}>취소</button>
+        )}
+      </div>
+      </Col>
+    </Row>
+  </div>
   );
 };
 

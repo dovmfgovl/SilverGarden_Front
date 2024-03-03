@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../member.module.css';
 import {Col, Image,  Stack} from 'react-bootstrap'
 import Counsel from './Counsel'
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,18 +9,17 @@ const MemberDetail2 = () => {
   const dispatch = useDispatch();
   const selectedMember = useSelector(state => state.memberSlice.selectedMember) || {};
   return (
-    <div className="container">
-      <div className="user-detail">
+        <>
+        <div className={styles.rightMemberLayout1}>
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상담일지</h2>
-        </Col>
-        <Col>
-          <Stack direction="horizontal" gap={2}>
-          </Stack>
+          <h5>이용자상담일지</h5>
         </Col>
           <MemberDetailPage selectedMember={selectedMember}  />
-      </div>
-    </div>
+        </div>
+          <div className={styles.rightMemberLayout2}>
+       <Counsel selectedMember={selectedMember}/>
+          </div>
+        </>
   );
 };
 
@@ -37,7 +37,7 @@ export const MemberDetailPage = ({selectedMember}) => {
             <Descriptions.Item label="나이" span={2}>{selectedMember.CLIENT_AGE}</Descriptions.Item>
             <Descriptions.Item label="주소">{selectedMember.CLIENT_ADDRESS}</Descriptions.Item>
           </Descriptions>
-       <Counsel selectedMember={selectedMember}/>
+         
     </>
   )
 }

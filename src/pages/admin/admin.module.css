@@ -4,29 +4,33 @@
   grid-template-areas: 
   "empSidebarWrap empTitleBar"
   "empSidebarWrap innerContentWrap"
-  /* "empSidebarWrap innerContentWrap"
-  "empSidebarWrap innerContentWrap" */
   ;
   grid-template-columns: 1fr 6fr;
   grid-template-rows: 70px 1fr;  
-  background-color: white;
+  background-color: rgb(231, 233, 246);
+  overflow-y: auto;
 }
 
 .empSidebarWrap{
   grid-area: empSidebarWrap;
   background-color: white;
-  display: flex;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 20px;
 }
 
 .empTitleBar{
   grid-area: empTitleBar;
-  background-color: white;
-  font-size: 2.0rem;
-  padding: 10px;
+  background-color: rgb(231, 233, 246);
+  font-size: 1.2rem;
+  padding-top: 22px;
 }
+
 .innerContentWrap{
   height: 100%;
-  
+  background-color: rgb(231, 233, 246);
+  padding: 0 0 20px 0;
 }
 
 

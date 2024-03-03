@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import styles from "./notice.module.css";
 import {
+  faCaretRight,
   faList,
   faPenNib,
   faPenToSquare,
-  faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import NoticeList from "./NoticeList";
 import NoticeDetail from "./NoticeDetail";
@@ -14,7 +14,9 @@ import { getNoticeList } from "../../services/api/noticeApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
-import { useSelector } from "react-redux";
+import {useSelector } from "react-redux";
+import CrowlList from "./CrawlList";
+
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -36,6 +38,7 @@ const Notice = () => {
       subMenuItems: [
         { label: "전체공지", icon: faList },
         { label: "공지작성", icon: faPenToSquare },
+        { label: "관련공지", icon: faPenToSquare },
       ],
     },
   ];
@@ -83,8 +86,8 @@ const Notice = () => {
         <SidebarCommon list={sidebarList} handleMenu={handleMenu} />
       </div>
       <div className={styles.noticeTitleBar}>
-        <FontAwesomeIcon icon={faVolumeHigh} />
-        {noticePage}
+        <FontAwesomeIcon icon={faCaretRight} />
+        {" "+noticePage}
       </div>
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (
@@ -106,12 +109,13 @@ const Notice = () => {
         {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} />}
         {noticePage === "공지수정" && (
           <NoticeUpdate
-            noticeNo={noticeNo}
-            noticeList={noticeList}
-            handlePage={handlePage}
-            fileList={fileList}
+          noticeNo={noticeNo}
+          noticeList={noticeList}
+          handlePage={handlePage}
+          fileList={fileList}
           />
-        )}
+          )}
+        {/*{noticePage === "관련공지" && <CrowlList /> }*/}
       </div>
     </div>
   );

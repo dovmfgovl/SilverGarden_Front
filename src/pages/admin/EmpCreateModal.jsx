@@ -5,10 +5,12 @@ import styled from "styled-components";
 import createstyle from "./modal.module.css";
 import { Col, Row } from "antd";
 import { DeptNameDB, SignupAPI } from "../../services/api/empCreateApi";
+import { useSelector } from "react-redux";
 
-const EmpCreateModal = () => {
+const EmpCreateModal = ({ empCreated }) => {
   const [e_password, setPassword] = useState("");
   const [dept, setDept] = useState([]);
+  const empData = useSelector((state) => state.userInfoSlice);
   const {
     setValue,
     handleSubmit,
@@ -19,12 +21,25 @@ const EmpCreateModal = () => {
 
   const onSubmit = async (values) => {
     console.log(values);
-
-    SignupAPI(values)
+    console.log(values.dept_name);
+    const value = {
+      e_birth: values.e_birth,
+      e_name: values.e_name,
+      e_phone: values.e_phone,
+      dept_name: values.dept_name,
+      e_email: values.e_email,
+      e_rank: values.e_rank,
+      e_auth: values.e_auth,
+      e_password: values.e_password,
+      reg_id: empData.e_no,
+      mod_id: empData.e_no,
+    };
+    SignupAPI(value)
       .then((response) => {
         reset();
         alert("신규 등록이 완료되었습니다");
         handleClose();
+        empCreated();
       })
       .catch((error) => {
         alert(error);
@@ -184,6 +199,18 @@ const EmpCreateModal = () => {
                   allowNegative={false}
                 />
                 <Error>{errors?.e_email?.message}</Error>
+              </div>
+              <div className={createstyle.rank}>
+                <Form.Label>직급</Form.Label>
+                <div>
+                  <select style={{ width: "150px" }} {...register("e_rank")}>
+                    <option selected value="사원">
+                      사원
+                    </option>
+                    <option value="팀장">팀장</option>
+                    <option value="시설장">시설장</option>
+                  </select>
+                </div>
               </div>
               <div className={createstyle.role}>
                 <Form.Label>권한</Form.Label>

@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState }from 'react';
 import { Button, Card, Col, Form, Modal, Row, } from 'react-bootstrap';
-import { counselInsert } from '../../../services/api/memberApi';
+import { counselInsert, getCounselList } from '../../../services/api/memberApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../../redux/chooseEmpSlice';
 
-const CounselCreate = ({selectedMember}) => {
+const CounselCreate = ({selectedMember,getCounsel}) => {
+  const [counselList,setCounselList]=useState([]);
     const [show, setShow] = useState(false);
     const handleClose = () => {
       setDate('')
@@ -48,7 +49,6 @@ const CounselCreate = ({selectedMember}) => {
       console.log(content);
     },[]);
 
-
   const empList = useSelector(state => state.chooseEmp.value);
   const userData =useSelector(state => state.userInfoSlice);
   const dispatch = useDispatch();
@@ -72,9 +72,9 @@ const CounselCreate = ({selectedMember}) => {
         const res = await counselInsert(counsel);
         const responseData = JSON.parse(res.data);
         console.log(responseData);
-        alert("회원 정보가 성공적으로 저장되었습니다.");
-        window.location.reload(); 
-  
+        alert("상담정보가 성공적으로 저장되었습니다.");
+        handleClose();
+        getCounsel()
       } catch (error) {
         console.error("회원 정보 저장 실패:", error);
         alert("회원 정보를 저장하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -127,7 +127,7 @@ const CounselCreate = ({selectedMember}) => {
           <Col>
             <Form.Select aria-label="Default select example"   value={manager} onChange={e => {handleManager(e.target.value)}}>
             {empList.map(emp => (
-                      emp.DEPT_NAME === "사회복지팀" && (
+                      emp.DEPT_NAME === "사회복지팀" &&emp.E_STATUS !=="퇴직" &&(
                         <option key={emp.E_NAME} value={emp.E_NAME}>{emp.E_NAME}</option>
                       )
                     ))}

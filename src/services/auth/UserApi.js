@@ -2,6 +2,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import userInfoSlice from "../../redux/userInfoSlice";
+import { RefreshTokenAPI } from "./AutApi";
+
 
 const accessToken = localStorage.getItem("accessToken");
 const refreshToken = localStorage.getItem("refreshToken");
@@ -32,10 +34,19 @@ export const AdminPage = async() => {
       // 토큰이 만료된 경우 처리
       // 로그아웃 등의 작업 수행
       //alert("토큰이 만료되어 자동로그아웃됩니다")
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch(userInfoSlice.actions.setEmpInfo({}));
-      navigate("/")
+      // localStorage.removeItem("accessToken");
+      // localStorage.removeItem("refreshToken");
+      // dispatch(userInfoSlice.actions.setEmpInfo({}));
+      // navigate("/")
+      RefreshTokenAPI()
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("refreshToken", response.refreshToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     } else if (status === 403) {
       // 권한이 없는 경우 처리
       // 권한 에러 메시지 표시 등의 작업 수행
@@ -78,26 +89,15 @@ export const UserAPage = async() => {
       // 토큰이 만료된 경우 처리
       // 로그아웃 등의 작업 수행
       console.error('Error:', error);
-      
-      // let configB = {
-      //   method: 'post',
-      //   maxBodyLength: Infinity,
-      //   url: process.env.REACT_APP_SPRING_IP + "api/v1/auth/refresh",
-      //   headers: { 
-      //     'Authorization': `Bearer ${refreshToken}`
-      //   },
-      // };
-
-      // axios.request(configB).then((response) => {
-      //   console.log("요청성공")
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch(userInfoSlice.actions.setEmpInfo({}));
-      navigate("/")
+      RefreshTokenAPI()
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("refreshToken", response.refreshToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     } else if (status === 403) {
       // 권한이 없는 경우 처리
@@ -111,7 +111,7 @@ export const UserAPage = async() => {
       //alert("해당 페이지에 대한 권한이 없습니다")
       navigate("/home")
     }
-  });
+  });     
 }
 
 export const UserBPage = async() => {
@@ -139,12 +139,15 @@ export const UserBPage = async() => {
     if (status === 401) {
       // 토큰이 만료된 경우 처리
       // 로그아웃 등의 작업 수행
-      console.error('Error:', error);
-      alert("토큰이 만료되어 자동로그아웃됩니다")
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch(userInfoSlice.actions.setEmpInfo({}));
-      navigate("/")
+      RefreshTokenAPI()
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("refreshToken", response.refreshToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     } else if (status === 403) {
       // 권한이 없는 경우 처리
       // 권한 에러 메시지 표시 등의 작업 수행

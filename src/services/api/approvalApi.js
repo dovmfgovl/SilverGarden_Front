@@ -65,6 +65,26 @@ export const approvalInsert = (data) => {
   });
 };
 
+export const approvalVacationRequest = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "post",
+        url: process.env.REACT_APP_SPRING_IP + "approval/approvalVacationRequest",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        processData: false,
+        contentType: false,
+        data: data,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const approvalDelete = (params) => {
   return new Promise((resolve, reject) => {
     try {
@@ -108,15 +128,18 @@ export const approvalFileDownload = (filename) => {
 
 
 export const approvalWaitList = (params) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
-      const response = axios({
+      const response = await axios({
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "approval/approvalWaitList",
         params: params,
       });
       resolve(response);
     } catch (error) {
+      console.log("여기여기");
+      console.log(error.response.data);
+      console.log(error.response.status);
       reject(error);
     }
   });
