@@ -57,3 +57,25 @@
     left: 92%;
     
   }
+
+.empTable{
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.empTable th,
+.empTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.empTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.empTable tbody td {
+  cursor: pointer;
+}

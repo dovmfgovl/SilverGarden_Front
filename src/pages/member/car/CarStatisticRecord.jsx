@@ -2,6 +2,7 @@ import Title from 'antd/es/typography/Title';
 import { Col, ConfigProvider, DatePicker, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import styles from '../member.module.css';
 
 const CarStatisticRecord = ({calList}) => {
   const [numOfRecords, setNumOfRecords] = useState(0);
@@ -63,7 +64,7 @@ const CarStatisticRecord = ({calList}) => {
           },
         }}
       >
-        <Table dataSource={filteredDataInRange} bordered pagination={{position:['bottomCenter'],size:['small'],defaultPageSize:[10]}}>
+        <Table className={styles.memberTable} dataSource={filteredDataInRange} bordered pagination={{position:['bottomCenter'],size:['small'],defaultPageSize:[10]}}>
           <Table.Column title="이용날짜" dataIndex="serv_date" key="SERV_DATE" align='center'/>
           <Table.Column title="이름" dataIndex="serv_user" key="SERV_USER" align='center'/>
           <Table.Column title="이용목적" dataIndex="serv_title" key="SERV_TITLE" align='center'/>

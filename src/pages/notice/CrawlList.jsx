@@ -1,32 +1,52 @@
-// const puppeteer = require('puppeteer');
-// const cheerio = require('cheerio');
+// // const CrowlList = async () => {
+// //     const browser = await puppeteer.launch();
+// //     const page = await browser.newPage();
 
-// const CrowlList = async () => {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
+// //     await page.goto('http://www.kaswcs.or.kr/bj_board/bjbrd_list.htm?board_id=0307');
 
-//     await page.goto('http://www.kaswcs.or.kr/bj_board/bjbrd_list.htm?board_id=0307');
+// //     const html = await page.content();
+// //     const $ = cheerio.load(html);
 
-//     const html = await page.content();
-//     const $ = cheerio.load(html);
+// //     let crawledDataList = [];
 
-//     let crawledDataList = [];
+// //     $('td.subject a').each((index, element) => {
+// //         const title = $(element).text().trim();
+// //         const href = $(element).attr('href');
 
-//     $('td.subject a').each((index, element) => {
-//         const title = $(element).text().trim();
-//         const href = $(element).attr('href');
+// //         if (title.includes('공모')) {
+// //             crawledDataList.push({
+// //                 title,
+// //                 href: `http://www.kaswcs.or.kr${href}`
+// //             });
+// //         }
+// //     });
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
 
-//         if (title.includes('공모')) {
-//             crawledDataList.push({
-//                 title,
-//                 href: `http://www.kaswcs.or.kr${href}`
+// const CrawledDataList = () => {
+//     const [data, setData] = useState([]);
+
+//     useEffect(() => {
+//         axios.get('/crawled-data')
+//             .then(response => {
+//                 setData(response.data);
+//                 console.log(data);
+//             })
+//             .catch(error => {
+//                 console.error("There was an error fetching the crawled data: ", error);
 //             });
-//         }
-//     });
+//     }, []);
 
-//     await browser.close();
-
-//     return crawledDataList;
+//     return (
+//         <div>
+//             <h2>Crawled Data</h2>
+//             <ul>
+//                 {data.map((item, index) => (
+//                     <li key={index}>{item.title}: {item.content}</li>
+//                 ))}
+//             </ul>
+//         </div>
+//     );
 // };
 
-// export default CrowlList;
+// export default CrawledDataList;

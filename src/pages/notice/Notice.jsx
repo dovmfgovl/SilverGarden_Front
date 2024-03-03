@@ -14,8 +14,8 @@ import { getNoticeList } from "../../services/api/noticeApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
-import {useSelector } from "react-redux";
-import CrowlList from "./CrawlList";
+import { useSelector } from "react-redux";
+import CrawilngHome from "../crawling/CrawilngHome";
 
 
 const Notice = () => {
@@ -80,6 +80,9 @@ const Notice = () => {
     setFileList(list);
   };
 
+  const commonEvents = useSelector((state) => state.commoncalendarSlice);
+  console.log(commonEvents.events);
+
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>
@@ -115,7 +118,7 @@ const Notice = () => {
           fileList={fileList}
           />
           )}
-        {/*{noticePage === "관련공지" && <CrowlList /> }*/}
+        {noticePage === "관련공지" && <CrawilngHome />}
       </div>
     </div>
   );

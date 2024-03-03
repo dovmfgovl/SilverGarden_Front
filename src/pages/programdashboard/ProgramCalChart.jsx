@@ -1,8 +1,7 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ChartComponent = ({pgCalList}) => {
-
+const ProgramCalChart = ({pgCalList}) => {
     // 주어진 데이터의 타이틀별로 그룹화하고 개수를 계산
     const groupedData = pgCalList.reduce((acc, item) => {
         const title = item.PS_NAME;
@@ -21,32 +20,27 @@ const ChartComponent = ({pgCalList}) => {
         횟수: groupedData[title],
     }));
 
-    // 데이터를 카테고리별로 다른 색상으로 지정
-    const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00C49F', '#FFBB28', '#FF8042'];
-    chartData.forEach((data, index) => {
-        data.color = COLORS[index % COLORS.length];
-    });
-
     // 데이터를 count를 기준으로 정렬
     chartData.sort((a, b) => b.count - a.count);
 
     return (
-        <>
-            <h4>프로그램별 진행 횟수(예정)</h4>
-            <BarChart width={300} height={300} data={chartData} layout="vertical">
+        <div style={{ width: '95%', height: '90%' }}>
+        <ResponsiveContainer>
+            <BarChart data={chartData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" />
-                <YAxis dataKey="title" type="category" />
+                <YAxis dataKey="title" type="category" width={140} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="횟수" fill="#8884d8"  >
+                <Bar dataKey="횟수" fill="#8884d8">
                     {chartData.map((entry, index) => (
                         <Bar key={`bar-${index}`} dataKey="횟수" fill={entry.color} />
                     ))}
                 </Bar>
             </BarChart>
-        </>
+        </ResponsiveContainer>
+    </div>
     );
 };
 
-export default ChartComponent;
+export default ProgramCalChart;

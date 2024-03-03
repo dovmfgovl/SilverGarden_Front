@@ -4,6 +4,7 @@ import { callMypage } from '../../services/api/mypageApi'; // mypage 데이터�
 import { useDispatch, useSelector } from 'react-redux';
 import { DatePicker } from 'antd';
 import moment from 'moment';
+import styles from './mypage.module.css'
 
 const MypageSubcon2 = () => {
   const [mypageDate, setMypageDate] = useState([]); // mypage 데이터 상태
@@ -115,6 +116,7 @@ const MypageSubcon2 = () => {
                         }}
             >
       <Table
+        className={styles.myTable}
         columns={columns}
         dataSource={filteredDataInRange}
         size="small"
