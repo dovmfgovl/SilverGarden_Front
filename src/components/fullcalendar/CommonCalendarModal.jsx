@@ -87,7 +87,7 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
     return (
         <div>
         <Modal show={true} onHide={onClose} className="modalForm" style={{height:'auto', alignItems:'center', fontSize:'0.5rem'}}>
-            <Modal.Header closeButton style={{backgroundColor:'#6e95f796'}}>
+            <Modal.Header closeButton style={{backgroundColor:'#794ff7', color:'white'}}>
                 <Modal.Title style={{fontWeight:'bolder', fontSize:'1rem', height:'auto'}}><FontAwesomeIcon icon={faCalendarDays} />  {action === '생성' ? '새로운 일정 추가' : '기존 일정 수정'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>

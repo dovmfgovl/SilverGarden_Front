@@ -40,6 +40,7 @@ const CarInfo = () => {
                             }}
             >
                   <Table
+                className={styles.memberTable}
                 dataSource={carList}
                 bordered
                 pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [10] }}

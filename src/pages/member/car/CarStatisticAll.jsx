@@ -1,5 +1,6 @@
 import { ConfigProvider, Table } from 'antd'
 import Title from 'antd/es/typography/Title';
+import styles from '../member.module.css';
 import React, { useEffect, useState } from 'react'
 
 const CarStatisticAll = ({calList}) => {
@@ -28,7 +29,7 @@ const CarStatisticAll = ({calList}) => {
                     },
                 }}
     >
-    <Table dataSource={data} bordered pagination={{position:['bottomCenter'],size:['small'],defaultPageSize:[10]}} >
+    <Table className={styles.memberTable} dataSource={data} bordered pagination={{position:['bottomCenter'],size:['small'],defaultPageSize:[10]}} >
         <Table.Column title="이용날짜" dataIndex="serv_date" key="SERV_USER" align='center'/>
         <Table.Column title="이름" dataIndex="serv_user" key="SERV_USER" align='center'/>
         <Table.Column title="이용목적" dataIndex="serv_title" key="SERV_TITLE" align='center'/>

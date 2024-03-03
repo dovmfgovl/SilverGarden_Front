@@ -12,21 +12,18 @@ const calendarSlice = createSlice({
     },
     reducers: {
         setPgEvents: (state, action) => {
-            console.log("calendarSlice setPgEvents", action.payload);
             state.events = action.payload;
         },
         setFilters: (state, action) => {
             state.filters = action.payload;
         },
         setFilteredEvents: (state, action) => {
-            // 새로운 액션으로 filteredEvents 업데이트
             const { events, filters } = state;
             const filteredData = events.filter((event) => {
                 const isSearchMatch = !filters.searchTitle || event.title.includes(filters.searchTitle);
                 const isCategoryMatch = !filters.selectedCategory || event.category === filters.selectedCategory;
                 return isSearchMatch && isCategoryMatch;
             });
-
             state.filteredEvents = filteredData;
         },
     },

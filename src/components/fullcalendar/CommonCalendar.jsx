@@ -11,7 +11,8 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 const CommonCalendar = ({
   onEventAdd,
@@ -35,36 +36,37 @@ const CommonCalendar = ({
   
 //기본 초기화 세트
   const updateModalState = () => {
-  setIsModalOpen(false);
-  setModalAction(null);
-};
-  const dispatch = useDispatch();
+    setIsModalOpen(false);
+    setModalAction(null);
+  };
+  const commonEvents = useSelector((state) => state.commoncalendarSlice.events);
+  console.log(commonEvents);
 
   // 일정 조회 로직
+  const fetchAndDispatch = async () => {
+    try {
+      const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
+      const formattedEvents = eventsData.map((eventsData) => ({
+        title: eventsData[columnNames.title],
+        start: eventsData[columnNames.start],
+        end: eventsData[columnNames.end],
+        no: eventsData[columnNames.no],
+        color: eventsData[columnNames.color],
+        content: eventsData[columnNames.content],
+        category: eventsData[columnNames.category],
+      }));
+      handleDispatch(formattedEvents); 
+      const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
+      setCategories(uniqueCategories);
+    } catch (error) {
+      // 에러 처리
+    }
+  };
+
   useEffect(() => {
-    const fetchAndDispatch = async () => {
-      try {
-        const eventsData = await CommonCalendarLogic.listDB(urls.listURL);
-        const formattedEvents = eventsData.map((eventsData) => ({
-          title: eventsData[columnNames.title],
-          start: eventsData[columnNames.start],
-          end: eventsData[columnNames.end],
-          no: eventsData[columnNames.no],
-          color: eventsData[columnNames.color],
-          content: eventsData[columnNames.content],
-          category: eventsData[columnNames.category],
-        }));
-        handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
-        const uniqueCategories = [...new Set(formattedEvents.map(event => event.category))];
-        setCategories(uniqueCategories);
-        console.log(uniqueCategories);
-      } catch (error) {
-        // 에러 처리
-      }
-    };
     fetchAndDispatch();
-  }, [isModalOpen, dispatch]);
-  
+  }, [isModalOpen]);
+
   //모달 핸들링
   const handleModalAction = (action, event) => {
     setModalAction(action);
@@ -125,20 +127,18 @@ const CommonCalendar = ({
         [columnNames.start]: formData.start,
         [columnNames.end]: formData.end,
         [columnNames.no]: formData.no,
-        // 추가 필드들도 필요에 따라 변환
       };
       await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
       onEventDelete(transformedData);
       updateModalState();
     } catch (error) {
-      // 에러 처리
+      console.log(error);
     }
   };
   //모달 닫기
   const handleEventClose = () => {
     updateModalState();
   };
-
 
   // FullCalendar 옵션 설정
   const calendarOptions = {
@@ -159,17 +159,32 @@ const CommonCalendar = ({
     headerToolbar: {
       left: calendarListOptions? "prev,next" :"prev,next today",
       center: "title",
-      right: calendarListOptions? null :"dayGridMonth,timeGridWeek,listWeek",
+      right: calendarListOptions? "today" :"dayGridMonth,timeGridWeek,listWeek",
 
     },
-    events: filteredEvents? filteredEvents : eventData,
-    eventTextColor: "black",
+    eventSources:[ 
+      {
+        events: filteredEvents ? filteredEvents : eventData,
+        color: 'black', // 사용자 정의 이벤트의 배경 색상
+        textColor: 'white', // 사용자 정의 이벤트의 텍스트 색상
+        borderColor: 'black',
+      },
+      {
+        events: commonEvents.map((event) => ({
+          className: "custom-event", // 여기에 CSS 클래스 이름을 추가
+          title: event.summary,
+          start: event.start.date || event.start.dateTime, // 공휴일 이벤트의 시작 날짜
+          end: event.end.date || event.end.dateTime, // 공휴일 이벤트의 종료 날짜
+          color: '#FFC0CB', // 공휴일 이벤트의 배경 색상
+          // eventTitle : 'red', // 공휴일 이벤트의 텍스트 색상
+        })),
+      },
+    ],
     nowIndicator: false,
     eventOverlap: false,
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     ...calendarListOptions,
     initialView: initialView || "dayGridMonth", // prop 값이 없을 경우 기본값 설정
-    // 이벤트를 클릭한 경우
     eventClick: (info) => {
       handleModalAction("수정", info.event, categories);
     },
@@ -181,10 +196,13 @@ const CommonCalendar = ({
     selectAllow: () => {
       return true;
     },
+    eventResize: ({ event }) => {
+      // 일정이 늘어난 경우의 처리 로직
+      handleModalAction("수정", event, categories);
+    },
     select: ({ startStr, endStr }) => {
       const isSingleDay = startStr === endStr;
       let endDate = isSingleDay ? startStr : endStr;
-    
       // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
       if (!isSingleDay) {
         const endMoment = moment(endDate).subtract(1, "days");
@@ -209,7 +227,8 @@ const CommonCalendar = ({
             listPlugin,
             bootstrap5Plugin,
             resourceTimelinePlugin,
-            timelinePlugin
+            timelinePlugin,
+            googleCalendarPlugin
           ]}
           {...calendarOptions}
         />

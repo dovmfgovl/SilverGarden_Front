@@ -1,7 +1,5 @@
 import React from "react";
 import CommonCalendar from "../../components/fullcalendar/CommonCalendar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { setAdminEvents } from "../../redux/calendarAdminSlice";
 

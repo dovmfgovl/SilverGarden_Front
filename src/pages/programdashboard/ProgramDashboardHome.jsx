@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ChartComponent from './ChartComponent';
 import styles from './programboard.module.css'
-import CustomShapeChartComponent from './CustomShapeChartComponent';
 import Print from '../../components/print/Print';
 import ProgramChart from './ProgramChart';
 import CommonCalendarLogic from '../../components/fullcalendar/CommonCalendarLogic';
+import ProgramProgressChart from './ProgramProgressChart';
+import ProgramCalChart from './ProgramCalChart';
 
-const ProgramDashboard = ({programList}) => {
+const ProgramDashboardHome = ({programList}) => {
     const componentRef = useRef();
     const [pgCalList, setPgCalList] = useState([]);
     useEffect(()=>{
@@ -19,22 +19,24 @@ const ProgramDashboard = ({programList}) => {
             }
         };
         fetchData();
-        console.log(pgCalList);
     },[])
     
     return (
         <>
         <div className={styles.dashboardWrap}>
-            <Print componentRef={componentRef}/>
-            <div ref={componentRef} className="d-flex justify-content-center align-items-center">
+            <Print componentRef={componentRef}  className={styles.btn}/>
+            <div ref={componentRef} className="d-flex justify-content-center">
                 <div className={styles.chartWrap}>
-                        <ChartComponent pgCalList={pgCalList}  />
-                </div>
-                <div className={styles.chartWrap}>
+                    <h4>분야별 프로그램 갯수</h4>
                     <ProgramChart programList={programList}/>
                 </div>
                 <div className={styles.chartWrap}>
-                        <CustomShapeChartComponent pgCalList={pgCalList}/>
+                    <h4>월별 프로그램 진행 횟수</h4>
+                    <ProgramProgressChart pgCalList={pgCalList}/>
+                </div>
+                <div className={styles.chartWrap}>
+                    <h4>프로그램별 진행 횟수</h4>
+                    <ProgramCalChart pgCalList={pgCalList}  />
                 </div>
             </div>
         </div>
@@ -42,4 +44,4 @@ const ProgramDashboard = ({programList}) => {
     );
 };
 
-export default ProgramDashboard;
+export default ProgramDashboardHome;

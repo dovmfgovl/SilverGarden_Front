@@ -4,6 +4,7 @@ import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
   faBook,
   faCalendar,
+  faCaretRight,
   faChartPie,
   faServer,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,10 +13,9 @@ import { useDispatch } from "react-redux";
 import ProgramInfo from "./ProgramInfo";
 import { setDetail } from "../../redux/programSlice";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
-import ProgramDashboard from "../programdashboard/ProgramDashboard";
 import { UserBPage } from "../..//services/auth/UserApi";
-// import TestTimeLine from "../../components/fullcalendar/TestTimeLine";
-import TestCalendar from "../../components/fullcalendar/TestMonthCalendar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProgramDashboardHome from "../programdashboard/ProgramDashboardHome";
 
 const Program = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -39,7 +39,7 @@ const Program = () => {
         { label: "현황", icon: faChartPie }, //서브목록이름, 아이콘명, 클릭시넘어갈 url
         { label: "프로그램 정보", icon: faBook },
         { label: "일정", icon: faCalendar },
-        { label: "일정테스트(공통)", icon: faCalendar },
+        // { label: "일정테스트(공통)", icon: faCalendar },
       ],
     },
   ];
@@ -59,10 +59,8 @@ const Program = () => {
   const onRowClick = async (program) => {
     if (program) {
       dispatch(setDetail(program));
-      console.log(program);
       const detail = programList.find((item) => item.PG_NO === program.PG_NO);
       setProgramDetail(detail);
-      console.log(programDetail);
     } else {
       setProgramDetail(null);
     }
@@ -70,7 +68,6 @@ const Program = () => {
 
   useEffect(() => {
     getProgramList();
-    console.log(programList); //{PG_NO: 163, PG_TEACHER: '124', PG_CONTENT: '343333', PG_CATEGORY: '신체', COLOR: '#E0FFFF', …}
   }, []);
 
   return (
@@ -78,10 +75,11 @@ const Program = () => {
       <div className={styles.programSidebarWrap}>
         <SidebarCommon list={list} handleMenu={handleMenu} />
       </div>
-      <div className={styles.programTitleBar}> {page}</div>
+      <div className={styles.programTitleBar}><FontAwesomeIcon icon={faCaretRight} /> {page}</div>
       <div className={styles.innerContentLayout}>
+        
         {page === "현황" && (
-          <ProgramDashboard
+          <ProgramDashboardHome
             programList={programList}
             getProgramList={getProgramList}
           />
@@ -95,8 +93,6 @@ const Program = () => {
           />
         )}
         {page === "일정" && <ProgramCalendarHome programList={programList} />}
-        {page === "일정테스트(공통)" && <TestCalendar />}
-        {/* {page === "일정테스트(타임라인)" && <TestTimeLine />} */}
       </div>
     </div>
   );

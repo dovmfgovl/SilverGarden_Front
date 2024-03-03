@@ -1,6 +1,7 @@
 import { ConfigProvider, Select, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from '../member.module.css';
 import { getMemList } from '../../../redux/memberSlice';
 import Title from 'antd/es/typography/Title';
 
@@ -61,7 +62,7 @@ const CarStatisticPass = ({calList}) => {
                                     },
                                 }}
             >
-                <Table dataSource={data} bordered  pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [10] }}>
+                <Table className={styles.memberTable} dataSource={data} bordered  pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [10] }}>
                     <Table.Column title="이름" dataIndex="serv_user" key="SERV_USER" align='center'/>
                     <Table.Column title="이용날짜" dataIndex="serv_date" key="SERV_USER" align='center'/>
                     <Table.Column title="이용목적" dataIndex="serv_title" key="SERV_TITLE" align='center'/>
