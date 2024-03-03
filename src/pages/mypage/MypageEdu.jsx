@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {  ConfigProvider, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './mypage.module.css'
 
 const MypageEdu = () => {
     const { Column } = Table;
@@ -39,11 +40,11 @@ const MypageEdu = () => {
                             },
                         }}
             >
-                <Table dataSource={data} pagination={false} bordered>
-                    <Column title="기간" dataIndex="period" key="period" />
-                    <Column title="학교명" dataIndex="name" key="name" />
-                    <Column title="학과명" dataIndex="major" key="major" />
-                    <Column title="졸업구분" dataIndex="status" key="status" />
+                <Table className={styles.myTable} dataSource={data} pagination={false} bordered>
+                    <Column title="기간" dataIndex="period" key="period"  align='center'/>
+                    <Column title="학교명" dataIndex="name" key="name" align='center'/>
+                    <Column title="학과명" dataIndex="major" key="major" align='center'/>
+                    <Column title="졸업구분" dataIndex="status" key="status" align='center'/>
               </Table>
         </ConfigProvider>
         </>

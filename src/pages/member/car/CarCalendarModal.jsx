@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMemList } from '../../../redux/memberSlice';
 import { getCarList } from '../../../redux/carSlice';
 
-const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, categories }) => {
+const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose}) => {
     // 날짜 형식을 변환하는 함수
     const dispatch=useDispatch();
     const memberList = useSelector(state => state.memberSlice.value);
@@ -33,7 +33,8 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
         userno: '',
         user: '',
     });
-    
+    console.log(event.start);
+    console.log(event.end);
     //event가 바뀔때 실행->이벤트클릭, 날짜클릭 나눠서 초기값 재세팅
     useEffect(() => {
         if (event) {
@@ -41,10 +42,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             setFormData({
                 title: event.title || '',
                 start: formatDateForInput(event.start) || '',
-                end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
+                end: formatDateForInput(event.end) || moment.tz(event.end,'Asia/Seoul').add(1,'hour').format('YYYY-MM-DDTHH:mm'),
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
-                content: event.extendedProps?.content || '', // 수정된 부분
+                content: event.extendedProps?.content || '', // 수정된 부분 
                 car_no: event.extendedProps?.car_no || '',
                 userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',

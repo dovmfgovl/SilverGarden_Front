@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import styles from "./notice.module.css";
 import {
+  faCaretRight,
   faList,
   faPenNib,
   faPenToSquare,
-  faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import NoticeList from "./NoticeList";
 import NoticeDetail from "./NoticeDetail";
@@ -15,7 +15,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
-import CrowlList from "./CrawlList";
+import CrawilngHome from "../crawling/CrawilngHome";
+
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -79,14 +80,17 @@ const Notice = () => {
     setFileList(list);
   };
 
+  const commonEvents = useSelector((state) => state.commoncalendarSlice);
+  console.log(commonEvents.events);
+
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>
         <SidebarCommon list={sidebarList} handleMenu={handleMenu} />
       </div>
       <div className={styles.noticeTitleBar}>
-        <FontAwesomeIcon icon={faVolumeHigh} />
-        {noticePage}
+        <FontAwesomeIcon icon={faCaretRight} />
+        {" "+noticePage}
       </div>
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (
@@ -114,7 +118,7 @@ const Notice = () => {
           fileList={fileList}
           />
           )}
-        {/*{noticePage === "관련공지" && <CrowlList /> }*/}
+        {noticePage === "관련공지" && <CrawilngHome />}
       </div>
     </div>
   );
