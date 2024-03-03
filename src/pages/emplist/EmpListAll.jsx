@@ -70,7 +70,7 @@ const EmpListAll = ({ empList, sendEmpList,dept }) => {
           value={keyword} onChange={(e)=>setKeyword(e.target.value)} 
           enterButton style={{width: 200}}  />
       </Space>
-      <Table dataSource={data} bordered pagination={{position:['bottomCenter']}} >
+      <Table className={styles.empTable} dataSource={data} bordered pagination={{position:['bottomCenter']}} >
         {/* 각 열은 테이블의 컬럼으로 정의됩니다. */}
         <Table.Column title="사원명" dataIndex="e_name" key="E_NAME" align='center'/>
         <Table.Column title="부서명" dataIndex="dept_name" key="DEPT_NAME" align='center'/>

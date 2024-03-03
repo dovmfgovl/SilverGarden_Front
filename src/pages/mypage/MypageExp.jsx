@@ -1,6 +1,7 @@
 import React from 'react'
 import {  ConfigProvider, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './mypage.module.css'
 
 const MypageExp = () => {
   const selectedEmployee = useSelector(state => state.chooseEmp.selectedEmployee) || {};
@@ -28,12 +29,12 @@ const MypageExp = () => {
                             },
                         }}
     >
-                <Table dataSource={data} pagination={false} bordered>
-                    <Column title="회사명" dataIndex="exp_name" key="firstName" />
-                    <Column title="부서" dataIndex="exp_dept" key="age" />
-                    <Column title="직급" dataIndex="exp_rank" key="address" />
-                    <Column title="담당업무" dataIndex="exp_duty" key="address" />
-                    <Column title="재직기간" dataIndex="exp_period" key="address" />
+                <Table className={styles.myTable} dataSource={data} pagination={false} bordered>
+                    <Column title="회사명" dataIndex="exp_name" key="firstName" align='center' />
+                    <Column title="부서" dataIndex="exp_dept" key="age"  align='center'/>
+                    <Column title="직급" dataIndex="exp_rank" key="address" align='center'/>
+                    <Column title="담당업무" dataIndex="exp_duty" key="address" align='center'/>
+                    <Column title="재직기간" dataIndex="exp_period" key="address" align='center'/>
               </Table>
     </ConfigProvider>
     </>

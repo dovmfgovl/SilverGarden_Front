@@ -41,10 +41,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             setFormData({
                 title: event.title || '',
                 start: formatDateForInput(event.start) || '',
-                end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
+                end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('yyyy-MM-ddThh:mm'), 
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
-                content: event.extendedProps?.content || '', // 수정된 부분
+                content: event.extendedProps?.content || '', // 수정된 부분 
                 car_no: event.extendedProps?.car_no || '',
                 userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
