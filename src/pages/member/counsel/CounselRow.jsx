@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CounselDetail from './CounselDetail';
+import styles from '../member.module.css';
 import Title from 'antd/es/typography/Title';
 import { ConfigProvider, Table, Col, DatePicker } from 'antd';
 import moment from 'moment';
@@ -59,6 +60,7 @@ const CounselRow = ({ selectedMember, counselList,getCounsel }) => {
         }}
       >
         <Table
+          className={styles.memberTable}
           dataSource={filteredCounselList}
           bordered
           pagination={{ position: ['bottomCenter'], size: ['small'], defaultPageSize: [5] }}

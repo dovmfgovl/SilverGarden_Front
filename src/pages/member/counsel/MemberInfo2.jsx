@@ -65,7 +65,7 @@ const MemberInfo2 = () => {
                             >
 
                     <div className="col border border-white border-2" style={{ background: 'hsl(193, 6%, 88%)' }}>
-                    <Table dataSource={memberList} bordered pagination={{position:['bottomCenter'], defaultPageSize:[10]}}
+                    <Table className={styles.memberTable} dataSource={memberList} bordered pagination={{position:['bottomCenter'], defaultPageSize:[10]}}
                  onRow={(record,index)=>{
                     return {
                         onClick:() => handleRowClick(record),
