@@ -4,10 +4,12 @@ import styles from "./home.module.css";
 import AtStart from "./AtStart";
 import AtEnd from "./AtEnd";
 import { atListDB } from "../../services/api/attendanceApi";
+import { empListDB } from "../../services/api/empInfoApi";
 
 const HomeProfile = () => {
   const empData = useSelector((state) => state.userInfoSlice);
   const [atList, setAtList] = useState({});
+  const [empProfile, setEmpProfile] = useState({});
 
   const today = new Date();
   const [date, setDate] = useState([today.getFullYear(), `0${today.getMonth() + 1}`.slice(-2), `0${today.getDate()}`.slice(-2)].join("-"));
@@ -48,11 +50,40 @@ const HomeProfile = () => {
   useEffect(() => {
     empAtList(); // atList 상태가 변경될 때마다 데이터를 가져옴
   }, [empData.e_no]); // empData.e_no가 변경될 때마다 useEffect가 호출
+
+  const emp = {
+    E_NO : empData.e_no,
+    E_PROFILE : ''
+  }
+  const empList = async () => {
+    try {
+      const response = await empListDB(emp);
+      const data = response.data;
+      console.log("직원 데이터 ===========>", data);
+
+      // 특정한 E_NO 찾기
+      const targetData = data.find(item => item.E_NO === empData.e_no);
+
+      if (targetData) {
+        setEmpProfile({
+          E_PROFILE: targetData.E_PROFILE
+        });
+      } else {
+        console.log("해당하는 직원데이터가 없습니다.")
+      }
+    } catch (error) {
+      console.error("직원리스트 에러: ", error);
+    }
+  }
+
+  useEffect(() => {
+    empList();
+  }, [empData.e_no]);
   
   return (
     <>
       <div>
-        <img src={empData.e_profile ===null ?"https://picsum.photos/200/200" : empData.e_profile} alt="프로필" />
+        <img src={empProfile.E_PROFILE ===null ?"https://picsum.photos/200/200" : empProfile.E_PROFILE} alt="프로필" />
       </div>
       <div className={styles.eName}>
         {empData.e_name}

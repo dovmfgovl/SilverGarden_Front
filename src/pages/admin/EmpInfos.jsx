@@ -39,10 +39,10 @@ const EmpInfos = () => {
       </div>
       <div className={styles.empBaseInfoWrap}>
         <Tabs defaultActiveKey="edu" id="emp-tabs">
-          <Tab eventKey="edu" title="학력">
+          <Tab eventKey="edu" title={<span style={{ color: 'black' }}>학력</span>}>
             <EmpEdu empDetail={empDetail} />
           </Tab>
-          <Tab eventKey="exp" title="경력">
+          <Tab eventKey="exp" title={<span style={{ color: 'black' }}>경력</span>}>
             <EmpExp empDetail={empDetail} />
           </Tab>
         </Tabs>

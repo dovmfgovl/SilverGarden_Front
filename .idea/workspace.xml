@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="36274045-1f93-42cb-acc1-2f7811d26754" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/rourter/AppRouter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rourter/AppRouter.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpCreateModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpCreateModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpInfos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpInfos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpListAll.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpListAll.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpListPagination.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpListPagination.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/empDetailInfo.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/empDetailInfo.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/empInfo.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/empInfo.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/HomeProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/HomeProfile.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +26,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2c1wkUyWJQGcgBOImease38YxjX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,10 +38,12 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "emp",
+    "git-widget-placeholder": "emp7",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "AtomSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
@@ -45,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707292544161</updated>
       <workItem from="1707292547871" duration="293000" />
+      <workItem from="1709434705939" duration="10069000" />
     </task>
     <servers />
   </component>
