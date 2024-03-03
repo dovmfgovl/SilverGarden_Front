@@ -29,6 +29,7 @@ export const programDetailDB = async (program) => {
         throw error;
     }
 };
+
 export const ProgramDeleteDB = async (program) => {
     try {
         console.log(program) //42(눌린 pg_no값)
