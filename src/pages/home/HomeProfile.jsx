@@ -60,10 +60,10 @@ const HomeProfile = () => {
       </div>
       <div className={styles.atTimeWrap}>
         <div className={styles.atTimeStart}>
-          출근시간: {atList.AT_START ? atList.AT_START : '미확인'}
+          출근시간: {atList.AT_START ? atList.AT_START : '-'}
         </div>
         <div className={styles.atTimeEnd}>
-          퇴근시간: {atList.AT_END ? atList.AT_END : '미확인'}
+          퇴근시간: {atList.AT_END ? atList.AT_END : '-'}
         </div>
       </div>
       <div className={styles.atContainer}>

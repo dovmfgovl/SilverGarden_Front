@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Col, Stack, Button, Modal, Form } from 'react-bootstrap';
-import { Descriptions, Input, Select, Space } from 'antd';
+import {  Descriptions, Input, Select, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetail, saveMemDetails, getMemList } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
@@ -46,25 +46,25 @@ const MemberDetail = () => {
     setUpdatedMember(originalMember);
   };
 
-  const handleSaveChanges = () => {
-    const fullAddress = `${roadAddress} ${detailAddress}`;
-    const updatedMemberDetail = {
-      ...updatedMember,
-      CLIENT_ADDRESS: fullAddress,
-      MOD_ID: userData.e_no,
-    };
-
-    dispatch(saveMemDetails(updatedMemberDetail))
-      .then(() => {
-        dispatch(setDetail(updatedMember));
-        alert("이용자 정보가 성공적으로 저장되었습니다.");
-        setEditing(false);
-        dispatch(getMemList())
-      })
-      .catch(error => {
-        console.error('Error saving member details: ', error);
-      });
+ const handleSaveChanges = async () => {
+  const fullAddress = `${roadAddress} ${detailAddress}`;
+  const updatedMemberDetail = {
+    ...updatedMember,
+    CLIENT_ADDRESS: fullAddress,
+    MOD_ID: userData.e_no,
   };
+
+  try {
+    dispatch(saveMemDetails(updatedMemberDetail));
+    dispatch(setDetail(updatedMember));
+    alert("이용자 정보가 성공적으로 저장되었습니다.");
+    setEditing(false);
+    dispatch(getMemList());
+  } catch (error) {
+    console.error('Error saving member details: ', error);
+    // 여기서 오류 처리 로직을 추가할 수 있습니다.
+  }
+};
 
   const handleChange = (key, value) => {
     if (key === 'CLIENT_BIRTH') {
@@ -99,7 +99,7 @@ const MemberDetail = () => {
     <div className="container" >
       <div className="user-detail" >
         <Col>
-          <h2>&nbsp;&nbsp;&nbsp;▶︎&nbsp;이용자상세정보</h2>
+          <h5>이용자상세정보</h5>
         </Col>
         {selectedMember && Object.keys(selectedMember).length > 0 && (
           <Stack direction="horizontal" gap={3}>
@@ -196,6 +196,7 @@ const MemberDetail = () => {
                 />
               </Descriptions.Item>
             </Descriptions>
+
         ) : (
           <Descriptions bordered>
             <Descriptions.Item label="이름">{memoSelectedMember.CLIENT_NAME}</Descriptions.Item>

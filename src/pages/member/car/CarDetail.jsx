@@ -1,7 +1,7 @@
-import { Descriptions, Input, Select } from 'antd'
+import { Descriptions, Input} from 'antd'
 import styles from '../member.module.css';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
+import { Button, Col, Form,  Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList } from '../../../redux/chooseEmpSlice'
 import { getCarList, saveCarDetails, setDetail } from '../../../redux/carSlice'
@@ -55,7 +55,6 @@ const handleSaveChanges=()=>{
     dispatch(setDetail(FinalupdatedCar))
     alert("차량 정보가 성공적으로 저장되었습니다.");
     setEditing(false);
-    dispatch(getCarList())
   })
   .catch(error=>{
     console.error('Error saving car details: ', error);
@@ -66,7 +65,8 @@ const handleDelete= async()=>{
     const res = await shuttleDelete(selectedCar.SHUTTLE_NO);
     console.log(res.data);
     alert("삭제되었습니다");
-    window.location.reload(); 
+    dispatch(getCarList())
+    dispatch(setDetail())
   }
 
 }
@@ -74,9 +74,9 @@ const handleDelete= async()=>{
   return (
     <>
     <div className={styles.rightMemberLayout1}>
-    <Col><h2>차량상세</h2></Col>
+      <h5>차량상세</h5>
       {selectedCar && Object.keys(selectedCar).length>0 &&(
-        <Stack direction='horizontal'>
+        <Stack direction='horizontal' gap={3}>
           {editing ? (
             <>
              <div className='ms-auto'>
@@ -85,10 +85,12 @@ const handleDelete= async()=>{
                 <Button variant="outline-danger" onClick={handleCancel}>취소</Button>
             </>
           ):(
+            <>        
           <div className='ms-auto'>
-      <Button variant="outline-success" onClick={handleEdit}>정보수정</Button>
-        <Button onClick={handleDelete}>정보삭제</Button>
+      <Button variant="outline-primary" onClick={handleEdit}>수정</Button>
         </div>
+        <Button variant="outline-secondary" onClick={handleDelete}>삭제</Button>
+            </>
           )}
         </Stack>
       )}
@@ -122,15 +124,15 @@ const handleDelete= async()=>{
                     </Descriptions.Item>
                   </Descriptions>
       ):(
-      <Descriptions bordered>
-                  <Descriptions.Item label="차량번호" span={3}>{memoSelectedCar.SHUTTLE_CARNUM}</Descriptions.Item>
+        <Descriptions bordered>
+                  <Descriptions.Item  label="차량번호" span={3}>{memoSelectedCar.SHUTTLE_CARNUM}</Descriptions.Item>
                   <Descriptions.Item label="차량종류"span={3}>{memoSelectedCar.SHUTTLE_TYPE}</Descriptions.Item>
                   <Descriptions.Item label="차량운전자" span={3}>{memoSelectedCar.SHUTTLE_DRIVER}</Descriptions.Item>
                 </Descriptions>
       )}  
     </div>
-    <div className={styles.rightMemberLayout2}>
-        <CarStatistic />
+    <div className={styles.rightMemberLayout3}>
+        <CarStatistic selectedCar={selectedCar}/>
     </div>
     </>
   )

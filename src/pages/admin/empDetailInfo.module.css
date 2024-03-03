@@ -1,6 +1,5 @@
 .empInfoWrap {
   background-color: white;
-  border: 1px solid lightgray;
   height: 100%;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr;
@@ -120,12 +119,14 @@
   font-size: 0.8rem;
 }
 
+/* ************** 직원 프로필 사진 틀, 미리보기, 선택, 업로드 버튼****************************** */
 .imgSquare  {
   width: 150px;
   height: 150px;
   overflow: hidden;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transform: translateX(-10%) translateY(10%);
 }
 .imgSquare img {
   width: 100%;
@@ -133,7 +134,225 @@
 }
 .imgSaveButton {
   position: absolute;
-  bottom: 47%; /* 이미지 하단에서 조정 */
-  left: 50%; /* 이미지 가운데에서 조정 */
+  transform: translateX(15%) translateY(80%);
+}
+
+.uploadWrap {
+  position: relative;
+}
+
+.choiceHiddenButton {
+  display: none;
+}
+.choiceButton {
+  margin-right: 7px; /* 버튼과 간격 조절 */
+  padding: 5px 10px; /* 내부 여백 조절 */
+  background-color: #800080; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
   transform: translateX(-50%);
+}
+.choiceButton:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+.previewImg {
+  position: absolute;
+  top: calc(100% + 10px); /* 버튼 아래에 위치 */
+  left: -50;
+  transform: translateX(-24%);
+  border: 1px solid #ccc; /* 테두리 추가 */
+  border-radius: 4px; /* 테두리 둥글게 만들기 */
+  padding: 5px; /* 내부 여백 추가 */
+}
+
+.previewImg img {
+  width: 100%; /* 이미지 가로 길이 100% */
+  width: 135px;
+}
+
+.uploadButton {
+  margin-bottom: 10px; /* 버튼과 간격 조절 */
+  padding: 5px 10px; /* 내부 여백 조절 */
+  background-color: #ff7b02; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
+  transform: translateX(-47%);
+}
+.uploadButton:hover {
+  transform: translateX(-47%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+/****************** 학력 목록 테이블 *********************/
+.empBaseTable {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  max-height: 100rem;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.empBaseTable th,
+.empBaseTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.empBaseTable thead th {
+  background-color: #fbfbfb;
+  color: #000000;
+}
+
+/* ************* 학력 입력 창 *********** */
+.eduInput {
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 5px; 
+  transition: border-color 0.3s ease; /* 부드러운 외곽선 효과를 위한 transition 추가 */
+}
+.eduInput:focus {
+  outline: none; /* 포커스 시 기본 외곽선 제거 */
+  border-color: #a0a0a0; /* 포커스 시 좀 더 진한 그레이 색상의 외곽선 적용 */
+}
+
+/* ****************** 직원 상세, 학력 저장 버튼 ****************** */
+.empSaveButton1 {
+  margin-bottom: 10px; /* 버튼과 간격 조절 */
+  padding: 5px 12px; /* 내부 여백 조절 */
+  background-color: #800080; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
+  transform: translateX(-47%);
+}
+.empSaveButton1:hover {
+  transform: translateX(-47%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+.empSaveButton2 {
+  margin-bottom: 10px; /* 버튼과 간격 조절 */
+  padding: 5px 12px; /* 내부 여백 조절 */
+  background-color: #ff7b02; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
+  transform: translateX(-47%);
+}
+.empSaveButton2:hover {
+  transform: translateX(-47%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+.empSaveButton3 {
+  margin-bottom: 10px; /* 버튼과 간격 조절 */
+  padding: 5px 12px; /* 내부 여백 조절 */
+  background-color: #ffb533; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
+  transform: translateX(-47%);
+}
+.empSaveButton3:hover {
+  transform: translateX(-47%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+/* 엑셀 다운로드 */
+.empSaveButton4 {
+  margin-bottom: 10px; /* 버튼과 간격 조절 */
+  padding: 7px 10px; /* 내부 여백 조절 */
+  background-color: #477448; /* 배경색 지정 */
+  color: white; /* 텍스트 색상 지정 */
+  border: none; /* 테두리 없애기 */
+  border-radius: 6px; /* 테두리 둥글게 만들기 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+  box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
+  white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
+  font-size: 0.65rem;
+  transform: translateX(0%);
+}
+.empSaveButton4:hover {
+  transform: translateX(0%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}
+
+/* ******** 경력 저장 버튼 ********* */
+.expSaveButton {
+  background-color: #1DE5E2; /* 버튼 배경색 */
+  border: none; /* 버튼 테두리 없애기 */
+  color: white; /* 버튼 텍스트 색상 */
+  padding: 4px 5px; /* 버튼 안 여백 설정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  text-decoration: none; /* 텍스트에 밑줄 없애기 */
+  display: inline-block; /* 인라인 요소로 표시 */
+  font-size: 14px; /* 텍스트 크기 */
+  margin: 4px 2px; /* 버튼 간 여백 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  border-radius: 4px; /* 버튼 모서리를 둥글게 만들기 */
+  box-shadow: 0 4px #0FB5B2; /* 버튼에 그림자 효과 추가 */
+  white-space: nowrap; /* 버튼 내 텍스트 한 줄에 */
+  font-size: x-small;
+}
+.expSaveButton:hover {
+  background-color: #36f0ed; /* 마우스 호버 시 배경색 변경 */
+}
+.expSaveButton:active {
+  background-color: #0da19d; /* 버튼을 클릭할 때 배경색 변경 */
+  box-shadow: 0 2px #0da19d; /* 클릭 시 그림자 효과 약간 줄이기 */
+}
+
+/* **************** 경력 +, - 버튼  ****************** */
+.expRowButton {
+  background-color: #C165DD; /* 버튼 배경색 */
+  border: none; /* 버튼 테두리 없애기 */
+  color: white; /* 버튼 텍스트 색상 */
+  padding: 1px 7px; /* 버튼 안 여백 설정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  text-decoration: none; /* 텍스트에 밑줄 없애기 */
+  display: inline-block; /* 인라인 요소로 표시 */
+  font-size: 14px; /* 텍스트 크기 */
+  margin: 4px 2px; /* 버튼 간 여백 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  border-radius: 4px; /* 버튼 모서리를 둥글게 만들기 */
+  box-shadow: 0 4px #8E5EA2; /* 버튼에 그림자 효과 추가 */
+}
+.expRowButton:hover {
+  background-color: #B05DCF; /* 마우스 호버 시 배경색 변경 */
+}
+.expRowButton:active {
+  background-color: #914EB9; /* 버튼을 클릭할 때 배경색 변경 */
+  box-shadow: 0 2px #914EB9; /* 클릭 시 그림자 효과 약간 줄이기 */
 }

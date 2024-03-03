@@ -2,10 +2,11 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import styles from './notice.module.css';
 
 const NoticeTable = ({noticeList, handlePage}) => {
   return (
-    <Table bordered hover style={{textAlign: "center", margin:0}}>
+    <Table hover className={styles.noticeTable}>
     <thead>
       <tr>
         <th style={{width: "7%"}}>#</th>

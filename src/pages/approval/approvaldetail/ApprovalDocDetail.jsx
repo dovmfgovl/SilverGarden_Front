@@ -7,7 +7,6 @@ import ApprovalDetailLine from './ApprovalDetailLine';
 import ApprovalDetailTable from './ApprovalDetailTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faPaperclip } from '@fortawesome/free-solid-svg-icons';
-import { noticeFileDownload } from '../../../services/api/noticeApi';
 import CommentModal from './CommentModal';
 import ExpenseReportDetail from './ExpenseReportDetail';
 import VacationRequestDetail from './VacationRequestDetail';

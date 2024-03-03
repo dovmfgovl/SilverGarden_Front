@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Form, InputGroup } from 'react-bootstrap'
+import {Form, InputGroup } from 'react-bootstrap'
 
 const VacationRequestDetail = ({value}) => {
   const vacationInfo = JSON.parse(value);

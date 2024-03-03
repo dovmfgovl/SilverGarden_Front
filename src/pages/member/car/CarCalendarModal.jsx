@@ -30,7 +30,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
         category: '',
         content:'',
         car_no: '',
-        user_no: '',
+        userno: '',
         user: '',
     });
     
@@ -44,11 +44,12 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 end: formatDateForInput(event.end) || moment.tz(event.start, 'Asia/Seoul').add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
                 no: event.extendedProps?.no || '', 
                 category: event.extendedProps?.category || '', // 수정된 부분
-                content: event.extendedProps?.content || '',
+                content: event.extendedProps?.content || '', // 수정된 부분
                 car_no: event.extendedProps?.car_no || '',
-                user_no: event.extendedProps?.user_no || '',
+                userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
             });
+            console.table(formData);
         } else {
             // 날짜 클릭 시 -> create
             setFormData({
@@ -56,14 +57,16 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                 start: '',
                 end: '',
                 no: undefined,
-                category: '',
-                content:'',
+                category: '', // 수정된 부분
+                content: '', // 수정된 부분
                 car_no: '',
-                user_no: '',
+                userno: '',
                 user: '',
             });
+            console.table(formData);
         }
     }, [event]);
+    
 
     //폼 안의 값이 바뀌는 것 처리
     const handleChange = (e) => {
@@ -90,7 +93,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             if (selectedUser) {
                 setFormData(prevFormData => ({
                     ...prevFormData,
-                    user_no: selectedUser.CLIENT_ID,
+                    userno: selectedUser.CLIENT_ID,
                 }));
             }
         }
@@ -134,6 +137,23 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                <Form.Group controlId="formUser" style={{marginTop:'10px'}}>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자</Form.Label>
+                        <Form.Select
+                            style={{fontSize:'0.8rem'}}
+                            as="select"
+                            name="user"
+                            value={formData.user}
+                            onChange={handleChange}
+                        >
+                            <option >이용자를 선택하세요</option>
+                            {memberList.map((user) => (
+                                <option key={user.CLIENT_ID} >
+                                    {user.CLIENT_NAME}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
                     <Form.Group controlId="formTitle" style={{marginTop:'10px'}}>
                         <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>일정제목</Form.Label>
                         <Form.Control
@@ -157,7 +177,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                         />
                     </Form.Group>
                     <Form.Group controlId="formCategory" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>카테고리</Form.Label>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용차량</Form.Label>
                         <Form.Select
                             style={{fontSize:'0.8rem'}}
                             as="select"
@@ -165,27 +185,10 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             value={formData.category}
                             onChange={handleChange}
                         >
-                            <option  >카테고리를 선택하세요</option>
+                            <option  >차량을 선택하세요</option>
                             {CarList.map((category) => (
-                                <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE}>
+                                <option key={category.SHUTTLE_NO} value={category.SHUTTLE_TYPE} >
                                     {category.SHUTTLE_TYPE}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group controlId="formUser" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자</Form.Label>
-                        <Form.Select
-                            style={{fontSize:'0.8rem'}}
-                            as="select"
-                            name="user"
-                            value={formData.user}
-                            onChange={handleChange}
-                        >
-                            <option >이용자를 선택하세요</option>
-                            {memberList.map((user) => (
-                                <option key={user.CLIENT_ID} >
-                                    {user.CLIENT_NAME}
                                 </option>
                             ))}
                         </Form.Select>
@@ -210,7 +213,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             onChange={handleChange}
                             />
                     </Form.Group>
-                    <Form.Group >
+                    <Form.Group hidden >
                     <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용자와 차번호</Form.Label>
                         <Form.Control
                             style={{fontSize:'0.8rem'}}
@@ -227,7 +230,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose, 
                             disabled
                             placeholder='이용자번호'
                             name="user_no"
-                            value={formData.user_no}
+                            value={formData.userno}
                             
                             />
                     </Form.Group>

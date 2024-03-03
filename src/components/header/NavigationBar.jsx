@@ -1,13 +1,12 @@
 import {
   faPaperPlane,
-  faPersonShelter,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import Roboto from "../../assets/fonts/Roboto";
 import styles from "./navigation.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
 import styled from "styled-components";
@@ -37,40 +36,44 @@ const NavigationBar = ({ isLogin }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/home" className="mx-2">
-                Home
+              <Nav.Link className="mx-2">
+                <Link to="/home" style={{textDecoration:"none", color:"black"}}>Home</Link>
               </Nav.Link>
-              <Nav.Link href="/approval" className="mx-2">
-                결재
+              <Nav.Link className="mx-2">
+                <Link to="/approval" style={{textDecoration:"none", color:"black"}}>결재</Link>
               </Nav.Link>
-              <Nav.Link href="/empList" className="mx-2">
-                직원조회
+              <Nav.Link className="mx-2">
+                <Link to="/empList" style={{textDecoration:"none", color:"black"}}>직원조회</Link>
               </Nav.Link>
-              <Nav.Link href="/member" className="mx-2">
-                이용자관리
+              <Nav.Link className="mx-2">
+                <Link to="/member" style={{textDecoration:"none", color:"black"}}>이용자관리</Link>
               </Nav.Link>
-              <Nav.Link href="/program" className="mx-2">
-                프로그램관리
+              <Nav.Link className="mx-2">
+                <Link to="/program" style={{textDecoration:"none", color:"black"}}>프로그램관리</Link>
               </Nav.Link>
-              <Nav.Link href="/notice" className="mx-2">
-                공지사항
+              <Nav.Link className="mx-2">
+                <Link to="/notice" style={{textDecoration:"none", color:"black"}}>공지사항</Link>
               </Nav.Link>
-              <Nav.Link href="/admin" className="mx-2">
-                관리자페이지
+              <Nav.Link className="mx-2">
+                <Link to="/admin" style={{textDecoration:"none", color:"black"}}>관리자페이지</Link>
               </Nav.Link>
               <Nav.Link href="/payment" className="mx-2">
                 결제관리
               </Nav.Link>
             </Nav>
             <Nav className="mx-3">
-              <Nav.Link href="/message">
+              <Nav.Link >
+              <Link to="/message" style={{textDecoration:"none", color:"black"}}>
                 <FontAwesomeIcon
                   style={{ margin: "0px" }}
                   className="ms-2"
                   icon={faPaperPlane}
                 />
+              </Link>
               </Nav.Link>
-              <Nav.Link href="/mypage">마이페이지</Nav.Link>
+              <Nav.Link>
+                <Link to="/mypage" style={{textDecoration:"none", color:"black"}}>마이페이지</Link>
+              </Nav.Link>
               <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
           </Navbar.Collapse>

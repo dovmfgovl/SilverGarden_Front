@@ -17,7 +17,7 @@
   flex-direction: column;
   border-radius: 20px;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 30px;
   margin: 0 10px 0 0 ;
   font-size: 0.8rem;
 }
@@ -28,7 +28,7 @@
   font-size: 0.8rem;
   border-radius: 20px;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 30px;
   margin: 0 10px;
 }
 
@@ -114,4 +114,90 @@
   justify-content: center;
   align-items: center;
   margin:0 10px 10px 10px;
+}
+
+/****************** 전체 직원 목록 테이블 *********************/
+.empList_table_container {
+  max-height: 100rem;
+  overflow-y: auto;
+}
+
+.empListTable {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+.empListTable tbody tr {
+  cursor: pointer;
+}
+
+.empListTable th,
+.empListTable td {
+  border-radius: 10px;
+  text-align: center;
+}
+
+.empListTable thead th {
+  background-color: #fbfbfb;
+  color: #000000;
+}
+
+/* ********* 직원 전체 목록 페이지네이션 ********** */
+.empListPagination {
+  margin-top: 20px; /* 조절 가능한 간격 설정 */
+  display: flex;
+  justify-content: center;
+}
+
+.empListPagination button {
+  background-color: #ff7b02;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.empListPagination button:hover {
+  background-color: #ff7b02;
+}
+
+.empListPagination button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.empListPagination button:disabled:hover {
+  background-color: #6c757d;
+}
+
+.empListPagination .page-active {
+  background-color: #ff7b02;
+}
+
+.empListPagination .page-dots {
+  pointer-events: none;
+  cursor: default;
+  margin: 0 5px;
+}
+
+.empListPagination .page-ellipsis {
+  margin: 0 5px;
+}
+
+.empListPagination .page-prev,
+.empListPagination .page-next {
+  padding: 10px 15px;
+}
+
+.empListPagination .page-info {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.empListPagination .page-info strong {
+  color: #000000;
 }

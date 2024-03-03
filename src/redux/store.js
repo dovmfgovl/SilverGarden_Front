@@ -14,6 +14,8 @@ import carSlice from "./carSlice";
 import calendarCarSlice from "./calendarCarSlice";
 import paymentDetail from "./paymentSlice";
 import paymentClientDetail from "./paymentClientSlice";
+import commoncalendarSlice from "./commoncalendarSlice";
+
 
 
 const persistConfig ={//persist redux를 사용하고자 할 때 필요한 설정
@@ -40,7 +42,8 @@ const rootReducer = combineReducers({
   calendarAdminSlice:calendarAdminSlice, //수연 캘린더
   calendarCarSlice:calendarCarSlice, //태규 캘린더
   paymentDetail:paymentDetail.reducer,
-  paymentClientDetail:paymentClientDetail.reducer
+  paymentClientDetail:paymentClientDetail.reducer,
+  commoncalendarSlice:commoncalendarSlice,
 });
 
 const store = configureStore({

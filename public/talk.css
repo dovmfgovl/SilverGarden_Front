@@ -1,0 +1,114 @@
+.talkContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    #title{
+        text-align: center;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+    #talks{
+        height: 390px;
+        width: 100%;
+        overflow-y: auto;
+    }
+    #form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.chat-message{
+    display: grid;
+    margin-bottom: 0.2rem;
+    grid-template-areas: 
+    "nickname nickname"
+    "message time"
+    ;
+    grid-template-columns: 3fr 1fr;
+}
+
+.nickname{
+    grid-area: nickname;
+    margin-right: 0.1rem;
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.message{
+    grid-area: message;
+    margin: 0.5rem 0.1rem;
+    background: #f0f0f0;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    font-size: 0.7rem;
+    word-wrap: break-word; /* 긴 단어도 줄바꿈 */
+    word-break: break-word; /* 필요하면 단어 내에서도 줄바꿈 */
+    overflow-wrap: break-word; /* CSS3에서 word-wrap 대신 권장되는 속성 */
+}
+
+#send {
+    background: #5c27fe;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px; /* 버튼의 모서리를 둥글게 만듦 */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* 그림자 효과 */
+}
+#send:hover {
+    background-color: #6d3dff; /* 마우스 호버 시의 배경색 */
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); /* 호버 시 그림자 효과 강화 */
+}
+
+#input {
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    font-size: 0.75rem;
+    padding: 5px;
+}
+#input:focus {
+    outline: none;
+    border: 1px solid gray;
+}
+
+.time{
+    grid-area: time;
+    margin: 0.1rem;
+    font-size: x-small;
+    align-self: flex-end;
+}
+
+::-webkit-scrollbar {
+    width: 12px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바 트랙(바탕)을 스타일링합니다. */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 트랙의 배경색 */
+}
+
+/* 스크롤바 핸들(움직이는 부분)을 스타일링합니다. */
+::-webkit-scrollbar-thumb {
+    background: #888; /* 핸들의 배경색 */
+}
+
+/* 스크롤바 핸들에 호버했을 때 */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 호버 시 핸들의 배경색 */
+}
