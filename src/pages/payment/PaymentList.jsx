@@ -8,6 +8,8 @@ import { setPaymentDetail } from "../../redux/paymentSlice";
 import { Col, Row } from "antd";
 
 const PaymentList = ({ handleRefresh, payList, payment }) => {
+  const [selectType, setSelectType] = useState("");
+  const [selectStatus, setSelectStatus] = useState("");
   const dispatch = useDispatch();
 
   const handleRowClick = (data) => {
@@ -25,15 +27,36 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
   };
 
   const handleReset = () => {
+    setSelectType("");
+    setSelectStatus("");
+    reset();
     handleRefresh();
   };
 
-  const handleOptionChange = (event) => {
-    console.log(event.target.value);
+  const handleTypeChange = (e) => {
+    console.log(e.target.value);
+    setSelectStatus("");
+    setSelectType(e.target.value);
     const gubun = {
-      gubun: event.target.value,
+      gubun: e.target.value,
     };
     handleRefresh(gubun);
+  };
+
+  const handleStatusChange = (e) => {
+    console.log(e.target.value);
+    setSelectType("");
+    setSelectStatus(e.target.value);
+    const gubun = {
+      gubun: e.target.value,
+    };
+    handleRefresh(gubun);
+  };
+
+  const handleKeyword = (e) => {
+    console.log(e);
+    setSelectType("");
+    setSelectStatus("");
   };
 
   return (
@@ -58,7 +81,7 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
                     aria-label="분류"
                     {...register("gubun")}
                   >
-                    <option defaultValue value="name">
+                    <option defaultValue value="name" selected>
                       회원명
                     </option>
                     <option value="phone">연락처</option>
@@ -67,7 +90,9 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
                 <div className="col-7">
                   <input
                     style={{ fontSize: "13px" }}
-                    {...register("keyword")}
+                    {...register("keyword", {
+                      onChange: (e) => handleKeyword(e.target.value),
+                    })}
                     type="text"
                     id="keyword"
                     className="form-control"
@@ -95,25 +120,49 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
                     전체조회
                   </Button>
                 </div>
-                <div className="col-2">
-                  <select
-                    style={{ fontSize: "13px" }}
-                    id="gubun"
-                    value=""
-                    className="form-select"
-                    aria-label="분류"
-                    {...register("gubun")}
-                    onChange={handleOptionChange}
-                  >
-                    <option defaultValue value="">
-                      결제유형
-                    </option>
-                    <option value="pay">매입</option>
-                    <option value="refund">환불</option>
-                  </select>
-                </div>
               </div>
             </Form>
+          </Col>
+        </Row>
+        <Row gutter={10}>
+          <Col>
+            <div className="col-2">
+              <select
+                style={{ fontSize: "13px", width: "150px" }}
+                id="gubun1"
+                value={selectType}
+                className="form-select"
+                aria-label="분류"
+                {...register("gubun1")}
+                onChange={handleTypeChange}
+              >
+                <option value="" selected>
+                  결제유형
+                </option>
+                <option value="pay">매입</option>
+                <option value="refund">환불</option>
+              </select>
+            </div>
+          </Col>
+          <Col>
+            <div className="col-2">
+              <select
+                style={{ fontSize: "13px", width: "150px" }}
+                id="gubun2"
+                value={selectStatus}
+                className="form-select"
+                aria-label="분류"
+                {...register("gubun2")}
+                onChange={handleStatusChange}
+              >
+                <option value="" selected>
+                  결제상태
+                </option>
+                <option value="pending">결제대기</option>
+                <option value="completed">결제완료</option>
+                <option value="refundcom">환불완료</option>
+              </select>
+            </div>
           </Col>
         </Row>
         <div className={styles.paymentList}>
