@@ -3,7 +3,6 @@ import Table from 'react-bootstrap/Table';
 import EmpEduRow from './EmpEduRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, saveEmpEdu, setDetail } from '../../redux/empInfosSlice';
-import { Button } from 'react-bootstrap';
 import styles from './empDetailInfo.module.css';
 import { Col, Row } from 'antd';
 
@@ -62,25 +61,7 @@ const EmpEdu = () => {
 
   return (
     <div className={styles.empBaseInfo} >
-      <Row style={{marginBottom:"10px"}}>
-        <Col md = {11}>          
-        </Col>
-        <Col md ={13}>          
-          <div className="col-9">
-            <Row>
-              <Col md={16}>
-                {editing && <Button style = {{width : "80px"}} variant="outline-secondary" onClick={handleSaveChanges}>저장</Button>}
-              </Col>
-              <Col md={8}>
-                <Button style = {{width : "80px"}} variant="outline-success" onClick={editing ? handleCancel : handleEdit}>
-                  {editing ? '취소' : '수정'}
-                </Button>
-              </Col>
-            </Row>
-          </div>          
-        </Col>
-      </Row>
-      <Table striped bordered hover className={styles.empBaseTable}>
+      <Table responsive className={styles.empBaseTable}>
         <thead>
           <tr>
             <th>기간</th>
@@ -95,6 +76,23 @@ const EmpEdu = () => {
           ))}
         </tbody>
       </Table>
+      <Row style={{ marginBottom: "10px" }}>
+        <Col md={15}></Col> {/* 해당 부분을 삭제해도 됩니다 */}
+        <Col md={9}>
+          <div className="col-11" style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ marginRight: "10px" }}>
+              {editing ? (
+                <button className={styles.empSaveButton2} onClick={handleSaveChanges}>저장</button>
+              ) : (
+                <button className={styles.empSaveButton1} onClick={handleEdit}>수정</button>
+              )}
+            </div>
+            {editing && (
+              <button className={styles.empSaveButton3} onClick={handleCancel}>취소</button>
+            )}
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Statistic, Table } from 'antd';
+import { Col, ConfigProvider, Row, Statistic, Table } from 'antd';
 import { callMypage } from '../../services/api/mypageApi'; // mypage 데이터를 가져오는 API 호출
 import { useDispatch, useSelector } from 'react-redux';
 import { DatePicker } from 'antd';
@@ -105,6 +105,15 @@ const MypageSubcon2 = () => {
           />
         </Col>
       </Row>
+      <ConfigProvider
+                theme={{
+                    components: {
+                        Table: {
+                            borderColor: '#d9d9d9', //hex색표 
+                                },
+                            },
+                        }}
+            >
       <Table
         columns={columns}
         dataSource={filteredDataInRange}
@@ -112,6 +121,7 @@ const MypageSubcon2 = () => {
         bordered
         pagination={{ position: ['bottomCenter'] }}
       />
+            </ConfigProvider>
     </>
   );
 };

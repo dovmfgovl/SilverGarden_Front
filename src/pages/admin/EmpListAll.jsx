@@ -78,7 +78,7 @@ const EmpListAll = () => {
     const filteredList = empList.filter(handleFilter);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const postPerPage = 10;
+    const postPerPage = 15;
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -128,26 +128,28 @@ const EmpListAll = () => {
                 </div>
 
                 <div className={styles.empList}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th style={{width: "5%"}}>#</th>
-                                <th style={{width: "12%"}}>사원번호</th>
-                                <th style={{width: "9%"}}>현황</th>
-                                <th style={{width: "13%"}}>사원명</th>
-                                <th style={{width: "15%"}}>부서</th>
-                                <th style={{width: "12%"}}>직급</th>
-                                <th style={{width: "18%"}}>전화번호</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {selectedlist.map((emp, index) => (
-                                <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
-                            ))}
-                        </tbody>
-                    </Table>
-                    <div className={styles.empListPagination}>
-                        <EmpListPagination currentPage={currentPage} totalPosts={filteredList.length} postPerPage={postPerPage} handleSetCurrentPage={setCurrentPage}></EmpListPagination>
+                    <div className={styles.empList_table_container}>
+                        <Table hover className={styles.empListTable}>
+                            <thead>
+                                <tr>
+                                    <th style={{width: "5%"}}>#</th>
+                                    <th style={{width: "12%"}}>사원번호</th>
+                                    <th style={{width: "9%"}}>현황</th>
+                                    <th style={{width: "13%"}}>사원명</th>
+                                    <th style={{width: "15%"}}>부서</th>
+                                    <th style={{width: "12%"}}>직급</th>
+                                    <th style={{width: "18%"}}>전화번호</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {selectedlist.map((emp, index) => (
+                                    <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
+                                ))}
+                            </tbody>
+                        </Table>
+                        <div className={styles.empListPagination}>
+                            <EmpListPagination currentPage={currentPage} totalPosts={filteredList.length} postPerPage={postPerPage} handleSetCurrentPage={setCurrentPage}></EmpListPagination>
+                        </div>
                     </div>
 
                     <hr />

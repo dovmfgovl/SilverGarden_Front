@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./mypage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCaretRight,
   faGroupArrowsRotate,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
@@ -70,7 +71,7 @@ const Mypage = () => {
     <>
       <div className={styles.MypageContainerLayout}>
         <div className={styles.mypageTitlebar}>
-          <FontAwesomeIcon icon={faPerson} /> 마이페이지{" "}
+          <FontAwesomeIcon icon={faCaretRight} /> 마이페이지{" "}
         </div>
         <div className={styles.sidebarLayout}>
           <SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon>

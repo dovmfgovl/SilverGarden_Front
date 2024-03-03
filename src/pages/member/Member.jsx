@@ -1,6 +1,7 @@
 import {
   faBus,
   faCar,
+  faCaretRight,
   faFilePen,
   faRoad,
   faUsersRectangle,
@@ -60,7 +61,7 @@ const Member = () => {
   return (
     <div className={styles.MemberContainerLayout}>
       <div className={styles.memberTitlebar}>
-        <FontAwesomeIcon icon={faUsersRectangle} /> {memberPage}{" "}
+        <FontAwesomeIcon icon={faCaretRight} /> {memberPage}{" "}
       </div>
       <div className={styles.sidebarLayout}>
         <SidebarCommon list={list} handleMenu={handleMenu}></SidebarCommon>

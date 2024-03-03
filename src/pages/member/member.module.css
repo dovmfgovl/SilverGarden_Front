@@ -26,8 +26,8 @@
 
 .memberTitlebar{
     grid-area: memberTitlebar;
-    font-size: 2.0rem;
-    padding: 10px;
+    font-size: 1.2rem;
+    padding-top: 22px;
     background-color: rgb(231, 233, 246);
 }
 
@@ -77,7 +77,29 @@
 
 .rightMemberLayout2{
     grid-area: rightMemberLayout2;
-    background-color: rgb(238, 119, 119);
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 20px 20px 0;
+       
+}
+
+.InnerMemberLayout3{
+    height: 100%;
+    display:grid;
+    grid-template-areas:
+    "leftMemberLayout rightMemberLayout1"
+    "leftMemberLayout rightMemberLayout3"
+    ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr ;
+    background-color: rgb(231, 233, 246);
+}
+
+.rightMemberLayout3{
+    grid-area: rightMemberLayout3;
+    background-color: white;
     border-radius: 20px;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;

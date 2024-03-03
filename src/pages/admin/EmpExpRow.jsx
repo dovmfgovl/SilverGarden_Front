@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import styles from './empDetailInfo.module.css';
 
 const EmpExpRow = ({ EXP_NAME, EXP_DEPT, EXP_RANK, EXP_DUTY, EXP_PERIOD, onDelete, onInputChange, onSave }) => {
   const [isModified, setIsModified] = useState(false);
@@ -24,13 +24,13 @@ const EmpExpRow = ({ EXP_NAME, EXP_DEPT, EXP_RANK, EXP_DUTY, EXP_PERIOD, onDelet
 
   return (
     <tr>
-      <td><Form.Control type="text" name="EXP_NAME" defaultValue={EXP_NAME} onChange={handleInputChange} /></td>
-      <td><Form.Control type="text" name="EXP_DEPT" defaultValue={EXP_DEPT} onChange={handleInputChange} /></td>
-      <td><Form.Control type="text" name="EXP_RANK" defaultValue={EXP_RANK} onChange={handleInputChange} /></td>
-      <td><Form.Control type="text" name="EXP_DUTY" defaultValue={EXP_DUTY} onChange={handleInputChange} /></td>
-      <td><Form.Control type="text" name="EXP_PERIOD" defaultValue={EXP_PERIOD} onChange={handleInputChange} /></td>
-      <td><Button variant="danger" onClick={handleDelete}>-</Button></td>
-      <td>{isModified && <Button variant="success" onClick={handleSave}>저장</Button>}</td>
+      <td><Form.Control type="text" name="EXP_NAME" defaultValue={EXP_NAME} onChange={handleInputChange} style={{ height: '30px', fontSize: 'small' }} /></td>
+      <td><Form.Control type="text" name="EXP_DEPT" defaultValue={EXP_DEPT} onChange={handleInputChange} style={{ height: '30px', fontSize: 'small' }}/></td>
+      <td><Form.Control type="text" name="EXP_RANK" defaultValue={EXP_RANK} onChange={handleInputChange} style={{ height: '30px', fontSize: 'small' }}/></td>
+      <td><Form.Control type="text" name="EXP_DUTY" defaultValue={EXP_DUTY} onChange={handleInputChange} style={{ height: '30px', fontSize: 'small' }}/></td>
+      <td><Form.Control type="text" name="EXP_PERIOD" defaultValue={EXP_PERIOD} onChange={handleInputChange} style={{ height: '30px', fontSize: 'small' }}/></td>
+      <td><button className={styles.expRowButton} onClick={handleDelete}>-</button></td>
+      <td>{isModified && <button className={styles.expSaveButton} onClick={handleSave}>저장</button>}</td>
     </tr>
   );
 };

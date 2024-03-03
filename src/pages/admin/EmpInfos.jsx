@@ -7,7 +7,6 @@ import EmpExp from './EmpExp'
 import EmpCerti from './EmpCerti'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpList, setDetail } from '../../redux/empInfosSlice' // 액션 및 셀럭터 import
-import EmpExpInsert from './EmpExpInsert'
 import { Tab, Tabs } from 'react-bootstrap'
 
 const EmpInfos = () => {

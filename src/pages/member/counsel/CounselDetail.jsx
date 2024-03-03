@@ -3,21 +3,21 @@ import { Button, Modal, Table } from 'react-bootstrap';
 import CounselUpdate from './CounselUpdate';
 import { counselDelete } from '../../../services/api/memberApi';
 
-const CounselDetail = ({counsel}) => {
+const CounselDetail = ({counsel,getCounsel}) => {
  
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(counsel.COUNSEL_NO);
+    // console.log(counsel.COUNSEL_NO);
     
     const handleDelete= async()=>{
       if(window.confirm("이 상담일지를 삭제하시겠습니까?")){
         const res = await counselDelete(counsel.COUNSEL_NO);
         console.log(res.data);
         alert("삭제되었습니다");
-        window.location.reload(); 
+        getCounsel()
       }
 
     }
@@ -57,7 +57,7 @@ const CounselDetail = ({counsel}) => {
               </Table>
         </Modal.Body>
         <Modal.Footer>
-        <CounselUpdate onClick={handleClose} counsel={counsel}/>
+        <CounselUpdate onClick={handleClose} counsel={counsel} getCounsel={getCounsel}/>
           <Button variant="danger" onClick={handleDelete} >
             삭제
           </Button>
