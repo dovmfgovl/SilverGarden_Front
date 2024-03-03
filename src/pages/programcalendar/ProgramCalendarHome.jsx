@@ -53,7 +53,7 @@ const ProgramCalendarHome = () => {
         const newFilters = { ...filters, searchTitle: e.target.value };
     
         if (selectedCategory === '전체') {
-            dispatch(setFilters({ searchTitle: e.target.value, selectedCategory: '' }));
+            handleRefresh();
         } else {
             dispatch(setFilters(newFilters));
         }
@@ -65,8 +65,8 @@ const ProgramCalendarHome = () => {
         setSearchTitle('');
         setSelectedCategory('전체');
         dispatch(setFilters({ searchTitle: '', selectedCategory: '' }));
-        dispatch(setPgEvents(eventData.slice())); // eventData를 복제하여 사용
-        dispatch(setFilteredEvents()); // 필터된 이벤트 업데이트
+        dispatch(setPgEvents(eventData.slice())); 
+        dispatch(setFilteredEvents()); 
         console.log(eventData);
         console.log(filteredEvents);
     };
@@ -84,7 +84,7 @@ const ProgramCalendarHome = () => {
                     <WeekendToggle weekendsVisible={weekendsVisible} setWeekendsVisible={setWeekendsVisible} />
                     <InputGroup className="mb-3" style={{height:'20px', width:'250px'}}>
                         <FormControl
-                            placeholder="일정 이름을 입력하세요"
+                            placeholder="일정을 입력하세요"
                             aria-label="Recipient's username"
                             aria-describedby="button-addon2"
                             value={searchTitle}
@@ -96,7 +96,6 @@ const ProgramCalendarHome = () => {
                         </Button>
                     </InputGroup>
                     <DropdownButton id="dropdown-basic-button" title={selectedCategory || '전체'} onSelect={handleCategorySelect} style={{width:'100px'}}>
-                        <Dropdown.Item eventKey="전체">전체</Dropdown.Item>
                         <Dropdown.Item eventKey="신체">신체</Dropdown.Item>
                         <Dropdown.Item eventKey="교양">교양</Dropdown.Item>
                         <Dropdown.Item eventKey="문화">문화</Dropdown.Item>

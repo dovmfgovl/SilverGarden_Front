@@ -11,7 +11,7 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import CommonCalendarModal from "./CommonCalendarModal";
 import moment from "moment-timezone";
 import "./FullCalendarContainer.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 const CommonCalendar = ({
@@ -171,11 +171,12 @@ const CommonCalendar = ({
       },
       {
         events: commonEvents.map((event) => ({
+          className: "custom-event", // 여기에 CSS 클래스 이름을 추가
           title: event.summary,
           start: event.start.date || event.start.dateTime, // 공휴일 이벤트의 시작 날짜
           end: event.end.date || event.end.dateTime, // 공휴일 이벤트의 종료 날짜
-          color: 'white', // 공휴일 이벤트의 배경 색상
-          textColor: 'red', // 공휴일 이벤트의 텍스트 색상
+          color: '#FFC0CB', // 공휴일 이벤트의 배경 색상
+          // eventTitle : 'red', // 공휴일 이벤트의 텍스트 색상
         })),
       },
     ],

@@ -3,7 +3,6 @@ import styles from '../program/programhome.module.css';
 import { programInsertDB } from '../../services/api/programApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRotateRight, faDownload, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { Popconfirm } from 'antd';
 
 function ProgramInsert({ componentRef, handleReset, getProgramList }) {
     const [newData, setNewData] = useState({

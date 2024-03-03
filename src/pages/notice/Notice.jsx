@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
-import CrowlList from "./CrawlList";
+import CrawilngHome from "../crawling/CrawilngHome";
 
 const Notice = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -117,7 +117,7 @@ const Notice = () => {
           fileList={fileList}
           />
           )}
-        {/*{noticePage === "관련공지" && <CrowlList /> }*/}
+        {noticePage === "관련공지" && <CrawilngHome />}
       </div>
     </div>
   );

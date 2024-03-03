@@ -88,7 +88,7 @@
 /* 이벤트 이름 */
 .fc-event-title{
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.748);
+  /* color: rgba(0, 0, 0, 0.748); */
 }
 
 .fc-daygrid-event-harness{
@@ -99,6 +99,11 @@
 .fc-timegrid-slot-label-frame fc-scrollgrid-shrink-frame{
   font-size: 0.2rem;
 }
+
+/* .custom-event{
+  background-color: #050505;
+  color: red;
+} */
 
 /* 리스트 */
 .fc-scrollgrid  fc-scrollgrid-liquid{

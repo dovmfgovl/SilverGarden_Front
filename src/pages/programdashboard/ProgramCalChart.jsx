@@ -5,7 +5,6 @@ const ProgramCalChart = ({pgCalList}) => {
     // 주어진 데이터의 타이틀별로 그룹화하고 개수를 계산
     const groupedData = pgCalList.reduce((acc, item) => {
         const title = item.PS_NAME;
-        const category = item.PS_CATEGORY;
         if (!acc[title]) {
             acc[title] = 1;
         } else {

@@ -108,8 +108,7 @@ const HomeCalendar = ({
           title: event.summary,
           start: event.start.date || event.start.dateTime, // 공휴일 이벤트의 시작 날짜
           end: event.end.date || event.end.dateTime, // 공휴일 이벤트의 종료 날짜
-          color: 'white', // 공휴일 이벤트의 배경 색상
-          textColor: 'red', // 공휴일 이벤트의 텍스트 색상
+          color: '#FFC0CB', // 공휴일 이벤트의 배경 색상
         })),
       },
     ],
