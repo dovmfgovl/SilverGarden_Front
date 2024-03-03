@@ -12,6 +12,7 @@ import calendarAtSlice from "./calendarAtSlice";
 import calendarAdminSlice from "./calendarAdminSlice";
 import carSlice from "./carSlice";
 import calendarCarSlice from "./calendarCarSlice";
+import commoncalendarSlice from "./commoncalendarSlice";
 
 
 const persistConfig ={//persist redux를 사용하고자 할 때 필요한 설정
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   calendarAtSlice:calendarAtSlice, //슬기 캘린더
   calendarAdminSlice:calendarAdminSlice, //수연 캘린더
   calendarCarSlice:calendarCarSlice, //태규 캘린더
+  commoncalendarSlice:commoncalendarSlice,
 });
 
 const store = configureStore({

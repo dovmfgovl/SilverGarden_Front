@@ -5,7 +5,6 @@ import RightContent from './RightContent';
 
 
 const ProgramInfo =  ({programList,getProgramList,onRowClick}) => {
-    console.log(programList); //[]
     return (
     <div className={styles.programInfoWrap}>
         <div className={styles.programContentWrap}>

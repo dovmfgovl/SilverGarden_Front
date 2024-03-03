@@ -5,18 +5,14 @@ import HomeCalendar from "./HomeCalendar";
 
 const HomeCalendarInfo = () => {
   //이부분 추가 & 프롭전달 추가///////////////////////////////////////////
-  const eventData = useSelector((state) => state.calendarAtSlice.events);
-  console.log(eventData);
   const dispatch = useDispatch();
+  const eventData = useSelector((state) => state.calendarAtSlice.events);
   const handleDispatch = (events) => dispatch(setAtEvents(events));
   //이부분 추가/////////////////////////////////////////////////////////
 
   //스프링 컨트롤러 url 입력(기본 CRUD)
   const commonUrls = {
     listURL: "schedule/schedulelist",
-    /* addURL: "schedule/scheduleinsert",
-    updateURL: "schedule/scheduleupdate",
-    deleteURL: "schedule/scheduledelete", */
   };
   // 개별 컴포넌트에서 사용할 데이터의 컬럼명 정의
   const columnNames = {

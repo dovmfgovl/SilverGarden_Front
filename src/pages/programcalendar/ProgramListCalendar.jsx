@@ -1,7 +1,7 @@
 import React from 'react';
 import CommonCalendar from '../../components/fullcalendar/CommonCalendar';
 
-const ProgramListCalendar = ({eventData, handleDispatch}) => {
+const ProgramListCalendar = ({eventData, handleDispatch, filteredEvents}) => {
     const handleIndividualEventAdd = (event) => {
         console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
@@ -37,10 +37,9 @@ const ProgramListCalendar = ({eventData, handleDispatch}) => {
     const calendarListOptions = {
         height: 660,
         slotMinTime: '08:00',
-        slotMaxTime: '24:00',
+        slotMaxTime: '19:00',
         expandRows: true,
         navLinks: true,
-        // 원하는 다른 옵션들을 추가할 수 있습니다.
     };
     const initialViewOption = 'timeGridDay'; // 원하는 초기 뷰로 설정
     return (
@@ -55,6 +54,7 @@ const ProgramListCalendar = ({eventData, handleDispatch}) => {
                 calendarListOptions={calendarListOptions}
                 initialView={initialViewOption}
                 handleDispatch={handleDispatch}
+                filteredEvents={filteredEvents}
             />
         </div>
     );
