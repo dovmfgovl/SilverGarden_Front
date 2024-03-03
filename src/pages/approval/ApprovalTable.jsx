@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Table } from 'react-bootstrap'
+import styles from './approval.module.css'
 
 const ApprovalTable = ({appList, handleMenu}) => {
   const [isChecked, setChecked] = useState(false);
@@ -10,7 +11,7 @@ const ApprovalTable = ({appList, handleMenu}) => {
 
   return (
     <>
-    <Table bordered hover style={{textAlign: "center", margin:0}}>
+    <Table hover className={styles.approvalTable}>
     <thead>
       <tr>
         <th style={{ width: '60px'}}><Form.Check aria-label="option 1"/></th>

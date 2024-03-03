@@ -41,8 +41,8 @@
 .messageTitleBar{
   grid-area: messageTitleBar;
   background-color: rgb(231, 233, 246);
-  font-size: 2.0rem;
-  padding:10px;
+  font-size: 1.2rem;
+  padding-top: 22px;
 }
 
 .messageContentWrap{
@@ -115,7 +115,31 @@
   grid-area: messageListContent;
   margin:10px;
   padding:10px;
+  
 }
+
+.messageTable{
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.messageTable th,
+.messageTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+.messageTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.messageTable tbody td {
+  cursor: pointer;
+}
+
+
 
 .messageListPagination{
   grid-area: messageListPagination;

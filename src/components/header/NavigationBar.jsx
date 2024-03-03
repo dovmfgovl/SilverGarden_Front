@@ -6,7 +6,7 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import Roboto from "../../assets/fonts/Roboto";
 import styles from "./navigation.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
 import styled from "styled-components";

@@ -24,8 +24,8 @@
 .approvalTitleBar{
   grid-area: approvalTitleBar;
   background-color: rgb(231, 233, 246);
-  font-size: 2.0rem;
-  padding:10px;
+  font-size: 1.2rem;
+  padding-top: 22px;
 }
 
 .approvalContentWrap{
@@ -76,6 +76,28 @@
   margin:10px;
   padding:10px;
   
+}
+
+.approvalTable{
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.approvalTable th,
+.approvalTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.approvalTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.approvalTable tbody td {
+  cursor: pointer;
 }
 
 .approvalListPagination{

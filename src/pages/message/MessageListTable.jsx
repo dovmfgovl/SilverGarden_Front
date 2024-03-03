@@ -2,11 +2,11 @@ import { faEnvelope, faEnvelopeOpen, faPaperclip } from '@fortawesome/free-solid
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Form, Table } from 'react-bootstrap'
-
+import styles from './message.module.css'
 const MessageListTable = ({messageList, handleMenu, messagePage}) => {
   return (
     <>
-    <Table bordered hover style={{textAlign: "center", margin:0}}>
+    <Table hover className={styles.messageTable}>
     <thead>
       <tr>
         <th style={{ width: '60px'}}><Form.Check aria-label="option 1"/></th>
