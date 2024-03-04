@@ -9,7 +9,6 @@ const ApprovalUpList = ({handleMenu, empData, approvalPage}) => {
     const[appList, setAppList] = useState([]);
     const getList = async () =>{
       const response = await getAllApprovalList({e_no: empData.e_no})
-      console.log(response.data);
       setAppList(response.data);
     }
 

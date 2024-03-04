@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Col, Form, Modal, Row, Stack } from 'react-bootstrap';
 import DaumPostcode from 'react-daum-postcode';
 import { memberInsert } from '../../services/api/memberApi';
-import { useNavigate } from 'react-router-dom';
 import { Descriptions, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList } from '../../redux/chooseEmpSlice';
@@ -16,7 +15,6 @@ const MemberInsert = () => {
   const [tel,setTel]=useState('');
   const [age,setAge]=useState(0);
   const [manager, setManager] = useState('');
-  const [photo,setPhoto]=useState('');
 
   const empList = useSelector(state => state.chooseEmp.value);
   const userData =useSelector(state => state.userInfoSlice);
@@ -25,9 +23,7 @@ const MemberInsert = () => {
     dispatch(getEmpList());
   }, [dispatch]);
 
-// console.log(JSON.stringify(empList));
 
-  const navigate = useNavigate();
   const [roadAddress, setRoadAddress] = useState('');
   const [detailAddress, setDetailAddress] = useState('');
   const [show, setShow] = useState(false);
@@ -70,9 +66,6 @@ const MemberInsert = () => {
     setTel(value);
   }, []);
 
-  const handlePhoto = useCallback((value) => {
-    setPhoto(value);
-  }, []);
 
 
 
@@ -101,8 +94,6 @@ const MemberInsert = () => {
     try {
       console.table(client);
       const res = await memberInsert(client);
-      const responseData = JSON.parse(res.data);
-      console.log(responseData);
       alert("회원 정보가 성공적으로 저장되었습니다.");
       handleClose();
       dispatch(getMemList())

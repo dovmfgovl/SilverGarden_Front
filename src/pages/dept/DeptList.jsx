@@ -67,7 +67,7 @@ const DeptList = ({ page, dept, handleRefresh, deptList }) => {
                 aria-describedby="btn_search"
               />
             </div>
-            <div className="col-1">
+            <div className="col-auto">
               <Button variant="outline-success" type="submit">
                 검색
               </Button>

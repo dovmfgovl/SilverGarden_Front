@@ -10,17 +10,17 @@ const CarTimeLine = () => {
     const handleDispatch = (events)=>dispatch(setCarEvents(events)); 
 
     const handleIndividualEventAdd = (event) => {
-        console.log('Individual Calendar: Event Added', event);
+        // console.log('Individual Calendar: Event Added', event);
         // 개별 캘린더에서 추가 이벤트 처리
     };
     
     const handleIndividualEventUpdate = (event) => {
-        console.log('Individual Calendar: Event Updated', event);
+        // console.log('Individual Calendar: Event Updated', event);
         // 개별 캘린더에서 업데이트 이벤트 처리
     };
     
     const handleIndividualEventDelete = (event) => {
-        console.log('Individual Calendar: Event Deleted', event);
+        // console.log('Individual Calendar: Event Deleted', event);
         // 개별 캘린더에서 삭제 이벤트 처리
     };
     //스프링 컨트롤러 url 입력(기본 CRUD)

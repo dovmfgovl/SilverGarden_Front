@@ -35,7 +35,6 @@ const CarInsert = () => {
         }, []);
         
         const handleSubmit=async()=>{
-            console.log('submit');
             const shuttle={
                 SHUTTLE_TYPE:type,
                 SHUTTLE_DRIVER:driver,
@@ -45,7 +44,6 @@ const CarInsert = () => {
             }
             try {
                 const res = await shuttleInsert(shuttle)
-                console.log(res.data);
                 alert("차량이 등록되었습니다.")
                 handleClose()
                dispatch(getCarList());

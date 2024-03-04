@@ -9,7 +9,6 @@ export const getMemberList = (params) => {
         params: params,
       });
       resolve(response);
-      console.log(response);
     } catch (error) {
       reject(error);
     }
@@ -77,14 +76,6 @@ export const getCounselList = (params) => {
 
 export const counselInsert = (params) => {
   return new Promise((resolve, reject) => {
-    // ISO 8601 형식에서 시간 부분을 제거하고 적절한 형식으로 변환
-    // const isoDateString = formDataToSend.client_birth;
-    // const dateWithoutTime = isoDateString.split("T")[0];
-    // const formattedDate = new Date(dateWithoutTime);
-
-    // // 변환된 날짜를 formData에 적용
-    // formDataToSend.client_birth = formattedDate;
-
     try {
       const response = axios({
         method: "post",

@@ -10,7 +10,6 @@ const ApprovalProgList = ({handleMenu, empData}) => {
 
     const getList = async () =>{
       const response = await approvalProgressList({e_no: empData.e_no})
-      console.log(response.data);
       setProgressList(response.data);
     }
     const handleFilterdList = async (gubun, keyword) =>{

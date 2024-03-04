@@ -10,6 +10,7 @@ import Program from '../../pages/program/Program'
 import Mypage from '../../pages/mypage/Mypage'
 import Message from '../../pages/message/Message'
 import ErrorPage from '../../pages/error/ErrorPage'
+import Payment from '../../pages/payment/Payment'
 
 const AppRouter = () => {
   return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
     <Route path="/mypage" exact={true} element={<Mypage/>}></Route>
     <Route path="/message" exact={true} element={<Message/>}></Route>
     <Route path="/error" exact={true} element={<ErrorPage/>}></Route>
+    <Route path="/payment" exact={true} element={<Payment/>}></Route>
   </Routes>
   )
 }

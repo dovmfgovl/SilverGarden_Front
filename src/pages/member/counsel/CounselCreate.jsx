@@ -26,27 +26,22 @@ const CounselCreate = ({selectedMember,getCounsel}) => {
   
 
     const changeDate= useCallback((value)=>{
-      console.log(value);
       setDate(value);
     },[]);
 
     const handleTime= useCallback((value)=>{
       setTime(value);
-      console.log(time);
     },[]);
     const handleHow=useCallback((value)=>{
-      console.log(value);
       setHow(value)
     },[])
     const handleManager = useCallback((value) => {
-      console.log(value);
       setManager(value);
     }, []);
     
       
     const handleContent= useCallback((value)=>{
       setContent(value);
-      console.log(content);
     },[]);
 
   const empList = useSelector(state => state.chooseEmp.value);
@@ -71,7 +66,6 @@ const CounselCreate = ({selectedMember,getCounsel}) => {
         // console.table(counsel);
         const res = await counselInsert(counsel);
         const responseData = JSON.parse(res.data);
-        console.log(responseData);
         alert("상담정보가 성공적으로 저장되었습니다.");
         handleClose();
         getCounsel()

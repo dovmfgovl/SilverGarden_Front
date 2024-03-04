@@ -10,11 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
 import styled from "styled-components";
 import Home from "../home/Home";
+import logo from "../../assets/images/slivergardenlogo2.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const {
     handleSubmit,
@@ -41,7 +41,7 @@ const LoginForm = () => {
             e_rank: response.e_rank,
           })
         );
-          navigate("home");
+        navigate("home");
       })
       .catch((error) => {
         alert("아이디 혹은 비밀번호를 올바르게 입력해주세요.");
@@ -58,7 +58,12 @@ const LoginForm = () => {
     <div className={style.container}>
       <div className={style.child}>
         <div>
-          <h3 className={style.header}>SliverGarden</h3>
+          <h3 className={style.header}>
+            <div>
+              <img src={logo} alt="로고" style={{ width: "300px" }} />
+            </div>
+            SliverGarden
+          </h3>
         </div>
         <div className={style.inputbox}>
           <Form onSubmit={handleSubmit(onSubmit)} className={style.loginForm}>

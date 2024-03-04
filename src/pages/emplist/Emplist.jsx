@@ -25,7 +25,7 @@ const Emplist = () => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error)
       });
   }
 
@@ -35,8 +35,6 @@ const Emplist = () => {
 
   const sendEmpList = async (params) => {
     const res = await getEmpList(params);
-    console.log(res.data);
-    console.table(res.data);
     setEmpList(res.data);
   };
 

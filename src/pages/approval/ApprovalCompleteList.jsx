@@ -10,7 +10,6 @@ const ApprovalCompleteList = ({handleMenu, empData}) => {
 
   const getList = async () =>{
     const response = await approvalCompleteList({e_no: empData.e_no})
-    console.log(response.data);
     setCompleteList(response.data);
   }
   const handleFilterdList = async (gubun, keyword) =>{

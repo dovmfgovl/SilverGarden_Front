@@ -75,7 +75,6 @@ const MessageListHeader = ({messagePage, handleList, empData}) => {
     const selectedTarget = e.target.id
     const selectedDate = e.target.value
     if(selectedTarget === "start-date"){
-      console.log("start-date");
       setStartDate(selectedDate)
     }else{
       console.log("end-date");
