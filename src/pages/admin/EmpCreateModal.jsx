@@ -6,6 +6,7 @@ import createstyle from "./modal.module.css";
 import { Col, Row } from "antd";
 import { DeptNameDB, SignupAPI } from "../../services/api/empCreateApi";
 import { useSelector } from "react-redux";
+import styles from './empDetailInfo.module.css';
 
 const EmpCreateModal = ({ empCreated }) => {
   const [e_password, setPassword] = useState("");
@@ -87,9 +88,9 @@ const EmpCreateModal = ({ empCreated }) => {
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
+      <button className={styles.empSaveButton5} onClick={handleShow}>
         신규등록
-      </Button>
+      </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>신규등록팝업</Modal.Title>

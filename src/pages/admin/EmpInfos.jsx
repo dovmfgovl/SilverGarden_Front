@@ -39,11 +39,14 @@ const EmpInfos = () => {
       </div>
       <div className={styles.empBaseInfoWrap}>
         <Tabs defaultActiveKey="edu" id="emp-tabs">
-          <Tab eventKey="edu" title="학력">
+          <Tab eventKey="edu" title={<span style={{ color: 'black' }}>학력</span>}>
             <EmpEdu empDetail={empDetail} />
           </Tab>
-          <Tab eventKey="exp" title="경력">
+          <Tab eventKey="exp" title={<span style={{ color: 'black' }}>경력</span>}>
             <EmpExp empDetail={empDetail} />
+          </Tab>
+          <Tab eventKey="certi" title={<span style={{ color: 'black' }}>자격증</span>}>
+            <EmpCerti empDetail={empDetail} />
           </Tab>
         </Tabs>
       </div> 
@@ -53,7 +56,3 @@ const EmpInfos = () => {
 }
 
 export default EmpInfos
-
-//<EmpCerti
-//          empDetail={empDetail}
-//        />
