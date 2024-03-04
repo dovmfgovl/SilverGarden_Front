@@ -9,7 +9,6 @@ const calendarCarSlice = createSlice({ //태규
     },
     reducers: {
         setCarEvents: (state, action) => {
-            console.log("calendarCarSlice setAtEvents:", action.payload);
             state.events = action.payload;
         },
     },

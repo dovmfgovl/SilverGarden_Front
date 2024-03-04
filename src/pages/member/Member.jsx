@@ -7,7 +7,7 @@ import {
   faUsersRectangle,
   faUsersViewfinder,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./member.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import MemberInfo from "./MemberInfo";
@@ -26,7 +26,7 @@ const Member = () => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
   const list = [

@@ -33,8 +33,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
         userno: '',
         user: '',
     });
-    console.log(event.start);
-    console.log(event.end);
     //event가 바뀔때 실행->이벤트클릭, 날짜클릭 나눠서 초기값 재세팅
     useEffect(() => {
         if (event) {
@@ -50,7 +48,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
                 userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
             });
-            console.table(formData);
         } else {
             // 날짜 클릭 시 -> create
             setFormData({
@@ -64,7 +61,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
                 userno: '',
                 user: '',
             });
-            console.table(formData);
         }
     }, [event]);
     
