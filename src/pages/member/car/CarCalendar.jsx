@@ -186,17 +186,6 @@ const CarCalendar = ({
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
-    // select: ({ startStr, endStr }) => {
-    //   const isSingleDay = startStr === endStr;
-    //   let endDate = isSingleDay ? startStr : endStr;
-      
-    //   // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
-    //   if (!isSingleDay) {
-    //     const endMoment = moment(endDate).subtract(1, "days");
-    //     endDate = endMoment.toISOString(); // ISO8601 문자열로 변환
-    //   }
-    // },
-    // 타임라인
     eventSources: [
       {
         events: formattedEvents, 
