@@ -5,99 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36274045-1f93-42cb-acc1-2f7811d26754" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/slivergardenlogo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/crawling/CrawlingHome.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/crawling/CrawlingSearchBar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/crawling/crawling.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/ClientSearchModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/InputNumber.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/Payment.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/PaymentDetail.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/PaymentInfo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/PaymentList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/PaymentPagination.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/RefundModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/SmsModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/payment.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/paymentInfo.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/payment/smsModal.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/paymentClientSlice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/paymentSlice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api/paymentApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntryPoint.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chatting/ChattingBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chatting/ChattingBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/NavigationBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/NavigationBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rourter/AppRouter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rourter/AppRouter.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/Approval.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/Approval.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalCompleteList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalCompleteList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalDenyList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalDenyList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalListHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalListHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalProgList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalProgList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalTempList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalTempList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalUpList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalUpList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/ApprovalWaitList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/ApprovalWaitList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvaldetail/ApprovalDetailLine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvaldetail/ApprovalDetailLine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvaldetail/ApprovalDocDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvaldetail/ApprovalDocDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvaldetail/CommentModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvaldetail/CommentModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalupdate/ApprovalDocUpdate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalupdate/ApprovalDocUpdate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalDocWrite.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalDocWrite.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalFileUpload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalFileUpload.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalLineModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalLineModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalWriteLine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/ApprovalWriteLine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/LineSelectBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/LineSelectBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/SelectedAgreementLine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/SelectedAgreementLine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approval/approvalwrite/SelectedApprovalLine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approval/approvalwrite/SelectedApprovalLine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/crawling/CrawilngHome.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/crawling/CrawlingComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/crawling/CrawlingComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dept/DeptDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dept/DeptDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dept/DeptList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dept/DeptList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/emplist/Emplist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/emplist/Emplist.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/loginform.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/loginform.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/Member.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/Member.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/MemberDelete.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/MemberDelete.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/MemberDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/MemberDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/MemberInsert.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/MemberInsert.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarCalendar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarCalendar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarCalendarLogic.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarCalendarLogic.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarCalendarModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarCalendarModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarInsert.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarInsert.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/car/CarTimeLine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/car/CarTimeLine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/counsel/Counsel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/counsel/Counsel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/counsel/CounselCreate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/counsel/CounselCreate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/member/counsel/CounselDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/member/counsel/CounselDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/Message.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/Message.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageAddressBook.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageAddressBook.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageDeleted.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageDeleted.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageDeletedDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageDeletedDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageListHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageListHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageReceive.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageReceive.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageReceiveDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageReceiveDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageSend.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageSend.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageSendDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageSendDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageStored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageStored.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageStoredDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageStoredDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message/MessageWrite.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message/MessageWrite.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mypage/ChangePwModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/ChangePwModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mypage/Mypage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/Mypage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mypage/MypageEdu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/MypageEdu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mypage/MypageInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/MypageInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notice/CrawlList.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notice/Notice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notice/Notice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notice/NoticeDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notice/NoticeDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notice/NoticeDetailHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notice/NoticeDetailHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/notice/NoticeUpdate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notice/NoticeUpdate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/program/ProgramList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/program/ProgramList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/programdashboard/programboard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/programdashboard/programboard.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/calendarCarSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/calendarCarSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/api/approvalApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/approvalApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/api/memberApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/memberApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talk/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/talk/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpExcelDownload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpExcelDownload.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/EmpListAll.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/EmpListAll.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/HomeProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/HomeProfile.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +41,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging emp7",
+    "git-widget-placeholder": "emp7",
     "kotlin-language-version-configured": "true",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707292544161</updated>
       <workItem from="1707292547871" duration="293000" />
-      <workItem from="1709434705939" duration="41962000" />
+      <workItem from="1709434705939" duration="44724000" />
     </task>
     <servers />
   </component>

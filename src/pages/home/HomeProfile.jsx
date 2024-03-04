@@ -83,7 +83,7 @@ const HomeProfile = () => {
   return (
     <>
       <div>
-        <img src={empProfile.E_PROFILE ===null ?"https://picsum.photos/200/200" : empProfile.E_PROFILE} alt="프로필" />
+        <img src={empProfile.E_PROFILE ? empProfile.E_PROFILE : "https://picsum.photos/200/200" } alt="프로필" />
       </div>
       <div className={styles.eName}>
         {empData.e_name}

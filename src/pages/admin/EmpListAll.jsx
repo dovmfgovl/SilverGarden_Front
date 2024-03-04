@@ -4,6 +4,7 @@ import EmpRow from "./EmpRow";
 import { Button, Form } from "react-bootstrap";
 import styles from "./empInfo.module.css";
 import EmpExcelDownload from './EmpExcelDownload';
+import ExcelForm from './ExcelForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, setShowAll, toggleIncludeResigned } from '../../redux/empInfosSlice';
 import EmpCreateModal from './EmpCreateModal';
@@ -133,7 +134,7 @@ const EmpListAll = () => {
                     <hr />
                     <span className="row justify-content-between">
                         <span className="col-3">
-                            <EmpExcelDownload empList={selectedlist}/>
+                            <ExcelForm empList={selectedlist}/>
                         </span>
                         <span className="col-3">
                             • 전체 사원 수: {empCount}
