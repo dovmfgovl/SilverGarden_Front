@@ -31,6 +31,7 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
     setSelectType("");
     setSelectStatus("");
     reset();
+    setCurrentPage(1);
     handleRefresh();
   };
 
