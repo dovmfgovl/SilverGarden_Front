@@ -8,6 +8,7 @@ import ClientSearchModal from "./ClientSearchModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setClientDetail } from "../../redux/paymentClientSlice";
 import { SmsRequestApi } from "../../services/api/paymentApi";
+import InputNumber from "./InputNumber";
 
 const SmsModal = ({ handleRefresh }) => {
   const data = useSelector((state) => state.paymentClientDetail.value);
@@ -77,7 +78,9 @@ const SmsModal = ({ handleRefresh }) => {
                   <Col>
                     <Form.Control
                       style={{ width: "150px", backgroundColor: "#DFDFDF" }}
-                      {...register("id")}
+                      {...register("id", {
+                        required: "* 회원ID를 입력해주세요.",
+                      })}
                       type="text"
                       name="id"
                       id="id"
@@ -88,6 +91,7 @@ const SmsModal = ({ handleRefresh }) => {
                       value={data.CLIENT_ID}
                       readOnly={true}
                     />
+                    <Error>{errors?.id?.message}</Error>
                   </Col>
                   <Col>
                     <ClientSearchModal />
@@ -128,15 +132,17 @@ const SmsModal = ({ handleRefresh }) => {
               </div>
               <div className={styles.price}>
                 <Form.Label>결제금액</Form.Label>
-                <Form.Control
-                  style={{ width: "150px" }}
+                <InputNumber
+                  style={{
+                    width: "150px",
+                    WebkitAppearance: "none" /* 스피너 제거 */,
+                    margin: "0",
+                  }}
                   {...register("amount", {
                     required: "* 결제금액을 입력해주세요.",
                   })}
-                  type="number"
                   autoFocus
                   maxLength={10}
-                  thousandSeparator=","
                   allowNegative={false}
                 />
                 <Error>{errors?.amount?.message}</Error>

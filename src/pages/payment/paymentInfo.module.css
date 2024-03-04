@@ -60,9 +60,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  column-gap: 7px;
   font-size: 7px;
-  width: 400px;
+  column-gap: 7px;
 }
 
 /* 테이블 푸터 스타일 조정 */

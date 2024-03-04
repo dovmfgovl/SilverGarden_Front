@@ -33,7 +33,7 @@ export const PaymentClientListDB = (data) => {
 }
 
 export const SmsRequestApi = (data) => {
-
+console.log(data)
   return new Promise((resolve, reject) => {
     try {
       const response = axios({

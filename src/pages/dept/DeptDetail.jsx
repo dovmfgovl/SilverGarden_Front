@@ -51,7 +51,12 @@ const DeptDetail = ({ handlepage, handleRefresh }) => {
             <h5>부서상세</h5>
           </Col>
           <Col md={2}>
-            <Button variant="outline-danger" size="sm" onClick={handleShow}>
+            <Button
+              variant="outline-danger"
+              size="sm"
+              onClick={handleShow}
+              style={{ width: "80%" }}
+            >
               삭제
             </Button>
             <DeleteModal
@@ -61,7 +66,12 @@ const DeptDetail = ({ handlepage, handleRefresh }) => {
             />
           </Col>
           <Col md={2}>
-            <Button variant="outline-dark" size="sm" onClick={handlepage}>
+            <Button
+              variant="outline-dark"
+              size="sm"
+              onClick={handlepage}
+              style={{ width: "80%" }}
+            >
               수정
             </Button>
           </Col>

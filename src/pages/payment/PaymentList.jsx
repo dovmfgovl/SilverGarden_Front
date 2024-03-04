@@ -69,61 +69,53 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
           <h5>결제목록</h5>
           <hr />
         </div>
-        <Row gutter={30}>
-          <Col>
-            <Form onSubmit={handleSubmit(handleSearch)}>
-              <div className={styles.search}>
-                <div className="col-3">
-                  <select
-                    style={{ fontSize: "13px" }}
-                    id="gubun"
-                    className="form-select"
-                    aria-label="분류"
-                    {...register("gubun")}
-                  >
-                    <option defaultValue value="name" selected>
-                      회원명
-                    </option>
-                    <option value="phone">연락처</option>
-                  </select>
-                </div>
-                <div className="col-7">
-                  <input
-                    style={{ fontSize: "13px" }}
-                    {...register("keyword", {
-                      onChange: (e) => handleKeyword(e.target.value),
-                    })}
-                    type="text"
-                    id="keyword"
-                    className="form-control"
-                    placeholder="검색어를 입력하세요"
-                    aria-label="검색어를 입력하세요"
-                    aria-describedby="btn_search"
-                  />
-                </div>
-                <div className="col-1" style={{ marginRight: "5px" }}>
-                  <Button
-                    variant="outline-success"
-                    size="sm"
-                    type="submit"
-                    style={{ fontSize: "13px", width: "40px" }}
-                  >
-                    검색
-                  </Button>
-                </div>
-                <div className="col-2">
-                  <Button
-                    variant="outline-warning"
-                    size="sm"
-                    onClick={handleReset}
-                  >
-                    전체조회
-                  </Button>
-                </div>
-              </div>
-            </Form>
-          </Col>
-        </Row>
+        <Form onSubmit={handleSubmit(handleSearch)}>
+          <div className={styles.search}>
+            <div className="col-2">
+              <select
+                style={{ fontSize: "13px" }}
+                id="gubun"
+                className="form-select"
+                aria-label="분류"
+                {...register("gubun")}
+              >
+                <option defaultValue value="name" selected>
+                  회원명
+                </option>
+                <option value="phone">연락처</option>
+              </select>
+            </div>
+            <div className="col-7">
+              <input
+                style={{ fontSize: "13px" }}
+                {...register("keyword", {
+                  onChange: (e) => handleKeyword(e.target.value),
+                })}
+                type="text"
+                id="keyword"
+                className="form-control"
+                placeholder="검색어를 입력하세요"
+                aria-label="검색어를 입력하세요"
+                aria-describedby="btn_search"
+              />
+            </div>
+            <div className="col-auto">
+              <Button
+                variant="outline-success"
+                size="sm"
+                type="submit"
+                style={{ fontSize: "13px" }}
+              >
+                검색
+              </Button>
+            </div>
+            <div className="col-2">
+              <Button variant="outline-warning" size="sm" onClick={handleReset}>
+                전체조회
+              </Button>
+            </div>
+          </div>
+        </Form>
         <Row gutter={10}>
           <Col>
             <div className="col-2">
