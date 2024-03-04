@@ -1,20 +1,40 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap';
-import styles from "./empInfo.module.css";
+import styled from 'styled-components';
+
+const PaginationStyled = styled(Pagination)`
+  .page-link {
+    color: #000; 
+    background-color: #fff;
+    border: 1px solid #ccc; 
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #555;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    border-color: #ccc;
+  }
+
+  .page-link:focus, .page-link:hover {
+    color: #000;
+    background-color: #fafafa; 
+    border-color: #ccc;
+  }
+`;
 
 const EmpListPagination = ({currentPage, totalPosts, postPerPage, handleSetCurrentPage}) => {
   
   const pageNumbers = [];
-  // 총 페이지 수 계산
   const totalPages = Math.ceil(totalPosts / postPerPage);
-
   const startPage = Math.max(currentPage - 2, 1);
   const endPage = Math.min(startPage + 4, totalPages);
 
-  // 페이지 번호 배열 생성
   for (let i = startPage; i <= endPage; i++) {
     pageNumbers.push(i);
   }
+
   const handlePrev = () =>{
     if(currentPage > 1){
       handleSetCurrentPage(currentPage-1);
@@ -26,19 +46,20 @@ const EmpListPagination = ({currentPage, totalPosts, postPerPage, handleSetCurre
       handleSetCurrentPage(currentPage+1);
     }
   }
+
   return (
-      <Pagination className={styles.empListPagination}>
+    <PaginationStyled className="mb-0">
       <Pagination.First onClick={() => handleSetCurrentPage(1)} />
-        <Pagination.Prev onClick={handlePrev}/>
-        {pageNumbers.map(number => (
-          <Pagination.Item active={number === currentPage} onClick={() => handleSetCurrentPage(number)} key={number}>
-            {number}
-          </Pagination.Item>
-        ))}
-        <Pagination.Next onClick={handleNext} />
-        <Pagination.Last onClick={() => handleSetCurrentPage(totalPages)} />
-      </Pagination>
+      <Pagination.Prev onClick={handlePrev}/>
+      {pageNumbers.map(number => (
+        <Pagination.Item active={number === currentPage} onClick={() => handleSetCurrentPage(number)} key={number}>
+          {number}
+        </Pagination.Item>
+      ))}
+      <Pagination.Next onClick={handleNext} />
+      <Pagination.Last onClick={() => handleSetCurrentPage(totalPages)} />
+    </PaginationStyled>
   )
 }
 
-export default EmpListPagination
+export default EmpListPagination;
