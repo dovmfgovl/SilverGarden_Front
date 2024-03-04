@@ -127,6 +127,7 @@ const CommonCalendar = ({
         [columnNames.start]: formData.start,
         [columnNames.end]: formData.end,
         [columnNames.no]: formData.no,
+        [columnNames.content]: formData.content,
       };
       await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
       onEventDelete(transformedData);

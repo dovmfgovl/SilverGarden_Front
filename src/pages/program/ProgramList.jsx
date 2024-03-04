@@ -11,8 +11,6 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
     const[currentPage, setCurrentPage] = useState(1)
     const postPerPage = 10;
     const totalPosts = programList.length
-    // console.log(totalPosts);
-    // 시작 인덱스와 끝 인덱스 계산
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
     const selectedlist = [...programList.slice(indexOfFirstPost, indexOfLastPost)]
@@ -30,8 +28,8 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
 
     const today = new Date();
     const getGubun = (start, end) => {
-        const startDate = new Date(start); // 오라클에서 받은 Date를 JavaScript Date 객체로 변환
-        const endDate = new Date(end); // 오라클에서 받은 Date를 JavaScript Date 객체로 변환
+        const startDate = new Date(start); 
+        const endDate = new Date(end); 
     
         if (endDate < today) {
             return '종료';
