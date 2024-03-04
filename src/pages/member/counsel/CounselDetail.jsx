@@ -15,7 +15,6 @@ const CounselDetail = ({counsel,getCounsel}) => {
     const handleDelete= async()=>{
       if(window.confirm("이 상담일지를 삭제하시겠습니까?")){
         const res = await counselDelete(counsel.COUNSEL_NO);
-        console.log(res.data);
         alert("삭제되었습니다");
         getCounsel()
       }
