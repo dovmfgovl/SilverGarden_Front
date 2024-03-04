@@ -23,6 +23,7 @@ import ApprovalDocUpdate from "./approvalupdate/ApprovalDocUpdate";
 
 const Approval = () => {
   const accessToken = localStorage.getItem("accessToken");
+
   if (accessToken) {
     UserAPage()
       .then((response) => {

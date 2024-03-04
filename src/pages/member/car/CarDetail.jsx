@@ -63,7 +63,6 @@ const handleSaveChanges=()=>{
 const handleDelete= async()=>{
   if(window.confirm("이 차량을 삭제하시겠습니까?")){
     const res = await shuttleDelete(selectedCar.SHUTTLE_NO);
-    console.log(res.data);
     alert("삭제되었습니다");
     dispatch(getCarList())
     dispatch(setDetail())

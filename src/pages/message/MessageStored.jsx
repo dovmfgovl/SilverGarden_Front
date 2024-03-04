@@ -11,7 +11,6 @@ const MessageStored = ({empData, handleMenu}) => {
   const getList = async () =>{
     const response = await messageStoredList({e_no: empData.e_no})
     setStoredList(response.data);
-    console.log(response.data);
   }
   useEffect(()=>{
     getList();

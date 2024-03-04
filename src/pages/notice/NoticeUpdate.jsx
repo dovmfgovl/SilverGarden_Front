@@ -15,14 +15,12 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
       n_content: detail.N_CONTENT,
       e_no: detail.REG_ID
     });
-    console.log(noticeDetail);
 
     ////quillEditor/////////////////////////
     const  quillRef = useRef()
     const [images, setImages] = useState([])
   
     const handleContent = useCallback((value) => {
-      console.log(value)
       setNoticeDetail({...noticeDetail, n_content: value})
     },[])
   
@@ -37,7 +35,6 @@ const NoticeUpdate = ({noticeList, noticeNo, handlePage, fileList}) => {
 
   const handleUpdate = async () =>{//서브밋이 요청되었을 때 일하는 함수
     const response = await noticeUpdate(noticeDetail);
-    console.log(response.data);
     alert("수정이 완료되었습니다.")
     handlePage('공지상세', noticeNo);
   }

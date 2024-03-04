@@ -17,7 +17,6 @@ const ApprovalLineModal = (props) => {
 
   const requestDeptData = async () =>{
     const response = await getDeptData();
-    console.log(response.data);
     setDeptData(response.data);
   } 
   useEffect(()=>{

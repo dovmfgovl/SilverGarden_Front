@@ -102,14 +102,15 @@ const EmpExp = ({ empDetail }) => {
     <div className={styles.empBaseInfo}>
       <Table responsive className={styles.empBaseTable}>
         <thead>
-          <tr>
-            <th>회사명</th>
-            <th>부서</th>
-            <th>직급</th>
-            <th>담당업무</th>
-            <th>재직기간</th>
-            <th></th>
-          </tr>
+        <tr>
+          <th>#</th>
+          <th>회사명</th>
+          <th>부서</th>
+          <th>직급</th>
+          <th>담당업무</th>
+          <th>재직기간</th>
+          <th></th>
+        </tr>
         </thead>
         <tbody>
           {filteredExList.map((ex, index) => (

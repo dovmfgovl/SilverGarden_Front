@@ -16,7 +16,6 @@ const MemberDelete = () => {
       CLIENT_ID:selectedMember.CLIENT_ID
     }
     const res = await memberDelete(client.CLIENT_ID)
-    console.log(res.data);
     alert("삭제되었습니다");
     handleClose()
     dispatch(getMemList())

@@ -28,7 +28,6 @@ class CarCalendarLogic {
                     url: process.env.REACT_APP_SPRING_IP + url,
                     data: event,
                 });
-                console.log(response);
                 resolve(response.data);
             } catch (error) {
                 console.error('Error adding calendar event:', error);
@@ -65,7 +64,6 @@ class CarCalendarLogic {
                     url: process.env.REACT_APP_SPRING_IP + url,
                     params: event
                 });
-                console.log(response);
                 resolve(response.data);
             } catch (error) {
                 console.error('Error deleting calendar event:', error);

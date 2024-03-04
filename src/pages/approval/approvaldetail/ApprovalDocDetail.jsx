@@ -31,11 +31,8 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
     setFileList(files);
   }
 
-  console.log(docDetail);
-
   const handleFileDownload = (filename) =>{
     const response = approvalFileDownload(filename);
-    console.log(response);
 }
 
   useEffect(()=>{
@@ -61,8 +58,6 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
   const handleApprovalClick = () =>{
     const myLev = lineData.approvalLine.filter((approval)=> approval.ap_id === empData.e_no)[0].ap_lev
     const levelCheck = lineData.approvalLine.filter((approval) => approval.ap_category === "결재" && approval.ap_lev < myLev && approval.ap_result === "대기중").length
-    console.log(myLev);
-    console.log(levelCheck);
     if(levelCheck === 0 ){
       setModalShow(true)
     }else{
@@ -83,7 +78,6 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
   },[]);
 
   const handleContent = useCallback((value) => {
-    console.log(value)
     setContent(value)
   },[])
   /////////////////////////////////quill end////////////////////////
@@ -114,7 +108,7 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
         )}
        {lineData.agreement && lineData.agreement.map(/* 내가 합의자인 경우 */
         (agreement)=> agreement.ap_id === empData.e_no && agreement.ap_result === '대기중' && <Button className="mx-2" variant="primary" onClick={()=>setModalShow(true)}>합의</Button>)}
-        <CommentModal show={modalShow} onHide={onHide} docNo={docNo} lineData={lineData} empData={empData} handleMenu={handleMenu}/>
+        <CommentModal show={modalShow} onHide={onHide} docNo={docNo} docDetail={docDetail} lineData={lineData} empData={empData} handleMenu={handleMenu}/>
       </div>
       <div className={styles.approvalDetailHeader}>
         <div>{docDetail && docDetail.d_category}</div>

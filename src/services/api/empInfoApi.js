@@ -34,6 +34,23 @@ export const empExpListDB = (emp) => {
         }
     });
 };
+export const empCertiListDB = (emp) => {
+    return new Promise((resolve, reject) => {
+        try {
+            console.log(emp);
+            const response = axios({
+                method: "get",
+                url: process.env.REACT_APP_SPRING_IP + "emp/certiList",
+                params: emp,
+            });
+            resolve(response);
+            console.log(response);
+
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
 
 export const empDetailDB = (emp) => {
     return new Promise((resolve, reject) => {
@@ -169,6 +186,23 @@ export const empCertiInsertDB = (emp) => {
         resolve(response);
         } catch (error) {
         reject(error);
+        }
+    });
+};
+
+export const empCertiDeleteDB = (certiNo) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const response = axios({
+                method: "delete",
+                url: process.env.REACT_APP_SPRING_IP + "emp/certiDelete",
+                params: {certi_no: certiNo},
+            });
+            resolve(response);
+            console.log(response);
+
+        } catch (error) {
+            reject(error);
         }
     });
 };

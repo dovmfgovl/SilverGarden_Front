@@ -32,7 +32,6 @@ const ApprovalListHeader = ({handleMenu, empData, handleFilterdList}) => {
 
   const handleSearch = (e) =>{
     if(e.target.innerText === '전체목록'){
-      console.log("전체목록");
       handleFilterdList()
     }else{
       handleFilterdList(gubun, keyword)
