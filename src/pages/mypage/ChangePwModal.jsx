@@ -40,9 +40,7 @@ const ChangePwModal = ({ show, handleClose }) => {
     E_PASSWORD: updatedEmployee.E_PASSWORD,
    }
    try {
-      console.log(updatedPassword);
       const res = await changePw(updatedPassword)
-      console.log(res.data);
       alert("비밀번호가 변경되었습니다!")
       handleClose()
    } catch (error) {
@@ -53,7 +51,7 @@ const ChangePwModal = ({ show, handleClose }) => {
   
   // 폼 제출 핸들러
   const onSubmit = (data) => {
-    console.log(data);
+   // console.log(data);
   };
 
   return (
