@@ -1,0 +1,36 @@
+.paymentListWrap {
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "paymentSidebarWrap paymentTitleBar"
+  "paymentSidebarWrap innerContentWrap"
+  ;
+  grid-template-columns: 1fr 6fr;
+  grid-template-rows: 70px 1fr;  
+  background-color: rgb(231, 233, 246);
+  overflow-y: auto;
+}
+
+.paymentSidebarWrap{
+  grid-area: paymentSidebarWrap;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  margin: 20px;
+}
+
+.paymentTitleBar{
+  grid-area: paymentTitleBar;
+  background-color: rgb(231, 233, 246);
+  font-size: 2.0rem;
+  padding: 10px;
+}
+
+.innerContentWrap{
+  height: 100%;
+  background-color: rgb(231, 233, 246);
+  padding: 0 0 20px 0;
+}
+
+

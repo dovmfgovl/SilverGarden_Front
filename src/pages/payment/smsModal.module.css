@@ -1,0 +1,32 @@
+.body{
+  height: 100%;
+  /* min-width: 1100PX; */
+  display: grid;
+  grid-template-areas: 
+  "id name"
+  "phone price"
+  "text text"
+  ;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+}
+.id{
+  grid-area: id;
+  margin-bottom: 5px;
+}
+.name{
+  grid-area: name;
+}
+.phone{
+  grid-area: phone;
+}
+.price{
+  grid-area: price;
+}
+.text{
+  grid-area: text;
+}
+.clienttable{
+  font-size: 11px;
+}
