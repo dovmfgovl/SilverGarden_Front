@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmpList, saveEmpDetails, setDetail } from '../../redux/chooseEmpSlice';
 import { changePw } from '../../services/api/mypageApi';
 
 // 비밀번호 변경 모달 컴포넌트
