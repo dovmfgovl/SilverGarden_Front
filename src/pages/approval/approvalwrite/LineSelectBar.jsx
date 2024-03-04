@@ -17,7 +17,6 @@ const LineSelectBar = ({empData, handleLineData, lineData}) => {
       }
       const approvalLineList = [...lineData.approvalLine, {ap_id:empData.e_no, ap_name:empData.e_name, ap_category:"결재", ap_rank:empData.e_rank}]
       const updatedLineData = {...lineData, approvalLine: approvalLineList};
-      console.log(updatedLineData);
       handleLineData(updatedLineData)
     }
     else if(appMethod === "합의" && empData.e_no !== ""){

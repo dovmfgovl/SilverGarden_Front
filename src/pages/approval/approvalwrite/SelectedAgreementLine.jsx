@@ -5,7 +5,6 @@ const SelectedAgreementLine = ({lineData, handleLineData}) => {
   const handleDelete = (ap_id) =>{
     if(lineData.agreement.length !==0){
       const updatedData = [...lineData.agreement.filter((element) => element.ap_id !== ap_id)]
-      
       handleLineData({...lineData, agreement: updatedData});
     }
   }

@@ -19,6 +19,7 @@ import CarInfo from "./car/CarInfo";
 
 
 const Member = () => {
+
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     UserBPage()
@@ -29,6 +30,11 @@ const Member = () => {
         console.error(error);
       });
   }
+  
+  useEffect(()=>{
+
+  },[])
+
   const list = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {

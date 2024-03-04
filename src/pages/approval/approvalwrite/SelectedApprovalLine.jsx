@@ -6,7 +6,6 @@ const SelectedApprovalLine = ({lineData, handleLineData}) => {
   const handleDelete = (ap_id) =>{
     if(lineData.approvalLine.length !==0){
       const updatedData = [...lineData.approvalLine.filter((element) => element.ap_id !== ap_id)]
-      
       handleLineData({...lineData, approvalLine: updatedData});
     }
   }

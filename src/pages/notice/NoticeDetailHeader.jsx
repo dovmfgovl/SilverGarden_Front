@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const NoticeDetailHeader = ({noticeDetail, handlePage, empData}) => {
   const detail = {...noticeDetail}
-  const navigation = useNavigate();
 
   const handleUpdate = () =>{
     handlePage("공지수정", noticeDetail.N_NO)//Notice로 현재 공지글의 번호를 넘겨줌
@@ -15,7 +14,6 @@ const NoticeDetailHeader = ({noticeDetail, handlePage, empData}) => {
   const handleDelete = async () =>{
     if(window.confirm("정말 삭제하시겠습니까?")){
       const response =  await noticeDelete(noticeDetail.N_NO);
-      console.log(response.data);
       alert("삭제가 되었습니다");
       handlePage("전체공지")
     }

@@ -59,7 +59,6 @@ const empData = useSelector(state => state.userInfoSlice)//empData내 데이터 
 const [messageDetail, setMessageDetail] = useState("");
 
 const handleMenu = (menuTitle, messageDetail) =>{//사이드바 메뉴를 조작하는 함수
-  console.log(menuTitle, messageDetail);
   setPage(menuTitle)
   if(messageDetail){
     setMessageDetail(messageDetail)

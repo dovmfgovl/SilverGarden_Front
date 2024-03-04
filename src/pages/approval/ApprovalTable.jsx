@@ -1,13 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Table } from 'react-bootstrap'
 import styles from './approval.module.css'
 
 const ApprovalTable = ({appList, handleMenu}) => {
-  const [isChecked, setChecked] = useState(false);
-
-  const handleAllCheck= () =>{
-    setChecked(current => !current)
-  }
 
   return (
     <>

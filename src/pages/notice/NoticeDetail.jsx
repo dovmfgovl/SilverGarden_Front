@@ -14,7 +14,6 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList, empData
   const getDetail = async () => {//해당 문서와 첨부파일 정보를 가져오는 함수 선언
     const response =  await getNoticeDetail(noticeNo);
     const detailList = response.data;
-    console.log(detailList);
     setNoticeDetail({...detailList[0]});//받아온 값중 공지글에 대한 정보만 detail에 담음
     
     let tempList = [];//임시배열생성
@@ -26,7 +25,6 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList, empData
       handleFileList(tempList);
       //setFileList(tempList);//파일명 배열을 state에 저장
     }
-    console.log(fileList);
 
   useEffect(()=>{
     getDetail();
@@ -34,7 +32,6 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList, empData
 
   const handleFileDownload = (filename) =>{
       const response = noticeFileDownload(filename);
-      console.log(response);
   }
 
   return (
@@ -43,7 +40,6 @@ const NoticeDetail = ({noticeNo , handlePage , handleFileList, fileList, empData
     <div className={styles.noticeDetailLayout}>
       <div className={styles.noticeReturnBtn}>
         <Button variant="secondary" className='ms-3 mb-2' onClick={()=>{
-        console.log("클릭");
         handlePage("전체공지")
       }}>목록</Button>{' '}
       </div>
