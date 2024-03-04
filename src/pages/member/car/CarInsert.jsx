@@ -35,7 +35,6 @@ const CarInsert = () => {
         }, []);
         
         const handleSubmit=async()=>{
-            console.log('submit');
             const shuttle={
                 SHUTTLE_TYPE:type,
                 SHUTTLE_DRIVER:driver,

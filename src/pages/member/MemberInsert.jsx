@@ -94,8 +94,6 @@ const MemberInsert = () => {
     try {
       console.table(client);
       const res = await memberInsert(client);
-      const responseData = JSON.parse(res.data);
-      console.log(responseData);
       alert("회원 정보가 성공적으로 저장되었습니다.");
       handleClose();
       dispatch(getMemList())
