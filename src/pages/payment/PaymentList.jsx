@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setPaymentDetail } from "../../redux/paymentSlice";
 import { Col, Row } from "antd";
+import PaymentPagination from "./PaymentPagination";
 
 const PaymentList = ({ handleRefresh, payList, payment }) => {
   const [selectType, setSelectType] = useState("");
@@ -57,6 +58,20 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
     console.log(e);
     setSelectType("");
     setSelectStatus("");
+  };
+
+  //pagination
+  const totalPosts = payment.length;
+  const [currentPage, setCurrentPage] = useState(1);
+  const postPerPage = 10;
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const selectedlist = [...payment.slice(indexOfFirstPost, indexOfLastPost)];
+  console.log(selectedlist);
+
+  const handleSetCurentPage = (pageNo) => {
+    setCurrentPage(pageNo);
   };
 
   return (
@@ -171,8 +186,8 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
               </tr>
             </thead>
             <tbody>
-              {payment &&
-                payment.map((item, index) => (
+              {selectedlist &&
+                selectedlist.map((item, index) => (
                   <tr key={index} onClick={() => handleRowClick(item)}>
                     <td>{item.PAY_NO}</td>
                     <td>{item.CLIENT_ID}</td>
@@ -185,6 +200,14 @@ const PaymentList = ({ handleRefresh, payList, payment }) => {
                 ))}
             </tbody>
           </Table>
+          <div className={styles.paymentPagination}>
+            <PaymentPagination
+              currentPage={currentPage}
+              totalPosts={totalPosts}
+              postPerPage={postPerPage}
+              handleSetCurentPage={handleSetCurentPage}
+            ></PaymentPagination>
+          </div>
         </div>
         <hr />
         <span className={`${styles.paymentListFooter} row`}>
