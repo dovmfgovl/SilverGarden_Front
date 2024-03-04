@@ -83,3 +83,19 @@ export const adminAtUpdateDB = (at) => {
         }
     });
 };
+
+export const atDeleteDB = (at) => {
+    console.log(at);
+    return new Promise((resolve, reject) => {
+        try {
+            const response = axios({
+                method: "get",
+                url: process.env.REACT_APP_SPRING_IP + "at/atDelete",
+                params: at,
+            });
+            resolve(response);
+        } catch (error) {
+            reject(error);
+        }
+    });
+};

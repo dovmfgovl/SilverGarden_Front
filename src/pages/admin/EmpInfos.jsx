@@ -45,6 +45,9 @@ const EmpInfos = () => {
           <Tab eventKey="exp" title={<span style={{ color: 'black' }}>경력</span>}>
             <EmpExp empDetail={empDetail} />
           </Tab>
+          <Tab eventKey="certi" title={<span style={{ color: 'black' }}>자격증</span>}>
+            <EmpCerti empDetail={empDetail} />
+          </Tab>
         </Tabs>
       </div> 
     </div>    
@@ -53,7 +56,3 @@ const EmpInfos = () => {
 }
 
 export default EmpInfos
-
-//<EmpCerti
-//          empDetail={empDetail}
-//        />

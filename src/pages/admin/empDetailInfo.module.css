@@ -166,7 +166,6 @@
 .previewImg {
   position: absolute;
   top: calc(100% + 10px); /* 버튼 아래에 위치 */
-  left: -50;
   transform: translateX(-24%);
   border: 1px solid #ccc; /* 테두리 추가 */
   border-radius: 4px; /* 테두리 둥글게 만들기 */
@@ -243,7 +242,7 @@
   box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
   white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   transform: translateX(50%) translateY(80%);
 }
 .empSaveButton1:hover {
@@ -262,7 +261,7 @@
   box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
   white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   transform: translateX(40%) translateY(80%);
 }
 .empSaveButton2:hover {
@@ -281,7 +280,7 @@
   box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
   white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   transform: translateX(50%) translateY(80%);
 }
 .empSaveButton3:hover {
@@ -301,7 +300,7 @@
   box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
   white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   transform: translateX(5%);
 }
 .empSaveButton4:hover {
@@ -321,11 +320,11 @@
   box-shadow: 0px 4px 8px rgba(128, 0, 128, 0.2); /* 그림자 효과 추가 */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 효과에 전환 추가 */
   white-space: nowrap; /* 파일 선택 텍스트가 한 줄에 나오도록 설정 */
-  font-size: 0.65rem;
-  transform: translateX(80%);
+  font-size: 0.75rem;
+  transform: translateX(85%);
 }
 .empSaveButton5:hover {
-  transform: translateX(80%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
+  transform: translateX(85%) translateY(-3px);; /* 호버 시 약간 위로 이동하여 입체적인 느낌 표현 */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
 }
 
