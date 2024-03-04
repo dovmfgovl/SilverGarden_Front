@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
 import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
-import CrawilngHome from "../crawling/CrawilngHome";
+import CrawlingHome from "../crawling/CrawlingHome";
 
 
 const Notice = () => {
@@ -38,7 +38,7 @@ const Notice = () => {
       subMenuItems: [
         { label: "전체공지", icon: faList },
         { label: "공지작성", icon: faPenToSquare },
-        { label: "관련공지", icon: faPenToSquare },
+        { label: "관련정보", icon: faPenToSquare },
       ],
     },
   ];
@@ -48,7 +48,7 @@ const Notice = () => {
   };
   ///////sidebar 메뉴  end/////////////
 
-  const [noticePage, setPage] = useState("전체공지"); //기본페이지는 noticeList
+  const [noticePage, setPage] = useState("관련정보"); //기본페이지는 noticeList
   const [noticeNo, setNoticeNo] = useState({});
   const [noticeList, setNoticeList] = useState([]);
   const [fileList, setFileList] = useState([]); //공지상세에서 가져온 파일정보를 관리할 state
@@ -118,7 +118,7 @@ const Notice = () => {
           fileList={fileList}
           />
           )}
-        {noticePage === "관련공지" && <CrawilngHome />}
+        {noticePage === "관련정보" && <CrawlingHome />}
       </div>
     </div>
   );
