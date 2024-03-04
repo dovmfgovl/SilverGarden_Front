@@ -2,7 +2,6 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 import styles from './approvalWrite.module.css'
 const ApprovalWriteLine = ({lineData}) => {
-  console.log("lineData:"+lineData.approvalLine.ename);
   return (
     <div className={styles.approvalLineWrap}>
       <div className={styles.approvalTableHeader}>결재</div>

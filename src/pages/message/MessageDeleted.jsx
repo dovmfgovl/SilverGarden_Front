@@ -11,7 +11,6 @@ const MessageDeleted = ({empData, handleMenu}) => {
   const getList = async () =>{
     const response = await messageDeletedList({e_no: empData.e_no})
     setReceiveList(response.data);
-    console.log(response.data);
   }
   useEffect(()=>{
     getList();

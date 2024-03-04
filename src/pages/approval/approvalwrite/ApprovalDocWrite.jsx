@@ -6,7 +6,7 @@ import QuillEditor from '../../../components/Quill/QuillEditor'
 import ApprovalWriteLine from './ApprovalWriteLine'
 import ApprovalFileUpload from './ApprovalFileUpload'
 import ApprovalLineModal from './ApprovalLineModal'
-import { approvalInsert, approvalVacationRequest } from '../../../services/api/approvalApi'
+import { approvalInsert} from '../../../services/api/approvalApi'
 import VacationRequestForm from './VacationRequestForm'
 import ExpenseReportForm from './ExpenseReportForm'
 
@@ -44,7 +44,6 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
     },[]);
   
     const handleContent = useCallback((value) => {
-      console.log(value)
       setContent(value)
     },[])
     /////////////////////////////////quill end////////////////////////
@@ -53,7 +52,6 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
     const handleSubmit = async (e) =>{//서브밋이 요청되었을 때 일하는 함수
       const title = titleRef.current.value;
       const d_status = e.target.innerText;
-      console.log(d_status);
   
       if("" !== title && "" !== content){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
         const formDataToSend = new FormData();
@@ -65,7 +63,6 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
 
         if(d_status === '임시저장'){//임시저장의 경우 
           const response  = await approvalInsert(formDataToSend);
-          console.log(response.data);
           if(response.data === 'ok'){
             alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
             handleMenu('결재대기함');
@@ -86,20 +83,11 @@ const ApprovalDocWrite = ({empData, handleMenu}) => {
 
         if(line.length!==0){// 합의나 결재가 있는경우에만 결재라인을 넣어줌
           formDataToSend.append('line', JSON.stringify(line))
-          if(docType === '휴가신청서'){//휴가신청서의 경우 다른 api를 태움
-            const response  = await approvalVacationRequest(formDataToSend);
-            if(response.data === 'ok'){
-              alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
-              handleMenu('결재요청함');
-            }
-          }else{//나머지의 경우 동일하게 처리함
             const response  = await approvalInsert(formDataToSend);
             if(response.data === 'ok'){
               alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
               handleMenu('결재요청함');
             }
-          }
-
         }else{
           alert("결재라인이 지정되지 않았습니다.")
           return;

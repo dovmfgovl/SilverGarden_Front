@@ -10,7 +10,6 @@ const MessageWrite = ({empData, handleMenu}) => {
   const [modalShow, setModalShow] = useState(false);
   const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
   const [receiverList, setReceiverList] = useState([])
-  console.log(receiverList);
 
   const handleFile = (e) =>{//파일리스트를 업데이트할 함수선언
     const selectedFiles = Array.from(e.target.files);
@@ -41,7 +40,6 @@ const MessageWrite = ({empData, handleMenu}) => {
       alert("받는사람을 설정해주세요")
       return
     }
-    console.log(title);
 
     if("" !== title && "" !== content){
       const formDataToSend = new FormData();
@@ -55,9 +53,8 @@ const MessageWrite = ({empData, handleMenu}) => {
           formDataToSend.append('files', fileList[i]);
         }
       }
-      console.log(formDataToSend);
+
       const response = await messageSend(formDataToSend)
-      console.log(response.data);
       if(response.data === "ok"){
         alert("쪽지를 성공적으로 보냈습니다.")
         handleMenu("보낸쪽지함")

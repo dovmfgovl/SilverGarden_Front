@@ -13,7 +13,6 @@ const MessageAddressBook = (props) => {
 
   const requestDeptData = async () =>{
     const response = await getDeptData();
-    console.log(response.data);
     setDeptData(response.data);
   } 
   useEffect(()=>{
@@ -25,7 +24,6 @@ const MessageAddressBook = (props) => {
   }
 
   const handleEmpData = (data) => {
-    console.log(data);
     setEmpData(data)
   }
 

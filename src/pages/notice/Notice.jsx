@@ -57,7 +57,6 @@ const Notice = () => {
   const getList = async (params) => {
     //DB에서 리스트를 불러오는 함수
     const response = await getNoticeList(params);
-    console.log(response.data);
     setNoticeList(response.data);
   };
 
@@ -79,10 +78,7 @@ const Notice = () => {
     //파일리스트를 변경하는 함수 선언, 프롭스로 넘김
     setFileList(list);
   };
-
-  const commonEvents = useSelector((state) => state.commoncalendarSlice);
-  console.log(commonEvents.events);
-
+  
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>

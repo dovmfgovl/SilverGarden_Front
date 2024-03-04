@@ -9,11 +9,9 @@ const MessageDeletedDetail = ({handleMenu, empData, messageDetail}) => {
 
   const handleFileDownload = (filename) =>{
     const response = messageFileDownload(filename);
-    console.log(response.data);
   }
   const handleStoreBtn = async () =>{
     const response = await messageStore({r_id:empData.e_no, me_no:messageDetail.me_no})
-    console.log(response.data);
     if(response.data === "ok"){
       alert("쪽지가 보관함에 저장되었습니다.")
       handleMenu("받은쪽지함")
@@ -22,7 +20,6 @@ const MessageDeletedDetail = ({handleMenu, empData, messageDetail}) => {
   
   const handleCompleteDeleteBtn = async () =>{
     const response = await messageCompleteDelete({r_id:empData.e_no, me_no:messageDetail.me_no})
-    console.log(response.data);
     if(response.data === "ok"){
       alert("쪽지가 삭제되었습니다.")
       handleMenu("받은쪽지함")

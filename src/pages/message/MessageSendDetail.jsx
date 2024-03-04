@@ -7,10 +7,11 @@ import { messageFileDownload } from '../../services/api/messageApi'
 
 const MessageSendDetail = ({handleMenu, empData, messageDetail}) => {
   console.log(messageDetail);
+
   const handleFileDownload = (filename) =>{
     const response = messageFileDownload(filename);
-    console.log(response.data);
   }
+  
   return (
     <div className={styles.detailWrap}>
     <div className={styles.detailBtnGroup}>

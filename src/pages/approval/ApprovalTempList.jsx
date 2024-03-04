@@ -9,7 +9,6 @@ const ApprovalTempList = ({handleMenu, empData}) => {
     const[tempList, setTempList] = useState([]);
     const getList = async () =>{
       const response = await approvalTempList({e_no: empData.e_no})
-      console.log(response.data);
       setTempList(response.data);
     }
     const handleFilterdList = async (gubun, keyword) =>{

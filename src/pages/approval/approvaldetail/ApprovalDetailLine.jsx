@@ -6,7 +6,6 @@ import agreementImg from '../../../assets/images/합의.png'
 import denyImg from '../../../assets/images/반려.png'
 
 const ApprovalDetailLine = ({lineData}) => {
-  console.log(lineData);
   return (
     <div className={styles.approvalLineWrap}>
     <div className={styles.approvalTableHeader}>결재</div>

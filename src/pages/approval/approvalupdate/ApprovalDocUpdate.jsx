@@ -32,7 +32,6 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
     setFileList(files);
     setDocType(response.data[0].d_category)
     titleRef.current.textContent = response.data[0].d_title
-    console.log(response.data[0].d_title);
   }
 
   const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
@@ -58,7 +57,6 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
     },[]);
   
     const handleContent = useCallback((value) => {
-      console.log(value)
       setContent(value)
     },[])
     /////////////////////////////////quill end////////////////////////
@@ -66,7 +64,6 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
     const handleSubmit = async (e) =>{//서브밋이 요청되었을 때 일하는 함수
       const title = titleRef.current.value;
       const d_status = e.target.innerText;
-      console.log(d_status);
   
       if("" !== title && "" !== content){//제목과 내용이 있어야 서버에 요청 가능하도록 필터링
         const formDataToSend = new FormData();
@@ -78,7 +75,6 @@ const ApprovalDocUpdate = ({handleMenu, docNo, empData}) => {
 
         if(d_status === '임시저장'){//임시저장의 경우 
           const response  = await approvalInsert(formDataToSend);
-          console.log(response.data);
           if(response.data === 'ok'){
             alert(`문서가 ${d_status}되었습니다.`)//상신, 혹은 임시저장
             handleMenu('결재대기함');
