@@ -3,6 +3,7 @@ import CrawlingComponent from './CrawlingComponent'
 import { UserAPage } from '../../services/auth/UserApi';
 import { crawlingListDB } from '../../services/api/crawlingApi';
 import styles from './crawling.module.css';
+import CrawlingSearchBar from './CrawlingSearchBar'
 
 const CrawlingHome = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -16,26 +17,22 @@ const CrawlingHome = () => {
         });
     }
     const [dataList, setDataList] = useState([]);
-    
+
+    useEffect(() => {
+        getDataList();
+    }, []);
+    console.log(dataList); //undefined
+
     const getDataList = async () => {
         console.log("getDataList");
         const response = await crawlingListDB();
         console.log(response);
         setDataList(response);
     };
-
-    useEffect(() => {
-        getDataList();
-    }, []);
-
-    const handlePage = (pageType, crawledNo) => {
-        console.log(`페이지 유형: ${pageType}, 크롤링 번호: ${crawledNo}`);
-        // 크롤링 번호 여기선 뜨네
-    };
-
     return (
         <div className={styles.crawlingListLayout}>
-            <CrawlingComponent dataList={dataList} getDataList={getDataList} handlePage={handlePage}/>
+            <div className={styles.crawlingHeader}><CrawlingSearchBar getDataList={getDataList}></CrawlingSearchBar></div>
+            <CrawlingComponent dataList={dataList} getDataList={getDataList}/>
         </div>
     )
 }
