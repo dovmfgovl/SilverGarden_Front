@@ -21,13 +21,13 @@ const ExcelForm = ({empList}) => {
       const wb = XLSX.utils.book_new();
       const headerStyle = {
         font: { bold: true, color: { rgb: '000000' }, name: '함초롱바탕', sz: 13 },
-        fill: { fgColor: { rgb: 'BC8F8F' } },
+        fill: { fgColor: { rgb: 'B588F7' } },
         alignment: { horizontal: 'center', vertical: 'center' },
         border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
       };
       const dataStyle = {
         font: { color: { rgb: '000000' }, name: '함초롱바탕', sz: 11 },
-        fill: { fgColor: { rgb: 'FFFAFA' } },
+        fill: { fgColor: { rgb: 'FFFFFF' } },
         alignment: { horizontal: 'center', vertical: 'center' },
         border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
       };
@@ -47,13 +47,13 @@ const ExcelForm = ({empList}) => {
         { v: '전화번호', t: 's', s: headerStyle },
       ];
 
-      const dataRows = empList.map(emp => [
-        { v: emp.E_NO, t: 's', s: dataStyle },  // 사원번호
-        { v: emp.E_STATUS, t: 's', s: dataStyle },  // 현황
-        { v: emp.E_NAME, t: 's', s: dataStyle },  // 사원명
-        { v: emp.DEPT_NAME, t: 's', s: dataStyle },  // 사원명
-        { v: emp.E_RANK, t: 's', s: dataStyle },  // 직급
-        { v: emp.E_PHONE, t: 's', s: dataStyle },  // 전화번호
+      const dataRows = empList.map(emp => [ // 중간에 값이 비어도 스타일 적용
+        { v: emp.E_NO || '', t: 's', s: emp.E_NO ? dataStyle : dataStyle },  // 사원번호
+        { v: emp.E_STATUS || '', t: 's', s: emp.E_STATUS ? dataStyle : dataStyle },  // 현황
+        { v: emp.E_NAME || '', t: 's', s: emp.E_NAME ? dataStyle : dataStyle },  // 사원명
+        { v: emp.DEPT_NAME || '', t: 's', s: emp.DEPT_NAME ? dataStyle : dataStyle },  // 부서
+        { v: emp.E_RANK || '', t: 's', s: emp.E_RANK ? dataStyle : dataStyle },  // 직급
+        { v: emp.E_PHONE || '', t: 's', s: emp.E_PHONE ? dataStyle : dataStyle },  // 전화번호
       ]);
 
       const rows = [headerRow, ...dataRows];

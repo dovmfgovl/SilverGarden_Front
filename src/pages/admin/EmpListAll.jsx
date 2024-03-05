@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import EmpRow from "./EmpRow";
 import { Button, Form } from "react-bootstrap";
 import styles from "./empInfo.module.css";
+import EmpExcelDownload from './EmpExcelDownload';
 import ExcelForm from './ExcelForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, setShowAll, toggleIncludeResigned } from '../../redux/empInfosSlice';
