@@ -24,6 +24,7 @@ const ApprovalDocDetail = ({empData, handleMenu, docNo}) => {
     const response = await getApprovalDetail({d_no: docNo})
     setDocDetail(response.data[0])
     setContent(response.data[0].d_content)
+    console.log(response.data);
     const approval = response.data[0].line.filter((element)=> element.ap_category === '결재')
     const agreement = response.data[0].line.filter((element)=> element.ap_category === '합의')
     const files = response.data[0].file

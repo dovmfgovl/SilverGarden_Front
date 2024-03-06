@@ -31,7 +31,7 @@ const CarStatisticAll = ({calList}) => {
     >
     <Table className={styles.memberTable} dataSource={data} bordered pagination={{position:['bottomCenter'],size:['small'],defaultPageSize:[10]}} >
         <Table.Column title="이용날짜" dataIndex="serv_date" key="SERV_USER" align='center'/>
-        <Table.Column title="이름" dataIndex="serv_user" key="SERV_USER" align='center'/>
+        <Table.Column title="이용자명" dataIndex="serv_user" key="SERV_USER" align='center'/>
         <Table.Column title="이용목적" dataIndex="serv_title" key="SERV_TITLE" align='center'/>
         <Table.Column title="이용내용" dataIndex="serv_info" key="SERV_INFO" align='center'/>
         <Table.Column title="시작시간" dataIndex="serv_start" key="SERV_END" align='center'/>
