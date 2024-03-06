@@ -6,6 +6,7 @@ import { Col, Row } from 'antd';
 import { DeptNameDB } from '../../services/api/empCreateApi';
 import styled from 'styled-components';
 import EmpUploadImg from './EmpUploadImg';
+import { JobListDB } from '../../services/api/deptApi';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,15 @@ const EmpDetail = () => {
   const [updatedEmployee, setUpdatedEmployee] = useState(memoSelectedEmployee); // 수정된 직원 정보를 관리하는 state
   const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee); // 원래의 직원 정보를 관리하는 state
   const [dept, setDept] = useState([]);
+  const [occup, setOccup] = useState([]);
   const [e_password, setPassword] = useState("");
+  
+  const deptCd = dept.find(item => item.CD_VALUE === updatedEmployee.DEPT_NAME)?.CD;
+  console.log(deptCd);
+  const empData = useSelector((state) => state.userInfoSlice);
+
+  console.log(updatedEmployee.DEPT_NAME);
+  console.log(dept.map(item => item.CD_VALUE));
 
   useEffect(() => {
     // 선택된 직원 정보가 변경되면 해당 정보로 state 업데이트
@@ -31,7 +40,17 @@ const EmpDetail = () => {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 한 번 부서 정보를 가져오도록 설정
     deptName();
-  }, []);
+    if (updatedEmployee.DEPT_NAME) {
+      job(); // 부서가 선택되면 직종 데이터 가져오기
+    }
+
+  }, [deptCd]);
+
+/*   useEffect(() => {
+    if (updatedEmployee.DEPT_NAME) {
+      job(); // 부서가 선택되면 직종 데이터 가져오기
+    }
+  }, [updatedEmployee.DEPT_NAME]);  */ 
 
     const deptName = () => {
     console.log("deptName");
@@ -44,6 +63,26 @@ const EmpDetail = () => {
         console.log(error);
       });
   };
+
+
+
+  // deptName에 있는 CD와 같은 CD 가져오기
+  const job = () => {
+    console.log("job");
+    const data = {
+      CD : deptCd,
+      MOD_ID: empData.e_no
+    }
+    console.log(data);
+    JobListDB(data)
+      .then((response) => {
+        console.log(response);
+        setOccup(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  } 
 
   const passwordGenerate = () => {
     const chars =
@@ -140,6 +179,11 @@ const EmpDetail = () => {
                   dept.map((item, index) => (
                     <option key={index} value={item.CD_VALUE}>{item.CD_VALUE}</option>
                   ))
+                ) : name === 'E_OCCUP' ? (
+                  // 직종 선택 옵션을 동적으로 가져오기
+                  occup.map((item, index) => (
+                    <option key={index} value={item.CD_VALUE}>{item.CD_VALUE}</option>
+                  ))
                 ) : (
                   // 기존의 옵션들은 그대로 사용
                   options.map((option, index) => (
@@ -178,7 +222,7 @@ const EmpDetail = () => {
     { label: '비밀번호', name: 'E_PASSWORD', type: 'password' },
     { label: '권한', name: 'E_AUTH', type: 'select', options: ['ADMIN', 'USERA', 'USERB'] },
     { label: '현황', name: 'E_STATUS', type: 'select', options: ['재직', '휴직', '퇴직'] },
-    { label: '직종', name: 'E_OCCUP', type: 'select', options: ['간호사', '간호조무사', '물리치료사', '사회복지사', '요양보호사', '조리사', '활동지원사', '강사'] },
+    { label: '직종', name: 'E_OCCUP', type: 'select', options: occup.map(item => item.CD_VALUE) },
     { label: '직급', name: 'E_RANK', type: 'select', options: ['시설장', '팀장', '사원'] },
   ];
   
