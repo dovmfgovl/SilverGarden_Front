@@ -7,12 +7,13 @@ import { Nav, Navbar } from "react-bootstrap";
 import Roboto from "../../assets/fonts/Roboto";
 import styles from "./navigation.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userInfoSlice from "../../redux/userInfoSlice";
 import styled from "styled-components";
 import logofile from "../../assets/images/silvergarden.png";
 
 const NavigationBar = ({ isLogin }) => {
+  const empData = useSelector((state) => state.userInfoSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -72,7 +73,7 @@ const NavigationBar = ({ isLogin }) => {
               </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/mypage" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>마이페이지</Link>
+                <Link to="/mypage" style={{textDecoration:"none", color:"black", fontSize: '0.9rem', textDecoration: 'underline'}}>{empData.e_name}님</Link>
               </Nav.Link>
               <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
@@ -87,6 +88,7 @@ export default NavigationBar;
 
 const LogoutBtn = styled.button`
   border-radius: 10px;
+  margin-top: 3px;
   text-align: center;
   border: 0px;
   font-family: "Roboto", sans-serif;
