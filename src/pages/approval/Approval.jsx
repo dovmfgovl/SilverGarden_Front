@@ -1,4 +1,3 @@
-import { UserAPage } from "../../services/auth/UserApi";
 import {
   faCaretRight,
   faCheck,
@@ -22,18 +21,6 @@ import ApprovalDocDetail from "./approvaldetail/ApprovalDocDetail";
 import ApprovalDocUpdate from "./approvalupdate/ApprovalDocUpdate";
 
 const Approval = () => {
-  const accessToken = localStorage.getItem("accessToken");
-
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   const list = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {
@@ -86,7 +73,7 @@ const Approval = () => {
       </div>
       <div className={styles.approvalTitleBar}>
         <FontAwesomeIcon icon={faCaretRight} />
-        {" "+approvalPage}
+        {" " + approvalPage}
       </div>
       <div className={styles.approvalContentWrap}>
         {approvalPage === "결재대기함" && (

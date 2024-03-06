@@ -39,6 +39,7 @@ const LoginForm = () => {
             e_profile: response.e_profile,
             dept_name: response.dept_name,
             e_rank: response.e_rank,
+            e_auth: response.e_auth,
           })
         );
         navigate("home");

@@ -12,24 +12,12 @@ import styles from "./member.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import MemberInfo from "./MemberInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { UserBPage } from "../../services/auth/UserApi";
 import MemberInfo2 from "./counsel/MemberInfo2";
 import CarTimeLine from "./car/CarTimeLine";
 import CarInfo from "./car/CarInfo";
 
 
 const Member = () => {
-
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserBPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
   
   useEffect(()=>{
 

@@ -10,6 +10,7 @@ const userInfoSlice = createSlice({
       state.e_profile = action.payload.e_profile;
       state.dept_name = action.payload.dept_name;
       state.e_rank = action.payload.e_rank;
+      state.e_auth = action.payload.e_auth;
     }
   }
 })

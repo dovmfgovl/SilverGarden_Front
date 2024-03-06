@@ -13,21 +13,9 @@ import EmpInfos from "./EmpInfos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AtCalendarHome from "./AtCalendarHome";
 import Dept from "../dept/Dept";
-import { AdminPage } from "../../services/auth/UserApi";
 import AdminCalendar from "../schedule/TestCalendar";
 
 const Admin = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    AdminPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   const sidebarList = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {

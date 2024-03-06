@@ -1,6 +1,7 @@
 import axios from "axios";
+import useCheckTokenExpiration from "../../pages/login/CheckTokenExpiration";
+import apiInterceptor from "./apiInterceptor";
 
-const refreshToken = localStorage.getItem("refreshToken");
 
 export const AuthApi = axios.create({
   baseURL : process.env.REACT_APP_SPRING_IP,
@@ -17,10 +18,17 @@ console.log(response.data)
 }
 
 export const RefreshTokenAPI = async() => {
+  const refreshToken = localStorage.getItem("refreshToken");
   const data = {
     token : refreshToken
   }
-  const response = await AuthApi.post(`/api/v1/auth/refresh`, data);
-console.log(response.data)
-  return response.data;
+  //
+  try {
+    const response = await AuthApi.post(`/api/v1/auth/refresh`, data)
+    console.log(response.data)
+    return response;
+  } catch (error) {
+    throw error;
+  }
+  //
 }
