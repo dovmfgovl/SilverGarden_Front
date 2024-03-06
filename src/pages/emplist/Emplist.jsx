@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
   faCaretRight,
-  faFile,
   faHouseMedical,
   faPeopleArrows,
   faPeopleGroup,
@@ -14,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import EmpListAll from "./EmpListAll";
 import { getEmpList } from "../../services/api/empListApi";
-import { Space } from "antd";
 import { UserAPage } from "../../services/auth/UserApi";
 
 const Emplist = () => {
@@ -35,7 +33,8 @@ const Emplist = () => {
 
   const sendEmpList = async (params) => {
     const res = await getEmpList(params);
-    setEmpList(res.data);
+    const filteredEmpList = res.data.filter(emp=>emp.E_STATUS!=="퇴직")
+    setEmpList(filteredEmpList);
   };
 
   useEffect(() => {

@@ -31,7 +31,6 @@ const CarStatisticRecord = ({calList}) => {
   };
 
   useEffect(() => {
-    setNumOfRecords(calList.length);
     
     // 새로운 데이터 필터링
     const filteredData = data.filter(item => {
@@ -39,6 +38,7 @@ const CarStatisticRecord = ({calList}) => {
       return moment(selectedMonth).isSame(itemMonth, 'month');
     });
     setFilteredDataInRange(filteredData);
+    setNumOfRecords(filteredData.length);
   }, [calList, selectedMonth]);
 
   const handleMonthChange = async (date,dateString) => {
