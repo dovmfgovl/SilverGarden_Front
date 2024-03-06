@@ -10,6 +10,7 @@ const HomeProfile = () => {
   const empData = useSelector((state) => state.userInfoSlice);
   const [atList, setAtList] = useState({});
   const [empProfile, setEmpProfile] = useState({});
+  console.log(empProfile);
 
   const today = new Date();
   const [date, setDate] = useState([today.getFullYear(), `0${today.getMonth() + 1}`.slice(-2), `0${today.getDate()}`.slice(-2)].join("-"));
@@ -83,7 +84,7 @@ const HomeProfile = () => {
   return (
     <>
       <div>
-        <img src={empProfile.E_PROFILE ? empProfile.E_PROFILE : "https://picsum.photos/200/200" } alt="프로필" />
+        <img src={empProfile.E_PROFILE ? empProfile.E_PROFILE : "https://picsum.photos/200/200"} alt="프로필" />
       </div>
       <div className={styles.eName}>
         {empData.e_name}

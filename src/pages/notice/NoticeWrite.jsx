@@ -5,7 +5,7 @@ import NoticeFileUpload from './NoticeFileUpload'
 import { noticeInsert } from '../../services/api/noticeApi'
 import QuillEditor from '../../components/Quill/QuillEditor'
 
-const NoticeWrite = ({handlePage}) => {
+const NoticeWrite = ({handlePage, empData}) => {
   const [fileList, setFileList] = useState([])//파일리스트를 관리할 state
 
   const handleFile = (list) =>{//파일리스트를 업데이트할 함수선언
@@ -22,7 +22,7 @@ const NoticeWrite = ({handlePage}) => {
       const formDataToSend = new FormData();
       formDataToSend.append('n_title', title)
       formDataToSend.append('n_content', quillContent)
-      formDataToSend.append('e_no', "202402_00000008")
+      formDataToSend.append('e_no', empData.e_no)
   
       for(let i = 0; i < fileList.length; i++){
         formDataToSend.append('files', fileList[i]);
@@ -61,7 +61,7 @@ const NoticeWrite = ({handlePage}) => {
             <Form.Control
               placeholder="작성자"
               readOnly
-              value="관리자"
+              value={empData.e_name}
             />
           </InputGroup>   
           <InputGroup className="mb-3">
