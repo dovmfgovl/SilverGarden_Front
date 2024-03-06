@@ -68,7 +68,6 @@ const Notice = () => {
   const handlePage = (page, n_no) => {
     //페이지를 조작하는 함수
     if (n_no) {
-      console.log(n_no);
       setNoticeNo(n_no);
     }
     setPage(page);
@@ -105,7 +104,7 @@ const Notice = () => {
             empData={empData}
           />
         )}
-        {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} />}
+        {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} empData={empData} />}
         {noticePage === "공지수정" && (
           <NoticeUpdate
           noticeNo={noticeNo}
