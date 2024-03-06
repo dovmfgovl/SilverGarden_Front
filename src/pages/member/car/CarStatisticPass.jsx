@@ -38,8 +38,8 @@ const CarStatisticPass = ({calList}) => {
         }));
     }
     useEffect(() => {
-        setNumOfRecords(calList.length); // calList의 길이를 numOfRecords로 설정
-    }, [calList]);
+        setNumOfRecords(data.length); // calList의 길이를 numOfRecords로 설정
+    }, [data]);
     return (
         <>
             <h6>

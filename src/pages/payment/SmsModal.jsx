@@ -14,6 +14,7 @@ const SmsModal = ({ handleRefresh }) => {
   const data = useSelector((state) => state.paymentClientDetail.value);
   const empData = useSelector((state) => state.userInfoSlice);
   console.log(empData);
+  console.log(data.CLIENT_TEL);
   const dispatch = useDispatch();
   const {
     handleSubmit,
@@ -23,27 +24,37 @@ const SmsModal = ({ handleRefresh }) => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = async (values) => {
-    //주문번호 생성
-    const date = new Date();
-    const timestamp = date.getTime();
-    console.log(timestamp);
-    console.log(values);
-    const phone = data.CLIENT_TEL.replace(/\D/g, "");
-    const value = {
-      id: data.CLIENT_ID,
-      name: data.CLIENT_NAME,
-      phone: phone,
-      amount: values.amount,
-      memo: values.memo,
-      orderno: "order" + values.id + timestamp,
-      e_no: empData.e_no,
-    };
-    console.log(value);
-    const response = await SmsRequestApi(value);
-    console.log(response);
-    alert("결제 요청 메세지가 전송되었습니다.");
-    handleClose();
-    handleRefresh();
+    console.log(values.id);
+    console.log(data.CLIENT_ID);
+    if (
+      data.CLIENT_ID !== undefined &&
+      data.CLIENT_NAME !== undefined &&
+      data.CLIENT_TEL !== undefined
+    ) {
+      //주문번호 생성
+      const date = new Date();
+      const timestamp = date.getTime();
+      console.log(timestamp);
+      console.log(values);
+      const phone = data.CLIENT_TEL.replace(/\D/g, "");
+      const value = {
+        id: data.CLIENT_ID,
+        name: data.CLIENT_NAME,
+        phone: phone,
+        amount: values.amount,
+        memo: values.memo,
+        orderno: "order" + values.id + timestamp,
+        e_no: empData.e_no,
+      };
+      console.log(value);
+      const response = await SmsRequestApi(value);
+      console.log(response);
+      alert("결제 요청 메세지가 전송되었습니다.");
+      handleClose();
+      handleRefresh();
+    } else {
+      alert("회원정보를 입력해주세요.");
+    }
   };
 
   ///모달
@@ -78,9 +89,7 @@ const SmsModal = ({ handleRefresh }) => {
                   <Col>
                     <Form.Control
                       style={{ width: "150px", backgroundColor: "#DFDFDF" }}
-                      {...register("id", {
-                        required: "* 회원ID를 입력해주세요.",
-                      })}
+                      {...register("id")}
                       type="text"
                       name="id"
                       id="id"
@@ -91,7 +100,6 @@ const SmsModal = ({ handleRefresh }) => {
                       value={data.CLIENT_ID}
                       readOnly={true}
                     />
-                    <Error>{errors?.id?.message}</Error>
                   </Col>
                   <Col>
                     <ClientSearchModal />

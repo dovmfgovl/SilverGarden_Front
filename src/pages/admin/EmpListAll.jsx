@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import EmpRow from "./EmpRow";
 import { Button, Form } from "react-bootstrap";
 import styles from "./empInfo.module.css";
+import EmpExcelDownload from './EmpExcelDownload';
 import ExcelForm from './ExcelForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmpList, setShowAll, toggleIncludeResigned } from '../../redux/empInfosSlice';
@@ -66,7 +67,7 @@ const EmpListAll = () => {
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const selectedlist = empList.filter(handleFilter).slice(indexOfFirstPost, indexOfLastPost);
+    const selectedList = empList.filter(handleFilter).slice(indexOfFirstPost, indexOfLastPost);
 
     return (
         <>
@@ -88,14 +89,14 @@ const EmpListAll = () => {
                     </div>
                     <div className="col-6">
                         <input style={{ marginLeft: '5px', fontSize: "0.8rem" }}
-                               type="text"
-                               id="keyword"
-                               className="form-control"
-                               placeholder="검색어를 입력하세요"
-                               aria-label="검색어를 입력하세요"
-                               aria-describedby="btn_search"
-                               onChange={(e) => setSearchKeyword(e.target.value)}
-                               value={searchKeyword}
+                            type="text"
+                            id="keyword"
+                            className="form-control"
+                            placeholder="검색어를 입력하세요"
+                            aria-label="검색어를 입력하세요"
+                            aria-describedby="btn_search"
+                            onChange={(e) => setSearchKeyword(e.target.value)}
+                            value={searchKeyword}
                         />
                     </div>
                     <div className="col-3">
@@ -120,7 +121,7 @@ const EmpListAll = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {selectedlist.map((emp, index) => (
+                            {selectedList.map((emp, index) => (
                                 <EmpRow key={emp.E_NO} emp={emp} currentPage={currentPage} postPerPage={postPerPage} index={index} />
                             ))}
                             </tbody>
@@ -133,7 +134,7 @@ const EmpListAll = () => {
                     <hr />
                     <span className="row justify-content-between">
                         <span className="col-3">
-                            <ExcelForm empList={selectedlist}/>
+                            <EmpExcelDownload empList={selectedList}/>
                         </span>
                         <span className="col-3">
                             • 전체 사원 수: {empCount}
