@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import AtCalendar from './AtCalendar'
 import { InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import styles from './atCalendar.module.css'
 import WeekendToggle from '../../components/fullcalendar/WeekendToggle';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredEvents, setFilters, setAtEvents } from '../../redux/calendarAtSlice';
-import styled from 'styled-components';
+import atColor from '../../assets/images/attendace.png';
 
 const AtCalendarHome = () => {
     const [searchTitle, setSearchTitle] = useState('');
@@ -98,6 +96,9 @@ const AtCalendarHome = () => {
                         <Dropdown.Item eventKey="지각">지각</Dropdown.Item>
                     </DropdownButton>
                     <WeekendToggle weekendsVisible={weekendsVisible} setWeekendsVisible={setWeekendsVisible} />
+                </div>
+                <div style={{ textAlign: 'right'}}>
+                    <img src={atColor} alt='근태 색 알림' style={{ width: "25%", height: "17%", margin: "0 20px 0 0px" }}/>
                 </div>
             </div>
             <div className={styles.monthWrap}>
