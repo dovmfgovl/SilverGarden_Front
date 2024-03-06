@@ -14,7 +14,7 @@ const VacationRequestForm = ({handleContent, formContent}) => {
   useEffect(()=>{
     if(formContent){
       const rows = JSON.parse(formContent)
-      setVacationInfo([...rows])
+      setVacationInfo({...rows})
     }
   },[])
 
