@@ -15,7 +15,10 @@ const ProgramCalendarHome = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     const dispatch = useDispatch();
-    const handleDispatch = (events)=>dispatch(setPgEvents(events));         //이벤트 리덕스 스토어 저장
+    const handleDispatch = (events)=> {
+        console.log("디스패치")
+        dispatch(setPgEvents(events))
+    };         //이벤트 리덕스 스토어 저장
     const handleFiltersChange = (filters) => dispatch(setFilters(filters)); //필터값 리덕스 스토어 저장
 
     const eventData = useSelector((state)=>state.calendarSlice.events);                //이벤트 데이터 가져오기
@@ -25,8 +28,8 @@ const ProgramCalendarHome = () => {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(setFilteredEvents());
-            console.log(eventData);
-            console.log(filteredEvents);
+            // console.log(eventData);
+            // console.log(filteredEvents);
         };
     
         fetchData();

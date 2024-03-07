@@ -31,7 +31,6 @@ const CommonCalendar = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
   
 //기본 초기화 세트
@@ -40,7 +39,6 @@ const CommonCalendar = ({
     setModalAction(null);
   };
   const commonEvents = useSelector((state) => state.commoncalendarSlice.events);
-  console.log(commonEvents);
 
   // 일정 조회 로직
   const fetchAndDispatch = async () => {
