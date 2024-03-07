@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from './empDetailInfo.module.css';
 
-const EmpExpRow = ({ key, index, EXP_NAME, EXP_DEPT, EXP_RANK, EXP_DUTY, EXP_PERIOD, onDelete, onInputChange, onSave }) => {
+const EmpExpRow = ({ index, EXP_NAME, EXP_DEPT, EXP_RANK, EXP_DUTY, EXP_PERIOD, onDelete, onInputChange, onSave }) => {
   const [isModified, setIsModified] = useState(false);
 
   // 삭제 버튼 클릭 시 처리 함수
@@ -24,7 +24,7 @@ const EmpExpRow = ({ key, index, EXP_NAME, EXP_DEPT, EXP_RANK, EXP_DUTY, EXP_PER
 
   return (
       <tr>
-          <td><Form.Control type="text" name="index + 1" defaultValue={index + 1} onChange={handleInputChange}
+          <td><Form.Control type="text" name={`${index + 1}`} defaultValue={index + 1} onChange={handleInputChange}
                             style={{height: '30px', fontSize: 'small'}}/></td>
           <td><Form.Control type="text" name="EXP_NAME" defaultValue={EXP_NAME} onChange={handleInputChange}
                             style={{height: '30px', fontSize: 'small'}}/></td>

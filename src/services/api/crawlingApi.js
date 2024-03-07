@@ -37,6 +37,22 @@ export const crawlingListDB = async (params) => {
 //         throw error;
 //     }
 // };
+// =======
+// export const crawlingListDB = (param) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             console.log("crawlingListDB");
+//             const response = await axios.get(process.env.REACT_APP_SPRING_IP + "crawling/dataList", {
+//                 params: param
+//             });
+//             resolve(response.data);
+//         } catch (error) {
+//             console.error(error);
+//             reject(error);
+//         }
+//     });
+// };
+// >>>>>>> e4197850c0f4bdfd1558f047485a91b3d6f4710a
 
 export const crawlingInsertDB = async (data) => {
     try {

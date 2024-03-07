@@ -1,163 +1,9 @@
-.crawlingHeader{
-  grid-area: crawlingHeader;
-  background-color: rgb(255, 255, 255);
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: auto;
-  padding:9px 50px 0 50px;
-  margin:10px;
-}
-.crawlingContent{
-  background-color: rgb(255, 255, 255);
-  grid-area: crawlingContent;
-  margin:10px;
-  padding:10px;
-}
 .crawlingPagination{
-  grid-area: crawlingPagenation;
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
   margin:0 10px 10px 10px;
-}
-/* crawlingdetail css */
-
-.crawlingDetailLayout{
-  height: 100%;
-  background-color: rgb(255, 255, 255);
-  display:grid;
-  grid-template-areas:
-  "crawlingDetailBtn"
-  "crawlingDetailHeader"
-  "crawlingDatailContent"
-  "crawlingDetailAttachment"
-  ;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.3fr 1fr 4fr 0.5fr;
-  margin: 0 20px;
-  padding:20px;
-
-}
-.crawlingDetailBtn{
-  grid: crawlingDetailBtn;
-}
-
-.crawlingDetailHeader{
-  display: flex;
-  flex-direction:column;
-  align-items: start;
-  grid-area: crawlingDetailHeader;
-  background-color: rgb(242, 242, 242);
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
-  margin:0 20px 0 20px;
-  padding: 0 10px
-}
-
-.crawlingDetailTitle{
-  font-size: 2.0rem;
-  font-weight: bold;
-  margin: 5px;
-}
-
-.crawlingDetailOthers{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
-}
-.crawlingDetailOthers div:nth-child(1){
-  width: 100px;
-}
-.crawlingDetailOthers div:nth-child(2){
-  width: 150px;
-}
-.crawlingDetailOthers div:nth-child(1){
-  width: 100px;
-}
-
-.crawlingDetailAttachment{
-  grid-area: crawlingDetailAttachment;
-  background-color: rgb(255, 255, 255);
-  margin:0 20px 20px 20px;
-  padding: 10px;
-  align-items: center;
-  border-top: 1px solid lightgrey;
-}
-.crawlingDetailAttachment div{
-  margin: 0 20px;
-}
-
-.crawlingDetailAttachment div button{
-  margin: 0 10px;
-  border: none;
-  background-color: white;
-}
-
-
-.crawlingDatailContent{
-  grid-area: crawlingDatailContent;
-  background-color: rgb(255, 255, 255);
-  margin:20px;
-  overflow-y: auto;
-}
-
-.crawlingDatailContent div{
-  font-size: 1.2rem;
-}
-/* crawlingWrite css */
-
-.crawlingWriteLayout{
-  height: 100%;
-  background-color: rgb(255, 255, 255);
-  display:grid;
-  grid-template-areas:
-  "crawlingWriteHeader"
-  "crawlingWriteContent"
-  "crawlingWriteAttachment";
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 3fr 0.5fr;
-  margin: 20px;
-  padding:20px;
-}
-
-.crawlingWriteHeader{
-  grid-area: crawlingWriteHeader;
-  background-color: rgb(255, 255, 255);
-  padding:10px 50px 10px 10px;
-  margin:0 20px;
-}
-
-.crawlingWriteAttachment{
-  grid-area: crawlingWriteAttachment;
-  background-color: rgb(255, 255, 255);
-  flex-direction: row;
-  padding: 10px;
-  margin:10px 20px;
-}
-
-.crawlingFileUploadBar{
-  display: flex;
-  flex-direction: column;
-}
- .crawlingFileUploadBar div{
-  margin: 5px;
-  vertical-align: middle;
- }
- .crawlingFileUploadBar div button{
-  border: none;
-  background-color: white;
- }
-
-.crawlingWriteContent{
-  grid-area: crawlingWriteContent;
-  display: flex;
-  background-color: rgb(255, 255, 255);
-  margin:20px;
-  overflow-y: auto;
 }
 
 .crawlingTable{
@@ -180,4 +26,14 @@
 
 .crawlingTable tbody td {
   cursor: pointer;
+}
+
+:global {
+  .myTooltip {
+    /* 툴팁에 대한 커스텀 스타일 추가 */
+    font-size: 14px;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    /* 필요한 다른 스타일 속성들을 추가하세요 */
+  }
 }
