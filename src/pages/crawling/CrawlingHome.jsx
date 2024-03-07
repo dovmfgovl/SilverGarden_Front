@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CrawlingComponent from './CrawlingComponent'
-import { UserAPage } from '../../services/auth/UserApi';
 import { crawlingListDB } from '../../services/api/crawlingApi';
 import styles from './crawling.module.css';
 import CrawlingPagination from './CrawlingPagination';
 
 const CrawlingHome = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-        UserAPage()
-        .then((response) => {
-        console.log(response); //undefined
-        })
-        .catch((error) => {
-        console.log(error);
-        });
-    }
+
     const [dataList, setDataList] = useState([]);
     
     const getDataList = async () => {

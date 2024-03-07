@@ -127,9 +127,6 @@ const EmpDetail = () => {
               readOnly={!editing}
               name={name}
             />
-            <MyButton type="button" onClick={passwordGenerate}>
-              임시비밀번호재발급
-            </MyButton>
           </div>
           {index !== inputFields.length - 1 && <div className={styles.divider} />}
         </div>

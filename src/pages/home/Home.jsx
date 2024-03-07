@@ -12,21 +12,11 @@ import { messageReceiveList } from '../../services/api/messageApi';
 import { getNoticeList } from '../../services/api/noticeApi';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { UserAPage } from '../../services/auth/UserApi';
 import HomeCalendarInfo from './HomeCalendarInfo';
 import ChattingBar from '../../components/chatting/ChattingBar';
 
 const Home = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+
   /////////////////// 대쉬보드(프로그램, 이용자) /////////////////////////////////////////////////
   const [memberList, setMemberList] = useState([]);
   const [pgCalList, setPgCalList] = useState([]);

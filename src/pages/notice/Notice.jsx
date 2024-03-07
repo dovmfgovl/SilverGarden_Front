@@ -13,22 +13,11 @@ import NoticeWrite from "./NoticeWrite";
 import { getNoticeList } from "../../services/api/noticeApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
-import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
 import CrawlingHome from "../crawling/CrawlingHome";
 
 
 const Notice = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
   ///////sidebar 메뉴 start//////
   const sidebarList = [
     {

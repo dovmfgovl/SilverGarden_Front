@@ -15,19 +15,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import EmpListAll from "./EmpListAll";
 import { getEmpList } from "../../services/api/empListApi";
-import { UserAPage } from "../../services/auth/UserApi";
+import { Space } from "antd";
+
 
 const Emplist = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error)
-      });
-  }
 
   const [empListpage, setEmpListPage] = useState("전체"); // 초기에 진입했을 때 어떤 화면 진입하고 싶은지
   const [empList, setEmpList] = useState([]);

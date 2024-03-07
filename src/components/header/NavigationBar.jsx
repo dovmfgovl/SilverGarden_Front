@@ -1,6 +1,4 @@
-import {
-  faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
@@ -19,6 +17,7 @@ const NavigationBar = ({ isLogin }) => {
   const handleSignOut = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("check");
     dispatch(userInfoSlice.actions.setEmpInfo({}));
     navigate("/");
   };
@@ -26,7 +25,11 @@ const NavigationBar = ({ isLogin }) => {
     <>
       <Roboto></Roboto>
       <div className={styles.navigationWrap}>
-        <Navbar collapseOnSelect expand="lg" className={`bg-body-tertiary shadow-sm ${styles.navbar}`}>
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          className={`bg-body-tertiary shadow-sm ${styles.navbar}`}
+        >
           <img
             src={logofile}
             alt="description"
@@ -38,42 +41,127 @@ const NavigationBar = ({ isLogin }) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link className="mx-3">
-                <Link to="/home" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>Home</Link>
+                <Link
+                  to="/home"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  Home
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/approval" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>결재</Link>
+                <Link
+                  to="/approval"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  결재
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/empList" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>직원조회</Link>
+                <Link
+                  to="/empList"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  직원조회
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/member" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>이용자관리</Link>
+                <Link
+                  to="/member"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  이용자관리
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/program" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>프로그램관리</Link>
+                <Link
+                  to="/program"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  프로그램관리
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/notice" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>공지사항</Link>
+                <Link
+                  to="/notice"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  공지사항
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/admin" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>관리자페이지</Link>
+                <Link
+                  to="/admin"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  관리자페이지
+                </Link>
               </Nav.Link>
               <Nav.Link className="mx-3">
-                <Link to="/payment" style={{textDecoration:"none", color:"black", fontSize: '0.9rem'}}>결제관리</Link>
+                <Link
+                  to="/payment"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  결제관리
+                </Link>
               </Nav.Link>
             </Nav>
             <Nav className="mx-3">
-              <Nav.Link >
-              <Link to="/message" style={{textDecoration:"none", color:"black"}}>
-                <FontAwesomeIcon
-                  style={{ margin: "0px" }}
-                  className="ms-2"
-                  icon={faPaperPlane}
-                />
-              </Link>
+              <Nav.Link>
+                <Link
+                  to="/message"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <FontAwesomeIcon
+                    style={{ margin: "0px" }}
+                    className="ms-2"
+                    icon={faPaperPlane}
+                  />
+                </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/mypage" style={{textDecoration:"none", color:"black", fontSize: '0.9rem', textDecoration: 'underline'}}>{empData.e_name}님</Link>
+                <Link
+                  to="/mypage"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "0.9rem",
+                    textDecoration: "underline",
+                  }}
+                >
+                  {empData.e_name}님
+                </Link>
               </Nav.Link>
               <LogoutBtn onClick={handleSignOut}>로그아웃</LogoutBtn>
             </Nav>
@@ -97,9 +185,9 @@ const LogoutBtn = styled.button`
   color: #666666;
   background-color: transparent;
   position: relative; /* ::after 가상 요소를 포함하는 요소를 상대 위치로 설정 */
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;

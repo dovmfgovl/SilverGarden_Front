@@ -18,21 +18,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./payment.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { UserBPage } from "../../services/auth/UserApi";
 import PaymentInfo from "./PaymentInfo";
 
 const Payment = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserBPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  useEffect(() => {}, [accessToken]);
+
   const sidebarList = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {
