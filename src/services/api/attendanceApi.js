@@ -72,7 +72,7 @@ export const atDetailDB = async (E_NO) => {
 
 export const atInsertDB = async (at) => {
     try {
-      const response = await apiInterceptor.post("at/atInsert", {data: at});
+      const response = await apiInterceptor.post("at/atInsert", at);
       return response;
     } catch (error) {
       throw error;
@@ -97,7 +97,7 @@ export const atInsertDB = async (at) => {
 
 export const atUpdateDB = async (at) => {
     try {
-      const response = await apiInterceptor.put("at/atUpdate", {data: at});
+      const response = await apiInterceptor.put("at/atUpdate", at);
       return response;
     } catch (error) {
       throw error;
@@ -122,7 +122,7 @@ export const atUpdateDB = async (at) => {
 
 export const adminAtUpdateDB = async (at) => {
     try {
-      const response = await apiInterceptor.put("at/adminAtUpdate", {data: at});
+      const response = await apiInterceptor.put("at/adminAtUpdate", at);
       return response;
     } catch (error) {
       throw error;

@@ -20,11 +20,12 @@ function App() {
     if (isTokenExpired) {
       // 토큰이 만료되었을 경우의 로직
       console.log("Token is expired. Redirecting to login page...");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch(userInfoSlice.actions.setEmpInfo({}));
       alert("토큰이 만료되어 로그아웃됩니다.");
       navigation("/");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("check");
+      dispatch(userInfoSlice.actions.setEmpInfo({}));
     }
   }, [isTokenExpired]);
   return (

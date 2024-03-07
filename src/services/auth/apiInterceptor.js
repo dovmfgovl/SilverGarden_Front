@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const apiInterceptor = axios.create({
   baseURL: process.env.REACT_APP_SPRING_IP,
@@ -25,12 +26,15 @@ apiInterceptor.interceptors.response.use(
     return response;
   },
   error => {
+    const navigation = useNavigate();
     // 에러 응답 처리 로직
     if (error.response) {
       switch (error.response.status) {
         case 401:
           // 예: 인증 실패 (토큰 만료 등)
-          console.log("인증실패! 재로그인 해주세요");
+          console.log("인증실패! 재로그인 해주세요")
+          ;
+          navigation("/")
           // 로그인 페이지로 리다이렉트
           break;
         case 403:

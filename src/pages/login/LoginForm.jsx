@@ -31,6 +31,7 @@ const LoginForm = () => {
         localStorage.clear();
         localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("refreshToken", response.refreshToken);
+        localStorage.setItem("check", "Y");
         console.log(response);
         dispatch(
           userInfoSlice.actions.setEmpInfo({
@@ -48,12 +49,6 @@ const LoginForm = () => {
         alert("아이디 혹은 비밀번호를 올바르게 입력해주세요.");
       });
   };
-
-  const accessToken = localStorage.getItem("accessToken");
-
-  if (accessToken) {
-    return <Navigate to="/home" />;
-  }
 
   return (
     <div className={style.container}>
