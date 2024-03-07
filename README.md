@@ -87,47 +87,77 @@
 ├── README.md
 ├── .server.js
 ├── .gitignore
-├── .prettierrc.json
 ├── package-lock.json
 ├── package.json
 ├── 
 │
 ├── public
-│    └── index.html
+│    ├── client.js
+│    ├── favicon.ico
+│    ├── index.html
+│    ├── logo192.png
+│    ├── logo512.png
+│    ├── manifest.json
+│    ├── robots.txt
+│    └──  talk.css
 └── src
      ├── App.jsx
-     ├── index.jsx
-     ├── api
-     │     └── mandarinAPI.js
-     ├── asset
+     ├── EntryPoint.jsx
+     ├── index.js
+     ├── app.module.css
+     │    
+     ├── assets
      │     ├── fonts
-     │     ├── css_sprites.png
-     │     ├── logo-404.svg
-     │     └── logo-home.svg
-     │          .
-     │          .
-     │          .
-     ├── atoms
-     │     ├── LoginData.js
-     │     └── LoginState.js
-     ├── common
-     │     ├── alert
-     │     │     ├── Alert.jsx
-     │     │     └── Alert.Style.jsx
-     │     ├── button
-     │     ├── comment
-     │     ├── inputBox
-     │     ├── post
-     │     ├── postModal
-     │     ├── product
-     │     ├── tabMenu
-     │     ├── topBanner
-     │     └── userBanner
+     │     │      └── Roboto.jsx
+     │     └── images
+     │            ├── loding2.gif
+     │            ├── silvergarden.png
+     │            ├── silvergardenlogo.png
+     │            ├── 결재.png
+     │            ├── 반려.png
+     │            └── 합의.png
+     │          
+     │          
+     ├── components
+     │     ├── Quill
+     │     │     ├── QuillEditor.jsx
+     │     │     └── quillEditor.css
+     │     ├── carousel
+     │     │     └── MemberCarousel.jsx
+     │     ├── chatting
+     │     │     ├── ChattingBar.jsx
+     │     │     └── chatting.module.css
+     │     ├── footer
+     │     │     ├── FootBar.jsx
+     │     │     └── footbar.module.css    
+     │     ├── fullcalendar
+     │     │     ├── CommonCalendar.jsx
+     │     │     ├── CommonCalendar2.jsx
+     │     │     ├── CommonCalendarLogic.jsx
+     │     │     ├── CommonCalendarModal.jsx
+     │     │     ├── FullCalendarContainer.css
+     │     │     ├── WeekendToggle.jsx
+     │     │     ├── Wfullcalendar.module.css   
+     │     │     └── 공통캘린더사용.txt 
+     │     ├── header
+     │     │     ├── NavigationBar.jsx
+     │     │     └── navigation.module.css 
+     │     ├── include
+     │     │     └── BootInclude.jsx 
+     │     ├── pagination
+     │     │     └── PaginationCommon.jsx 
+     │     ├── print
+     │     │     ├── Print.jsx
+     │     │     └── print.module.css 
+     │     ├── rourter
+     │     │     └── AppRouter.jsx
+     │     └── sidebar
+     │     │     └── SidebarCommon.jsx
      ├── pages
-     │     ├── addProduct
+     │     ├── admin
      │     │     ├── AddProduct.jsx
      │     │     └── AddProduct.Style.jsx
-     │     ├── chatList
+     │     ├── approval
      │     ├── chatRoom
      │     ├── emailLogin
      │     ├── followerList
