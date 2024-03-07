@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import userInfoSlice from '../../redux/userInfoSlice';
 
 const apiInterceptor = axios.create({
   baseURL: process.env.REACT_APP_SPRING_IP,
@@ -27,6 +29,7 @@ apiInterceptor.interceptors.response.use(
   },
   error => {
     const navigation = useNavigate();
+    const dispatch = useDispatch();
     // 에러 응답 처리 로직
     if (error.response) {
       switch (error.response.status) {
@@ -34,7 +37,12 @@ apiInterceptor.interceptors.response.use(
           // 예: 인증 실패 (토큰 만료 등)
           console.log("인증실패! 재로그인 해주세요")
           ;
+
           navigation("/")
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("check");
+          dispatch(userInfoSlice.actions.setEmpInfo({}));
           // 로그인 페이지로 리다이렉트
           break;
         case 403:
