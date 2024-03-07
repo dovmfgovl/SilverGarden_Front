@@ -109,7 +109,7 @@ const EmpDetail = () => {
           <div className={styles.selectContainer}>
             <input
               className={styles.inputFields}
-              type="password"
+              type="text"
               value={updatedEmployee[name] || ''} // updatedEmployee의 비밀번호 값으로 설정
               onChange={handleInputChange} // 입력 필드가 변경되면 상태를 업데이트
               readOnly={!editing}
@@ -175,7 +175,7 @@ const EmpDetail = () => {
     { label: '이메일', name: 'E_EMAIL', type: 'text' },
     { label: '주소', name: 'E_ADDRESS', type: 'text' },
     { label: '부서', name: 'DEPT_NAME', type: 'select', options: dept.map(item => item.CD_VALUE) },
-    { label: '비밀번호', name: 'E_PASSWORD', type: 'password' },
+    { label: '비밀번호', name: 'E_PASSWORD', type: 'text' },
     { label: '권한', name: 'E_AUTH', type: 'select', options: ['ADMIN', 'USERA', 'USERB'] },
     { label: '현황', name: 'E_STATUS', type: 'select', options: ['재직', '휴직', '퇴직'] },
     { label: '직종', name: 'E_OCCUP', type: 'select', options: ['간호사', '간호조무사', '물리치료사', '사회복지사', '요양보호사', '조리사', '활동지원사', '강사'] },

@@ -3,43 +3,43 @@ import { Table } from 'react-bootstrap';
 import styles from './crawling.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-// import NoticePagination from '../notice/NoticePagination';
+import CrawlingModal from '../crawling/CrawlingModal';
 
-const CrawlingComponent = ({dataList, getDataList, handlePage}) => {
+
+const CrawlingComponent = ({dataList, currentPage, postPerPage}) => {
     console.log(dataList);
-    
     useEffect(() => {
         document.getElementById('keyword').focus();
     }, []);
 
     const [searchedDatas, setSearchedDatas] = useState([]);
-    const [searchKeyword, setSearchKeyword] = useState(''); // 추가: 검색어 상태
-    
-    const handleSearch = () => {
-        const gubun = document.getElementById('gubun').value;
-        const filteredList = dataList.filter((data) => {
-            const value = data[gubun].toLowerCase(); // 대소문자 구분 없이 검색
-            return value.includes(searchKeyword.trim().toLowerCase());
-        });
-        setSearchedDatas(filteredList);
-        console.log(filteredList); //[]
-        setSearchKeyword(''); // 추가: 검색어 초기화
-    };
-    const handleKeyDown = (e) =>{
-        if(e.keyCode === 13){
-            handleSearch();
-            setSearchKeyword(''); // 추가: 검색어 초기화
-        }
-    }
+    const [searchKeyword, setSearchKeyword] = useState('');
 
-        // 전체조회 & 초기화 설정
-        const handleShowAll = () => {
-            console.log('handleShowAll');
-            searchedDatas([]); // 검색 결과 초기화
-            setSearchKeyword(''); // 추가: 검색어 초기화
-            getDataList();//초기화
-            document.getElementById('gubun').value = '구분';
-        }
+    const [selectedCrawling, setSelectedCrawling] = useState(null); // 선택된 크롤링 데이터 상태 추가
+
+    const handleSearch = () => {
+    const gubun = document.getElementById('gubun').value;
+    const filteredList = dataList.filter((data) => {
+        const value = data[gubun].toLowerCase();
+        return value.includes(searchKeyword.trim().toLowerCase());
+    });
+    setSearchedDatas(filteredList);
+    setSearchKeyword('');
+    };
+
+    const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+        handleSearch();
+        setSearchKeyword('');
+    }
+    };
+
+    // tr 클릭 시 선택된 크롤링 데이터 설정
+    const handleTrClick = (crawling) => {
+    setSelectedCrawling(crawling);
+    };
+    
+
 
     return (
         <>
@@ -84,40 +84,48 @@ const CrawlingComponent = ({dataList, getDataList, handlePage}) => {
                         </div>
                     </div>
         </div>
+        <div style={{textAlign:'right', margin:'10px', fontSize:'1rem'}}>
+            {dataList.length > 0 && dataList[0].MOD_DATE ? `📌 수정일 : ${dataList[0].MOD_DATE}(매일 자정 업데이트)` : ''}
+        </div>        
         <Table hover className={styles.crawlingTable}>
             <thead>
                 <tr>
                     <th style={{width: "5%"}}>#</th>
-                    <th style={{width: "40%"}}>제목(링크)</th>
+                    <th style={{width: "30%"}}>게시글 제목(게시글 상세 내용)</th>
+                    <th style={{width: "5%"}}>링크</th>
                     <th style={{width: "10%"}}>출처</th>
                     <th style={{width: "10%"}}>등록일</th>
-                    <th style={{width: "5%"}}>자세히</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style={{verticalAlign:'middle'}}>
                 {(searchedDatas.length > 0 ? searchedDatas : dataList).map((crawling, index) => (
                     <tr 
                         key={crawling.CRAWLED_NO} 
-                        onClick={() => handlePage("공지상세", crawling.CRAWLED_NO)}
+                        onClick={() => handleTrClick(crawling)} 
+                        className={styles.myTooltip}
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title={`내용: ${crawling.CRAWLED_CONTENT}`}
                     >
-                        <td>{index + 1}</td>
                         <td>
-                            <a href={crawling.CRAWLED_URL} style={{ textDecoration: 'none', color: 'inherit' }}  target="_blank">
-                                {crawling.CRAWLED_TITLE}
-                            </a>
-                        </td> 
-                        <td>{crawling.CRAWLED_SITENAME}</td>
-                        <td>{crawling.REG_DATE}</td>
+                            {(currentPage - 1) * postPerPage + index + 1}
+                        </td>
+                        <td>
+                            {crawling.CRAWLED_TITLE}
+                        </td>
                         <td>
                             <a href={crawling.CRAWLED_URL}  target="_blank">
                                 <FontAwesomeIcon icon={faLink} />
                             </a>
                         </td> 
+                        <td>{crawling.CRAWLED_SITENAME}</td>
+                        <td>{crawling.REG_DATE}</td>
+
                     </tr>
                 ))}
             </tbody>
         </Table>
-        {/* <NoticePagination styled={{}} currentPage={currentPage} totalPosts={totalPosts} postPerPage={postPerPage} handleSetCurentPage={handleSetCurentPage}></NoticePagination> */}
+        <CrawlingModal style={{ width: '100%' }} showModal={selectedCrawling !== null} handleModalClose={() => setSelectedCrawling(null)} dataList={[selectedCrawling]} />
         </>
     )
 }

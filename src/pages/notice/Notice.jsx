@@ -48,7 +48,7 @@ const Notice = () => {
   };
   ///////sidebar 메뉴  end/////////////
 
-  const [noticePage, setPage] = useState("관련정보"); //기본페이지는 noticeList
+  const [noticePage, setPage] = useState("전체공지"); //기본페이지는 noticeList
   const [noticeNo, setNoticeNo] = useState({});
   const [noticeList, setNoticeList] = useState([]);
   const [fileList, setFileList] = useState([]); //공지상세에서 가져온 파일정보를 관리할 state

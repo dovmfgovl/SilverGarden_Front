@@ -3,11 +3,10 @@ import axios from "axios";
 export const crawlingListDB = (param) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // console.log("crawlingListDB");
+            console.log("crawlingListDB");
             const response = await axios.get(process.env.REACT_APP_SPRING_IP + "crawling/dataList", {
                 params: param
             });
-            // console.log(response); //{data: 'noData', status: 200, statusText: '', headers: AxiosHeaders, config: {…}, …}
             resolve(response.data);
         } catch (error) {
             console.error(error);
