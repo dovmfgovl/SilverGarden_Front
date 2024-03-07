@@ -103,7 +103,7 @@ class CarCalendarLogic {
 
   static deleteDB = async (url, event) => {
     try {
-      const response = await apiInterceptor.delete(url, event);
+      const response = await apiInterceptor.delete(url, {params : event});
       return response.data;
     } catch (error) {
       throw error;
