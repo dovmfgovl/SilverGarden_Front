@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
   faCaretRight,
+  faComputer,
   faHouseMedical,
   faPeopleArrows,
   faPeopleGroup,
   faPersonChalkboard,
   faPersonCircleCheck,
   faSolarPanel,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import EmpListAll from "./EmpListAll";
 import { getEmpList } from "../../services/api/empListApi";
@@ -56,8 +58,10 @@ const Emplist = () => {
         //서브목록 정보
         { label: "전체", icon: faPeopleGroup }, //서브목록이름, 아이콘명, 클릭시넘어갈 url
         { label: "간호팀", icon: faHouseMedical },
-        { label: "사회복지팀", icon: faPeopleArrows },
+        { label: "개발팀", icon: faComputer },
         { label: "교육팀", icon: faPersonChalkboard },
+        { label: "사회복지팀", icon: faPeopleArrows },
+        { label: "영업팀", icon: faUser },
         { label: "운영관리팀", icon: faPersonCircleCheck },
       ],
     },
@@ -98,6 +102,22 @@ const Emplist = () => {
             dept={dept}
           />
         )}
+        {empListpage === "개발팀" && (
+          <EmpListAll
+            empList={empList}
+            handleMenu={handleMenu}
+            sendEmpList={sendEmpList}
+            dept={dept}
+          />
+        )}
+          {empListpage === "교육팀" && (
+            <EmpListAll
+              empList={empList}
+              handleMenu={handleMenu}
+              sendEmpList={sendEmpList}
+              dept={dept}
+            />
+          )}
         {empListpage === "사회복지팀" && (
           <EmpListAll
             empList={empList}
@@ -106,7 +126,7 @@ const Emplist = () => {
             dept={dept}
           />
         )}
-        {empListpage === "교육팀" && (
+        {empListpage === "영업팀" && (
           <EmpListAll
             empList={empList}
             handleMenu={handleMenu}

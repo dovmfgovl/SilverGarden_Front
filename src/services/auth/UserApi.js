@@ -8,7 +8,7 @@ import { RefreshTokenAPI } from "./AutApi";
 const accessToken = localStorage.getItem("accessToken");
 const refreshToken = localStorage.getItem("refreshToken");
 
-export const AdminPage = async() => {
+export const AdminPage = async () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   

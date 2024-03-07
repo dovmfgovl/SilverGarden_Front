@@ -4,8 +4,9 @@ import styles from './empDetailInfo.module.css';
 import { getEmpList, saveEmpDetails, setDetail } from '../../redux/empInfosSlice';
 import { Col, Row } from 'antd';
 import { DeptNameDB } from '../../services/api/empCreateApi';
-import styled from 'styled-components';
 import EmpUploadImg from './EmpUploadImg';
+import { JobListDB } from '../../services/api/deptApi';
+import EmpDetailInputField from './EmpDetailInputField';
 
 const EmpDetail = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,11 @@ const EmpDetail = () => {
   const [updatedEmployee, setUpdatedEmployee] = useState(memoSelectedEmployee); // 수정된 직원 정보를 관리하는 state
   const [originalEmployee, setOriginalEmployee] = useState(memoSelectedEmployee); // 원래의 직원 정보를 관리하는 state
   const [dept, setDept] = useState([]);
+  const [job, setJob] = useState([]);
   const [e_password, setPassword] = useState("");
+  
+  const deptCd = dept.find(item => item.CD_VALUE === updatedEmployee.DEPT_NAME)?.CD;
+  const empData = useSelector((state) => state.userInfoSlice);
 
   useEffect(() => {
     // 선택된 직원 정보가 변경되면 해당 정보로 state 업데이트
@@ -31,13 +36,14 @@ const EmpDetail = () => {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 한 번 부서 정보를 가져오도록 설정
     deptName();
-  }, []);
+    if (updatedEmployee.DEPT_NAME) {
+      deptJob(); // 부서가 선택되면 직종 데이터 가져오기
+    }
+  }, [deptCd]);
 
-    const deptName = () => {
-    console.log("deptName");
+  const deptName = () => {
     DeptNameDB()
       .then((response) => {
-        console.log(response);
         setDept(response);
       })
       .catch((error) => {
@@ -45,21 +51,19 @@ const EmpDetail = () => {
       });
   };
 
-  const passwordGenerate = () => {
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
-    let randomStr = "";
-    for (let i = 0; i < 10; i++) {
-      let randomIndex = Math.floor(Math.random() * chars.length);
-      randomStr += chars[randomIndex];
+  const deptJob = () => {
+    const data = {
+      CD : deptCd,
+      MOD_ID: empData.e_no
     }
-    console.log(randomStr);
-    setPassword(randomStr);
-    setUpdatedEmployee(prevState => ({
-      ...prevState,
-      E_PASSWORD: randomStr // E_PASSWORD 항목만 업데이트
-    }))
-  };
+    JobListDB(data)
+      .then((response) => {
+        setJob(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  } 
 
   const handleEdit = () => {
     setEditing(true); // 수정 버튼을 누를 때 수정 모드 활성화
@@ -85,6 +89,15 @@ const EmpDetail = () => {
     }));
   }
 
+  // 비밀번호 재발급 처리
+  const handlePasswordGenerate = (newPassword) => {
+    setPassword(newPassword);
+    setUpdatedEmployee(prevState => ({
+      ...prevState,
+      E_PASSWORD: newPassword // E_PASSWORD 항목만 업데이트
+    }))
+  };
+
   // 수정된 직원 정보 저장 후, 전체 직원 목록을 다시 가져옴
   const handleSaveChanges = () => {
     dispatch(saveEmpDetails(updatedEmployee)) // 수정된 직원 정보 저장
@@ -92,7 +105,6 @@ const EmpDetail = () => {
         dispatch(setDetail(updatedEmployee)); // 리덕스 스토어에서 선택된 직원 정보 업데이트
         setEditing(false); // 저장 후 수정 모드 비활성화
         dispatch(getEmpList()); // 저장 후 전체 목록 갱신
-
         // 수정된 직원 정보를 UI에 반영하기 위해 상태 업데이트
         setOriginalEmployee(updatedEmployee);
       })
@@ -163,6 +175,7 @@ const EmpDetail = () => {
       );
     }
   };
+
   
   const inputFields = [
     { label: '사원명', name: 'E_NAME', type: 'text' },
@@ -178,7 +191,7 @@ const EmpDetail = () => {
     { label: '비밀번호', name: 'E_PASSWORD', type: 'text' },
     { label: '권한', name: 'E_AUTH', type: 'select', options: ['ADMIN', 'USERA', 'USERB'] },
     { label: '현황', name: 'E_STATUS', type: 'select', options: ['재직', '휴직', '퇴직'] },
-    { label: '직종', name: 'E_OCCUP', type: 'select', options: ['간호사', '간호조무사', '물리치료사', '사회복지사', '요양보호사', '조리사', '활동지원사', '강사'] },
+    { label: '직종', name: 'E_OCCUP', type: 'select', options: job.map(item => item.CD_VALUE) },
     { label: '직급', name: 'E_RANK', type: 'select', options: ['시설장', '팀장', '사원'] },
   ];
   
@@ -198,7 +211,18 @@ const EmpDetail = () => {
             { editing && <EmpUploadImg imageUrlChange={handleImageUrlChange}/> }
           </div>
         </div>
-        {inputFields.map(renderInputField)}
+        {inputFields.map((field, index) => (
+          <EmpDetailInputField
+            key={index}
+            field={field}
+            updatedEmployee={updatedEmployee}
+            handleInputChange={handleInputChange}
+            editing={editing}
+            dept={dept}
+            job={job}
+            onPasswordGenerate={handlePasswordGenerate} // 비밀번호 생성 함수 전달
+          />
+        ))}
       </div>
     <Row style={{ marginBottom: "10px" }}>
       <Col md={15}></Col>
@@ -222,10 +246,3 @@ const EmpDetail = () => {
 };
 
 export default EmpDetail;
-
-const MyButton = styled.button`
-  margin-top: 35px;
-  border-radius: 5px;
-  background-color: grey;
-  color: white;
-`;

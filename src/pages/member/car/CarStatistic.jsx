@@ -33,7 +33,7 @@ const CarStatistic = ({selectedCar}) => {
 
   return (
     <>
-      <h5>차량 이용 통계</h5>
+      <h5>운행기록</h5>
       {selectedCar && filteredCalList.length > 0 && (
         <Tabs
           defaultActiveKey="all"
@@ -43,10 +43,10 @@ const CarStatistic = ({selectedCar}) => {
           <Tab eventKey="all" title="전체">
             <CarStatisticAll calList={filteredCalList} />
           </Tab>
-          <Tab eventKey="passenger" title="이용자 탑승정보">
+          <Tab eventKey="passenger" title="이용자별 운행기록">
             <CarStatisticPass calList={filteredCalList}/>
           </Tab>
-          <Tab eventKey="drive" title="운행기록" >
+          <Tab eventKey="drive" title="날짜별 운행기록" >
             <CarStatisticRecord calList={filteredCalList} />
           </Tab>
         </Tabs>
