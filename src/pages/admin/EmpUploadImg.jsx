@@ -46,7 +46,7 @@ const EmpUploadImg = ({ imageUrlChange }) => {
   return (
     <div className={styles.uploadWrap}>
       <input type="file" id="fileInput" className={styles.choiceHiddenButton} onChange={handleChange} />
-      <label for="fileInput" className={styles.choiceButton}>파일 선택</label>
+      <label htmlFor="fileInput" className={styles.choiceButton}>파일 선택</label>
       <button className={styles.uploadButton} onClick={handleUpload}>사진업로드</button>
       {imageUrl && ( /* 이미지 URL 존재할 경우 이미지 출력 */
         <div className={styles.previewImg}>
