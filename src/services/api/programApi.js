@@ -91,7 +91,7 @@ export const ProgramDeleteDB = async (program) => {
 
 export const programInsertDB = async (program) => {
     try {
-      const response = await apiInterceptor.delete("program/pgInsert", program);
+      const response = await apiInterceptor.post("program/pgInsert", program);
       return response;
     } catch (error) {
       throw error;

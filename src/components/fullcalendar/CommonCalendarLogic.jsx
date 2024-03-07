@@ -22,6 +22,7 @@ class CommonCalendarLogic {
     console.log("listDB");
     try {
       const response = await apiInterceptor.get(url);
+      console.log("캘린더값받아옴");
       return response.data;
     } catch (error) {
       throw error;
@@ -105,7 +106,7 @@ class CommonCalendarLogic {
 
   static deleteDB = async (url, event) => {
     try {
-      const response = await apiInterceptor.delete(url, event);
+      const response = await apiInterceptor.delete(url, {params:event});
       return response.data;
     } catch (error) {
       throw error;
