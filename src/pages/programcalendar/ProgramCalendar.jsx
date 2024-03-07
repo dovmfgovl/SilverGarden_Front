@@ -18,8 +18,8 @@ const ProgramCalendar = ({eventData, weekendsVisible, handleDispatch, filteredEv
         title: 'PS_NAME',
         start: 'PS_START',
         end: 'PS_END',
-        color: 'COLOR', //카테고리별로 생성되는 색상
-        category: 'PS_CATEGORY', //색상을 구분하는 카테고리
+        color: 'COLOR', 
+        category: 'PS_CATEGORY', 
         content: 'PS_INFO'
     };
         

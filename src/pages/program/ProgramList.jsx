@@ -130,7 +130,6 @@ const ProgramList = ({ programList, onRowClick, getProgramList  }) => {
                     {searchedPrograms.length > 0
                         ? searchedPrograms.map((program, index) => (
                             <tr key={program.PG_NO} onClick={() => onRowClick(program)}>
-                                {/* <td>{index + 1}</td> */}
                                 <td>{(currentPage - 1) * postPerPage + index + 1}</td>
                                 <td>{program.PG_NAME}</td>
                                 <td>{program.PG_CATEGORY}</td>

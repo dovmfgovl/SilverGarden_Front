@@ -1,7 +1,6 @@
 /* 리차트 효과 */
-
 .chartContainer{
-    width: 95%;
+    width: 90%;
     height: 94%;
 }
 
@@ -20,6 +19,7 @@
 }
 
 .chartWrap{
+    margin: 10px;
     flex-basis: 50%;
 }
 

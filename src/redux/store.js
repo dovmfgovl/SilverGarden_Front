@@ -15,6 +15,7 @@ import calendarCarSlice from "./calendarCarSlice";
 import paymentDetail from "./paymentSlice";
 import paymentClientDetail from "./paymentClientSlice";
 import commoncalendarSlice from "./commoncalendarSlice";
+import crawlingSlice from "./crawlingSlice";
 
 
 
@@ -44,13 +45,12 @@ const rootReducer = combineReducers({
   paymentDetail:paymentDetail.reducer,
   paymentClientDetail:paymentClientDetail.reducer,
   commoncalendarSlice:commoncalendarSlice,
+  crawlingSlice:crawlingSlice,
 });
 
 const store = configureStore({
   reducer:   rootReducer,
   
 });
-
-
 
 export default store;

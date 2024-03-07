@@ -112,6 +112,70 @@ const EmpDetail = () => {
         console.error('Error saving employee details: ', error);
       });
   }
+
+  const renderInputField = ({ label, name, type, options }, index) => {
+    if (name === 'E_PASSWORD') {
+      return (
+        <div className={styles.empInfoItem} key={name}>
+          <div className={styles.label}>{label}</div>
+          <div className={styles.selectContainer}>
+            <input
+              className={styles.inputFields}
+              type="text"
+              value={updatedEmployee[name] || ''} // updatedEmployee의 비밀번호 값으로 설정
+              onChange={handleInputChange} // 입력 필드가 변경되면 상태를 업데이트
+              readOnly={!editing}
+              name={name}
+            />
+            <MyButton type="button" onClick={passwordGenerate}>
+              임시비밀번호재발급
+            </MyButton>
+          </div>
+          {index !== inputFields.length - 1 && <div className={styles.divider} />}
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.empInfoItem} key={name}>
+          <div className={styles.label}>{label}</div>
+          <div className={styles.selectContainer}>
+            {type === 'select' ? (
+              <select
+                className={styles.selectBox}
+                value={updatedEmployee[name] || ''}
+                onChange={handleInputChange}
+                disabled={!editing}
+                name={name}
+              >
+                {name === 'DEPT_NAME' ? (
+                  // 부서 선택 옵션을 동적으로 가져오기
+                  dept.map((item, index) => (
+                    <option key={index} value={item.CD_VALUE}>{item.CD_VALUE}</option>
+                  ))
+                ) : (
+                  // 기존의 옵션들은 그대로 사용
+                  options.map((option, index) => (
+                    <option key={index} value={option}>{option}</option>
+                  ))
+                )}
+              </select>
+            ) : (
+              <input
+                className={styles.inputFields}
+                type={type}
+                value={updatedEmployee[name] || ''}
+                onChange={handleInputChange}
+                readOnly={!editing}
+                name={name}
+              />
+            )}
+          </div>
+          {index !== inputFields.length - 1 && <div className={styles.divider} />}
+        </div>
+      );
+    }
+  };
+
   
   const inputFields = [
     { label: '사원명', name: 'E_NAME', type: 'text' },
