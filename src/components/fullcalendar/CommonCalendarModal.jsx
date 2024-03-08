@@ -93,11 +93,11 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
             <Modal.Body>
                 <Form>
                     <Form.Group controlId="formTitle" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>일정제목</Form.Label>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이름</Form.Label>
                         <Form.Control
                             style={{fontSize:'0.8rem'}}
                             type="text"
-                            placeholder="일정제목을 입력하세요"
+                            placeholder="내용을 입력하세요"
                             name="title"
                             value={formData.title}
                             onChange={handleChange}
@@ -124,7 +124,6 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
                             onChange={handleChange}
                         >
                             <option value="" >카테고리를 선택하세요</option>
-                            //개별 사전설정 카테고리 있을때
                             {defaultCategories ? (
                                 defaultCategories.map((category) => (
                                     <option key={category} value={category}>
@@ -172,9 +171,9 @@ const CommonCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClos
                     {action === '생성' ? '저장' : '수정'}
                 </Button>
                 {action === '수정' && (
-                    <Button style={{fontWeight:'bolder', fontSize:'0.8rem'}} variant="outline-danger" onClick={handleDelete}>
-                        삭제
-                    </Button>
+                <Button style={{fontWeight:'bolder', fontSize:'0.8rem'}} variant="outline-danger" onClick={handleDelete}>
+                    삭제
+                </Button>
                 )}
             </Modal.Footer>
         </Modal>

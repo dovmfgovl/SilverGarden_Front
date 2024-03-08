@@ -33,7 +33,6 @@ export const { setPgEvents, setFilters,setFilteredEvents } = calendarSlice.actio
 // 새로운 액션 추가
 export const setCalendarEvents = (events) => (dispatch) => {
     dispatch(setPgEvents(events));
-    // 필요하다면 setFilteredEvents 등 다른 액션들을 디스패치할 수도 있음
 };
 
 export default calendarSlice.reducer;

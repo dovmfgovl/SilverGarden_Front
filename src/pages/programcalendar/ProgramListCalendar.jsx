@@ -35,7 +35,7 @@ const ProgramListCalendar = ({eventData, handleDispatch, filteredEvents}) => {
     };
     
     const calendarListOptions = {
-        height: 660,
+        height: 740,
         slotMinTime: '08:00',
         slotMaxTime: '19:00',
         expandRows: true,

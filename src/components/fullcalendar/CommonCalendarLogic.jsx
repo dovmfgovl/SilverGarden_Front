@@ -23,6 +23,7 @@ class CommonCalendarLogic {
     try {
       const response = await apiInterceptor.get(url);
       console.log("캘린더값받아옴");
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       throw error;
@@ -50,7 +51,7 @@ class CommonCalendarLogic {
   static addDB = async (url, event) => {
     try {
       console.log("calender URL" + url);
-      console.log(event);
+      // console.log(event);
       const response = await apiInterceptor.post(url, event);
       return response.data;
     } catch (error) {

@@ -63,7 +63,7 @@ const CommonCalendar = ({
 
   useEffect(() => {
     fetchAndDispatch();
-  }, []);
+  }, [isModalOpen]);
 
   //모달 핸들링
   const handleModalAction = (action, event) => {
@@ -90,7 +90,6 @@ const CommonCalendar = ({
       await CommonCalendarLogic.addDB(urls.addURL, transformedData);
       onEventAdd(transformedData);
       updateModalState();
-      fetchAndDispatch();
     } catch (error) {
       // 에러 처리
     }
@@ -112,7 +111,6 @@ const CommonCalendar = ({
       await CommonCalendarLogic.updateDB(urls.updateURL, transformedData);
       onEventUpdate(transformedData);
       updateModalState();
-      fetchAndDispatch();
     } catch (error) {
       // 에러 처리
     }
@@ -132,7 +130,6 @@ const CommonCalendar = ({
       await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
       onEventDelete(transformedData);
       updateModalState();
-      fetchAndDispatch();
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +141,7 @@ const CommonCalendar = ({
 
   // FullCalendar 옵션 설정
   const calendarOptions = {
-    height: 740,
+    height: 660,
     eventTimeFormat: { 
       hour: '2-digit', 
       minute: '2-digit', 
@@ -188,11 +185,11 @@ const CommonCalendar = ({
     ...calendarListOptions,
     initialView: initialView || "dayGridMonth", // prop 값이 없을 경우 기본값 설정
     eventClick: (info) => {
-      handleModalAction("수정", info.event, defaultCategories? defaultCategories:categories);
+      handleModalAction("수정", info.event, categories);
     },
     // 이벤트를 드래그해서 이동한 경우
     eventDrop: (info) => {
-      handleModalAction("수정", info.event, defaultCategories? defaultCategories:categories);
+      handleModalAction("수정", info.event, categories);
     },
     // 날짜가 선택되는경우(하루, 영역)
     selectAllow: () => {
@@ -200,7 +197,7 @@ const CommonCalendar = ({
     },
     eventResize: ({ event }) => {
       // 일정이 늘어난 경우의 처리 로직
-      handleModalAction("수정", event, defaultCategories? defaultCategories:categories);
+      handleModalAction("수정", event, categories);
     },
     select: ({ startStr, endStr }) => {
       const isSingleDay = startStr === endStr;
@@ -213,7 +210,7 @@ const CommonCalendar = ({
       handleModalAction(
         "생성",
         { start: startStr, end: endDate },
-        defaultCategories? defaultCategories:categories
+        categories
       );
       return true;
     },

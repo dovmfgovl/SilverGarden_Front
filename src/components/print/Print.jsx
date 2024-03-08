@@ -6,8 +6,8 @@ import { useReactToPrint } from 'react-to-print';
 const Print = ({componentRef}) => {
     const handlePrint = useReactToPrint({
         content: useCallback(() => componentRef.current, [componentRef]),
-        documentTitle: "파일 다운로드 시 저장되는 이름 작성" ,
-        onAfterPrint: () => alert("파일 다운로드 후 알림창 생성 가능")
+        documentTitle: "프로그램 현황" ,
+        onAfterPrint: () => alert("파일 저장 및 인쇄가 완료되었습니다.")
     });
     // 1. 출력버튼 넣고 싶은 위치에 <Print componentRef={componentRef} />
     // 2. 상단에 const componentRef = useRef(); 및 import하기  
