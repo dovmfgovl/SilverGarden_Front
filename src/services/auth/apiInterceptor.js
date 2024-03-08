@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import userInfoSlice from '../../redux/userInfoSlice';
 
 const apiInterceptor = axios.create({
-  baseURL: process.env.REACT_APP_SPRING_IP,
+  baseURL: "/proxy/",
 });
 
 apiInterceptor.interceptors.request.use(

@@ -4,7 +4,7 @@ import apiInterceptor from "./apiInterceptor";
 
 
 export const AuthApi = axios.create({
-  baseURL : process.env.REACT_APP_SPRING_IP,
+  baseURL : "/proxy",
   headers : {
     'Content-Type' : 'application/json',
   }
