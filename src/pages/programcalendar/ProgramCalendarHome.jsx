@@ -15,10 +15,7 @@ const ProgramCalendarHome = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     const dispatch = useDispatch();
-    const handleDispatch = (events)=> {
-        console.log("디스패치")
-        dispatch(setPgEvents(events))
-    };         //이벤트 리덕스 스토어 저장
+    const handleDispatch = (events)=> {dispatch(setPgEvents(events))};         //이벤트 리덕스 스토어 저장
     const handleFiltersChange = (filters) => dispatch(setFilters(filters)); //필터값 리덕스 스토어 저장
 
     const eventData = useSelector((state)=>state.calendarSlice.events);                //이벤트 데이터 가져오기
@@ -28,23 +25,17 @@ const ProgramCalendarHome = () => {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(setFilteredEvents());
-            // console.log(eventData);
-            // console.log(filteredEvents);
         };
-    
         fetchData();
     }, [filters, eventData]);
     
     //카테고리 선택시
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
-        
         let newFilters = { ...filters, selectedCategory: category };
-    
         if (category === '전체') {
             newFilters = { ...newFilters, searchTitle: '' };
         }
-    
         dispatch(setFilters(newFilters));
         dispatch(setFilteredEvents());
     };
@@ -52,15 +43,12 @@ const ProgramCalendarHome = () => {
     // handleSearchChange 함수에도 선택된 카테고리가 '전체'인 경우의 처리를 추가
     const handleSearchChange = (e) => {
         setSearchTitle(e.target.value);
-    
         const newFilters = { ...filters, searchTitle: e.target.value };
-    
         if (selectedCategory === '전체') {
             handleRefresh();
         } else {
             dispatch(setFilters(newFilters));
         }
-    
         dispatch(setFilteredEvents());
     };
     //초기화(필터초기, 이벤트데이터 가져오기)
@@ -70,11 +58,9 @@ const ProgramCalendarHome = () => {
         dispatch(setFilters({ searchTitle: '', selectedCategory: '' }));
         dispatch(setPgEvents(eventData.slice())); 
         dispatch(setFilteredEvents()); 
-        console.log(eventData);
-        console.log(filteredEvents);
+        // console.log(eventData);
+        // console.log(filteredEvents);
     };
-    
-
     
     return (
         <div className={styles.programCalWrap}>

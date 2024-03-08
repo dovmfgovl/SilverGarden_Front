@@ -119,7 +119,7 @@ export const programInsertDB = async (program) => {
 
 export const ProgramUpdateDB = async (params) => {
     try {
-      const response = await apiInterceptor.delete("program/pgUpdate", {params});
+      const response = await apiInterceptor.put("program/pgUpdate", params);
       return response;
     } catch (error) {
       throw error;

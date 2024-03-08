@@ -5,6 +5,8 @@ import ProgramChart from "./ProgramChart";
 import CommonCalendarLogic from "../../components/fullcalendar/CommonCalendarLogic";
 import ProgramProgressChart from "./ProgramProgressChart";
 import ProgramCalChart from "./ProgramCalChart";
+import { useDispatch } from "react-redux";
+import { setPgEvents } from "../../redux/calendarSlice";
 
 const ProgramDashboardHome = ({ programList }) => {
   const componentRef = useRef();
@@ -20,7 +22,8 @@ const ProgramDashboardHome = ({ programList }) => {
     };
     fetchData();
   }, []);
-
+  const dispatch = useDispatch();
+  dispatch(setPgEvents(pgCalList));
   return (
     <>
       <div className={styles.dashboardWrap}>
