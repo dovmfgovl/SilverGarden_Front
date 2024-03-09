@@ -4,8 +4,10 @@ import styles from "./notice.module.css";
 import { noticeDelete } from "../../services/api/noticeApi";
 import { useNavigate } from "react-router-dom";
 
-const NoticeDetailHeader = ({ noticeDetail, handlePage, empData }) => {
+const NoticeDetailHeader = ({ noticeDetail, handlePage, empData}) => {
   const detail = { ...noticeDetail };
+  console.log(noticeDetail);
+  console.log(empData.e_no);
 
   const handleUpdate = () => {
     handlePage("공지수정", noticeDetail.N_NO); //Notice로 현재 공지글의 번호를 넘겨줌
@@ -28,7 +30,7 @@ const NoticeDetailHeader = ({ noticeDetail, handlePage, empData }) => {
         <div>조회수:{noticeDetail.N_HIT}</div>
       </div>
       <div className={styles.noticeDetailHeadetBtn}>
-        {noticeDetail.reg_id === empData.e_no && (
+        {noticeDetail.REG_ID === empData.e_no && (
           <>
             <Button variant="primary" onClick={handleUpdate}>
               수정

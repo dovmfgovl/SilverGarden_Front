@@ -76,17 +76,15 @@ const Home = () => {
   ///////////////// 공지사항 //////////////////////////////////////////
   const [noticeList, setNoticeList] = useState([]);
 
-  const getNoticeLists = async (params) => {
+  const getList = async (params) => {
     //DB에서 리스트를 불러오는 함수
     const response = await getNoticeList(params);
-    const recentNotice = response.data.slice(0, 8);
-    console.log(recentNotice);
-    setNoticeList(recentNotice);
+    setNoticeList(response.data);
   };
 
-  useEffect(() => {
-    getNoticeLists();
-  }, []);
+  useEffect(()=>{
+    getList({offset:1, limit:6});
+  },[])
 
   return (
     <>

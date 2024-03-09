@@ -1,18 +1,3 @@
-// export const getNoticeList = (params) => {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       const response = axios({
-//         method: "get",
-//         url: process.env.REACT_APP_SPRING_IP + "notice/noticeList",
-//         params: params,
-//       });
-//       resolve(response);
-//     } catch (error) {
-//       reject(error);
-//     }
-//   });
-// };
-
 import apiInterceptor from "../auth/apiInterceptor";
 
 export const getNoticeList = async (params) => {
@@ -39,6 +24,15 @@ export const getNoticeList = async (params) => {
 //     }
 //   });
 // };
+
+export const noticeTotalCount = async (params) => {
+  try {
+    const response = await apiInterceptor.get("notice/noticeTotalCount", { params });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getNoticeDetail = async (n_no) => {
   try {

@@ -39,20 +39,19 @@ const Notice = () => {
 
   const [noticePage, setPage] = useState("전체공지"); //기본페이지는 noticeList
   const [noticeNo, setNoticeNo] = useState({});
-  const [noticeList, setNoticeList] = useState([]);
   const [fileList, setFileList] = useState([]); //공지상세에서 가져온 파일정보를 관리할 state
   const empData = useSelector(state => state.userInfoSlice)
 
-  const getList = async (params) => {
-    //DB에서 리스트를 불러오는 함수
-    const response = await getNoticeList(params);
-    setNoticeList(response.data);
-  };
+  // const getList = async (params) => {
+  //   //DB에서 리스트를 불러오는 함수
+  //   const response = await getNoticeList(params);
+  //   setNoticeList(response.data);
+  // };
 
-  useEffect(() => {
-    //리스트는 페이지가 바뀌거나 시작시 한번만 불러옴
-    getList();
-  }, [noticePage]);
+  // useEffect(() => {
+  //   //리스트는 페이지가 바뀌거나 시작시 한번만 불러옴
+  //   getList();
+  // }, [noticePage]);
 
   const handlePage = (page, n_no) => {
     //페이지를 조작하는 함수
@@ -79,9 +78,7 @@ const Notice = () => {
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (
           <NoticeList
-            noticeList={noticeList}
             handlePage={handlePage}
-            getList={getList}
           />
         )}
         {noticePage === "공지상세" && (
@@ -97,7 +94,6 @@ const Notice = () => {
         {noticePage === "공지수정" && (
           <NoticeUpdate
           noticeNo={noticeNo}
-          noticeList={noticeList}
           handlePage={handlePage}
           fileList={fileList}
           />

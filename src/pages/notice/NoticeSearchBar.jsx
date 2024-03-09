@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 
-const NoticeSearchBar = ({getList}) => {
+const NoticeSearchBar = ({getList, postPerPage, currentPage}) => {
   const [gubun, setGubun] = useState("");
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("전체");
@@ -9,7 +9,7 @@ const NoticeSearchBar = ({getList}) => {
   const handleChange = (e) =>{
     const text = e.target.innerText
     if(text === "전체"){
-      getList();
+      getList({offset:(currentPage-1)*10+1, limit:postPerPage});
     }
     setGubun(e.target.id)
     setTitle(text);
@@ -17,7 +17,7 @@ const NoticeSearchBar = ({getList}) => {
 
   const handleSearch = () =>{
     if(keyword !== "" && gubun !== ""){
-      const params = {gubun: gubun, keyword: keyword};
+      const params = {gubun: gubun, keyword: keyword, offset:(currentPage-1)*10+1, limit:postPerPage};
       getList(params);
       setKeyword('');
     }
