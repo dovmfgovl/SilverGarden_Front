@@ -4,30 +4,21 @@ import React, { useEffect, useState } from "react";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import {
   faCaretRight,
-  faFile,
+  faComputer,
   faHouseMedical,
   faPeopleArrows,
   faPeopleGroup,
   faPersonChalkboard,
   faPersonCircleCheck,
   faSolarPanel,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import EmpListAll from "./EmpListAll";
 import { getEmpList } from "../../services/api/empListApi";
 import { Space } from "antd";
-import { UserAPage } from "../../services/auth/UserApi";
+
 
 const Emplist = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   const [empListpage, setEmpListPage] = useState("전체"); // 초기에 진입했을 때 어떤 화면 진입하고 싶은지
   const [empList, setEmpList] = useState([]);
@@ -35,9 +26,8 @@ const Emplist = () => {
 
   const sendEmpList = async (params) => {
     const res = await getEmpList(params);
-    console.log(res.data);
-    console.table(res.data);
-    setEmpList(res.data);
+    const filteredEmpList = res.data.filter(emp=>emp.E_STATUS!=="퇴직")
+    setEmpList(filteredEmpList);
   };
 
   useEffect(() => {
@@ -59,8 +49,10 @@ const Emplist = () => {
         //서브목록 정보
         { label: "전체", icon: faPeopleGroup }, //서브목록이름, 아이콘명, 클릭시넘어갈 url
         { label: "간호팀", icon: faHouseMedical },
-        { label: "사회복지팀", icon: faPeopleArrows },
+        { label: "개발팀", icon: faComputer },
         { label: "교육팀", icon: faPersonChalkboard },
+        { label: "사회복지팀", icon: faPeopleArrows },
+        { label: "영업팀", icon: faUser },
         { label: "운영관리팀", icon: faPersonCircleCheck },
       ],
     },
@@ -101,6 +93,22 @@ const Emplist = () => {
             dept={dept}
           />
         )}
+        {empListpage === "개발팀" && (
+          <EmpListAll
+            empList={empList}
+            handleMenu={handleMenu}
+            sendEmpList={sendEmpList}
+            dept={dept}
+          />
+        )}
+          {empListpage === "교육팀" && (
+            <EmpListAll
+              empList={empList}
+              handleMenu={handleMenu}
+              sendEmpList={sendEmpList}
+              dept={dept}
+            />
+          )}
         {empListpage === "사회복지팀" && (
           <EmpListAll
             empList={empList}
@@ -109,7 +117,7 @@ const Emplist = () => {
             dept={dept}
           />
         )}
-        {empListpage === "교육팀" && (
+        {empListpage === "영업팀" && (
           <EmpListAll
             empList={empList}
             handleMenu={handleMenu}

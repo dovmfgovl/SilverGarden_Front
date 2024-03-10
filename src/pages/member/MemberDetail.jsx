@@ -6,6 +6,7 @@ import { setDetail, saveMemDetails, getMemList } from '../../redux/memberSlice';
 import DaumPostcode from 'react-daum-postcode';
 import MemberDelete from './MemberDelete';
 import { getEmpList } from '../../redux/chooseEmpSlice';
+import e from 'cors';
 
 const MemberDetail = () => {
   const dispatch = useDispatch();
@@ -86,7 +87,6 @@ const MemberDetail = () => {
   };
   
   const completeHandler = (data) => {
-    console.log(data);
     setRoadAddress(data.address);
     setShow(false)
   };
@@ -142,10 +142,10 @@ const MemberDetail = () => {
                 <Select
                   style={{ width: '100%' }}
                   value={updatedMember.CLIENT_GENDER}
-                  onChange={e => handleChange('CLIENT_GENDER', e.target.value)}
+                  onChange={value=> handleChange('CLIENT_GENDER', value)}
                 >
                   <Select.Option value="남">남</Select.Option>
-                  <Select.Option value="여">여</Select.Option>
+                  <Select.Option  value="여">여</Select.Option>
                 </Select>
               </Descriptions.Item>
               <Descriptions.Item label="담당자" span={2}>

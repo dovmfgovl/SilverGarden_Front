@@ -10,7 +10,6 @@ const ApprovalWaitList = ({handleMenu, empData}) => {
   
   const getList = async () =>{
     const response = await approvalWaitList({e_no: empData.e_no})
-    console.log(response.data);
     setWaitList(response.data);
   }
   const handleFilterdList = async (gubun, keyword) =>{

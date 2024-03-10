@@ -7,10 +7,11 @@ import { messageFileDownload } from '../../services/api/messageApi'
 
 const MessageSendDetail = ({handleMenu, empData, messageDetail}) => {
   console.log(messageDetail);
+
   const handleFileDownload = (filename) =>{
     const response = messageFileDownload(filename);
-    console.log(response.data);
   }
+  
   return (
     <div className={styles.detailWrap}>
     <div className={styles.detailBtnGroup}>
@@ -55,7 +56,7 @@ const MessageSendDetail = ({handleMenu, empData, messageDetail}) => {
     <div className={styles.detailContent}>
     <InputGroup style={{height:"100%"}}>
     <InputGroup.Text id="basic-addon1" style={{width: "100px"}}>내용</InputGroup.Text>
-      <Form.Control as="textarea" aria-label="With textarea" style={{height:"100%"}} value={messageDetail.me_title} readOnly/>
+      <Form.Control as="textarea" aria-label="With textarea" style={{height:"100%"}} value={messageDetail.me_content} readOnly/>
     </InputGroup>
     </div>
   </div>

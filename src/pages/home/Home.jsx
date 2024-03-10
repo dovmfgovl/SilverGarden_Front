@@ -12,21 +12,11 @@ import { messageReceiveList } from '../../services/api/messageApi';
 import { getNoticeList } from '../../services/api/noticeApi';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { UserAPage } from '../../services/auth/UserApi';
 import HomeCalendarInfo from './HomeCalendarInfo';
 import ChattingBar from '../../components/chatting/ChattingBar';
 
 const Home = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+
   /////////////////// 대쉬보드(프로그램, 이용자) /////////////////////////////////////////////////
   const [memberList, setMemberList] = useState([]);
   const [pgCalList, setPgCalList] = useState([]);
@@ -86,17 +76,15 @@ const Home = () => {
   ///////////////// 공지사항 //////////////////////////////////////////
   const [noticeList, setNoticeList] = useState([]);
 
-  const getNoticeLists = async (params) => {
+  const getList = async (params) => {
     //DB에서 리스트를 불러오는 함수
     const response = await getNoticeList(params);
-    const recentNotice = response.data.slice(0, 8);
-    console.log(recentNotice);
-    setNoticeList(recentNotice);
+    setNoticeList(response.data);
   };
 
-  useEffect(() => {
-    getNoticeLists();
-  }, []);
+  useEffect(()=>{
+    getList({offset:1, limit:6});
+  },[])
 
   return (
     <>

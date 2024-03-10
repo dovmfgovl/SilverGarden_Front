@@ -26,7 +26,6 @@ const ApprovalFileUpload = ({fileList, handleFile}) => {
           e.preventDefault();
             if(selectedFile){
               const list = fileList.filter(element => element.name !== selectedFile.name)
-              console.log(list);
               handleFile([...list, selectedFile])
               if (fileInputRef.current) {
                 fileInputRef.current.value = "";

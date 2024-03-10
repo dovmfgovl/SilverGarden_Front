@@ -9,7 +9,6 @@ const Counsel = ({selectedMember}) => {
 
   const getCounsel =async (params)=>{
     const response = await getCounselList(params)
-    console.log(response.data);
     setCounselList(response.data);
   }
   

@@ -31,7 +31,6 @@ const CommonCalendar = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  //카테고리 관리 -> 모달창에서 카테고리 셀렉트 사용 가능
   const [categories, setCategories] = useState([]);
   
 //기본 초기화 세트
@@ -40,7 +39,6 @@ const CommonCalendar = ({
     setModalAction(null);
   };
   const commonEvents = useSelector((state) => state.commoncalendarSlice.events);
-  console.log(commonEvents);
 
   // 일정 조회 로직
   const fetchAndDispatch = async () => {
@@ -65,7 +63,7 @@ const CommonCalendar = ({
 
   useEffect(() => {
     fetchAndDispatch();
-  }, [isModalOpen]);
+  }, []);
 
   //모달 핸들링
   const handleModalAction = (action, event) => {
@@ -92,6 +90,7 @@ const CommonCalendar = ({
       await CommonCalendarLogic.addDB(urls.addURL, transformedData);
       onEventAdd(transformedData);
       updateModalState();
+      fetchAndDispatch();
     } catch (error) {
       // 에러 처리
     }
@@ -113,6 +112,7 @@ const CommonCalendar = ({
       await CommonCalendarLogic.updateDB(urls.updateURL, transformedData);
       onEventUpdate(transformedData);
       updateModalState();
+      fetchAndDispatch();
     } catch (error) {
       // 에러 처리
     }
@@ -127,10 +127,12 @@ const CommonCalendar = ({
         [columnNames.start]: formData.start,
         [columnNames.end]: formData.end,
         [columnNames.no]: formData.no,
+        [columnNames.content]: formData.content,
       };
       await CommonCalendarLogic.deleteDB(urls.deleteURL, transformedData);
       onEventDelete(transformedData);
       updateModalState();
+      fetchAndDispatch();
     } catch (error) {
       console.log(error);
     }
@@ -142,7 +144,7 @@ const CommonCalendar = ({
 
   // FullCalendar 옵션 설정
   const calendarOptions = {
-    height: 660,
+    height: 740,
     eventTimeFormat: { 
       hour: '2-digit', 
       minute: '2-digit', 
@@ -186,11 +188,11 @@ const CommonCalendar = ({
     ...calendarListOptions,
     initialView: initialView || "dayGridMonth", // prop 값이 없을 경우 기본값 설정
     eventClick: (info) => {
-      handleModalAction("수정", info.event, categories);
+      handleModalAction("수정", info.event, defaultCategories? defaultCategories:categories);
     },
     // 이벤트를 드래그해서 이동한 경우
     eventDrop: (info) => {
-      handleModalAction("수정", info.event, categories);
+      handleModalAction("수정", info.event, defaultCategories? defaultCategories:categories);
     },
     // 날짜가 선택되는경우(하루, 영역)
     selectAllow: () => {
@@ -198,7 +200,7 @@ const CommonCalendar = ({
     },
     eventResize: ({ event }) => {
       // 일정이 늘어난 경우의 처리 로직
-      handleModalAction("수정", event, categories);
+      handleModalAction("수정", event, defaultCategories? defaultCategories:categories);
     },
     select: ({ startStr, endStr }) => {
       const isSingleDay = startStr === endStr;
@@ -211,7 +213,7 @@ const CommonCalendar = ({
       handleModalAction(
         "생성",
         { start: startStr, end: endDate },
-        categories
+        defaultCategories? defaultCategories:categories
       );
       return true;
     },

@@ -13,21 +13,11 @@ import { useDispatch } from "react-redux";
 import ProgramInfo from "./ProgramInfo";
 import { setDetail } from "../../redux/programSlice";
 import ProgramCalendarHome from "../programcalendar/ProgramCalendarHome";
-import { UserBPage } from "../..//services/auth/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProgramDashboardHome from "../programdashboard/ProgramDashboardHome";
 
 const Program = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserBPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+
   const list = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {

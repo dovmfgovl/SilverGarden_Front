@@ -11,23 +11,11 @@ import styles from "./admin.module.css";
 import SidebarCommon from "../../components/sidebar/SidebarCommon";
 import EmpInfos from "./EmpInfos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AtCalendar from "./AtCalendar";
+import AtCalendarHome from "./AtCalendarHome";
 import Dept from "../dept/Dept";
-import { AdminPage } from "../../services/auth/UserApi";
 import AdminCalendar from "../schedule/TestCalendar";
 
 const Admin = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    AdminPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   const sidebarList = [
     //이 리스트를 props를 넣어주면 원하는 목록의 사이드바를 생성 가능
     {
@@ -61,7 +49,7 @@ const Admin = () => {
       <div className={styles.innerContentWrap}>
         {adminPage === "인적사항관리" && <EmpInfos handleMenu={handleMenu} />}{" "}
         {/* 조건부 렌더링 - Home.jsx 참고 */}
-        {adminPage === "근태관리" && <AtCalendar handleMenu={handleMenu} />}
+        {adminPage === "근태관리" && <AtCalendarHome handleMenu={handleMenu} />}
         {adminPage === "부서관리" && <Dept handleMenu={handleMenu} />}{" "}
         {adminPage === "일정관리" && <AdminCalendar handleMenu={handleMenu} />}{" "}
       </div>

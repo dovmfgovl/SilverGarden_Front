@@ -98,7 +98,6 @@ const CarCalendar = ({
     };
     //삭제액션 모달
     const handleEventDelete = async (formData) => {
-      console.log("handleModalDelete");
       try {
         // 컬럼명을 변환하여 서버로 데이터 전송
         const transformedData = {
@@ -139,7 +138,6 @@ const CarCalendar = ({
         handleDispatch(formattedEvents); //이걸 공통으로 사용하고 있음!!
         const uniqueCategories = [...new Set(formattedEvents.map(event => event.resourceId))]; //모달에 이벤트의 카테고리 목록으로 뜨게하는부분
         setCategories(uniqueCategories);
-        console.log(uniqueCategories);
         const resources = eventsData.reduce((resourceArray, eventData) => {
           const id = eventData[columnNames.category]; //위 리소스 아이디와 동일한 값으로 사용함. 
           const existingResource = resourceArray.find((resource) => resource.id === id); //리소스Id = id값들이 매칭처리 -> 타임라인으로 표시 
@@ -153,8 +151,6 @@ const CarCalendar = ({
         }, []);
         setResources(resources);
         setFormattedEvents(formattedEvents); // 상태값 업데이트
-        console.log(formattedEvents);
-        console.log(resources);
       } catch (error) {
         console.log(error);
       }
@@ -190,17 +186,6 @@ const CarCalendar = ({
     eventTextColor: "black",
     nowIndicator: false,
     eventOverlap: false,
-    select: ({ startStr, endStr }) => {
-      const isSingleDay = startStr === endStr;
-      let endDate = isSingleDay ? startStr : endStr;
-      
-      // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
-      if (!isSingleDay) {
-        const endMoment = moment(endDate).subtract(1, "days");
-        endDate = endMoment.format(); // ISO8601 문자열로 변환
-      }
-    },
-    // 타임라인
     eventSources: [
       {
         events: formattedEvents, 
@@ -246,7 +231,7 @@ const CarCalendar = ({
     
       // 종료일이 하루 더해진 경우에는 하루를 빼서 설정
       if (!isSingleDay) {
-        const endMoment = moment(endDate).subtract(1, "days");
+        const endMoment = moment(endDate);
         endDate = endMoment.toISOString();
       }
       handleModalAction(

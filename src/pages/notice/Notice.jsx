@@ -13,22 +13,11 @@ import NoticeWrite from "./NoticeWrite";
 import { getNoticeList } from "../../services/api/noticeApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoticeUpdate from "./NoticeUpdate";
-import { UserAPage } from "../../services/auth/UserApi";
 import { useSelector } from "react-redux";
-import CrawilngHome from "../crawling/CrawilngHome";
+import CrawlingHome from "../crawling/CrawlingHome";
 
 
 const Notice = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
   ///////sidebar 메뉴 start//////
   const sidebarList = [
     {
@@ -38,7 +27,7 @@ const Notice = () => {
       subMenuItems: [
         { label: "전체공지", icon: faList },
         { label: "공지작성", icon: faPenToSquare },
-        { label: "관련공지", icon: faPenToSquare },
+        { label: "관련정보", icon: faPenToSquare },
       ],
     },
   ];
@@ -50,26 +39,23 @@ const Notice = () => {
 
   const [noticePage, setPage] = useState("전체공지"); //기본페이지는 noticeList
   const [noticeNo, setNoticeNo] = useState({});
-  const [noticeList, setNoticeList] = useState([]);
   const [fileList, setFileList] = useState([]); //공지상세에서 가져온 파일정보를 관리할 state
   const empData = useSelector(state => state.userInfoSlice)
 
-  const getList = async (params) => {
-    //DB에서 리스트를 불러오는 함수
-    const response = await getNoticeList(params);
-    console.log(response.data);
-    setNoticeList(response.data);
-  };
+  // const getList = async (params) => {
+  //   //DB에서 리스트를 불러오는 함수
+  //   const response = await getNoticeList(params);
+  //   setNoticeList(response.data);
+  // };
 
-  useEffect(() => {
-    //리스트는 페이지가 바뀌거나 시작시 한번만 불러옴
-    getList();
-  }, [noticePage]);
+  // useEffect(() => {
+  //   //리스트는 페이지가 바뀌거나 시작시 한번만 불러옴
+  //   getList();
+  // }, [noticePage]);
 
   const handlePage = (page, n_no) => {
     //페이지를 조작하는 함수
     if (n_no) {
-      console.log(n_no);
       setNoticeNo(n_no);
     }
     setPage(page);
@@ -79,10 +65,7 @@ const Notice = () => {
     //파일리스트를 변경하는 함수 선언, 프롭스로 넘김
     setFileList(list);
   };
-
-  const commonEvents = useSelector((state) => state.commoncalendarSlice);
-  console.log(commonEvents.events);
-
+  
   return (
     <div className={styles.noticeContainerLayout}>
       <div className={styles.sidebarLayout}>
@@ -95,9 +78,7 @@ const Notice = () => {
       <div className={styles.innerContentLayout}>
         {noticePage === "전체공지" && (
           <NoticeList
-            noticeList={noticeList}
             handlePage={handlePage}
-            getList={getList}
           />
         )}
         {noticePage === "공지상세" && (
@@ -109,16 +90,15 @@ const Notice = () => {
             empData={empData}
           />
         )}
-        {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} />}
+        {noticePage === "공지작성" && <NoticeWrite handlePage={handlePage} empData={empData} />}
         {noticePage === "공지수정" && (
           <NoticeUpdate
           noticeNo={noticeNo}
-          noticeList={noticeList}
           handlePage={handlePage}
           fileList={fileList}
           />
           )}
-        {noticePage === "관련공지" && <CrawilngHome />}
+        {noticePage === "관련정보" && <CrawlingHome />}
       </div>
     </div>
   );

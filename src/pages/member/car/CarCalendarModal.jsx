@@ -33,8 +33,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
         userno: '',
         user: '',
     });
-    console.log(event.start);
-    console.log(event.end);
     //event가 바뀔때 실행->이벤트클릭, 날짜클릭 나눠서 초기값 재세팅
     useEffect(() => {
         if (event) {
@@ -50,7 +48,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
                 userno: event.extendedProps?.userno || '',
                 user: event.extendedProps?.user || '',
             });
-            console.table(formData);
         } else {
             // 날짜 클릭 시 -> create
             setFormData({
@@ -64,7 +61,6 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
                 userno: '',
                 user: '',
             });
-            console.table(formData);
         }
     }, [event]);
     
@@ -134,7 +130,7 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
         <div>
         <Modal show={true} onHide={onClose} className="modalForm" style={{height:'auto', alignItems:'center', fontSize:'0.5rem'}}>
             <Modal.Header closeButton style={{backgroundColor:'#6e95f796'}}>
-                <Modal.Title style={{fontWeight:'bolder', fontSize:'1rem', height:'auto'}}><FontAwesomeIcon icon={faCalendarDays} />  {action === '생성' ? '새로운 일정 추가' : '기존 일정 수정'}</Modal.Title>
+                <Modal.Title style={{fontWeight:'bolder', fontSize:'1rem', height:'auto'}}><FontAwesomeIcon icon={faCalendarDays} />  {action === '생성' ? '차량서비스 예약 추가' : '기존 차량서비스 예약 수정'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -156,18 +152,18 @@ const CarCalendarModal = ({ action, event, onSave, onUpdate, onDelete, onClose})
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId="formTitle" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>일정제목</Form.Label>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용목적</Form.Label>
                         <Form.Control
                             style={{fontSize:'0.8rem'}}
                             type="text"
-                            placeholder="일정제목을 입력하세요"
+                            placeholder="예약용도를 입력하세요"
                             name="title"
                             value={formData.title}
                             onChange={handleChange}
                         />
                     </Form.Group>
                     <Form.Group controlId="formContent" style={{marginTop:'10px'}}>
-                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>내용</Form.Label>
+                        <Form.Label style={{fontSize:'1rem', fontWeight:'bolder'}}>이용내용</Form.Label>
                         <Form.Control
                             style={{fontSize:'0.8rem', height: '50px' }}
                             as="textarea"

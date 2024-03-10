@@ -12,18 +12,7 @@ import ChangePwModal from "./ChangePwModal";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getEmpList, setDetail } from "../../redux/chooseEmpSlice";
-import { UserAPage } from "../../services/auth/UserApi";
 const Mypage = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   const empList = useSelector((state) => state.chooseEmp.value);
   const empDetail =useSelector((state) => state.chooseEmp.selectedEmployee) || {};

@@ -14,20 +14,9 @@ import MessageSendDetail from './MessageSendDetail';
 import MessageStored from './MessageStored';
 import MessageDeletedDetail from './MessageDeletedDetail';
 import MessageStoredDetail from './MessageStoredDetail';
-import { UserAPage } from '../../services/auth/UserApi';
 
 const Message = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    UserAPage()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  
+
   useEffect(()=>{
 
   },[])
@@ -59,7 +48,6 @@ const empData = useSelector(state => state.userInfoSlice)//empData내 데이터 
 const [messageDetail, setMessageDetail] = useState("");
 
 const handleMenu = (menuTitle, messageDetail) =>{//사이드바 메뉴를 조작하는 함수
-  console.log(menuTitle, messageDetail);
   setPage(menuTitle)
   if(messageDetail){
     setMessageDetail(messageDetail)

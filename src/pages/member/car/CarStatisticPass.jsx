@@ -25,6 +25,7 @@ const CarStatisticPass = ({calList}) => {
             serv_date: car.SERV_START.split('T')[0].substr(0,11),
             serv_user: car.SERV_USER,       
             serv_title: car.SERV_TITLE, 
+            serv_info: car.SERV_INFO, 
             serv_start: car.SERV_START.split('T')[1].substr(0, 5),
             serv_end: car.SERV_END.split('T')[1].substr(0, 5),
         }));
@@ -32,14 +33,15 @@ const CarStatisticPass = ({calList}) => {
         data = calList.filter(car => selectedUser === car.SERV_USERNO).map(car => ({
             serv_date: car.SERV_START.split('T')[0].substr(0,11),
             serv_user: car.SERV_USER,       
-            serv_title: car.SERV_TITLE, 
+            serv_title: car.SERV_TITLE,
+            serv_info: car.SERV_INFO,  
             serv_start: car.SERV_START.split('T')[1].substr(0, 5),
             serv_end: car.SERV_END.split('T')[1].substr(0, 5),
         }));
     }
     useEffect(() => {
-        setNumOfRecords(calList.length); // calList의 길이를 numOfRecords로 설정
-    }, [calList]);
+        setNumOfRecords(data.length); // calList의 길이를 numOfRecords로 설정
+    }, [data]);
     return (
         <>
             <h6>
@@ -66,6 +68,7 @@ const CarStatisticPass = ({calList}) => {
                     <Table.Column title="이름" dataIndex="serv_user" key="SERV_USER" align='center'/>
                     <Table.Column title="이용날짜" dataIndex="serv_date" key="SERV_USER" align='center'/>
                     <Table.Column title="이용목적" dataIndex="serv_title" key="SERV_TITLE" align='center'/>
+                    <Table.Column title="이용내용" dataIndex="serv_info" key="SERV_INFO" align='center'/>
                     <Table.Column title="시작시간" dataIndex="serv_start" key="SERV_END" align='center'/>
                     <Table.Column title="종료시간" dataIndex="serv_end" key="SERV_END" align='center'/>
                 </Table>

@@ -10,7 +10,6 @@ const ApprovalDenyList = ({handleMenu, empData}) => {
 
     const getList = async () =>{
       const response = await approvalDenyList({e_no: empData.e_no})
-      console.log(response.data);
       setDenyList(response.data);
     }
     

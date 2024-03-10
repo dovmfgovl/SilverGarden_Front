@@ -3,7 +3,31 @@ import AppRouter from "./components/rourter/AppRouter";
 import styles from "./app.module.css";
 import NavigationBar from "./components/header/NavigationBar";
 import FootBar from "./components/footer/FootBar";
+import { useEffect, useState } from "react";
+import useCheckTokenExpiration from "./pages/login/CheckTokenExpiration";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import userInfoSlice from "./redux/userInfoSlice";
 function App() {
+  console.log("App실행");
+  //const [token, setToken] = useState(() => localStorage.getItem("accessToken"));
+  const token = localStorage.getItem("accessToken");
+  const isTokenExpired = useCheckTokenExpiration(token);
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isTokenExpired) {
+      // 토큰이 만료되었을 경우의 로직
+      console.log("Token is expired. Redirecting to login page...");
+      alert("토큰이 만료되어 로그아웃됩니다.");
+      navigation("/");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("check");
+      dispatch(userInfoSlice.actions.setEmpInfo({}));
+    }
+  }, [isTokenExpired]);
   return (
     <div className="App">
       {/* 리덕스 툴킷을 사용하기 위해 선언 */}

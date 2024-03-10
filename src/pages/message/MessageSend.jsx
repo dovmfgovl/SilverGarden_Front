@@ -11,7 +11,6 @@ const MessageSend = ({empData, handleMenu}) => {
   const getList = async () =>{
     const response = await messageSendList({e_no: empData.e_no})
     setSendList(response.data);
-    console.log(response.data);
   }
   useEffect(()=>{
     getList();

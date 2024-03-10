@@ -1,0 +1,39 @@
+.crawlingPagination{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 10px 10px 10px;
+}
+
+.crawlingTable{
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.crawlingTable th,
+.crawlingTable td {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.crawlingTable thead th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.crawlingTable tbody td {
+  cursor: pointer;
+}
+
+:global {
+  .myTooltip {
+    /* 툴팁에 대한 커스텀 스타일 추가 */
+    font-size: 14px;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    /* 필요한 다른 스타일 속성들을 추가하세요 */
+  }
+}

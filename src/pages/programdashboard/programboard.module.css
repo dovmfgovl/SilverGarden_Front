@@ -1,12 +1,7 @@
 /* 리차트 효과 */
-
 .chartContainer{
-    width: 95%;
+    width: 90%;
     height: 94%;
-    overflow: hidden; /* 애니메이션 효과를 위해 overflow: hidden; 설정 */
-}
-.recharts-surface {
-    transition: transform 0.5s ease; /* 애니메이션 효과 설정 */
 }
 
 .recharts-legend-item-text {
@@ -20,11 +15,11 @@
     border-radius: 20px;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
     margin: 0 20px 20px 0;
-    padding: 10px;
     height: 100%;
 }
 
 .chartWrap{
+    margin: 10px;
     flex-basis: 50%;
 }
 

@@ -12,7 +12,7 @@
   "fileDownload fileDownload"
   ;
   grid-template-columns: 3fr 3fr;
-  grid-template-rows: 60px 190px 200px 600px 1fr;
+  grid-template-rows: 60px 300px 200px 600px 1fr;
   border: 1px solid rgb(231, 229, 229);
 }
 
