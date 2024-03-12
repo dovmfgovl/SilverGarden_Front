@@ -728,8 +728,18 @@
 
 ## 8. 트러블 슈팅
 - 데이터 처리 시간
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 23 31" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/1263bd01-89f4-4b65-8f48-0766294cc5da">
+<img width="814" alt="스크린샷 2024-03-12 오후 12 24 28" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/c2895659-4de1-4d86-bf47-7e528929341c">
+<img width="814" alt="스크린샷 2024-03-12 오후 12 24 31" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/1b87e0e7-aecc-4bd2-be62-d4bcef0e516b">
+
 - CORS이슈
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 34" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/24f098ec-1dd9-4134-81a2-bb6bde1e2397">
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 37" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/9292117c-ccbb-4021-88be-4151018a0a87">
+
 - 공통코드화
+<img width="814" alt="스크린샷 2024-03-12 오후 12 24 41" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/de352cee-70ce-4a97-a6e2-b71ccdc07a7b">
+
+<img width="814" alt="스크린샷 2024-03-12 오후 12 24 44" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f8939f27-ef47-4688-b9ba-1d5386ed73df">
 
 
 <br>
