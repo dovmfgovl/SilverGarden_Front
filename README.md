@@ -514,7 +514,7 @@
 | 초기화면 |
 | -------- |
 
-![로그인 화면](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/a017fa5f-ba5b-4bf4-9be6-384520449c7b)
+<img width="814" alt="초기화면" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/a017fa5f-ba5b-4bf4-9be6-384520449c7b" >
 
 <br>
 
@@ -526,7 +526,8 @@
 
 | 로그인                                                                                                           |
 | ---------------------------------------------------------------------------------------------------------------- |
-| ![login](https://user-images.githubusercontent.com/112460466/210177956-c716414e-01c2-4c1e-b1f7-6562b9b7a857.gif) |
+|  ![로그인](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/360443bd-c7a0-4dd2-94b7-0492b0a38965) |
+
 
 <br>
 
@@ -536,7 +537,8 @@
 
 | 로그아웃                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------- |
-| ![logout](https://user-images.githubusercontent.com/112460466/210178009-11225733-7af5-4b8b-aa1c-fe264af01797.gif) |
+| ![로그아웃1](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/0675087b-6650-4607-9bb8-2fc8a22b350f) | 
+
 
 <br>
 <br>
@@ -548,7 +550,7 @@
 
 | 권한 처리                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 권한 처리 이미지나 움짤 |
+| ![access](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/b760b040-1a71-46d1-ba8a-c268f91687d6) |
 
 <br>
 
@@ -563,7 +565,7 @@
 
 | 토큰만료                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 토큰만료 이미지나 움짤 |
+| ![로그아웃](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f25b57b6-456c-4332-9138-d5a0a979761d) |
 
 <br>
 <br>
@@ -575,7 +577,7 @@
 
 | 홈화면                                                                                              |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 홈화면 이미지나 움짤 |
+|  <img width="713" alt="스크린샷 2024-03-13 오후 12 15 26" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/6fb70032-0378-42d8-a8b8-bc3687079a2e"> |
 
 <br>
 <br>
@@ -590,8 +592,7 @@
 
 | 채팅, 근태, 내 결재 - 홈화면                                                                                              |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 채팅, 근태, 내 결재 - 홈화면 이미지나 움짤 |
-
+| ![cxrx](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f23df72e-9489-44a1-b549-8091e4c60b2d) |
 <br>
 
 <br>
@@ -635,7 +636,8 @@
   
 | 이용자관리  |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 이용자관리 이미지나 움짤 |
+| [이용자관리 이미지나 움짤](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/48ba6452-5dbf-4133-bfe5-4f1beab0e866) |
+
 
 <br>
 <br>
@@ -704,7 +706,7 @@
   
 | 근태관리 |
 | ----------------------------------------------------------------------------------------------------------------- |
-| 근태관리 이미지나 움짤 |
+|![Mar-13-2024 11-47-36](https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/2863bcf2-3ee5-4e38-927d-5024b34c5bf5)  |
 
 <br>
 <br>
@@ -771,23 +773,26 @@
 
 ## 8. 트러블 슈팅
 - 데이터 처리 시간
+  
   <img width="814" alt="스크린샷 2024-03-12 오후 12 23 31" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/1263bd01-89f4-4b65-8f48-0766294cc5da">
-<img width="814" alt="스크린샷 2024-03-12 오후 12 24 28" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/c2895659-4de1-4d86-bf47-7e528929341c">
-<img width="814" alt="스크린샷 2024-03-12 오후 12 24 31" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/1b87e0e7-aecc-4bd2-be62-d4bcef0e516b">
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 28" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/c2895659-4de1-4d86-bf47-7e528929341c">
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 31" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/1b87e0e7-aecc-4bd2-be62-d4bcef0e516b">
 
 - CORS이슈
+  
   <img width="814" alt="스크린샷 2024-03-12 오후 12 24 34" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/24f098ec-1dd9-4134-81a2-bb6bde1e2397">
   <img width="814" alt="스크린샷 2024-03-12 오후 12 24 37" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/9292117c-ccbb-4021-88be-4151018a0a87">
 
 - 공통코드화
-<img width="814" alt="스크린샷 2024-03-12 오후 12 24 41" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/de352cee-70ce-4a97-a6e2-b71ccdc07a7b">
+  
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 41" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/de352cee-70ce-4a97-a6e2-b71ccdc07a7b">
 
-<img width="814" alt="스크린샷 2024-03-12 오후 12 24 44" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f8939f27-ef47-4688-b9ba-1d5386ed73df">
+  <img width="814" alt="스크린샷 2024-03-12 오후 12 24 44" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f8939f27-ef47-4688-b9ba-1d5386ed73df">
 
 
 <br>
 
 ## 9. 프로젝트 후기
 
-<img width="822" alt="스크린샷 2024-03-12 오전 11 48 07" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/289fe901-4246-4943-91ef-955a8e69a6c5">
+  <img width="822" alt="스크린샷 2024-03-12 오전 11 48 07" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/289fe901-4246-4943-91ef-955a8e69a6c5">
 
