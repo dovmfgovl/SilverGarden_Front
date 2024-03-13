@@ -6,6 +6,7 @@
 ## 실행방법
 
 - **SilverGarden_back**에서 서버를 연다
+  https://github.com/Suyeon12345/SilverGarden_Back
 - 그 후 SilverGarden_Front가 설치된 터미널에 **npm run silvergarden** 을 입력한다.
 - Test ID : 202403_00000134
 - Test PW : 1234
