@@ -6,7 +6,7 @@
 ## 실행방법
 
 - **SilverGarden_back**에서 서버를 연다
-  https://github.com/Suyeon12345/SilverGarden_Back
+  https://github.com/dovmfgovl/SilverGarden_Back
 - 그 후 SilverGarden_Front가 설치된 터미널에 **npm run silvergarden** 을 입력한다.
 - Test ID : 202403_00000134
 - Test PW : 1234
@@ -27,22 +27,6 @@
 ## 프로젝트 진행기간
 
 <img width="760" alt="스크린샷 2024-03-13 오전 11 37 05" src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/2fd69688-158c-47d6-af09-fc78900d76cc">
-
-
-
-<br>
-
-## 팀원 구성
-
-
-
-|                                                                **박정원**                                                                |                                                                **안수연**                                                                |                                                                **이지연**                                                                |                                                                **이슬기**                                                                |                                                                **고태규**                                                                |
-| :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/388fde3e-1c74-4f93-8d49-887ef2698df3" height=150 width=150> | <img src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/0330a1c3-0f60-4569-814f-540401ab0346" height=150 width=150> | <img src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/0146902c-087f-48c9-a601-b4cb2fd9ebdd" height=150 width=150> | <img src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/ec35ce79-e1ce-42a1-88ea-4270fa3e1a87" height=150 width=150> | <img src="https://github.com/Suyeon12345/SilverGarden_Front/assets/144109053/f90f98f4-1dbf-42e5-bbb1-520a7dd36cc4" height=150 width=150> |
-
-
-
-
 
 
 
